@@ -49,6 +49,12 @@ Route::group([
     Route::get('/profile', 'ProfileController@show');
     Route::post('/profile', 'ProfileController@update');
 
+    // User: view logs
+    Route::get('/logs', 'LoggController@index');
+    Route::get('/logs/{id}', 'LoggController@show');
+
+    /****************** ADMIN Routes ****************/
+
     // Admin: manage users
     Route::get('/admin/users', 'Admin\AdminUserController@index');
     Route::get('/admin/users/create', 'Admin\AdminUserController@create');
@@ -56,5 +62,9 @@ Route::group([
     Route::get('/admin/users/{id}', 'Admin\AdminUserController@show');
     Route::patch('/admin/users', 'Admin\AdminUserController@update');
     Route::delete('/admin/users/{id}', 'Admin\AdminUserController@destroy');
+
+    // Admin: manage logs
+    Route::get('/admin/logs', 'Admin\AdminLoggController@index');
+    Route::get('/admin/logs/{id}', 'Admin\AdminLoggController@show');
 
 });
