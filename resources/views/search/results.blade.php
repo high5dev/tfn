@@ -43,7 +43,11 @@
                     {{ $post->email }}
                 </td>
                 <td>
-                    {{ $post->status }}
+                    @if($post->status == 'Active')
+                        A
+                    @else
+                        P
+                    @endif
                     @if($post->new)
                         N
                     @endif
