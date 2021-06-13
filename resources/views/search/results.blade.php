@@ -5,6 +5,7 @@
     @include('layouts.flash_message')
 
     <h3>Results</h3>
+    <h4>Search string: {{ $search }}</h4>
 
     <table class="table table-striped">
         <thead class="thead-light">

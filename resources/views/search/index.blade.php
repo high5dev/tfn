@@ -22,6 +22,7 @@
                                 <div class="alert alert-warning">{{ $errors->first('email') }}</div>
                                 @endif
                             </div>
+                            <span class="text-muted">Maximum 254 characters, partial email is ok</span>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="submit">&nbsp;</label>
@@ -41,6 +42,7 @@
                                 <div class="alert alert-warning">{{ $errors->first('subject') }}</div>
                                 @endif
                             </div>
+                            <span class="text-muted">Maximum 31 characters</span>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="submit">&nbsp;</label>

@@ -36,11 +36,16 @@ class SearchController extends Controller
      */
     public function email(Request $request)
     {
-        $email = '%' . $request->email . '%';
+        $validated = $request->validate([
+            'email' => 'required|max:254'
+        ]);
+
+        $email = '%' . $validated->email . '%';
+        $search = $validated->email;
 
         $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->get();
 
-        return view('search.results', compact('posts'));
+        return view('search.results', compact('posts', 'search'));
     }
 
     /**
@@ -48,11 +53,16 @@ class SearchController extends Controller
      */
     public function subject(Request $request)
     {
-        $subject = '%' . $request->subject . '%';
+        $validated = $request->validate([
+            'subject' => 'required|max:31'
+        ]);
+
+        $subject = '%' . $validated->subject . '%';
+        $search = $validated->subject;
 
         $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->get();
 
-        return view('search.results', compact('posts'));
+        return view('search.results', compact('posts', 'search'));
     }
 
 }
