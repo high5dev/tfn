@@ -258,7 +258,7 @@ class CustomValidator
                         while (!$found && $x2 - $x >= $minWordLen) {
                             $word = "/\\n" . substr( $password, $x, $minWordLen );
                             for ($x3 = $x + $minWordLen; $x3 < $x2; $x3++) {
-                                $word .= "(" . $password{ $x3 };
+                                $word .= "(" . $password[ $x3 ];
                             }
                             for ($x3 = $x + $minWordLen; $x3 < $x2; $x3++) {
                                 $word .= ")?";
