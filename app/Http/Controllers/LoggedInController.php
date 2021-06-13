@@ -37,21 +37,14 @@ class LoggedInController extends Controller
     {
         // get users name
         $name = Auth::user()->name;
-        
+
         // get the last datetime they logged in
         $lastLoggedIn = '';
         if (is_object(session('lastLogin'))) {
             $lastLoggedIn = session('lastLogin')->format('l jS F Y \a\t g:i a');
         }
-        
-        $funds = 'NaN';
-        if (Auth::User()->can('view funds')) {
-            $response = Http::withBasicAuth('comgw', '3GFur%eJ')->get('https://restapi.magrathea.net:8443/v1/account/balance/111822');
-            $json = $response->json();
-            $funds = number_format($json['funds'], 2);
-        }
-        
-        return view('home', compact('name', 'lastLoggedIn', 'funds'));
+
+        return view('home', compact('name', 'lastLoggedIn'));
     }
 
     // log the user out and redirect to index page
@@ -63,7 +56,7 @@ class LoggedInController extends Controller
         $log->user_id = Auth::User()->id;
         $log->content = Auth::User()->FullName . " logged out at " . date('Y-m-d H:i:s');
         $log->save();
-        
+
         // log user out
         auth()->logout();
         session()->flush();
@@ -75,7 +68,7 @@ class LoggedInController extends Controller
     {
         $dt = Carbon::createFromFormat('Ymd His', '20200823 000000');
         dd($dt->format('Y-m-d 23:59:59'));
-        
+
         return view('test', compact('contents'));
     }
 }
