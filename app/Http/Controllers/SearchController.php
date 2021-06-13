@@ -38,7 +38,7 @@ class SearchController extends Controller
     {
         $email = '%' . $request->email . '%';
 
-        $posts = Post::where('email', 'like', $email)->get();
+        $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->get();
 
         return view('search.results', compact('posts'));
     }
@@ -50,7 +50,7 @@ class SearchController extends Controller
     {
         $subject = '%' . $request->subject . '%';
 
-        $posts = Post::where('subject', 'like', $subject)->get();
+        $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->get();
 
         return view('search.results', compact('posts'));
     }
