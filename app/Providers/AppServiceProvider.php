@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // create a custom validator to check password strength
+        Validator::extend('nist_password', 'App\Rules\CustomValidator@validatePasswordStrength');
     }
 }
