@@ -37,7 +37,7 @@ Route::get('logout', 'LoggedInController@logout');
  * Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
  */
 // public routes
-//Route::get('/', 'PagesController@index')->name('index');
+Route::get('/', 'PagesController@index')->name('index');
 
 // pages for logged in users
 Route::group([
