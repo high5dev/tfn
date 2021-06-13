@@ -23,7 +23,7 @@
         @foreach($posts as $post)
             <tr>
                 <td>
-                    <a href="{{ $sturl }}/view_post?post_id={{ $post->id }} target=_blank">{{ $post->id }}</a>
+                    <a href="{{ $sturl }}/view_post?post_id={{ $post->id }}" target="_blank">{{ $post->id }}</a>
                 </td>
                 <td>
                     {{ $post->dated }}
@@ -35,7 +35,7 @@
                     {{ $post->type }}
                 </td>
                 <td>
-                    <a href="{{ $sturl }}/view_member?user_id={{ $post->userid }} target=_blank">{{ $post->userid }}</a>
+                    <a href="{{ $sturl }}/view_member?user_id={{ $post->userid }}" target="_blank">{{ $post->userid }}</a>
                 </td>
                 <td>
                     {{ $post->email }}
