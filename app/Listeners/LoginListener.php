@@ -2,7 +2,7 @@
 namespace App\Listeners;
 
 use Auth;
-use App\Logg;
+use App\Models\Logg;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
