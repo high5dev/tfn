@@ -10,10 +10,10 @@
         <thead class="thead-light">
         <tr>
             <th scope="col">Post ID</th>
+            <th scope="col">Dated</th>
             <th scope="col">Subject</th>
             <th scope="col">Type</th>
             <th scope="col">User ID</th>
-            <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">Status</th>
         </tr>
@@ -25,6 +25,9 @@
                     {{ $post->id }}
                 </td>
                 <td>
+                    {{ $post->dated }}
+                </td>
+                <td>
                     {{ $post->subject }}
                 </td>
                 <td>
@@ -34,8 +37,6 @@
                     {{ $post->userid }}
                 </td>
                 <td>
-                    {{ $post->username }}
-                </td>
                 <td>
                     {{ $post->email }}
                 </td>
