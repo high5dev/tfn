@@ -22,7 +22,7 @@
         <tbody>
         @foreach($posts as $post)
             <tr>
-                <a>
+                <td>
                     <a href="{{ $sturl }}/view_post?post_id={{ $post->id }} target=_blank">{{ $post->id }}</a>
                 </td>
                 <td>
