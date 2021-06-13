@@ -2,6 +2,8 @@
 
 return [
 
+    'dictionary' => env('DICTIONARY', 'dictionary.txt'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
