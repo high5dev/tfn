@@ -18,7 +18,7 @@
         @foreach($logs as $log)
           <tr>
             <td>{{ $log->created_at }}</td>
-            <td>{{ $log->user->full_name }}</td>
+            <td>{{ $log->user->name }}</td>
             <td><a href="/admin/logs/{{ $log->id }}">{{ $log->title }}</a></td>
           </tr>
         @endforeach
