@@ -37,7 +37,6 @@
                     {{ $post->userid }}
                 </td>
                 <td>
-                <td>
                     {{ $post->email }}
                 </td>
                 <td>
