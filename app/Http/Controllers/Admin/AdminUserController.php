@@ -34,7 +34,7 @@ class AdminUserController extends Controller
     {
         if (Auth::User()->can('view users')) {
 
-            $users = User::orderBy('family_name', 'asc')->orderBy('given_name', 'asc')->get();
+            $users = User::orderBy('name', 'asc')->get();
 
             return view('admin.users.index', compact('users'));
         } else {
@@ -72,20 +72,9 @@ class AdminUserController extends Controller
                 $user = new User();
 
                 // update the user
-                $user->company = $request->company;
-                $user->given_name = $request->given_name;
-                $user->family_name = $request->family_name;
-                $user->phone = $request->phone;
-                $user->mobile = $request->mobile;
-                $user->address = $request->address;
-                $user->town = $request->town;
-                $user->county = $request->county;
-                $user->postcode = $request->postcode;
+                $user->name = $request->name;
                 $user->email = $request->email;
                 $user->password = Hash::make($request->password);
-                $user->setup_completed = $request->setup_completed;
-                $user->adapter_posted = $request->adapter_posted;
-                $user->direct_debit = $request->direct_debit;
 
                 // assign roles to the new user
                 $user->assignRole($request->roles);
@@ -157,19 +146,8 @@ class AdminUserController extends Controller
             if (Hash::check($request->admin_password, Auth::User()->password)) {
 
                 // update the user
-                $user->company = $request->company;
-                $user->given_name = $request->given_name;
-                $user->family_name = $request->family_name;
+                $user->name = $request->name;
                 $user->email = $request->email;
-                $user->phone = $request->phone;
-                $user->mobile = $request->mobile;
-                $user->address = $request->address;
-                $user->town = $request->town;
-                $user->county = $request->county;
-                $user->postcode = $request->postcode;
-                $user->setup_completed = $request->setup_completed;
-                $user->adapter_posted = $request->adapter_posted;
-                $user->direct_debit = $request->direct_debit;
 
                 // update the users password
                 $passwordMessage = ' [password was NOT changed]';
@@ -218,32 +196,8 @@ class AdminUserController extends Controller
 
             if ($user) {
 
-                // check if the user is linked to any routers
-                if ( count($user->routers) ) {
-                    return redirect('/admin/users')->with('error', 'The user is linked to one or more routers, please remove then try again');
-                }
-
-                // check if the user is linked to any numbers
-                if ( count($user->numbers) ) {
-                    return redirect('/admin/users')->with('error', 'The user is linked to one or more numbers, please remove then try again');
-                }
-
                 // get the user's name
-                $name = $user->given_name . ' ' . $user->family_name;
-
-                // reset any voicemail entry
-                $user->voicemails->user_id = 0;
-                $user->voicemails->fullname = '';
-                $user->voicemails->email = '';
-
-                // delete any notes
-                $user->notes()->delete();
-
-                // delete any emergency entry
-                $user->emergencies()->delete();
-
-                // delete any redirects
-                $user->redirects()->delete();
+                $name = $user->name;
 
                 // delete the user
                 $user->delete();
