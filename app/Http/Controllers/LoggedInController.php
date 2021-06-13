@@ -33,7 +33,7 @@ class LoggedInController extends Controller
     }
 
     // home page
-    public function home(Request $request)
+    public function home()
     {
         // get users name
         $name = Auth::user()->name;
@@ -44,7 +44,7 @@ class LoggedInController extends Controller
             $lastLoggedIn = session('lastLogin')->format('l jS F Y \a\t g:i a');
         }
 
-        di($name, $lastLoggedIn);
+        dd($name, $lastLoggedIn);
         return view('home', compact('name', 'lastLoggedIn'));
     }
 
