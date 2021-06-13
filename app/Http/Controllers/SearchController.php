@@ -44,7 +44,7 @@ class SearchController extends Controller
         $rows = 100;
 
         $email = '%' . $request->email . '%';
-        $search = $request->email;
+        $search = 'Email: ' . $request->email;
 
         $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->paginate($rows)->withQueryString();
 
@@ -65,7 +65,7 @@ class SearchController extends Controller
         $rows = 100;
 
         $subject = '%' . $request->subject . '%';
-        $search = $request->subject;
+        $search = 'Subject: ' . $request->subject;
 
         $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->paginate($rows)->withQueryString();
 
