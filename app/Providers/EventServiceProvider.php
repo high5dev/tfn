@@ -15,10 +15,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            'Illuminate\Auth\Events\Login' => [
-                'App\Listeners\LoginListener',
-            ],
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LoginListener',
         ],
     ];
 
