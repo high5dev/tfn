@@ -13,17 +13,17 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
- //       Schema::create('posts', function (Blueprint $table) {
- //           $table->bigIncrements('id');
- //           $table->string('type', 7);
- //           $table->string('subject', 254)->nullable();
- //           $table->string('userid', 15);
- //           $table->string('username', 254);
- //           $table->string('email', 254);
- //           $table->string('grp', 254);
- //           $table->datetime('dated');
- //           $table->string('flags', 7);
- //       });
+        Schema::create('posts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('type', 7);
+            $table->string('subject', 254)->nullable();
+            $table->string('userid', 15);
+            $table->string('username', 254);
+            $table->string('email', 254);
+            $table->string('grp', 254);
+            $table->datetime('dated');
+            $table->string('flags', 7);
+        });
     }
 
     /**
@@ -33,6 +33,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
- //       Schema::dropIfExists('posts');
+        Schema::dropIfExists('posts');
     }
 }
