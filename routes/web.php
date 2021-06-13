@@ -58,3 +58,7 @@ Route::group([
     Route::delete('/admin/users/{id}', 'Admin\AdminUserController@destroy');
 
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
