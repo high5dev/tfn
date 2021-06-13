@@ -1,23 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    @include('layouts.flash_message')
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+    <div class="jumbotron">
+        Hello {{ $name }},
+        @if (strlen($lastLoggedIn))
+            you last logged in {{ $lastLoggedIn }}
+        @else
+            This is the first time you have logged into the telephone portal.
+        @endif
     </div>
-</div>
+
+    @can('view funds')
+        <div class="jumbotron">
+            <h1>Admin:</h1>
+            The Magrathea account has a balance of &pound;{{ $funds }}
+        </div>
+    @endcan
+
 @endsection
