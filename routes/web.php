@@ -38,14 +38,14 @@ Route::get('logout', 'LoggedInController@logout');
  */
 // public routes
 Route::get('/', 'PagesController@index')->name('index');
-
+Route::get('/home', 'LoggedInController@home')->name('home');
 // pages for logged in users
 Route::group([
     'middleware' => 'auth'
 ], function () {
 
     // User: homepage and profile
-    Route::get('/home', 'LoggedInController@home')->name('home');
+    //Route::get('/home', 'LoggedInController@home')->name('home');
     Route::get('/profile', 'ProfileController@show');
     Route::post('/profile', 'ProfileController@update');
 
