@@ -62,13 +62,4 @@ class LoggedInController extends Controller
         session()->flush();
         return redirect()->route('index');
     }
-
-    // test some stuff
-    public function test()
-    {
-        $dt = Carbon::createFromFormat('Ymd His', '20200823 000000');
-        dd($dt->format('Y-m-d 23:59:59'));
-
-        return view('test', compact('contents'));
-    }
 }
