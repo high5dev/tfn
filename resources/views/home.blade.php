@@ -5,7 +5,7 @@
     @include('layouts.flash_message')
 
     <div class="jumbotron">
-        Hello {{ $name }},x
+        Hello {{ $name }},
         @if (strlen($lastLoggedIn))
             you last logged in {{ $lastLoggedIn }}
         @else
