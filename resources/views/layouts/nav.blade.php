@@ -29,7 +29,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::user()->given_name }} {{ Auth::user()->family_name }}
+                        {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/profile"><span class="fa fa-user" aria-hidden="true"></span>&nbsp;Profile</a>
