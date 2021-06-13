@@ -40,9 +40,9 @@
                     {{ $post->email }}
                 </td>
                 <td>
-                    @if('p' == $post->flags)
+                    @if('P' == $post->flags)
                         Pending
-                    @elseif('a' == $post->flags)
+                    @elseif('A' == $post->flags)
                         Active
                     @else
                         UNKNOWN
