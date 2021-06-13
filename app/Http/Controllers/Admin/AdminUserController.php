@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Auth;
-use App\User;
-use App\Logg;
+use App\Models\User;
+use App\Models\Logg;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminUserStoreRequest;
 use App\Http\Requests\Admin\AdminUserUpdateRequest;
