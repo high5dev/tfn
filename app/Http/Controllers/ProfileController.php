@@ -2,8 +2,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\User;
-use App\Logg;
+use App\Models\Logg;
 use App\Http\Requests\ProfileUpdateRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;

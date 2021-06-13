@@ -2,8 +2,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Logg;
-use App\Http\Controllers\Controller;
+use App\Models\Logg;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
