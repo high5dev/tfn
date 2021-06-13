@@ -54,32 +54,6 @@ class SearchController extends Controller
     }
 
     /**
-     * search on email
-     */
-    public function email2(Request $request)
-    {
-        $validated = $request->validate([
-            'email' => 'required|max:254'
-        ]);
-
-        // get rows per page if passed with request,
-        // otherwise default of 100
-        $rows = request('rows', 100);
-
-        // don't allow > 100 rows per page
-        $rows = $rows < 101 ? $rows : 100;
-
-        $email = '%' . $request->email . '%';
-        $search = $request->email;
-
-        $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->paginate($rows);
-
-        $sturl = 'https://spamcontrol.freecycle.org/';
-
-        return view('search.results', compact('posts', 'search', 'sturl'));
-    }
-
-    /**
      * search on subject
      */
     public function subject(Request $request)

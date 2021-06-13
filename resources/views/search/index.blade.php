@@ -12,7 +12,7 @@
 
                 <div class="card-body">
 
-                    <form method="post" action="/search/email">
+                    <form method="get" action="/search/email">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="email">Email :</label>
@@ -32,7 +32,7 @@
                         </div>
                     </form>
 
-                    <form method="post" action="/search/subject">
+                    <form method="get" action="/search/subject">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="subject">Subject :</label>
