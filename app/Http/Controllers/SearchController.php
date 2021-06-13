@@ -45,7 +45,9 @@ class SearchController extends Controller
 
         $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->get();
 
-        return view('search.results', compact('posts', 'search'));
+        $sturl = 'https://spamcontrol.freecycle.org/';
+
+        return view('search.results', compact('posts', 'search', 'sturl'));
     }
 
     /**
@@ -62,7 +64,9 @@ class SearchController extends Controller
 
         $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->get();
 
-        return view('search.results', compact('posts', 'search'));
+        $sturl = 'https://spamcontrol.freecycle.org/';
+
+        return view('search.results', compact('posts', 'search', 'sturl'));
     }
 
 }
