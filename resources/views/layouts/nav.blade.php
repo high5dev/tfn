@@ -31,7 +31,7 @@
                        aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/profile"><span class="fa fa-user" aria-hidden="true"></span>&nbsp;Profile</a>
                         <a class="dropdown-item" href="/logout"><span class="fa fa-sign-out-alt"
                                                                       aria-hidden="true"></span>&nbsp;Logout</a>
