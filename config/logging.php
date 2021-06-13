@@ -43,8 +43,8 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
+            'path' => storage_path('logs/laravel-' . php_sapi_name() . '.log'),
+            'level' => 'debug',
         ],
 
         'daily' => [
