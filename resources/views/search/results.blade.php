@@ -16,7 +16,7 @@
             <th scope="col">Type</th>
             <th scope="col">User ID</th>
             <th scope="col">Email</th>
-            <th scope="col">Status</th>
+            <th scope="col">Flags</th>
         </tr>
         </thead>
         <tbody>
@@ -41,12 +41,9 @@
                     {{ $post->email }}
                 </td>
                 <td>
-                    @if('P' == $post->flags)
-                        Pending
-                    @elseif('A' == $post->flags)
-                        Active
-                    @else
-                        UNKNOWN
+                    {{ $post->status }}
+                    @if($post->new)
+                        N
                     @endif
                 </td>
             </tr>
