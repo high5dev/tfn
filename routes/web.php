@@ -56,7 +56,9 @@ Route::group([
     // User:: search
     Route::get('/search', 'SearchController@index');
     Route::post('/search/email', 'SearchController@email');
+    Route::get('/search/email', 'SearchController@email2');
     Route::post('/search/subject', 'SearchController@subject');
+    Route::get('/search/subject', 'SearchController@subject2');
 
     /****************** ADMIN Routes ****************/
 
