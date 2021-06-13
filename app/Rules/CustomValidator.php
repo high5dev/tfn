@@ -267,7 +267,7 @@ class CustomValidator
 
                             preg_match_all( $word, $data, $matches );
                             if (!count( $matches[ 0 ] )) {
-                                $password{ $x } = "*";
+                                $password[ $x ] = "*";
                                 $x++;
                                 $numbits = $this->GetNISTNumBits( substr( $password, 0, $x ) ) + $extrabits;
                                 if ($numbits >= $minBits) {
