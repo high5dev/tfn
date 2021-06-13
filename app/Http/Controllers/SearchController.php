@@ -46,7 +46,7 @@ class SearchController extends Controller
     /**
      * search on subject
      */
-    public function email(Request $request)
+    public function subject(Request $request)
     {
         $subject = '%' . $request->subject . '%';
 
