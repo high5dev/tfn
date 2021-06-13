@@ -12,54 +12,18 @@
         <thead class="thead-light">
         <tr>
             <th scope="col">Name</th>
-            <th scope="col">Adapter</th>
-            <th scope="col">Setup</th>
-            <th scope="col">DD</th>
+            <th scope="col">Email</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($users as $user)
             <tr>
-                <td>
-                    @if(strlen($user->company))
-                        {{ $user->company }}
-                    @else
-                        {{ $user->full_name }}
-                    @endif
-                </td>
-                <td>
-                    @if (is_null($user->adapter_posted))
-                        <i class="fas fa-times"></i>
-                    @else
-                        <i class="fas fa-check"></i>
-                    @endif
-                </td>
-                <td>
-                    @if (is_null($user->setup_completed))
-                        <i class="fas fa-times"></i>
-                    @else
-                        <i class="fas fa-check"></i>
-                    @endif
-                </td>
-                <td>
-                    @if (is_null($user->direct_debit))
-                        <i class="fas fa-times"></i>
-                    @else
-                        <i class="fas fa-check"></i>
-                    @endif
-                </td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
                 <td>
                     <div class="row">
-                        <div class="span4">
-                            <form method="get" action="/admin/calls/{{ $user->id }}">
-                                @csrf
-                                <button class='btn btn-default' type="submit" alt="Calls">
-                                    <span class="fas fa-phone" aria-hidden="true"></span>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="span4">
+                        <div class="span6">
                             <form method="get" action="/admin/users/{{ $user->id }}">
                                 @csrf
                                 <button class='btn btn-default' type="submit" alt="Edit">
@@ -67,7 +31,7 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="span4">
+                        <div class="span6">
                             <form method="post" action="/admin/users/{{ $user->id }}">
                                 @csrf
                                 @method("DELETE")

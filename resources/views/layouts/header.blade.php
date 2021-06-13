@@ -3,10 +3,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="The Communication Gateway Ltd, www.comgw.co.uk">
-    <meta name="description" content="The Telephone Gateway">
-    <meta name="keywords" content="fibre telephone ports, broadband telephone service, fibre telephone">
+    <meta name="description" content="The Secret Portal">
+    <meta name="keywords" content="search database">
 
-    <title>The Telephone Gateway</title>
+    <title>The Secret Portal</title>
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/bootstrap.min.css">

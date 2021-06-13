@@ -9,15 +9,8 @@
   @if (strlen($lastLoggedIn))
     you last logged in {{ $lastLoggedIn }}
   @else
-    This is the first time you have logged into the telephone portal.
+    This is the first time you have logged into the secret portal.
   @endif
   </div>
-
-  @can('view funds')
-  <div class="jumbotron">
-    <h1>Admin:</h1>
-    The Magrathea account has a balance of &pound;{{ $funds }}
-  </div>
-  @endcan
 
 @endsection
