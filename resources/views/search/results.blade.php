@@ -7,6 +7,8 @@
     <h3>Results</h3>
     <h4>Search string: "{{ $search }}"</h4>
 
+    {{ $posts->links() }}
+
     <table class="table table-striped">
         <thead class="thead-light">
         <tr>
@@ -50,5 +52,7 @@
         @endforeach
         </tbody>
     </table>
+
+    {{ $posts->links() }}
 
 @endsection

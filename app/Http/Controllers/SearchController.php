@@ -40,10 +40,12 @@ class SearchController extends Controller
             'email' => 'required|max:254'
         ]);
 
+        $rows = 100;
+
         $email = '%' . $request->email . '%';
         $search = $request->email;
 
-        $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->get();
+        $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->paginate($rows);
 
         $sturl = 'https://spamcontrol.freecycle.org/';
 
@@ -59,10 +61,12 @@ class SearchController extends Controller
             'subject' => 'required|max:31'
         ]);
 
+        $rows = 100;
+
         $subject = '%' . $request->subject . '%';
         $search = $request->subject;
 
-        $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->get();
+        $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->paginate($rows);
 
         $sturl = 'https://spamcontrol.freecycle.org/';
 
