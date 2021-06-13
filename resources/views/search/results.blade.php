@@ -40,7 +40,13 @@
                     {{ $post->email }}
                 </td>
                 <td>
-                    {{ $post->status }}
+                    @if('p' == $post->flags)
+                        Pending
+                    @elseif('a' == $post->flags)
+                        Active
+                    @else
+                        UNKNOWN
+                    @endif
                 </td>
             </tr>
         @endforeach
