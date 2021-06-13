@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
 
         // assign admin role to admin user
-        $user = User::Where('username', '=', 'chris')->first();
+        $user = User::Where('email', '=', 'chris@comgw.co.uk')->first();
         $role = Role::Where('name', '=', 'admin')->first();
         $user->roles()->attach($role->id);
     }
