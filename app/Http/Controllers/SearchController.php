@@ -46,7 +46,7 @@ class SearchController extends Controller
         $email = '%' . $request->email . '%';
         $search = $request->email;
 
-        $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->paginate($rows);
+        $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->paginate($rows)->withQueryString();
 
         $sturl = 'https://spamcontrol.freecycle.org/';
 
@@ -67,7 +67,7 @@ class SearchController extends Controller
         $subject = '%' . $request->subject . '%';
         $search = $request->subject;
 
-        $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->paginate($rows);
+        $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->paginate($rows)->withQueryString();
 
         $sturl = 'https://spamcontrol.freecycle.org/';
 
