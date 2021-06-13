@@ -53,15 +53,8 @@ class ProfileController extends Controller
             }
 
             // update the user
-            $user->company = $request->company;
-            $user->given_name = $request->given_name;
-            $user->family_name = $request->family_name;
-            $user->phone = $request->phone;
-            $user->mobile = $request->mobile;
-            $user->address = $request->address;
-            $user->town = $request->town;
-            $user->county = $request->county;
-            $user->postcode = $request->postcode;
+            $user->name = $request->name;
+            $user->email = $request->email;
 
             // update the users password
             $passwordMessage = ' [password was NOT changed]';
@@ -77,14 +70,14 @@ class ProfileController extends Controller
 
                 // log the changes
                 $log = new Logg();
-                $log->title = 'User update their profile';
+                $log->title = 'User updated their profile';
                 $log->user_id = $user->id;
                 $log->content = "User updated their profile:\n";
                 $log->content .= print_r($user->getChanges(), TRUE);
                 $log->save();
 
                 // redirect back to homepage
-                return redirect('/home')->with('success', 'You have successfully update the user ' . $passwordMessage);
+                return redirect('/home')->with('success', 'You have successfully updated your profile ' . $passwordMessage);
             }
             // redirect back to homepage
             return redirect('/home')->with('success', 'You made no changes, nothing updated');
