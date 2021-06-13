@@ -40,8 +40,8 @@ class SearchController extends Controller
             'email' => 'required|max:254'
         ]);
 
-        $email = '%' . $validated->email . '%';
-        $search = $validated->email;
+        $email = '%' . $request->email . '%';
+        $search = $request->email;
 
         $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->get();
 
@@ -57,8 +57,8 @@ class SearchController extends Controller
             'subject' => 'required|max:31'
         ]);
 
-        $subject = '%' . $validated->subject . '%';
-        $search = $validated->subject;
+        $subject = '%' . $request->subject . '%';
+        $search = $request->subject;
 
         $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->get();
 
