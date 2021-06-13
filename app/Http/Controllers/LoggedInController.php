@@ -44,7 +44,6 @@ class LoggedInController extends Controller
             $lastLoggedIn = session('lastLogin')->format('l jS F Y \a\t g:i a');
         }
 
-        dd($name, $lastLoggedIn);
         return view('home', compact('name', 'lastLoggedIn'));
     }
 
