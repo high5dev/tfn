@@ -39,7 +39,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'postid' => 'sometimes|required|integer|max:9',
             'date' => 'sometimes|required|date_format:Y-m-d',
-            'time' => 'sometimes|required|date_format:h:i'
+            'time' => 'sometimes|required|date_format:H:i'
         ]);
 
         $rows = 100;
