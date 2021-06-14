@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        if(count($posts))
+        @if(count($posts))
         @foreach($posts as $post)
             <tr>
                 <td>
