@@ -58,6 +58,7 @@ Route::group([
     Route::get('/search/email', 'SearchController@email');
     Route::get('/search/subject', 'SearchController@subject');
 
+    Route::get('/posts', 'PostController@index');
     Route::delete('/post/{id}', 'PostController@destroy');
 
     /****************** ADMIN Routes ****************/

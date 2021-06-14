@@ -24,6 +24,14 @@ class PostController extends Controller
     }
 
     /**
+     * get ready to display all posts
+     */
+    public function index()
+    {
+        return view('posts.index');
+    }
+
+    /**
      * show the search index page
      */
     public function destroy($id)
