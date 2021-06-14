@@ -63,7 +63,6 @@
                             @csrf
                             <button class="btn btn-sm btn-outline-secondary" type="submit">
                                 <i class="fas fa-trash-alt"></i></button>
-                            <span class="user-del-tooltiptext">Remove</span>
                         </form>
                     </td>
                 </tr>
