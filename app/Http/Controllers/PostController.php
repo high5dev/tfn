@@ -40,22 +40,44 @@ class PostController extends Controller
 
         if (isset($request->postid)) {
             if ('o' == $request->type) {
-                $posts = Post::where('id', $request->postid)->where('type', 'OFFER')->paginate($rows)->withQueryString();
+                $posts = Post::where('id', $request->postid)
+                    ->where('type', 'OFFER')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
             } elseif ('w' == $request->type) {
-                $posts = Post::where('id', $request->postid)->where('type', 'WANTED')->paginate($rows)->withQueryString();
+                $posts = Post::where('id', $request->postid)
+                    ->where('type', 'WANTED')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
             } else {
-                $posts = Post::where('id', $request->postid)->paginate($rows)->withQueryString();
+                $posts = Post::where('id', $request->postid)
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
             }
         }
 
         if (isset($request->date)) {
             $dated = $request->date . ' ' . $request->time . ':00';
             if ('o' == $request->type) {
-                $posts = Post::where('dated', '>=', $dated)->where('type', 'OFFER')->paginate($rows)->withQueryString();
+                $posts = Post::where('dated', '>=', $dated)
+                    ->where('type', 'OFFER')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
             } elseif ('w' == $request->type) {
-                $posts = Post::where('dated', '>=', $dated)->where('type', 'WANTED')->paginate($rows)->withQueryString();
+                $posts = Post::where('dated', '>=', $dated)
+                    ->where('type', 'WANTED')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
             } else {
-                $posts = Post::where('dated', '>=', $dated)->paginate($rows)->withQueryString();
+                $posts = Post::where('dated', '>=', $dated)
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
             }
         }
 
