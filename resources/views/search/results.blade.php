@@ -70,7 +70,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="7">No results for your search criteria</td>
+                <td colspan="8">No results for your search criteria</td>
             </tr>
         @endif
         </tbody>
