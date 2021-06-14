@@ -53,13 +53,15 @@ Route::group([
     Route::get('/logs', 'LoggController@index');
     Route::get('/logs/{id}', 'LoggController@show');
 
-    // User:: search
+    // User: search
     Route::get('/search', 'SearchController@index');
     Route::get('/search/email', 'SearchController@email');
     Route::get('/search/subject', 'SearchController@subject');
 
+    // User: posts
     Route::get('/posts', 'PostController@index');
     Route::get('/posts/list', 'PostController@list');
+
     Route::delete('/post/{id}', 'PostController@destroy');
 
     /****************** ADMIN Routes ****************/
