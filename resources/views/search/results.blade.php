@@ -22,6 +22,7 @@
         </tr>
         </thead>
         <tbody>
+        if(count($posts))
         @foreach($posts as $post)
             <tr>
                 <td>
@@ -37,7 +38,8 @@
                     {{ $post->type }}
                 </td>
                 <td>
-                    <a href="{{ $sturl }}/view_member?user_id={{ $post->userid }}" target="_blank">{{ $post->userid }}</a>
+                    <a href="{{ $sturl }}/view_member?user_id={{ $post->userid }}"
+                       target="_blank">{{ $post->userid }}</a>
                 </td>
                 <td>
                     {{ $post->email }}
@@ -54,6 +56,11 @@
                 </td>
             </tr>
         @endforeach
+        @else
+            <tr>
+                <td colspan="7">No results for your search criteria</td>
+            </tr>
+        @endif
         </tbody>
     </table>
 
