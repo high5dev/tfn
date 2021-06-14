@@ -36,6 +36,12 @@ class PostController extends Controller
      */
     public function list(Request $request)
     {
+        $validated = $request->validate([
+            'postid' => 'sometimes|required|integer|max:9',
+            'date' => 'sometimes|required|date_format:Y-m-d',
+            'time' => 'sometimes|required|date_format:h:i'
+        ]);
+
         $rows = 100;
 
         if (isset($request->postid)) {
