@@ -40,19 +40,19 @@ class PostController extends Controller
 
         if (isset($request->postid)) {
             if ('o' == $request->type) {
-                $posts = Post::where('id', $request->postid)
+                $posts = Post::where('id', '>=', $request->postid)
                     ->where('type', 'OFFER')
                     ->orderBy('dated', 'asc')
                     ->paginate($rows)
                     ->withQueryString();
             } elseif ('w' == $request->type) {
-                $posts = Post::where('id', $request->postid)
+                $posts = Post::where('id', '>=', $request->postid)
                     ->where('type', 'WANTED')
                     ->orderBy('dated', 'asc')
                     ->paginate($rows)
                     ->withQueryString();
             } else {
-                $posts = Post::where('id', $request->postid)
+                $posts = Post::where('id', '>=', $request->postid)
                     ->orderBy('dated', 'asc')
                     ->paginate($rows)
                     ->withQueryString();
