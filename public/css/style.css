@@ -1,57 +1,57 @@
 @CHARSET "UTF-8";
 
 html {
-	position: relative;
-	min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-	padding-top: 140px;
-	margin-bottom: 60px;
+    padding-top: 140px;
+    margin-bottom: 60px;
 }
 
-h4,h5 {
-	color: green !important;
+h4, h5 {
+    color: green !important;
 }
 
 #wrap {
-	min-height: 100%;
-	height: auto;
-	/* Negative indent footer by its height */
-	margin: 0 auto -60px;
-	/* Pad bottom by footer height */
-	padding: 0 0 60px;
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -60px;
+    /* Pad bottom by footer height */
+    padding: 0 0 60px;
 }
 
-.table-striped>tbody>tr:nth-child(odd)>td, 
-.table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: rgb(245, 230, 200);
- }
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: rgb(245, 230, 200);
+}
 
-.table-striped>tbody>tr:nth-child(even)>td, 
-.table-striped>tbody>tr:nth-child(even)>th {
-   background-color: rgb(225, 210, 200);
- }
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+    background-color: rgb(225, 210, 200);
+}
 
 .navbar-custom {
-	color: #000000;
+    color: #000000;
     background-color: #00a000;
 }
 
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:focus .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
-	color: #eeee00;
+    color: #eeee00;
     background-color: #006f00;
 }
 
 .footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	/* Set the fixed height of the footer here */
-	height: 60px;
-	line-height: 60px; /* Vertically center the text there */
-	color: #ffffff;
-	background-color: #000000;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    color: #ffffff;
+    background-color: #000000;
 }

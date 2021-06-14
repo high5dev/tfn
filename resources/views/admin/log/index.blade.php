@@ -2,27 +2,27 @@
 
 @section('content')
 
-@include('layouts.flash_message')
+    @include('layouts.flash_message')
 
-  <h3>List Log Entries</h3>
+    <h3>List Log Entries</h3>
 
-      <table class="table table-striped">
+    <table class="table table-striped">
         <thead class="thead-light">
-          <tr>
+        <tr>
             <th scope="col">Timestamp</th>
             <th scope="col">User</th>
             <th scope="col">Title</th>
-          </tr>
+        </tr>
         </thead>
         <tbody>
         @foreach($logs as $log)
-          <tr>
-            <td>{{ $log->created_at }}</td>
-            <td>{{ $log->user->name }}</td>
-            <td><a href="/admin/logs/{{ $log->id }}">{{ $log->title }}</a></td>
-          </tr>
+            <tr>
+                <td>{{ $log->created_at }}</td>
+                <td>{{ $log->user->name }}</td>
+                <td><a href="/admin/logs/{{ $log->id }}">{{ $log->title }}</a></td>
+            </tr>
         @endforeach
         </tbody>
-      </table>
+    </table>
 
 @endsection

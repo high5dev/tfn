@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -65,7 +66,7 @@ class SearchController extends Controller
         $rows = 100;
 
         $subject = '%' . $request->subject . '%';
-        $search = 'Subject: "' . $request->subject .'"';
+        $search = 'Subject: "' . $request->subject . '"';
 
         $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->paginate($rows)->withQueryString();
 

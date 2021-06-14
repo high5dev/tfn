@@ -7,10 +7,10 @@ class CustomValidator
     /**
      * validates that password is strong enough
      *
-     * @param   string  $attribute  name of the attribute being validated
-     * @param   string  $value      value of the attribute being validated
-     * @param   array   $parameters array of parameters passed to the rule
-     * @param   object  $validator  an instance of the validator
+     * @param string $attribute name of the attribute being validated
+     * @param string $value value of the attribute being validated
+     * @param array $parameters array of parameters passed to the rule
+     * @param object $validator an instance of the validator
      */
     public function validatePasswordStrength($attribute, $value, $parameters, $validator)
     {
@@ -23,11 +23,11 @@ class CustomValidator
     /**
      * NIST algorithm for determining password strength
      *
-     * @param   string  $password   the password to check
-     * @param   integer $result     the number of bits found
-     * @param   integer $minBits    minimum number of bits for an acceptable password
-     * @param   boolean $useDict    whether to use the password dictionary or not
-     * @param   integer $minWordLen minimum word length for phrases
+     * @param string $password the password to check
+     * @param integer $result the number of bits found
+     * @param integer $minBits minimum number of bits for an acceptable password
+     * @param boolean $useDict whether to use the password dictionary or not
+     * @param integer $minWordLen minimum word length for phrases
      *
      * @return  boolean true if password passes our checks
      */
@@ -39,19 +39,19 @@ class CustomValidator
         $numeric = false;
         $other = false;
         $space = false;
-        $y = strlen( $password );
+        $y = strlen($password);
         for ($x = 0; $x < $y; $x++) {
-            $tempchr = ord( substr( $password, $x, 1 ) );
-            if ($tempchr >= ord( "A" ) && $tempchr <= ord( "Z" )) {
+            $tempchr = ord(substr($password, $x, 1));
+            if ($tempchr >= ord("A") && $tempchr <= ord("Z")) {
                 $upper = true;
             } else {
-                if ($tempchr >= ord( "a" ) && $tempchr <= ord( "z" )) {
+                if ($tempchr >= ord("a") && $tempchr <= ord("z")) {
                     $lower = true;
                 } else {
-                    if ($tempchr >= ord( "0" ) && $tempchr <= ord( "9" )) {
+                    if ($tempchr >= ord("0") && $tempchr <= ord("9")) {
                         $numeric = true;
                     } else {
-                        if ($tempchr == ord( " " )) {
+                        if ($tempchr == ord(" ")) {
                             $space = true;
                         } else {
                             $other = true;
@@ -65,21 +65,21 @@ class CustomValidator
         if (!$space) {
             $extrabits -= 2;
         } else {
-            if (count( explode( " ", preg_replace( '/\s+/', " ", $password ) ) ) > 3) {
+            if (count(explode(" ", preg_replace('/\s+/', " ", $password))) > 3) {
                 $extrabits++;
             }
         }
-        $result = $this->GetNISTNumBits( $password, true ) + $extrabits;
+        $result = $this->GetNISTNumBits($password, true) + $extrabits;
 
-        $password = strtolower( $password );
-        $revpassword = strrev( $password );
-        $numbits = $this->GetNISTNumBits( $password ) + $extrabits;
+        $password = strtolower($password);
+        $revpassword = strrev($password);
+        $numbits = $this->GetNISTNumBits($password) + $extrabits;
         if ($result > $numbits) {
-            $result = intval( $numbits );
+            $result = intval($numbits);
         }
 
         // Remove QWERTY strings.^M
-        $qwertystrs = array (
+        $qwertystrs = array(
             "1234567890-qwertyuiopasdfghjkl;zxcvbnm,./",
             "1qaz2wsx3edc4rfv5tgb6yhn7ujm8ik,9ol.0p;/-['=]:?_{\"+}",
             "1qaz2wsx3edc4rfv5tgb6yhn7ujm8ik9ol0p",
@@ -91,30 +91,30 @@ class CustomValidator
             "plokmijnuhbygvtfcrdxeszwaq",
             "014725836914702583697894561230258/369*+-*/",
             "abcdefghijklmnopqrstuvwxyz"
-            );
+        );
 
         foreach ($qwertystrs as $qwertystr) {
             $qpassword = $password;
             $qrevpassword = $revpassword;
             $z = 6;
             do {
-                $y = strlen( $qwertystr ) - $z;
+                $y = strlen($qwertystr) - $z;
                 for ($x = 0; $x < $y; $x++) {
-                    $str = substr( $qwertystr, $x, $z );
-                    $qpassword = str_replace( $str, "*", $qpassword );
-                    $qrevpassword = str_replace( $str, "*", $qrevpassword );
+                    $str = substr($qwertystr, $x, $z);
+                    $qpassword = str_replace($str, "*", $qpassword);
+                    $qrevpassword = str_replace($str, "*", $qrevpassword);
                 }
 
                 $z--;
             } while ($z > 2);
 
-            $numbits = $this->GetNISTNumBits( $qpassword ) + $extrabits;
+            $numbits = $this->GetNISTNumBits($qpassword) + $extrabits;
             if ($result > $numbits) {
-                $result = intval( $numbits );
+                $result = intval($numbits);
             }
-            $numbits = $this->GetNISTNumBits( $qrevpassword ) + $extrabits;
+            $numbits = $this->GetNISTNumBits($qrevpassword) + $extrabits;
             if ($result > $numbits) {
-                $result = intval( $numbits );
+                $result = intval($numbits);
             }
 
             if ($result < $minBits) {
@@ -123,10 +123,10 @@ class CustomValidator
         }
 
         if ($useDict && $result >= $minBits) {
-            $passwords = array ();
+            $passwords = array();
 
             // Add keyboard shifting password variants.^M
-            $keyboardmap_down_noshift = array (
+            $keyboardmap_down_noshift = array(
                 "z" => "",
                 "x" => "",
                 "c" => "",
@@ -140,10 +140,10 @@ class CustomValidator
                 "<" => "",
                 ">" => "",
                 "?" => ""
-                );
+            );
 
-            if ($password == str_replace( array_keys( $keyboardmap_down_noshift ), array_values( $keyboardmap_down_noshift ), $password )) {
-                $keyboardmap_downright = array (
+            if ($password == str_replace(array_keys($keyboardmap_down_noshift), array_values($keyboardmap_down_noshift), $password)) {
+                $keyboardmap_downright = array(
                     "a" => "z",
                     "q" => "a",
                     "1" => "q",
@@ -170,9 +170,9 @@ class CustomValidator
                     "o" => "l",
                     "9" => "o",
                     "0" => "p",
-                    );
+                );
 
-                $keyboardmap_downleft = array (
+                $keyboardmap_downleft = array(
                     "2" => "q",
                     "w" => "a",
                     "3" => "w",
@@ -199,19 +199,19 @@ class CustomValidator
                     "0" => "o",
                     "p" => "l",
                     "-" => "p",
-                    );
+                );
 
-                $password2 = str_replace( array_keys( $keyboardmap_downright ), array_values( $keyboardmap_downright ), $password );
+                $password2 = str_replace(array_keys($keyboardmap_downright), array_values($keyboardmap_downright), $password);
                 $passwords[] = $password2;
-                $passwords[] = strrev( $password2 );
+                $passwords[] = strrev($password2);
 
-                $password2 = str_replace( array_keys( $keyboardmap_downleft ), array_values( $keyboardmap_downleft ), $password );
+                $password2 = str_replace(array_keys($keyboardmap_downleft), array_values($keyboardmap_downleft), $password);
                 $passwords[] = $password2;
-                $passwords[] = strrev( $password2 );
+                $passwords[] = strrev($password2);
             }
 
             // Deal with LEET-Speak substitutions.^M
-            $leetspeakmap = array (
+            $leetspeakmap = array(
                 "@" => "a",
                 "!" => "i",
                 "$" => "s",
@@ -225,30 +225,30 @@ class CustomValidator
                 "8" => "b",
                 "9" => "g",
                 "0" => "o"
-                );
+            );
 
-            $password2 = str_replace( array_keys( $leetspeakmap ), array_values( $leetspeakmap ), $password );
+            $password2 = str_replace(array_keys($leetspeakmap), array_values($leetspeakmap), $password);
             $passwords[] = $password2;
-            $passwords[] = strrev( $password2 );
+            $passwords[] = strrev($password2);
 
-            $leetspeakmap[ "1" ] = "l";
-            $password3 = str_replace( array_keys( $leetspeakmap ), array_values( $leetspeakmap ), $password );
+            $leetspeakmap["1"] = "l";
+            $password3 = str_replace(array_keys($leetspeakmap), array_values($leetspeakmap), $password);
             if ($password3 != $password2) {
                 $passwords[] = $password3;
-                $passwords[] = strrev( $password3 );
+                $passwords[] = strrev($password3);
             }
 
             // Process the password, while looking for words in the dictionary.^M
-            $a = ord( "a" );
-            $z = ord( "z" );
-            $data = file_get_contents( config('app.dictionary') );
+            $a = ord("a");
+            $z = ord("z");
+            $data = file_get_contents(config('app.dictionary'));
             foreach ($passwords as $num => $password) {
-                $y = strlen( $password );
+                $y = strlen($password);
                 for ($x = 0; $x < $y; $x++) {
-                    $tempchr = ord( substr( $password, $x, 1 ) );
+                    $tempchr = ord(substr($password, $x, 1));
                     if ($tempchr >= $a && $tempchr <= $z) {
                         for ($x2 = $x + 1; $x2 < $y; $x2++) {
-                            $tempchr = ord( substr( $password, $x2, 1 ) );
+                            $tempchr = ord(substr($password, $x2, 1));
                             if ($tempchr < $a || $tempchr > $z) {
                                 break;
                             }
@@ -256,29 +256,29 @@ class CustomValidator
 
                         $found = false;
                         while (!$found && $x2 - $x >= $minWordLen) {
-                            $word = "/\\n" . substr( $password, $x, $minWordLen );
+                            $word = "/\\n" . substr($password, $x, $minWordLen);
                             for ($x3 = $x + $minWordLen; $x3 < $x2; $x3++) {
-                                $word .= "(" . $password[ $x3 ];
+                                $word .= "(" . $password[$x3];
                             }
                             for ($x3 = $x + $minWordLen; $x3 < $x2; $x3++) {
                                 $word .= ")?";
                             }
                             $word .= "\\n/";
 
-                            preg_match_all( $word, $data, $matches );
-                            if (!count( $matches[ 0 ] )) {
-                                $password[ $x ] = "*";
+                            preg_match_all($word, $data, $matches);
+                            if (!count($matches[0])) {
+                                $password[$x] = "*";
                                 $x++;
-                                $numbits = $this->GetNISTNumBits( substr( $password, 0, $x ) ) + $extrabits;
+                                $numbits = $this->GetNISTNumBits(substr($password, 0, $x)) + $extrabits;
                                 if ($numbits >= $minBits) {
                                     $found = true;
                                 }
                             } else {
-                                foreach ($matches[ 0 ] as $match) {
-                                    $password2 = str_replace( trim( $match ), "*", $password );
-                                    $numbits = $this->GetNISTNumBits( $password2 ) + $extrabits;
+                                foreach ($matches[0] as $match) {
+                                    $password2 = str_replace(trim($match), "*", $password);
+                                    $numbits = $this->GetNISTNumBits($password2) + $extrabits;
                                     if ($result > $numbits) {
-                                        $result = intval( $numbits );
+                                        $result = intval($numbits);
                                     }
 
                                     if ($result < $minBits) {
@@ -306,37 +306,37 @@ class CustomValidator
     /**
      * NIST password weighting algorithm
      *
-     * @param   string  $password   the password to check
-     * @param   boolean $repeat     true to iterate over each char
+     * @param string $password the password to check
+     * @param boolean $repeat true to iterate over each char
      *
      * @return  integer password length in bits
      */
     public function GetNISTNumBits($password, $repeat = false)
     {
-        $y = strlen( $password );
+        $y = strlen($password);
         if ($repeat) {
             // Variant on NIST rules to reduce long sequences of repeated characters.^M
             $result = 0;
-            $charmult = array_fill( 0, 256, 1 );
+            $charmult = array_fill(0, 256, 1);
             for ($x = 0; $x < $y; $x++) {
-                $tempchr = ord( substr( $password, $x, 1 ) );
+                $tempchr = ord(substr($password, $x, 1));
                 if ($x > 19) {
-                    $result += $charmult[ $tempchr ];
+                    $result += $charmult[$tempchr];
                 } else {
                     if ($x > 7) {
-                        $result += $charmult[ $tempchr ] * 1.5;
+                        $result += $charmult[$tempchr] * 1.5;
                     } else {
                         if ($x > 0) {
-                            $result += $charmult[ $tempchr ] * 2;
+                            $result += $charmult[$tempchr] * 2;
                         } else {
                             $result += 4;
                         }
                     }
                 }
-                $charmult[ $tempchr ] *= 0.75;
+                $charmult[$tempchr] *= 0.75;
             }
 
-            return intval( $result );
+            return intval($result);
         } else {
             if ($y > 20)
                 return 4 + (7 * 2) + (12 * 1.5) + $y - 20;
@@ -345,7 +345,7 @@ class CustomValidator
             if ($y > 1)
                 return 4 + (($y - 1) * 2);
 
-            return intval( $y == 1 ? 4 : 0 );
+            return intval($y == 1 ? 4 : 0);
         }
     }
 

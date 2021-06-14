@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('layouts.header') 
+@include('layouts.header')
 <body>
-  <div id="wrap">
-@include('layouts.nav') 
+<div id="wrap">
+    @include('layouts.nav')
     <div class="container">
-@yield('content') 
+        @yield('content')
     </div>
-@include('layouts.footer') 
-  </div>
+    @include('layouts.footer')
+</div>
 </body>
 </html>

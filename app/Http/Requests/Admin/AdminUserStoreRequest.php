@@ -34,29 +34,29 @@ class AdminUserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-                'name' => [
-                    "required",
-                    "string",
-                    "min:1",
-                    "max:31"
-                ],
-                'email' => [
-                    "required",
-                    "string",
-                    "max:254",
-                    "email",
-                    "unique:users,email"
-                ],
-                'password' => [
-                    "nullable",
-                    "confirmed",
-                    "nist_password"
-                ],
-                'admin_password' => [
-                    "required",
-                    "string"
-                ]
-            ];
+            'name' => [
+                "required",
+                "string",
+                "min:1",
+                "max:31"
+            ],
+            'email' => [
+                "required",
+                "string",
+                "max:254",
+                "email",
+                "unique:users,email"
+            ],
+            'password' => [
+                "nullable",
+                "confirmed",
+                "nist_password"
+            ],
+            'admin_password' => [
+                "required",
+                "string"
+            ]
+        ];
     }
 
     /**

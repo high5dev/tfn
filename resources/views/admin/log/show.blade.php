@@ -2,15 +2,15 @@
 
 @section('content')
 
-@include('layouts.flash_message')
+    @include('layouts.flash_message')
 
-  <h3>View a log entry</h3>
+    <h3>View a log entry</h3>
 
-      <form method="post" action="#">
+    <form method="post" action="#">
 
         <fieldset>
 
-		    <legend>Log Details</legend>
+            <legend>Log Details</legend>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="title">Title :</label>
@@ -22,14 +22,16 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="owner">Owner :</label>
                 <div class="col-sm-10">
-                    <input type="text" id="owner" name="owner" class="form-control" readonly value="{{ $log->user->full_name }}">
+                    <input type="text" id="owner" name="owner" class="form-control" readonly
+                           value="{{ $log->user->full_name }}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="created_at">Timestamp :</label>
                 <div class="col-sm-10">
-                    <input type="text" id="created_at" name="created_at" class="form-control" readonly value="{{ $log->created_at }}">
+                    <input type="text" id="created_at" name="created_at" class="form-control" readonly
+                           value="{{ $log->created_at }}">
                 </div>
             </div>
 
@@ -42,6 +44,6 @@
 
         </fieldset>
 
-      </form>
+    </form>
 
 @endsection

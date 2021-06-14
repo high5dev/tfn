@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Auth;
@@ -52,7 +53,7 @@ class LoggedInController extends Controller
     {
         // log the logout
         $log = new Logg();
-        $log->title =  Auth::User()->FullName . ' logged out';
+        $log->title = Auth::User()->FullName . ' logged out';
         $log->user_id = Auth::User()->id;
         $log->content = Auth::User()->FullName . " logged out at " . date('Y-m-d H:i:s');
         $log->save();

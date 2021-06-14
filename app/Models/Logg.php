@@ -11,6 +11,7 @@ class Logg extends Model
         'title',
         'content',
     ];
+
     /**
      * get user the log belongs to
      */
