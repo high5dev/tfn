@@ -59,6 +59,7 @@ Route::group([
     Route::get('/search/subject', 'SearchController@subject');
 
     Route::get('/posts', 'PostController@index');
+    Route::get('/posts/list', 'PostController@list');
     Route::delete('/post/{id}', 'PostController@destroy');
 
     /****************** ADMIN Routes ****************/

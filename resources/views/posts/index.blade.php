@@ -7,7 +7,7 @@
     <h3>Scan Posts</h3>
 
     <div>Scan by post ID:</div>
-    <form method="post" action="/posts/byid" class="form-inline">
+    <form method="get" action="/posts/list" class="form-inline">
         @csrf()
 
         <div class="form-group">
@@ -34,7 +34,7 @@
     </form>
 
     <div>Scan by date & time:</div>
-    <form method="post" action="/posts/bytime" class="form-inline">
+    <form method="get" action="/posts/list" class="form-inline">
         @csrf()
 
         <div class="form-group">
