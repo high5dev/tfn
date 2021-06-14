@@ -4,6 +4,10 @@
 
     @include('layouts.flash_message')
 
+    @foreach($errors->all() as $message)
+        <div class="alert alert-warning">{{ $message }}</div>
+    @endforeach
+
     <h3>Scan Posts</h3>
 
     <div>Scan by post ID:</div>
@@ -13,9 +17,6 @@
         <div class="form-group">
             <input type="text" id="postid" name="postid" class="form-control" value="{{ old('postid') }}"
                    placeholder="Post ID" {{ $errors->has('postid') ? ' autofocus' : '' }} required>
-            @if ($errors->has('postid'))
-                <div class="alert alert-warning">{{ $errors->first('postid') }}</div>
-            @endif
         </div>
 
         <div class="form-group">
@@ -40,17 +41,11 @@
         <div class="form-group">
             <input type="text" id="date" name="date" class="form-control" value="{{ old('date') }}"
                    placeholder="YYYY-MM-DD" {{ $errors->has('date') ? ' autofocus' : '' }} required>
-            @if ($errors->has('date'))
-                <div class="alert alert-warning">{{ $errors->first('date') }}</div>
-            @endif
         </div>
 
         <div class="form-group">
             <input type="text" id="time" name="time" class="form-control" value="{{ old('time') }}"
                    placeholder="HH:MM" {{ $errors->has('time') ? ' autofocus' : '' }} required>
-            @if ($errors->has('time'))
-                <div class="alert alert-warning">{{ $errors->first('time') }}</div>
-            @endif
         </div>
 
         <div class="form-group">
