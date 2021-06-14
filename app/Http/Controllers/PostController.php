@@ -33,8 +33,8 @@ class PostController extends Controller
 
         if ($post) {
             $post->delete();
-            return view('/home')->with('success', 'Successfully removed the post');
+            return view('search.index')->with('success', 'Successfully removed the post');
         }
-        return view('/home')->with('error', 'Unable to find that post!');
+        return view('search.index')->with('error', 'Unable to find that post!');
     }
 }
