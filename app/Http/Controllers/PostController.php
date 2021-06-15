@@ -102,8 +102,8 @@ class PostController extends Controller
         $post = Post::where('id', $id)->first();
 
         if ($post) {
-            $post->delete();
-            return redirect('/search')->with('success', 'Successfully removed the post');
+            Post::where('userid', $post->userid)->delete();
+            return redirect('/search')->with('success', 'Successfully removed the user');
         }
         return redirect('/search')->with('error', 'Unable to find that post!');
     }
