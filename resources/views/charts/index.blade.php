@@ -64,6 +64,13 @@
                             text: 'Last week\'s posts'
                         }
                     },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                        },
+                    }
                 },
             });
         };
