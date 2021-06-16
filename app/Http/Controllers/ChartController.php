@@ -29,7 +29,12 @@ class ChartController extends Controller
      */
     public function index()
     {
-        $offers = Statistic::where('type', 'OFFERS')
+        $dates = Statistic::where('type', 'OFFERS')
+            ->where('dated', '>=', Carbon::today()->subDays(7))
+            ->where('dated', '<', Carbon::today())
+            ->pluck('dated');
+
+        $wanteds = Statistic::where('type', 'WANTEDS')
             ->where('dated', '>=', Carbon::today()->subDays(7))
             ->where('dated', '<', Carbon::today())
             ->pluck('quantity');
@@ -39,7 +44,7 @@ class ChartController extends Controller
             ->where('dated', '<', Carbon::today())
             ->pluck('quantity');
 
-        return view('charts.index', compact('offers', 'wanteds'));
+        return view('charts.index', compact('dates', 'offers', 'wanteds'));
     }
 
 }

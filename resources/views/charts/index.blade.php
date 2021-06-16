@@ -8,7 +8,6 @@
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
-        var offers =  {{ json_encode($offers) }}
 
         Highcharts.chart('highchart', {
             title: {
@@ -18,7 +17,7 @@
                 text: 'The Secret Portal'
             },
             xAxis: {
-                categories: ['1', '2', '3', '4', '5', '6', '7']
+                categories: {{ json_encode($dates) }}
             },
             yAxis: {
                 title: {
