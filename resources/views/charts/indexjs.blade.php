@@ -24,17 +24,17 @@
             datasets: [
                 {
                     label: 'OFFERS',
-                    backgroundColor: "green",
+                    borderColor: "green",
                     data: {{ $offers }}
                 },
                 {
                     label: 'WANTEDS',
-                    backgroundColor: "blue",
+                    borderColor: "blue",
                     data: {{ $wanteds }}
                 },
                 {
                     label: 'ZAPS',
-                    backgroundColor: "red",
+                    borderColor: "red",
                     data: {{ $zaps }}
                 }
             ]
@@ -56,7 +56,7 @@
                             text: 'Last week\'s posts'
                         }
                     }
-                }
+                },
             });
         };
     </script>
