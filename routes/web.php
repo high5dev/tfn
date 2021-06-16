@@ -66,6 +66,7 @@ Route::group([
 
     // User: charts
     Route::get('/chart', 'ChartController@index');
+    Route::get('/chartjs', 'ChartController@indexjs');
 
     /****************** ADMIN Routes ****************/
 

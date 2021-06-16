@@ -52,4 +52,32 @@ class ChartController extends Controller
         return view('charts.index', compact('dates', 'offers', 'wanteds', 'zaps'));
     }
 
+    /**
+     * display default chart
+     */
+    public function indexjs()
+    {
+        $dates = Statistic::where('type', 'OFFERS')
+            ->where('dated', '>=', Carbon::today()->subDays(7))
+            ->where('dated', '<', Carbon::today())
+            ->pluck('dated');
+
+        $offers = Statistic::where('type', 'OFFERS')
+            ->where('dated', '>=', Carbon::today()->subDays(7))
+            ->where('dated', '<', Carbon::today())
+            ->pluck('quantity');
+
+        $wanteds = Statistic::where('type', 'WANTEDS')
+            ->where('dated', '>=', Carbon::today()->subDays(7))
+            ->where('dated', '<', Carbon::today())
+            ->pluck('quantity');
+
+        $zaps = Statistic::where('type', 'ZAPS')
+            ->where('dated', '>=', Carbon::today()->subDays(7))
+            ->where('dated', '<', Carbon::today())
+            ->pluck('quantity');
+
+        return view('charts.indexjs', compact('dates', 'offers', 'wanteds', 'zaps'));
+    }
+
 }
