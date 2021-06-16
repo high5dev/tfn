@@ -23,18 +23,21 @@
             labels: {!! json_encode($dates)  !!},
             datasets: [
                 {
+                    yAxisID: 'y',
                     label: 'OFFERS',
                     borderColor: "green",
                     backgroundColor: 'transparent',
                     data: {{ $offers }}
                 },
                 {
+                    yAxisID: 'y',
                     label: 'WANTEDS',
                     borderColor: "blue",
                     backgroundColor: 'transparent',
                     data: {{ $wanteds }}
                 },
                 {
+                    yAxisID: 'y1',
                     label: 'ZAPS',
                     borderColor: "red",
                     backgroundColor: 'transparent',
