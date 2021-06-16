@@ -26,7 +26,8 @@
                     label: 'OFFERS',
                     borderColor: "green",
                     backgroundColor: 'transparent',
-                    data: {{ $offers }}
+                    data: {{ $offers }},
+                    yAxisID: 'y',
                 },
                 {
                     label: 'WANTEDS',
