@@ -17,6 +17,8 @@
         <h3>Statistics</h3>
         <div>There have been {{ $offers }} OFFER posts in the past 24 hours</div>
         <div>There have been {{ $wanteds }} WANTED posts in the past 24 hours</div>
+        <div>There have been {{ $zaps }} ZAPS posts in the past 24 hours</div>
+        <div><a href="/charts">Click here for more statistics</a></div>
     </div>
 
 @endsection

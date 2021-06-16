@@ -54,7 +54,11 @@ class LoggedInController extends Controller
         $wanteds = Post::where('type', 'WANTED')->where('dated', '>=', Carbon::now()->subDay())->count();
         $wanteds = number_format($wanteds);
 
-        return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds'));
+        // get number of ZAPS in the past 24 hours
+        $zaps = Post::where('type', 'ZAPS')->where('dated', '>=', Carbon::now()->subDay())->count();
+        $wanteds = number_format($zaps);
+
+        return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds', 'zaps'));
     }
 
     // log the user out and redirect to index page
