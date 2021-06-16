@@ -40,6 +40,9 @@
             }, {
                 name: 'WANTEDS',
                 data: {{ json_encode($wanteds) }}
+            }, {
+                name: 'ZAPS',
+                data: {{ json_encode($zaps) }}
             }],
 
             responsive: {
