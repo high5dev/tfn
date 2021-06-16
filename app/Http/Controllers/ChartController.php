@@ -31,7 +31,7 @@ class ChartController extends Controller
     {
         $offers = Statistic::select(\DB::raw("COUNT(*) as count"))
             ->where('type', 'OFFERS')
-            ->where('dated', '>=', Carbon::subWeek())
+            ->where('dated', '>=', Carbon::today()->subDays(7))
             ->where('dated', '<', Carbon::today())
             ->pluck('count');
 
