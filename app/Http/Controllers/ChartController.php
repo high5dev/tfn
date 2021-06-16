@@ -29,12 +29,10 @@ class ChartController extends Controller
      */
     public function index()
     {
-        $offers = Statistic::select(\DB::raw("COUNT(*) as count"))
-            ->where('type', 'OFFERS')
+        $offers = Statistic::where('type', 'OFFERS')
             ->where('dated', '>=', Carbon::today()->subDays(7))
             ->where('dated', '<', Carbon::today())
-            ->get();
-            //->pluck('count');
+            ->pluck('quantity');
 
         dd($offers);
 
