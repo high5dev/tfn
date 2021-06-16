@@ -39,7 +39,7 @@
                 name: 'OFFERS',
                 data: {{ json_encode($offers) }}
             }, {
-                NAME: 'WANTEDS',
+                name: 'WANTEDS',
                 data: {{ json_encode($wanteds) }}
             }],
 
