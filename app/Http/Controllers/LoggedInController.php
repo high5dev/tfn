@@ -48,9 +48,11 @@ class LoggedInController extends Controller
 
         // get number of OFFER posts in the past 24 hours
         $offers = Post::where('type', 'OFFER')->where('dated', '>=', Carbon::now()->subDay())->count();
+        $offers = number_format($offers);
 
         // get number of WANTED posts in the past 24 hours
         $wanteds = Post::where('type', 'WANTED')->where('dated', '>=', Carbon::now()->subDay())->count();
+        $wanteds = number_format($wanteds);
 
         return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds'));
     }
