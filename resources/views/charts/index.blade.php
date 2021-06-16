@@ -36,9 +36,13 @@
                 }
             },
             series: [{
-                name: 'Posts',
-                data: offers
+                name: 'OFFERS',
+                data: {{ json_encode($offers) }}
+            }, {
+                NAME: 'WANTEDS',
+                data: {{ json_encode($wanteds) }}
             }],
+
             responsive: {
                 rules: [{
                     condition: {
