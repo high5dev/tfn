@@ -17,7 +17,7 @@
                 text: 'The Secret Portal'
             },
             xAxis: {
-                categories: {{ json_encode(html_entity_decode($dates)) }}
+                categories: {!! json_encode($dates) !!}
             },
             yAxis: {
                 title: {
