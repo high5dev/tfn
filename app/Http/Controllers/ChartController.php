@@ -35,6 +35,8 @@ class ChartController extends Controller
             ->where('dated', '<', Carbon::today())
             ->pluck('count');
 
+        dd($offers);
+
         return view('charts.index', compact('offers'));
     }
 
