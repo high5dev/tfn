@@ -64,6 +64,9 @@ Route::group([
 
     Route::delete('/post/{id}', 'PostController@destroy');
 
+    // User: charts
+    Route::get('/chart', 'ChartController@index');
+
     /****************** ADMIN Routes ****************/
 
     // Admin: manage users
