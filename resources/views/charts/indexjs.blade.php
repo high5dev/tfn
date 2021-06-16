@@ -25,6 +25,7 @@
                 {
                     label: 'OFFERS',
                     borderColor: "green",
+                    backgroundColor: Utils.transparentize(Utils.CHART_COLORS.green, 0.5),
                     data: {{ $offers }}
                 },
                 {
