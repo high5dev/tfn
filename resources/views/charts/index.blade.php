@@ -48,7 +48,6 @@
             var ctx = document.getElementById("canvas").getContext("2d");
             window.myBar = new Chart(ctx, {
                 type: 'line',
-                data: chartData,
                 options: {
                     responsive: true,
                     interaction: {
@@ -81,6 +80,7 @@
                         },
                     }
                 },
+                data: chartData,
             });
         };
     </script>
