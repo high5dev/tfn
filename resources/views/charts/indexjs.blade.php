@@ -20,7 +20,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script>
         var chartData = {
-            labels: [1,2,3,4,5,6,7],
+            labels: {{ json_encode($dates)  }}
+        },
             datasets: [{
                 label: 'OFFERS',
                 backgroundColor: "green",
