@@ -4,6 +4,8 @@
 
     @include('layouts.flash_message')
 
+    <div id="hight-chart"></div>
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
         var offers =  {{ json_encode($offers) }}
