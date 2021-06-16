@@ -4,13 +4,13 @@
 
     @include('layouts.flash_message')
 
-    <div id="hight-chart"></div>
+    <div id="highchart"></div>
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
         var offers =  {{ json_encode($offers) }}
 
-        Highcharts.chart('container', {
+        Highcharts.chart('highchart', {
             title: {
                 text: 'Offer Posts: last week'
             },
