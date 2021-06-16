@@ -33,7 +33,8 @@ class ChartController extends Controller
             ->where('type', 'OFFERS')
             ->where('dated', '>=', Carbon::today()->subDays(7))
             ->where('dated', '<', Carbon::today())
-            ->pluck('count');
+            ->get();
+            //->pluck('count');
 
         dd($offers);
 
