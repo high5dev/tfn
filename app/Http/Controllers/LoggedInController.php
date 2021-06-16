@@ -56,7 +56,7 @@ class LoggedInController extends Controller
 
         // get number of ZAPS in the past 24 hours
         $zaps = Post::where('type', 'ZAPS')->where('dated', '>=', Carbon::now()->subDay())->count();
-        $wanteds = number_format($zaps);
+        $zaps = number_format($zaps);
 
         return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds', 'zaps'));
     }
