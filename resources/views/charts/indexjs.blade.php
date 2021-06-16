@@ -25,19 +25,19 @@
                 {
                     label: 'OFFERS',
                     borderColor: "green",
-                    backgroundColor: 'white',
+                    backgroundColor: 'transparent',
                     data: {{ $offers }}
                 },
                 {
                     label: 'WANTEDS',
                     borderColor: "blue",
-                    backgroundColor: 'white',
+                    backgroundColor: 'transparent',
                     data: {{ $wanteds }}
                 },
                 {
                     label: 'ZAPS',
                     borderColor: "red",
-                    backgroundColor: 'white',
+                    backgroundColor: 'transparent',
                     data: {{ $zaps }}
                 }
             ]
