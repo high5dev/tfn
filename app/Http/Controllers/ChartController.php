@@ -34,7 +34,7 @@ class ChartController extends Controller
             ->where('dated', '<', Carbon::today())
             ->pluck('dated');
 
-        $wanteds = Statistic::where('type', 'WANTEDS')
+        $offers = Statistic::where('type', 'OFFERS')
             ->where('dated', '>=', Carbon::today()->subDays(7))
             ->where('dated', '<', Carbon::today())
             ->pluck('quantity');
