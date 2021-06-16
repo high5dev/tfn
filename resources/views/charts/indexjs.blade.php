@@ -22,9 +22,21 @@
         var barChartData = {
             labels: 'OFFERs',
             datasets: [{
-                label: 'User',
-                backgroundColor: "pink",
+                label: 'OFFERS',
+                backgroundColor: "green",
                 data: {{ $offers }}
+            }, {
+                labels: 'WANTEDs',
+                datasets: [{
+                    label: 'WANTEDS',
+                    backgroundColor: "blue",
+                    data: {{ $wanteds }}
+                }, {
+                    labels: 'ZAPs',
+                    datasets: [{
+                        label: 'ZAPS',
+                        backgroundColor: "red",
+                        data: {{ $zaps }}
             }]
         };
 
