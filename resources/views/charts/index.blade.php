@@ -11,7 +11,7 @@
 
         Highcharts.chart('highchart', {
             title: {
-                text: 'Offer Posts: last week'
+                text: 'Last Week\'s Posts'
             },
             subtitle: {
                 text: 'The Secret Portal'
