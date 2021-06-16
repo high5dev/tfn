@@ -30,14 +30,14 @@
                     data: {{ $offers }}
                 },
                 {
-                    yAxisID: 'y',
+                    yAxisID: 'y1',
                     label: 'WANTEDS',
                     borderColor: "blue",
                     backgroundColor: 'transparent',
                     data: {{ $wanteds }}
                 },
                 {
-                    yAxisID: 'y1',
+                    yAxisID: 'y2',
                     label: 'ZAPS',
                     borderColor: "red",
                     backgroundColor: 'transparent',
@@ -74,6 +74,16 @@
                             position: 'left',
                         },
                         y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+
+                            // grid line settings
+                            grid: {
+                                drawOnChartArea: false, // only want the grid lines for one axis to show up
+                            },
+                        },
+                        y2: {
                             type: 'linear',
                             display: true,
                             position: 'right',
