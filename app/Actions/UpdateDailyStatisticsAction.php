@@ -27,7 +27,7 @@ class UpdateDailyStatisticsAction
         $stats->save();
 
         // get number of WANTED posts yesterday
-        $wanted = Post::where('type', 'WANTED')
+        $wanteds = Post::where('type', 'WANTED')
             ->where('dated', '>=', $yesterday)
             ->where('dated', '<', Carbon::today())
             ->count();
@@ -35,7 +35,7 @@ class UpdateDailyStatisticsAction
         $stats = new Statistic();
         $stats->dated = $yesterday;
         $stats->type = 'WANTEDS';
-        $stats->quantity = $offers;
+        $stats->quantity = $wanteds;
         $stats->save();
     }
 }
