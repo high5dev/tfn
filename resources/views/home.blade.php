@@ -13,4 +13,10 @@
         @endif
     </div>
 
+    <div class="jumbotron">
+        <h3>Statistics</h3>
+        <span>There have been {{ $offers }} OFFER posts in the past 24 hours</span>
+        <span>There have been {{ $wanteds }} WANTED posts in the past 24 hours</span>
+    </div>
+
 @endsection

@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Auth;
 use Storage;
 use Validator;
-use App\Models\Logg;
 use Carbon\Carbon;
+use App\Models\Post;
+use App\Models\Logg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -45,7 +46,13 @@ class LoggedInController extends Controller
             $lastLoggedIn = session('lastLogin')->format('l jS F Y \a\t g:i a');
         }
 
-        return view('home', compact('name', 'lastLoggedIn'));
+        // get number of OFFER posts in the past 24 hours
+        $offers = Post::where('type', 'OFFER')->where('dated', '>=', Carbon::now()->subDay())->count();
+
+        // get number of WANTED posts in the past 24 hours
+        $wanteds = Post::where('type', 'WANTED')->where('dated', '>=', Carbon::now()->subDay())->count();
+
+        return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds'));
     }
 
     // log the user out and redirect to index page
