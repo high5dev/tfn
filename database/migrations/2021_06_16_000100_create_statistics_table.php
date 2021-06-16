@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->date('dated');
             $table->string('type', 7);
-            $table->string('quantity');
+            $table->unsignedInteger('quantity');
             $table->timestamps();
         });
     }

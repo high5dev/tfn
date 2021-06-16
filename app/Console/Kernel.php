@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new UpdateDailyStatisticsAction)->dailyAt('00:01');
+        $schedule->call(new UpdateDailyStatisticsAction)->dailyAt('15:03');
     }
 
     /**
