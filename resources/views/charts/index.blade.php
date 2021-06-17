@@ -74,6 +74,7 @@
                             type: 'linear',
                             position: 'left',
                             title: {
+                                display: true,
                                 text: 'Posts'
                             },
                             ticks: {
@@ -85,6 +86,7 @@
                             type: 'linear',
                             position: 'right',
                             title: {
+                                display: true,
                                 text: 'Zaps'
                             },
                             ticks: {
