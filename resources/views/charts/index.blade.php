@@ -76,10 +76,7 @@
                             id: 'B',
                             type: 'linear',
                             position: 'right',
-                            ticks: {
-                                max: 50,
-                                min: 0
-                            }
+
                         }]
                     }
                 },
