@@ -26,19 +26,22 @@
                     label: 'OFFERS',
                     borderColor: "green",
                     backgroundColor: 'transparent',
-                    data: {{ $offers }}
+                    data: {{ $offers }},
+                    yAxisID: 'A'
                 },
                 {
                     label: 'WANTEDS',
                     borderColor: "blue",
                     backgroundColor: 'transparent',
-                    data: {{ $wanteds }}
+                    data: {{ $wanteds }},
+                    yAxisID: 'A'
                 },
                 {
                     label: 'ZAPS',
                     borderColor: "red",
                     backgroundColor: 'transparent',
-                    data: {{ $zaps }}
+                    data: {{ $zaps }},
+                    yAxisID: 'B'
                 }
             ]
         };
@@ -65,19 +68,19 @@
                         }
                     },
                     scales: {
-                        y: {
+                        yAxes: [{
+                            id: 'A',
                             type: 'linear',
-                            display: true,
                             position: 'left',
-                        },
-                        y1: {
+                        }, {
+                            id: 'B',
                             type: 'linear',
-                            display: true,
                             position: 'right',
-                            grid: {
-                                drawOnChartArea: false, // only want the grid lines for one axis to show up
-                            },
-                        },
+                            ticks: {
+                                max: 1,
+                                min: 0
+                            }
+                        }]
                     }
                 },
             });
