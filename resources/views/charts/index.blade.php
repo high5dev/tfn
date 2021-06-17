@@ -70,10 +70,12 @@
                     scales: {
                         yAxes: [{
                             id: 'A',
+                            title: 'Posts',
                             type: 'linear',
                             position: 'left',
                         }, {
                             id: 'B',
+                            title: 'Zaps',
                             type: 'linear',
                             position: 'right',
 
