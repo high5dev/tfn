@@ -77,7 +77,7 @@
                             type: 'linear',
                             position: 'right',
                             ticks: {
-                                max: 1,
+                                max: 50,
                                 min: 0
                             }
                         }]
