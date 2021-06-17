@@ -70,15 +70,20 @@
                     scales: {
                         yAxes: [{
                             id: 'A',
-                            title: 'Posts',
+                            text: 'Posts',
                             type: 'linear',
                             position: 'left',
+                            ticks: {
+                                beginAtZero: true,
+                            }
                         }, {
                             id: 'B',
-                            title: 'Zaps',
+                            text: 'Zaps',
                             type: 'linear',
                             position: 'right',
-
+                            ticks: {
+                                beginAtZero: true,
+                            }
                         }]
                     }
                 },
