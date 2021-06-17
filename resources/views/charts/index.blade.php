@@ -73,6 +73,9 @@
                             text: 'Posts',
                             type: 'linear',
                             position: 'left',
+                            title: {
+                                text: 'Posts'
+                            },
                             ticks: {
                                 beginAtZero: true,
                             }
@@ -81,6 +84,9 @@
                             text: 'Zaps',
                             type: 'linear',
                             position: 'right',
+                            title: {
+                                text: 'Zaps'
+                            },
                             ticks: {
                                 beginAtZero: true,
                             }
