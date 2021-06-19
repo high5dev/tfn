@@ -44,7 +44,9 @@ class PostController extends Controller
 
         $rows = 100;
 
-        if (isset($request->postid)) {
+        if ('bypostid' == $request->posts) {
+
+            // scan from specified post id
             if ('o' == $request->type) {
                 $posts = Post::where('id', '>=', $request->postid)
                     ->where('type', 'OFFER')
@@ -63,9 +65,10 @@ class PostController extends Controller
                     ->paginate($rows)
                     ->withQueryString();
             }
-        }
 
-        if (isset($request->date)) {
+        } elseif ('bydatetime' == $request->posts) {
+
+            // scan from specified datetime
             $dated = $request->date . ' ' . $request->time . ':00';
             if ('o' == $request->type) {
                 $posts = Post::where('dated', '>=', $dated)
@@ -85,6 +88,30 @@ class PostController extends Controller
                     ->paginate($rows)
                     ->withQueryString();
             }
+
+        } else {
+
+            // scan from midnight today
+            $dated = date('Y-m-d 00:00:00');
+            if ('o' == $request->type) {
+                $posts = Post::where('dated', '>=', $dated)
+                    ->where('type', 'OFFER')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
+            } elseif ('w' == $request->type) {
+                $posts = Post::where('dated', '>=', $dated)
+                    ->where('type', 'WANTED')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
+            } else {
+                $posts = Post::where('dated', '>=', $dated)
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
+            }
+
         }
 
         $sturl = 'https://spamcontrol.freecycle.org/';
