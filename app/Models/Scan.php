@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scan extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'started',
+    ];
+
     // we don't need timestamps in this model as we already have start & finish times
     public $timestamps = false;
 
