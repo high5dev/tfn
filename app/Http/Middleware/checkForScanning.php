@@ -17,17 +17,18 @@ class checkForScanning
      */
     public function handle(Request $request, Closure $next)
     {
-        // is someone scanning?
-        $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->first();
-
+        // clear the session variable if it exists
         if ($request->session()->exists('scanning')) {
             $request->session()->forget('scanning');
         }
+
+        // is someone scanning?
+        $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->first();
+
         if ($scanning) {
             $request->session(['scanning' => $scanning->user->name]);
+            dd($request->session()->all());
         }
-
-        dd($request->session()->all());
 
         return $next($request);
     }
