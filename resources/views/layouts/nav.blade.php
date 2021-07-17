@@ -32,7 +32,9 @@
             @endif
         </ul>
         @if(session()->has('scanning'))
-            <strong>{{ session('scanning') }} is scanning !</strong>
+            <div class="text-left">
+                <strong>{{ session('scanning') }} is scanning !</strong>
+            </div>
         @endif
         <ul class="navbar-nav">
             @if (Auth::check())
