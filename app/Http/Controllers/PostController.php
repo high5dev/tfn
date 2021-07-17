@@ -139,8 +139,10 @@ class PostController extends Controller
     {
         // get the current scanning entry
         $scan = Scan::where('user_id', Auth::user()->id)->whereNull('finished')->first();
-        $scan->finished = Carbon::now();
-        $scan->save();
+        if ($scan) {
+            $scan->finished = Carbon::now();
+            $scan->save();
+        }
 
         return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
     }
