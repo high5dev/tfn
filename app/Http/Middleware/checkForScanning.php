@@ -21,7 +21,7 @@ class checkForScanning
         $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->first();
 
         session()->forget('scanning');
-        if ($scanning) {
+        if ($scanning and count($scanning)) {
             session(['scanning' => $scanning->user->name]);
         }
 
