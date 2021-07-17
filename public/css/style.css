@@ -38,6 +38,11 @@ h4, h5 {
     background-color: #00a000;
 }
 
+.navbar-custom-scanning {
+    color: #000000;
+    background-color: #e3342f;
+}
+
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:focus .nav-link,
 .navbar-custom .nav-item:hover .nav-link {

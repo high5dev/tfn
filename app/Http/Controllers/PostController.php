@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Scan;
 use Auth;
 use App\Models\Post;
+use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -114,6 +116,17 @@ class PostController extends Controller
 
         }
 
+        // is someone scanning?
+        $scanning = '';
+        if ($request->scanning) {
+            Scan::create([
+                'user_id' => Auth::user()->id,
+                'started' => Carbon::now()
+            ]);
+            session(['scanning' => Auth::user()->name]);
+        }
+
+        // Spamtool URL to individual posts can be viewed
         $sturl = 'https://spamcontrol.freecycle.org/';
 
         return view('posts.list', compact('posts', 'sturl'));

@@ -23,7 +23,7 @@
                 <label class="col-sm-2 col-form-label" for="owner">Owner :</label>
                 <div class="col-sm-10">
                     <input type="text" id="owner" name="owner" class="form-control" readonly
-                           value="{{ $log->user->full_name }}">
+                           value="{{ $log->user->name }}">
                 </div>
             </div>
 

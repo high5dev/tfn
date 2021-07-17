@@ -82,4 +82,7 @@ Route::group([
     Route::get('/admin/logs', 'Admin\AdminLoggController@index');
     Route::get('/admin/logs/{id}', 'Admin\AdminLoggController@show');
 
+    // Admin: manage scans
+    Route::get('/admin/scans', 'Admin\AdminScanController@index');
+    Route::get('/admin/scans/{id}', 'Admin\AdminScanController@show');
 });

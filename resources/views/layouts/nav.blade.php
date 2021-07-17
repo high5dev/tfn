@@ -1,9 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
+<nav
+    class="navbar navbar-expand-lg navbar-light fixed-top @if(session()->has('scanning')) navbar-custom-scanning @else navbar-custom @endif">
     <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="The Communication Gateway Logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    @if(session()->has('scanning'))
+        <strong>{{ session('scanning') }} is scanning !</strong>
+    @endif
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())

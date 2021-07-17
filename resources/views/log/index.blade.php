@@ -4,7 +4,7 @@
 
     @include('layouts.flash_message')
 
-    <h3>List Log Entries</h3>
+    <h3>List my log entries</h3>
 
     <table class="table table-striped">
         <thead class="thead-light">

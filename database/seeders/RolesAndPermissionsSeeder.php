@@ -26,6 +26,8 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'update users']);
         Permission::create(['name' => 'delete users']);
 
+        Permission::create(['name' => 'view scans']);
+
         Permission::create(['name' => 'view logs']);
 
         // create the admin role
