@@ -10,7 +10,7 @@
 
     <h3>Scan Posts</h3>
 
-    <div class="bg-info">
+    <div class="bg-warning">
         If you are about to start scanning, please make sure you tick the "Scanning" checkbox
         so others can see you are scanning and we don't duplicate effort!
     </div>
