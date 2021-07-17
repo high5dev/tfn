@@ -10,7 +10,7 @@
 
     <h3>Scan Posts</h3>
 
-    <div class="text-warning">
+    <div class="bg-info">
         If you are about to start scanning, please make sure you tick the "Scanning" checkbox
         so others can see you are scanning and we don't duplicate effort!
     </div>
@@ -114,7 +114,7 @@
     <div class="jumbotron">
         If you are using this facility to carry out some scanning, then you must tick the "Scanning" checkbox.
         This will alert other team members that someone is scanning so we don't duplicate effort.
-        Unlike the old SpamTool it doesn;t do any harm for multiple people to be accessing this at the same time,
+        Unlike the old SpamTool it doesn't do any harm for multiple people to be accessing this at the same time,
         so if you just want to lookup a post or need to check something feel free to not tick the "Scanning"
         checkbox. It should only be used when you are performing a scan that will be entered into the database.
     </div>
