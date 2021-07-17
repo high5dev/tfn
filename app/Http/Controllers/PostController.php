@@ -138,7 +138,7 @@ class PostController extends Controller
     public function doneScanning()
     {
         // get the current scanning entry
-        $scan = Scan::where('user_id', Auth::user()->id)->isNull('finished')->first();
+        $scan = Scan::where('user_id', Auth::user()->id)->whereNull('finished')->first();
         $scan->finished = Carbon::now();
         $scan->save();
 
