@@ -22,7 +22,7 @@
         @csrf()
 
         <div class="form-group col-sm-8">
-            <select id="type" name="type" class="form-control>
+            <select id="type" name="type" class="form-control">
                 <option value="b">Both</option>
                 <option value="o">OFFERs</option>
                 <option value="w">WANTEDs</option>
