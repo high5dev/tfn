@@ -144,7 +144,7 @@ class PostController extends Controller
 
         session()->forget('scanning');
 
-        return view('/home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
+        return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
     }
 
     /**
