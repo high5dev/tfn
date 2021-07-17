@@ -113,17 +113,17 @@ class PostController extends Controller
                     ->paginate($rows)
                     ->withQueryString();
             }
-
         }
 
-        // is someone scanning?
-        $scanning = '';
-        if ($request->scanning) {
-            Scan::create([
-                'user_id' => Auth::user()->id,
-                'started' => Carbon::now()
-            ]);
-            session(['scanning' => Auth::user()->name]);
+        // is the user scanning?
+        $alreadyScanning = Scan::where('user_id', Auth::user()->id)->whereNull('finished')->first();
+        if (! $alreadyScanning) {
+            if ($request->scanning) {
+                Scan::create([
+                    'user_id' => Auth::user()->id,
+                    'started' => Carbon::now()
+                ]);
+            }
         }
 
         // Spamtool URL to individual posts can be viewed
@@ -141,8 +141,6 @@ class PostController extends Controller
         $scan = Scan::where('user_id', Auth::user()->id)->whereNull('finished')->first();
         $scan->finished = Carbon::now();
         $scan->save();
-
-        session()->forget('scanning');
 
         return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
     }
