@@ -39,6 +39,6 @@
 
     </form>
 
-    <a href="/scans">Back to list</a>
+    <a href="/admin/scans">Back to list</a>
 
 @endsection
