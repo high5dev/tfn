@@ -16,7 +16,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-12 bg-dark">Scan from midnight:</div>
+        <div class="col-sm-12 bg-light">Scan from midnight:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">
         @csrf()
