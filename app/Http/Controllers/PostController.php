@@ -133,17 +133,31 @@ class PostController extends Controller
     }
 
     /**
-     * show the search index page
+     * flag that the user has finished scanning
      */
-    public
-    function destroy($id)
+    public function finished()
+    {
+        // get the current scanning entry
+        $scan = Scan::where('user_id', Auth::user()->id)->isNull('finished')->first();
+        $scan->finished = Carbon::now();
+        $scan->save();
+
+        session->forget('scanning');
+
+        return view('/home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
+    }
+
+    /**
+     * delete a post entry
+     */
+    public function destroy($id)
     {
         // get the post
         $post = Post::where('id', $id)->first();
 
         if ($post) {
             Post::where('userid', $post->userid)->delete();
-            return redirect('/search')->with('success', 'Successfully removed the user');
+            return redirect('/search')->with('success', 'Successfully removed that post');
         }
         return redirect('/search')->with('error', 'Unable to find that post!');
     }

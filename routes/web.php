@@ -61,8 +61,8 @@ Route::group([
     // User: posts
     Route::get('/posts', 'PostController@index');
     Route::get('/posts/list', 'PostController@list');
-
     Route::delete('/post/{id}', 'PostController@destroy');
+    Route::get('/post/finished', 'PostController@doneScanning');
 
     // User: charts
     Route::get('/chart', 'ChartController@index');
