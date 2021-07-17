@@ -18,7 +18,7 @@ class checkForScanning
     public function handle(Request $request, Closure $next)
     {
         // is someone scanning?
-        $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->pluck(1);
+        $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->first();
 
         session()->forget('scanning');
         if ($scanning) {
