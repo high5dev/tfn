@@ -20,6 +20,8 @@ class checkForScanning
         // is someone scanning?
         $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->first();
 
+        dd($scanning);
+
         if ($request->session()->exists('scanning')) {
             $request->session()->forget('scanning');
         }
