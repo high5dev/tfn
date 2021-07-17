@@ -15,7 +15,9 @@
         so others can see you are scanning and we don't duplicate effort!
     </div>
 
-    <div>Scan from midnight:</div>
+    <div class="row">
+        <div class="col-sm-12 bg-light">Scan from midnight:</div>
+    </div>
     <form method="get" action="/posts/list" class="form-inline row">
         @csrf()
 
