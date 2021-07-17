@@ -27,7 +27,6 @@ class checkForScanning
 
         if ($scanning) {
             session(['scanning' => $scanning->user->name]);
-            dd($request->session()->all());
         }
 
         return $next($request);
