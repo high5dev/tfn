@@ -23,7 +23,7 @@ class checkForScanning
         if ($request->session()->exists('scanning')) {
             $request->session()->forget('scanning');
         }
-        if ($scanning and count($scanning)) {
+        if ($scanning) {
             $request->session(['scanning' => $scanning->user->name]);
         }
 
