@@ -23,7 +23,7 @@ class checkForScanning
         }
 
         // is someone scanning?
-        $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->first();
+        $scanning = Scan::whereNull('finished')->orderBy('id', 'desc')->first();
 
         if ($scanning) {
             session(['scanning' => $scanning->user->name]);
