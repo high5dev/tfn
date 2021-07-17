@@ -142,7 +142,7 @@ class PostController extends Controller
         $scan->finished = Carbon::now();
         $scan->save();
 
-        session->forget('scanning');
+        session()->forget('scanning');
 
         return view('/home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
     }
