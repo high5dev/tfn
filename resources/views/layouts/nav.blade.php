@@ -5,9 +5,6 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    @if(session()->has('scanning'))
-        <strong>{{ session('scanning') }} is scanning !</strong>
-    @endif
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
@@ -34,6 +31,9 @@
                 @endrole
             @endif
         </ul>
+        @if(session()->has('scanning'))
+            <strong>{{ session('scanning') }} is scanning !</strong>
+        @endif
         <ul class="navbar-nav">
             @if (Auth::check())
                 <li class="nav-item dropdown">
