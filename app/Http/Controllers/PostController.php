@@ -135,7 +135,7 @@ class PostController extends Controller
     /**
      * flag that the user has finished scanning
      */
-    public function finished()
+    public function doneScanning()
     {
         // get the current scanning entry
         $scan = Scan::where('user_id', Auth::user()->id)->isNull('finished')->first();
