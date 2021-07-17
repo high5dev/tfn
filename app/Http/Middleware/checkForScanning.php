@@ -26,7 +26,7 @@ class checkForScanning
         $scanning = Scan::whereNull('finished')->orderBy('id', 'asc')->first();
 
         if ($scanning) {
-            $request->session(['scanning' => $scanning->user->name]);
+            session(['scanning' => $scanning->user->name]);
             dd($request->session()->all());
         }
 
