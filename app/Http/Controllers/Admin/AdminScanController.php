@@ -37,7 +37,7 @@ class AdminScanController extends Controller
                 ->paginate($rows)
                 ->withQueryString();
 
-            return view('admin.scan.index', compact('scans'));
+            return view('admin.scans.index', compact('scans'));
         } else {
             return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view scans');
         }
@@ -54,7 +54,7 @@ class AdminScanController extends Controller
             $scan = Scan::where('id', '=', $id)->first();
 
             if ($scan) {
-                return view('admin.scan.show', compact('scan'));
+                return view('admin.scans.show', compact('scan'));
             } else {
                 return redirect('/admin/scans')->with('warning', 'Unable to find that scan entry!');
             }
