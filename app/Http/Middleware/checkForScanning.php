@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Scan;
+use Auth;
 use Closure;
 use Illuminate\Http\Request;
 
