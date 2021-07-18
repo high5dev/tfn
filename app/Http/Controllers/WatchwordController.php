@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WatchwordStoreRequest;
+
 use Auth;
 use App\Models\Logg;
 use App\Models\Watchword;
@@ -43,7 +45,7 @@ class WatchwordController extends Controller
     /**
      * store the new watchword
      */
-    public function store(Request $request)
+    public function store(WatchwordStoreRequest $request)
     {
         Watchword::create($request->validated());
 
