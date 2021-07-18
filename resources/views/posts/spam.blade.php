@@ -70,7 +70,9 @@
             </tbody>
         </table>
 
-        <input type="submit" value="Unmark Spam">
+        @if(count($posts))
+            <input type="submit" value="Unmark Spam">
+        @endif
 
     </form>
 
