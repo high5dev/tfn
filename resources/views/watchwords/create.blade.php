@@ -16,7 +16,7 @@
                     <option value="">Select The Type</option>
                     @foreach(['Email', 'Subject'] as $type)
                         <option
-                            value="{{ $type }}"{{ in_array($type, old('type')) ? ' selected' : '' }}>{{ $type }}</option>
+                            value="{{ $type }}"{{ $type == old('type') ? ' selected' : '' }}>{{ $type }}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('type'))
