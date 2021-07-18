@@ -155,7 +155,20 @@ class PostController extends Controller
      */
     public function notSpam(Request $request)
     {
-        dd($request->notspam);
+        // update posts
+        Post::whereIn('id', $request->notspam)->update(['spam', 0]);
+
+        $rows = 100;
+
+        $posts = Post::where('spam', 1)
+            ->orderBy('dated', 'asc')
+            ->paginate($rows)
+            ->withQueryString();
+
+        // Spamtool URL to individual posts can be viewed
+        $sturl = 'https://spamcontrol.freecycle.org/';
+
+        return view('posts.spam', compact('posts', 'sturl'));
     }
 
     /**
