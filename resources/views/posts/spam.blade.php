@@ -9,6 +9,7 @@
     {{ $posts->links() }}
 
     <form method="post" action="/posts/notspam">
+        @csrf()
 
         <table class="table table-striped">
             <thead class="thead-light">
