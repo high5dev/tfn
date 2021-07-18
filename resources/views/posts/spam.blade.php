@@ -76,4 +76,9 @@
 
     {{ $posts->links() }}
 
+    <div class="jumbotron">
+        Posts marked as potential spam will appear in this list. Please check them and, if they are not spam/scam
+        then please tick the checkbox and click the "Unmark Spam" button to unmark them as potential spam.
+    </div>
+
 @endsection
