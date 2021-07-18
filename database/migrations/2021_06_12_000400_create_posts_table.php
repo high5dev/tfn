@@ -19,11 +19,11 @@ class CreatePostsTable extends Migration
             $table->string('subject', 254)->nullable();
             $table->string('userid', 15);
             $table->string('username', 254);
-            $table->boolean('usernew')->default(false);
             $table->string('email', 254);
             $table->string('grp', 254);
             $table->datetime('dated');
-            $table->string('flags', 7);
+            $table->boolean('usernew')->default(false);
+            $table->string('status', 7);
         });
     }
 

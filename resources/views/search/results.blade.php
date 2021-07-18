@@ -51,7 +51,7 @@
                         @else
                             P
                         @endif
-                        @if($post->new)
+                        @if($post->usernew)
                             N
                         @endif
                     </td>
