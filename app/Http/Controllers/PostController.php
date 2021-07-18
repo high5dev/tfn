@@ -151,6 +151,14 @@ class PostController extends Controller
     }
 
     /**
+     * mark posts as not spam
+     */
+    public function notSpam(Request $request)
+    {
+        dd($request->notspam);
+    }
+
+    /**
      * flag that the user has finished scanning
      */
     public function doneScanning()

@@ -57,7 +57,7 @@
                             @endif
                         </td>
                         <td>
-                            <input type="checkbox" name="notspam" value="{{ $post->id }}">
+                            <input type="checkbox" name="notspam[]" value="{{ $post->id }}">
                         </td>
                     </tr>
                 @endforeach
