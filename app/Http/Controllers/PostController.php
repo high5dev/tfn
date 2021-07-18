@@ -117,7 +117,7 @@ class PostController extends Controller
 
         // is the user scanning?
         $alreadyScanning = Scan::where('user_id', Auth::user()->id)->whereNull('finished')->first();
-        if (! $alreadyScanning) {
+        if (!$alreadyScanning) {
             if ($request->scanning) {
                 Scan::create([
                     'user_id' => Auth::user()->id,
@@ -130,6 +130,24 @@ class PostController extends Controller
         $sturl = 'https://spamcontrol.freecycle.org/';
 
         return view('posts.list', compact('posts', 'sturl'));
+    }
+
+    /**
+     * list potential spam posts
+     */
+    public function spam(Request $request)
+    {
+        $rows = 100;
+
+        $posts = Post::where('spam', 1)
+            ->orderBy('dated', 'asc')
+            ->paginate($rows)
+            ->withQueryString();
+
+        // Spamtool URL to individual posts can be viewed
+        $sturl = 'https://spamcontrol.freecycle.org/';
+
+        return view('posts.spam', compact('posts', 'sturl'));
     }
 
     /**

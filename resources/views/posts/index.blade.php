@@ -14,7 +14,6 @@
         If you are about to start scanning, please make sure you tick the "Scanning" checkbox
         so others can see you are scanning and we don't duplicate effort!
     </div>
-
     <div class="row">
         <div class="col-sm-12 bg-light">Scan from midnight:</div>
     </div>
@@ -108,6 +107,21 @@
         </div>
 
         <input type="hidden" name="posts" value="bydatetime">
+
+    </form>
+
+    <div class="row">
+        <div class="col-sm-12 bg-light">Scan posts marked as potential spam:</div>
+    </div>
+    <form method="get" action="/posts/spam" class="form-inline row">
+        @csrf()
+
+        <div class="form-group col-sm-12">
+            <label class="sr-only" for="submit">&nbsp;</label>
+            <input type="submit" id="submit" name="submit" value="Go">
+        </div>
+
+        <input type="hidden" name="posts" value="midnight">
 
     </form>
 

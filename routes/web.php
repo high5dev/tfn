@@ -61,6 +61,7 @@ Route::group([
     // User: posts
     Route::get('/posts', 'PostController@index');
     Route::get('/posts/list', 'PostController@list');
+    Route::get('/posts/spam', 'PostController@spam');
     Route::delete('/post/{id}', 'PostController@destroy');
     Route::get('/post/finished', 'PostController@doneScanning');
 
