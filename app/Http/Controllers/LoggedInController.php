@@ -67,7 +67,7 @@ class LoggedInController extends Controller
         }
 
         // get the list of posts marked as potential spam
-        $watchwordsFound = Post::where('spam')->first();
+        $watchwordsFound = Post::where('spam', 1)->first();
 
         return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds', 'scanStarted', 'watchwordsFound'));
     }
