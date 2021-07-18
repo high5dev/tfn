@@ -22,11 +22,14 @@ class checkForScanning
             $request->session()->forget('scanning');
         }
 
-        // is someone scanning?
-        $scanning = Scan::whereNull('finished')->orderBy('id', 'desc')->first();
+        // if the user is logged in...
+        if (Auth::check()) {
+            // is someone scanning?
+            $scanning = Scan::whereNull('finished')->orderBy('id', 'desc')->first();
 
-        if ($scanning) {
-            session(['scanning' => $scanning->user->name]);
+            if ($scanning) {
+                session(['scanning' => $scanning->user->name]);
+            }
         }
 
         return $next($request);
