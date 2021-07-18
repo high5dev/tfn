@@ -116,7 +116,9 @@
     <form method="get" action="/posts/spam" class="form-inline row">
         @csrf()
 
-        <div class="form-group col-sm-12">
+        <div class="form-group col-sm-10"></div>
+
+        <div class="form-group col-sm-2">
             <label class="sr-only" for="submit">&nbsp;</label>
             <input type="submit" id="submit" name="submit" value="Go">
         </div>
