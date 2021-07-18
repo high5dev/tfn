@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Scan;
 use Auth;
 use Storage;
 use Validator;
@@ -54,7 +55,16 @@ class LoggedInController extends Controller
         $wanteds = Post::where('type', 'WANTED')->where('dated', '>=', Carbon::now()->subDay())->count();
         $wanteds = number_format($wanteds);
 
-        return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds'));
+        // are they marked as scanning?
+        $scanning = Scan::where('user_id', Auth::user()->id)
+            ->whereNull('finished')
+            ->orderBy('id', 'asc')->first();
+        $scanStarted = '';
+        if($scanning) {
+            $scanStarted = $scanning->started;
+        }
+
+        return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds','scanStarted'));
     }
 
     // log the user out and redirect to index page

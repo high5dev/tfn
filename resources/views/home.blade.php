@@ -13,6 +13,14 @@
         @endif
     </div>
 
+    @if(strlen($scanStarted))
+        <div class="jumbotron">
+            You appear to have an open scanning entry, is this intentional?
+            Looks like you started scanning on {{ $scanStarted }}
+            You can close it off by <a href="/post/finished">Clicking Here</a>
+        </div>
+    @endif
+
     <div class="jumbotron">
         <h3>Statistics</h3>
         <div>There have been {{ $offers }} OFFER posts in the past 24 hours</div>
