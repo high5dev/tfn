@@ -22,6 +22,12 @@
         </div>
     @endif
 
+    @if($watchwordsFound)
+        <div class="jumbotron">
+            Found some posts matching the watchword list!
+        </div>
+    @endif
+
     <div class="jumbotron">
         <h3>Statistics</h3>
         <div>There have been {{ $offers }} OFFER posts in the past 24 hours</div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Scan;
+use App\Models\Watchword;
 use Auth;
 use Storage;
 use Validator;
@@ -60,12 +61,15 @@ class LoggedInController extends Controller
             ->whereNull('finished')
             ->orderBy('id', 'asc')->first();
         $scanStarted = '';
-        if($scanning) {
+        if ($scanning) {
             $scanStarted = Carbon::createFromFormat('Y-m-d H:i:s', $scanning->started)
                 ->format('l jS F Y \a\t g:i a');
         }
 
-        return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds','scanStarted'));
+        // get the list of posts marked as potential spam
+        $watchwordsFound = Post::where('spam')->get();
+
+        return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds', 'scanStarted', 'watchwordsFound'));
     }
 
     // log the user out and redirect to index page
