@@ -15,8 +15,8 @@
 
     @if(strlen($scanStarted))
         <div class="jumbotron">
-            You appear to have an open scanning entry, is this intentional?
-            Looks like you started scanning on {{ $scanStarted }}
+            You appear to have an open scanning entry, is this intentional?<br>
+            Looks like you started scanning on {{ $scanStarted }}<br>
             You can close it off by <a href="/post/finished">Clicking Here</a>
         </div>
     @endif

@@ -61,7 +61,7 @@ class LoggedInController extends Controller
             ->orderBy('id', 'asc')->first();
         $scanStarted = '';
         if($scanning) {
-            $scanStarted = $scanning->started;
+            $scanStarted = $scanning->started->format('l jS F Y \a\t g:i a');
         }
 
         return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds','scanStarted'));
