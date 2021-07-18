@@ -64,6 +64,12 @@ Route::group([
     Route::delete('/post/{id}', 'PostController@destroy');
     Route::get('/post/finished', 'PostController@doneScanning');
 
+    // User: manage watchwords
+    Route::get('/watchwords', 'WatchwordController@index');
+    Route::get('/watchwords/create', 'WatchwordController@create');
+    Route::post('/watchwords', 'WatchwordController@store');
+    Route::delete('/watchwords/{id}', 'WatchwordController@destroy');
+
     // User: charts
     Route::get('/chart', 'ChartController@index');
     Route::get('/chartjs', 'ChartController@indexjs');
