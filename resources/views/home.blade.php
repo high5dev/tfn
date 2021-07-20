@@ -24,7 +24,7 @@
 
     @if($watchwordsFound)
         <div class="jumbotron">
-            Found some posts matching the watchword list!
+            <a href="/posts">Found some posts matching the watchword list!</a>
         </div>
     @endif
 

@@ -14,7 +14,7 @@
         If you are about to start scanning, please make sure you tick the "Scanning" checkbox
         so others can see you are scanning and we don't duplicate effort!
     </div>
-    <div class="row">
+    <div class="row border border-primary">
         <div class="col-sm-12 bg-light">Scan from midnight:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">
@@ -41,7 +41,7 @@
 
     </form>
 
-    <div class="row">
+    <div class="row border border-primary">
         <div class="col-sm-12 bg-light">Scan from a post ID:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">
@@ -73,7 +73,7 @@
 
     </form>
 
-    <div class="row">
+    <div class="row border border-primary">
         <div class="col-sm-12 bg-light">Scan from a date & time:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">
@@ -110,7 +110,7 @@
 
     </form>
 
-    <div class="row">
+    <div class="row border border-primary">
         <div class="col-sm-12 bg-light">Scan posts marked as potential spam:</div>
     </div>
     <form method="get" action="/posts/spam" class="form-inline row">
