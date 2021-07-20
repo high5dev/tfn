@@ -15,10 +15,8 @@
         so others can see you are scanning and we don't duplicate effort!
     </div>
 
-    <div class="border border-primary">
-        <div class="row">
-            <div class="col-sm-12 bg-light">Scan from midnight:</div>
-        </div>
+    <div class="row border border-primary">
+        <div class="col-sm-12 bg-light">Scan from midnight:</div>
         <form method="get" action="/posts/list" class="form-inline row">
             @csrf()
 
@@ -43,10 +41,8 @@
         </form>
     </div>
 
-    <div class="border border-primary">
-        <div class="row">
-            <div class="col-sm-12 bg-light">Scan from a post ID:</div>
-        </div>
+    <div class="ro border border-primary">
+        <div class="col-sm-12 bg-light">Scan from a post ID:</div>
         <form method="get" action="/posts/list" class="form-inline row">
             @csrf()
 
@@ -76,10 +72,8 @@
         </form>
     </div>
 
-    <div class="border border-primary">
-        <div class="row">
-            <div class="col-sm-12 bg-light">Scan from a date & time:</div>
-        </div>
+    <div class="row border border-primary">
+        <div class="col-sm-12 bg-light">Scan from a date & time:</div>
         <form method="get" action="/posts/list" class="form-inline row">
             @csrf()
 
@@ -114,10 +108,8 @@
         </form>
     </div>
 
-    <div class="border border-primary">
-        <div class="row">
-            <div class="col-sm-12 bg-light">Scan posts marked as potential spam:</div>
-        </div>
+    <div class="row border border-primary">
+        <div class="col-sm-12 bg-light">Scan posts marked as potential spam:</div>
         <form method="get" action="/posts/spam" class="form-inline row">
             @csrf()
 
