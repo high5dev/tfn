@@ -14,118 +14,125 @@
         If you are about to start scanning, please make sure you tick the "Scanning" checkbox
         so others can see you are scanning and we don't duplicate effort!
     </div>
-    <div class="row border border-primary">
-        <div class="col-sm-12 bg-light">Scan from midnight:</div>
+
+    <div class="border border-primary">
+        <div class="row">
+            <div class="col-sm-12 bg-light">Scan from midnight:</div>
+        </div>
+        <form method="get" action="/posts/list" class="form-inline row">
+            @csrf()
+
+            <div class="form-group col-sm-8">
+                <select id="type" name="type" class="form-control">
+                    <option value="b">Both</option>
+                    <option value="o">OFFERs</option>
+                    <option value="w">WANTEDs</option>
+                </select>
+            </div>
+
+            <div class="form-group col-sm-2">
+                Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label class="sr-only" for="submit">&nbsp;</label>
+                <input type="submit" id="submit" name="submit" value="Go">
+            </div>
+
+            <input type="hidden" name="posts" value="midnight">
+        </form>
     </div>
-    <form method="get" action="/posts/list" class="form-inline row">
-        @csrf()
 
-        <div class="form-group col-sm-8">
-            <select id="type" name="type" class="form-control">
-                <option value="b">Both</option>
-                <option value="o">OFFERs</option>
-                <option value="w">WANTEDs</option>
-            </select>
+    <div class="border border-primary">
+        <div class="row">
+            <div class="col-sm-12 bg-light">Scan from a post ID:</div>
         </div>
+        <form method="get" action="/posts/list" class="form-inline row">
+            @csrf()
 
-        <div class="form-group col-sm-2">
-            Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
-        </div>
+            <div class="form-group col-sm-4">
+                <input type="text" id="postid" name="postid" class="form-control" value="{{ old('postid') }}"
+                       placeholder="Post ID" {{ $errors->has('postid') ? ' autofocus' : '' }} required>
+            </div>
 
-        <div class="form-group col-sm-2">
-            <label class="sr-only" for="submit">&nbsp;</label>
-            <input type="submit" id="submit" name="submit" value="Go">
-        </div>
+            <div class="form-group col-sm-4">
+                <select id="type" name="type" class="form-control">
+                    <option value="b">Both</option>
+                    <option value="o">OFFERs</option>
+                    <option value="w">WANTEDs</option>
+                </select>
+            </div>
 
-        <input type="hidden" name="posts" value="midnight">
+            <div class="form-group col-sm-2">
+                Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
+            </div>
 
-    </form>
+            <div class="form-group col-sm-2">
+                <label class="sr-only" for="submit">&nbsp;</label>
+                <input type="submit" id="submit" name="submit" value="Go">
+            </div>
 
-    <div class="row border border-primary">
-        <div class="col-sm-12 bg-light">Scan from a post ID:</div>
+            <input type="hidden" name="posts" value="bypostid">
+        </form>
     </div>
-    <form method="get" action="/posts/list" class="form-inline row">
-        @csrf()
 
-        <div class="form-group col-sm-4">
-            <input type="text" id="postid" name="postid" class="form-control" value="{{ old('postid') }}"
-                   placeholder="Post ID" {{ $errors->has('postid') ? ' autofocus' : '' }} required>
+    <div class="border border-primary">
+        <div class="row">
+            <div class="col-sm-12 bg-light">Scan from a date & time:</div>
         </div>
+        <form method="get" action="/posts/list" class="form-inline row">
+            @csrf()
 
-        <div class="form-group col-sm-4">
-            <select id="type" name="type" class="form-control">
-                <option value="b">Both</option>
-                <option value="o">OFFERs</option>
-                <option value="w">WANTEDs</option>
-            </select>
-        </div>
+            <div class="form-group col-sm-2">
+                <input type="text" id="date" name="date" class="form-control" value="{{ old('date') }}"
+                       placeholder="YYYY-MM-DD" {{ $errors->has('date') ? ' autofocus' : '' }} required>
+            </div>
 
-        <div class="form-group col-sm-2">
-            Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
-        </div>
+            <div class="form-group col-sm-2">
+                <input type="text" id="time" name="time" class="form-control" value="{{ old('time') }}"
+                       placeholder="HH:MM" {{ $errors->has('time') ? ' autofocus' : '' }} required>
+            </div>
 
-        <div class="form-group col-sm-2">
-            <label class="sr-only" for="submit">&nbsp;</label>
-            <input type="submit" id="submit" name="submit" value="Go">
-        </div>
+            <div class="form-group col-sm-4">
+                <select id="type" name="type" class="form-control">
+                    <option value="b">Both</option>
+                    <option value="o">OFFERs</option>
+                    <option value="w">WANTEDs</option>
+                </select>
+            </div>
 
-        <input type="hidden" name="posts" value="bypostid">
+            <div class="form-group col-sm-2">
+                Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
+            </div>
 
-    </form>
+            <div class="form-group col-sm-2">
+                <label class="sr-only" for="submit">&nbsp;</label>
+                <input type="submit" id="submit" name="submit" value="Go">
+            </div>
 
-    <div class="row border border-primary">
-        <div class="col-sm-12 bg-light">Scan from a date & time:</div>
+            <input type="hidden" name="posts" value="bydatetime">
+        </form>
     </div>
-    <form method="get" action="/posts/list" class="form-inline row">
-        @csrf()
 
-        <div class="form-group col-sm-2">
-            <input type="text" id="date" name="date" class="form-control" value="{{ old('date') }}"
-                   placeholder="YYYY-MM-DD" {{ $errors->has('date') ? ' autofocus' : '' }} required>
+    <div class="border border-primary">
+        <div class="row">
+            <div class="col-sm-12 bg-light">Scan posts marked as potential spam:</div>
         </div>
+        <form method="get" action="/posts/spam" class="form-inline row">
+            @csrf()
 
-        <div class="form-group col-sm-2">
-            <input type="text" id="time" name="time" class="form-control" value="{{ old('time') }}"
-                   placeholder="HH:MM" {{ $errors->has('time') ? ' autofocus' : '' }} required>
-        </div>
+            <div class="form-group col-sm-10"></div>
 
-        <div class="form-group col-sm-4">
-            <select id="type" name="type" class="form-control">
-                <option value="b">Both</option>
-                <option value="o">OFFERs</option>
-                <option value="w">WANTEDs</option>
-            </select>
-        </div>
+            <div class="form-group col-sm-2">
+                <label class="sr-only" for="submit">&nbsp;</label>
+                <input type="submit" id="submit" name="submit" value="Go">
+            </div>
 
-        <div class="form-group col-sm-2">
-            Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
-        </div>
-
-        <div class="form-group col-sm-2">
-            <label class="sr-only" for="submit">&nbsp;</label>
-            <input type="submit" id="submit" name="submit" value="Go">
-        </div>
-
-        <input type="hidden" name="posts" value="bydatetime">
-
-    </form>
-
-    <div class="row border border-primary">
-        <div class="col-sm-12 bg-light">Scan posts marked as potential spam:</div>
+            <input type="hidden" name="posts" value="midnight">
+        </form>
     </div>
-    <form method="get" action="/posts/spam" class="form-inline row">
-        @csrf()
 
-        <div class="form-group col-sm-10"></div>
-
-        <div class="form-group col-sm-2">
-            <label class="sr-only" for="submit">&nbsp;</label>
-            <input type="submit" id="submit" name="submit" value="Go">
-        </div>
-
-        <input type="hidden" name="posts" value="midnight">
-
-    </form>
+    <br>
 
     <div class="jumbotron">
         If you are using this facility to carry out some scanning, then you must tick the "Scanning" checkbox.
