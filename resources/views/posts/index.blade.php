@@ -15,114 +15,114 @@
         so others can see you are scanning and we don't duplicate effort!
     </div>
 
-    <div class="row border border-primary">
-        <div class="col-sm-12 bg-light">Scan from midnight:</div>
-        <form method="get" action="/posts/list" class="form-inline row">
-            @csrf()
-
-            <div class="form-group col-sm-8">
-                <select id="type" name="type" class="form-control">
-                    <option value="b">Both</option>
-                    <option value="o">OFFERs</option>
-                    <option value="w">WANTEDs</option>
-                </select>
-            </div>
-
-            <div class="form-group col-sm-2">
-                Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
-            </div>
-
-            <div class="form-group col-sm-2">
-                <label class="sr-only" for="submit">&nbsp;</label>
-                <input type="submit" id="submit" name="submit" value="Go">
-            </div>
-
-            <input type="hidden" name="posts" value="midnight">
-        </form>
+    <div class="row">
+        <div class="col-sm-12 bg-primary">Scan from midnight:</div>
     </div>
+    <form method="get" action="/posts/list" class="form-inline row">
+        @csrf()
 
-    <div class="ro border border-primary">
-        <div class="col-sm-12 bg-light">Scan from a post ID:</div>
-        <form method="get" action="/posts/list" class="form-inline row">
-            @csrf()
+        <div class="form-group col-sm-8">
+            <select id="type" name="type" class="form-control">
+                <option value="b">Both</option>
+                <option value="o">OFFERs</option>
+                <option value="w">WANTEDs</option>
+            </select>
+        </div>
 
-            <div class="form-group col-sm-4">
-                <input type="text" id="postid" name="postid" class="form-control" value="{{ old('postid') }}"
-                       placeholder="Post ID" {{ $errors->has('postid') ? ' autofocus' : '' }} required>
-            </div>
+        <div class="form-group col-sm-2">
+            Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
+        </div>
 
-            <div class="form-group col-sm-4">
-                <select id="type" name="type" class="form-control">
-                    <option value="b">Both</option>
-                    <option value="o">OFFERs</option>
-                    <option value="w">WANTEDs</option>
-                </select>
-            </div>
+        <div class="form-group col-sm-2">
+            <label class="sr-only" for="submit">&nbsp;</label>
+            <input type="submit" id="submit" name="submit" value="Go">
+        </div>
 
-            <div class="form-group col-sm-2">
-                Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
-            </div>
+        <input type="hidden" name="posts" value="midnight">
+    </form>
 
-            <div class="form-group col-sm-2">
-                <label class="sr-only" for="submit">&nbsp;</label>
-                <input type="submit" id="submit" name="submit" value="Go">
-            </div>
-
-            <input type="hidden" name="posts" value="bypostid">
-        </form>
+    <div class="row">
+        <div class="col-sm-12 bg-primary">Scan from a post ID:</div>
     </div>
+    <form method="get" action="/posts/list" class="form-inline row">
+        @csrf()
 
-    <div class="row border border-primary">
-        <div class="col-sm-12 bg-light">Scan from a date & time:</div>
-        <form method="get" action="/posts/list" class="form-inline row">
-            @csrf()
+        <div class="form-group col-sm-4">
+            <input type="text" id="postid" name="postid" class="form-control" value="{{ old('postid') }}"
+                   placeholder="Post ID" {{ $errors->has('postid') ? ' autofocus' : '' }} required>
+        </div>
 
-            <div class="form-group col-sm-2">
-                <input type="text" id="date" name="date" class="form-control" value="{{ old('date') }}"
-                       placeholder="YYYY-MM-DD" {{ $errors->has('date') ? ' autofocus' : '' }} required>
-            </div>
+        <div class="form-group col-sm-4">
+            <select id="type" name="type" class="form-control">
+                <option value="b">Both</option>
+                <option value="o">OFFERs</option>
+                <option value="w">WANTEDs</option>
+            </select>
+        </div>
 
-            <div class="form-group col-sm-2">
-                <input type="text" id="time" name="time" class="form-control" value="{{ old('time') }}"
-                       placeholder="HH:MM" {{ $errors->has('time') ? ' autofocus' : '' }} required>
-            </div>
+        <div class="form-group col-sm-2">
+            Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
+        </div>
 
-            <div class="form-group col-sm-4">
-                <select id="type" name="type" class="form-control">
-                    <option value="b">Both</option>
-                    <option value="o">OFFERs</option>
-                    <option value="w">WANTEDs</option>
-                </select>
-            </div>
+        <div class="form-group col-sm-2">
+            <label class="sr-only" for="submit">&nbsp;</label>
+            <input type="submit" id="submit" name="submit" value="Go">
+        </div>
 
-            <div class="form-group col-sm-2">
-                Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
-            </div>
+        <input type="hidden" name="posts" value="bypostid">
+    </form>
 
-            <div class="form-group col-sm-2">
-                <label class="sr-only" for="submit">&nbsp;</label>
-                <input type="submit" id="submit" name="submit" value="Go">
-            </div>
-
-            <input type="hidden" name="posts" value="bydatetime">
-        </form>
+    <div class="row">
+        <div class="col-sm-12 bg-primary">Scan from a date & time:</div>
     </div>
+    <form method="get" action="/posts/list" class="form-inline row">
+        @csrf()
 
-    <div class="row border border-primary">
-        <div class="col-sm-12 bg-light">Scan posts marked as potential spam:</div>
-        <form method="get" action="/posts/spam" class="form-inline row">
-            @csrf()
+        <div class="form-group col-sm-2">
+            <input type="text" id="date" name="date" class="form-control" value="{{ old('date') }}"
+                   placeholder="YYYY-MM-DD" {{ $errors->has('date') ? ' autofocus' : '' }} required>
+        </div>
 
-            <div class="form-group col-sm-10"></div>
+        <div class="form-group col-sm-2">
+            <input type="text" id="time" name="time" class="form-control" value="{{ old('time') }}"
+                   placeholder="HH:MM" {{ $errors->has('time') ? ' autofocus' : '' }} required>
+        </div>
 
-            <div class="form-group col-sm-2">
-                <label class="sr-only" for="submit">&nbsp;</label>
-                <input type="submit" id="submit" name="submit" value="Go">
-            </div>
+        <div class="form-group col-sm-4">
+            <select id="type" name="type" class="form-control">
+                <option value="b">Both</option>
+                <option value="o">OFFERs</option>
+                <option value="w">WANTEDs</option>
+            </select>
+        </div>
 
-            <input type="hidden" name="posts" value="midnight">
-        </form>
+        <div class="form-group col-sm-2">
+            Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
+        </div>
+
+        <div class="form-group col-sm-2">
+            <label class="sr-only" for="submit">&nbsp;</label>
+            <input type="submit" id="submit" name="submit" value="Go">
+        </div>
+
+        <input type="hidden" name="posts" value="bydatetime">
+    </form>
+
+    <div class="row">
+        <div class="col-sm-12 bg-primary">Scan posts marked as potential spam:</div>
     </div>
+    <form method="get" action="/posts/spam" class="form-inline row">
+        @csrf()
+
+        <div class="form-group col-sm-10"></div>
+
+        <div class="form-group col-sm-2">
+            <label class="sr-only" for="submit">&nbsp;</label>
+            <input type="submit" id="submit" name="submit" value="Go">
+        </div>
+
+        <input type="hidden" name="posts" value="midnight">
+    </form>
 
     <br>
 
