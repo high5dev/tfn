@@ -29,7 +29,7 @@
             <label class="col-sm-2 col-form-label" for="theword">Watchword:</label>
             <div class="col-sm-10">
                 <input type="text" id="theword" name="theword" class="form-control"
-                       {{ $errors->has('theword') ? ' autofocus' : '' }} required>
+                       {{ $errors->has('theword') ? ' autofocus' : '' }} value="{{ old('theword') }}" required>
                 @if ($errors->has('theword'))
                     <div class="alert alert-warning">{{ $errors->first('theword') }}</div>
                 @endif
