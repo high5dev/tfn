@@ -31,15 +31,7 @@
                 </td>
                 <td>
                     <div class="row">
-                        <div class="span6">
-                            <form method="get" action="/watchwords/{{ $watchword->id }}">
-                                @csrf
-                                <button class='btn btn-default' type="submit" alt="Edit">
-                                    <span class="fa fa-edit" aria-hidden="true"></span>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="span6">
+                        <div class="span12">
                             <form method="post" action="/watchwords/{{ $watchword->id }}">
                                 @csrf
                                 @method("DELETE")
