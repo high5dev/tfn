@@ -15,8 +15,10 @@
         so others can see you are scanning and we don't duplicate effort!
     </div>
 
+    <br>
+
     <div class="row">
-        <div class="col-sm-12 bg-primary">Scan from midnight:</div>
+        <div class="col-sm-12 bg-secondary text-white">Scan from midnight:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">
         @csrf()
@@ -41,8 +43,10 @@
         <input type="hidden" name="posts" value="midnight">
     </form>
 
+    <br>
+
     <div class="row">
-        <div class="col-sm-12 bg-primary">Scan from a post ID:</div>
+        <div class="col-sm-12 bg-secondary text-white">Scan from a post ID:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">
         @csrf()
@@ -72,8 +76,10 @@
         <input type="hidden" name="posts" value="bypostid">
     </form>
 
+    <br>
+
     <div class="row">
-        <div class="col-sm-12 bg-primary">Scan from a date & time:</div>
+        <div class="col-sm-12 bg-secondary text-white">Scan from a date & time:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">
         @csrf()
@@ -108,8 +114,10 @@
         <input type="hidden" name="posts" value="bydatetime">
     </form>
 
+    <br>
+
     <div class="row">
-        <div class="col-sm-12 bg-primary">Scan posts marked as potential spam:</div>
+        <div class="col-sm-12 bg-secondary text-white">Scan posts marked as potential spam:</div>
     </div>
     <form method="get" action="/posts/spam" class="form-inline row">
         @csrf()
