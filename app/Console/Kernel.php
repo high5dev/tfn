@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Actions\PruneOldPostsAction;
 use App\Actions\UpdateDailyStatisticsAction;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
