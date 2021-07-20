@@ -7,7 +7,7 @@ use App\Models\Post;
 use App\Models\Logg;
 use App\Models\Notification;
 
-class UpdateDailyStatisticsAction
+class PruneOldPostsAction
 {
     public function __invoke(): void
     {
