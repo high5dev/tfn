@@ -45,4 +45,14 @@
 
     </form>
 
+    <div class="jumbotron">
+        <ul>
+            <li>Please select what to search on, i.e. the post's "Email" or "Subject"</li>
+            <li>You can enter up to 254 characters in the watchword</li>
+            <li>The sorter the watchword, the more posts it will catch (less specific)</li>
+            <li>The longer the watchword, the less posts it will catch (more specific)</li>
+            <li>Try to get a sensible balance between the two!</li>
+        </ul>
+    </div>
+
 @endsection

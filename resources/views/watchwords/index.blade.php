@@ -52,5 +52,6 @@
         You can add words and phrases here that will be watched out for.
         When new posts come in they are checked against this list
         and if a match is found the post will be flagged as potential spam.
+        The watchwords are not case sensitive, and any text will be displayed lowercase.
     </div>
 @endsection
