@@ -51,9 +51,9 @@ class LoginListener
 
         // log the login
         $log = new Logg();
-        $log->title = Auth::User()->FullName . ' logged in';
+        $log->title = Auth::User()->name . ' logged in';
         $log->user_id = Auth::User()->id;
-        $log->content = Auth::User()->FullName . " logged in at " . date('Y-m-d H:i:s') . " from IP: " . $this->request->ip();
+        $log->content = Auth::User()->name . " logged in at " . date('Y-m-d H:i:s') . " from IP: " . $this->request->ip();
         $log->save();
     }
 }
