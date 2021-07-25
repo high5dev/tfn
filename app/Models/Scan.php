@@ -14,6 +14,7 @@ class Scan extends Model
     protected $fillable = [
         'user_id',
         'started',
+        'startid'
     ];
 
     // we don't need timestamps in this model as we already have start & finish times
