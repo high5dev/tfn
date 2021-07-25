@@ -121,7 +121,8 @@ class PostController extends Controller
             if ($request->scanning) {
                 Scan::create([
                     'user_id' => Auth::user()->id,
-                    'started' => Carbon::now()
+                    'started' => Carbon::now(),
+                    'startid' => 0
                 ]);
             }
         }
