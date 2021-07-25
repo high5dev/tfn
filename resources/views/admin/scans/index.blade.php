@@ -12,7 +12,9 @@
         <thead class="thead-light">
         <tr>
             <th scope="col">Started</th>
+            <th scope="col">Start ID</th>
             <th scope="col">Finished</th>
+            <th scope="col">Stop ID</th>
             <th scope="col">Who</th>
         </tr>
         </thead>
@@ -20,7 +22,9 @@
         @foreach($scans as $scan)
             <tr>
                 <td>{{ $scan->started }}</td>
-                <td>{{ $scan->finished }}</td>
+                <td>{{ $scan->startid }}</td>
+                <td>{{ $scan->stopped }}</td>
+                <td>{{ $scan->stopid }}</td>
                 <td><a href="/admin/scans/{{ $scan->id }}">{{ $scan->user->name }}</a></td>
             </tr>
         @endforeach

@@ -10,7 +10,7 @@
 
         <fieldset>
 
-            <legend>Log Details</legend>
+            <legend>Scan Details</legend>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="user">User :</label>
@@ -28,10 +28,26 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="finished">Finished :</label>
+                <label class="col-sm-2 col-form-label" for="startid">Start ID :</label>
                 <div class="col-sm-10">
-                    <input type="text" id="finished" name="finished" class="form-control" readonly
-                           value="{{ $scan->finished }}">
+                    <input type="text" id="startid" name="startid" class="form-control" readonly
+                           value="{{ $scan->startid }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="stopped">Stopped :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="stopped" name="stopped" class="form-control" readonly
+                           value="{{ $scan->stopped }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="stopped">Stopid :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="stopid" name="stopid" class="form-control" readonly
+                           value="{{ $scan->stopped }}">
                 </div>
             </div>
 

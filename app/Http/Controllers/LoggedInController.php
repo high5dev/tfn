@@ -58,7 +58,7 @@ class LoggedInController extends Controller
 
         // are they marked as scanning?
         $scanning = Scan::where('user_id', Auth::user()->id)
-            ->whereNull('finished')
+            ->whereNull('stopped')
             ->orderBy('id', 'asc')->first();
         $scanStarted = '';
         if ($scanning) {

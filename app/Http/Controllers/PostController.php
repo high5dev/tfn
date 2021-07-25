@@ -116,7 +116,7 @@ class PostController extends Controller
         }
 
         // is the user scanning?
-        $alreadyScanning = Scan::where('user_id', Auth::user()->id)->whereNull('finished')->first();
+        $alreadyScanning = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
         if (!$alreadyScanning) {
             if ($request->scanning) {
                 Scan::create([
@@ -177,9 +177,9 @@ class PostController extends Controller
     public function doneScanning()
     {
         // get the current scanning entry
-        $scan = Scan::where('user_id', Auth::user()->id)->whereNull('finished')->first();
+        $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
         if ($scan) {
-            $scan->finished = Carbon::now();
+            $scan->stopped = Carbon::now();
             $scan->save();
         }
 

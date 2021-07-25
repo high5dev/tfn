@@ -26,7 +26,7 @@ class checkForScanning
         // if the user is logged in...
         if (Auth::check()) {
             // is someone scanning?
-            $scanning = Scan::whereNull('finished')->orderBy('id', 'desc')->first();
+            $scanning = Scan::whereNull('stopped')->orderBy('id', 'desc')->first();
 
             if ($scanning) {
                 session(['scanning' => $scanning->user->name]);

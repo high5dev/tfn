@@ -17,7 +17,9 @@ class CreateScansTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->datetime('started');
-            $table->datetime('finished')->nullable();
+            $table->bigInteger('startid')->unsigned();
+            $table->datetime('stopped')->nullable();
+            $table->bigInteger('stopid')->unsigned();
         });
     }
 
