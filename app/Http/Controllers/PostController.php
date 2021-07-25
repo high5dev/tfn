@@ -122,7 +122,7 @@ class PostController extends Controller
                 Scan::create([
                     'user_id' => Auth::user()->id,
                     'started' => Carbon::now(),
-                    'startid' => 0
+                    'startid' => 1
                 ]);
             }
         }
