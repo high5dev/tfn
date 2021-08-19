@@ -62,7 +62,7 @@
                             </button>
                         </form>
                         <form method="post" action="/post/{{ $post->id }}"
-                              class="form-inline"
+                              class="pull-left form-inline"
                               onsubmit="return confirm('Are you sure you want to remove this post?');">
                             @method('DELETE')
                             @csrf
