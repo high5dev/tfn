@@ -55,7 +55,7 @@
                         @endif
                     </td>
                     <td>
-                        <form method="post" action="/posts/notspam/{{ $post->id }}">
+                        <form method="post" action="/posts/notspam/{{ $post->id }}" class="user-delete-btn">
                             @csrf()
                             <button class="btn btn-sm btn-outline-secondary" type="submit">
                                 <i class="fas fa-toilet-paper-slash"></i>
