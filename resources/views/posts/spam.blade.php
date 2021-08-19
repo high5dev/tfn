@@ -55,14 +55,13 @@
                         @endif
                     </td>
                     <td>
-                        <form method="post" action="/posts/notspam/{{ $post->id }}" class="pull-left form-inline">
+                        <form method="post" action="/posts/notspam/{{ $post->id }}" class="input-group pull-left">
                             @csrf()
                             <button class="btn btn-sm btn-outline-secondary" type="submit">
                                 <i class="fas fa-toilet-paper-slash"></i>
                             </button>
                         </form>
-                        <form method="post" action="/post/{{ $post->id }}"
-                              class="pull-left form-inline"
+                        <form method="post" action="/post/{{ $post->id }}" class="input-group pull-right"
                               onsubmit="return confirm('Are you sure you want to remove this post?');">
                             @method('DELETE')
                             @csrf
