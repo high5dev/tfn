@@ -58,7 +58,7 @@
                     <td>
                         <form method="post" action="/post/{{ $post->id }}"
                               class="user-delete-btn"
-                                  onsubmit="return confirm('Are you sure you want to remove this user?');">
+                                  onsubmit="return confirm('Are you sure you want to remove this post?');">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-sm btn-outline-secondary" type="submit">

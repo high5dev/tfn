@@ -24,7 +24,7 @@
 
     @if($watchwordsFound)
         <div class="jumbotron">
-            <a href="/posts">Found some posts matching the watchword list!</a>
+            <a href="/posts/spam">Found some posts matching the watchword list!</a>
         </div>
     @endif
 

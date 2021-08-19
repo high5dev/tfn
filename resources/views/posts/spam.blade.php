@@ -21,7 +21,7 @@
                 <th scope="col">User ID</th>
                 <th scope="col">Email</th>
                 <th scope="col">Flags</th>
-                <th scope="col">Unmark</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -58,7 +58,15 @@
                             @endif
                         </td>
                         <td>
-                            <input type="checkbox" name="notspam[]" value="{{ $post->id }}">
+                            <input type="checkbox" name="notspam[]" value="{{ $post->id }}">Unmark
+                            <form method="post" action="/post/{{ $post->id }}"
+                                  class="user-delete-btn"
+                                  onsubmit="return confirm('Are you sure you want to remove this post?');">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                    <i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
