@@ -160,18 +160,6 @@ class PostController extends Controller
         Post::where('id', $id)->update(['spam' => 0]);
 
         return back()->with('success', 'Successfully unmarked that post as spam');
-
-        $rows = 100;
-
-        $posts = Post::where('spam', 1)
-            ->orderBy('dated', 'asc')
-            ->paginate($rows)
-            ->withQueryString();
-
-        // Spamtool URL to individual posts can be viewed
-        $sturl = 'https://spamcontrol.freecycle.org/';
-
-        return view('posts.spam', compact('posts', 'sturl'));
     }
 
     /**
