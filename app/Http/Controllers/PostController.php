@@ -159,6 +159,8 @@ class PostController extends Controller
         // update the post
         Post::where('id', $id)->update(['spam' => 0]);
 
+        return back()->with('success', 'Successfully unmarked that post as spam');
+
         $rows = 100;
 
         $posts = Post::where('spam', 1)
