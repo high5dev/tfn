@@ -172,9 +172,9 @@ class PostController extends Controller
         if ($scan) {
             $scan->stopped = Carbon::now();
             $scan->save();
+            return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
         }
-
-        return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
+        return redirect('home')->with('error', "I don't think you were scanning!");
     }
 
     /**
