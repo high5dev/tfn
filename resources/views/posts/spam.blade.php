@@ -55,14 +55,14 @@
                         @endif
                     </td>
                     <td>
-                        <form method="post" action="/posts/notspam/{{ $post->id }}" class="user-delete-btn">
+                        <form method="post" action="/posts/notspam/{{ $post->id }}" class="form-inline">
                             @csrf()
                             <button class="btn btn-sm btn-outline-secondary" type="submit">
                                 <i class="fas fa-toilet-paper-slash"></i>
                             </button>
                         </form>
                         <form method="post" action="/post/{{ $post->id }}"
-                              class="user-delete-btn"
+                              class="form-inline"
                               onsubmit="return confirm('Are you sure you want to remove this post?');">
                             @method('DELETE')
                             @csrf
