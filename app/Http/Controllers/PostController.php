@@ -154,10 +154,10 @@ class PostController extends Controller
     /**
      * mark posts as not spam
      */
-    public function notSpam(Request $request)
+    public function notSpam($id)
     {
-        // update posts
-        Post::whereIn('id', $request->notspam)->update(['spam' => 0]);
+        // update the post
+        Post::where('id', $id)->update(['spam' => 0]);
 
         $rows = 100;
 
