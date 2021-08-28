@@ -124,6 +124,7 @@ class PostController extends Controller
                     'started' => Carbon::now(),
                     'startid' => 1
                 ]);
+                session(['scanning' => Auth()->name]);
             }
         }
 
