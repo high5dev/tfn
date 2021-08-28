@@ -181,12 +181,12 @@ class PostController extends Controller
     /**
      * flag that the user has finished scanning
      */
-    public function finishedScanning($id)
+    public function finishedScanning(Request $request)
     {
         // get the current scanning entry
         $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
         if ($scan) {
-            $scan->stopid = $id;
+            $scan->stopid = $request->id;
             $scan->stopped = Carbon::now();
             $scan->save();
             return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');

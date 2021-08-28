@@ -56,7 +56,13 @@
                     </td>
                     <td>
                         @if(session()->has('scanning'))
-                            <a href="/post/done/{{ $post->id }}"><i class="fas fa-ban"></i></a>
+                            <form method="post" action="/post/done/" class="form-inline">
+                                @csrf
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <input type="hidden" name="id" value="{{ $post->id }}">
+                            </form>
                         @endif
                         <form method="post" action="/post/{{ $post->id }}" class="form-inline"
                               onsubmit="return confirm('Are you sure you want to remove this post?');">
