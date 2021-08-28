@@ -51,6 +51,23 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="zaps">Zaps :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="zaps" name="zaps" class="form-control" readonly
+                           value="{{ $scan->zaps }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="notes">Notes :</label>
+                <div class="col-sm-10">
+                    <textarea id="notes" name="notes" class="form-control" readonly>
+                           value="{{ $scan->notes }}">
+                    </textarea>
+                </div>
+            </div>
+
         </fieldset>
 
     </form>
