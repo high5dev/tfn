@@ -91,6 +91,4 @@
 
     {{ $posts->links() }}
 
-    <a href="/post/finished">Click Here when you have finished scanning</a>
-
 @endsection

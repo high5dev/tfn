@@ -122,7 +122,7 @@ class PostController extends Controller
                 Scan::create([
                     'user_id' => Auth::user()->id,
                     'started' => Carbon::now(),
-                    'startid' => 1
+                    'startid' => $posts->first()
                 ]);
                 session(['scanning' => Auth()->user()->name]);
             }
@@ -166,22 +166,7 @@ class PostController extends Controller
     /**
      * flag that the user has finished scanning
      */
-    public function doneScanning()
-    {
-        // get the current scanning entry
-        $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
-        if ($scan) {
-            $scan->stopped = Carbon::now();
-            $scan->save();
-            return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
-        }
-        return redirect('home')->with('error', "I don't think you were scanning!");
-    }
-
-    /**
-     * flag that the user has finished scanning
-     */
-    public function finishedScanning(Request $request)
+    public function doneScanning(Request $request)
     {
         // get the current scanning entry
         $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
