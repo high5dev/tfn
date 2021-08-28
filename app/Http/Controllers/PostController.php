@@ -225,8 +225,8 @@ class PostController extends Controller
         // get the scan entry
         $scan = Scan::where('user_id', Auth::user()->id)->where('id', $request->id)->first();
         if ($scan) {
-            $scan->stopid = $request->zaps;
-            $scan->stopped = $request->notes;
+            $scan->zaps = $request->zaps;
+            $scan->notes = $request->notes;
             $scan->save();
             return redirect('/home')->with('success', 'Thank you for scanning, your efforts are appreciated');
         }
