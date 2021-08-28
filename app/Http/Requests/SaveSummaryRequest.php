@@ -23,14 +23,7 @@ class saveSummaryRequest extends FormRequest
      */
     public function prepareForValidation(): void
     {
-        $type = strtoupper(substr($this->type, 0, 7));
-        $theword = strtolower(substr($this->theword, 0, 254));
-
-        // replace the data ready for validation
-        $this->merge([
-            'type' => $type,
-            'theword' => $theword
-        ]);
+        //
     }
 
     /**
