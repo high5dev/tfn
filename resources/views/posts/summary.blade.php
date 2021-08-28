@@ -6,7 +6,7 @@
 
     <h3>Scan Summary</h3>
 
-    <form method="get" action="/posts/summary" class="form">
+    <form method="post" action="/posts/summary" class="form">
         @csrf()
 
         <div class="form-group row">
