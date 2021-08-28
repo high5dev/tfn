@@ -18,6 +18,34 @@
     <br>
 
     <div class="row">
+        <div class="col-sm-12 bg-secondary text-white">Scan from last scanned:</div>
+    </div>
+    <form method="get" action="/posts/list" class="form-inline row">
+        @csrf()
+
+        <div class="form-group col-sm-8">
+            <select id="type" name="type" class="form-control">
+                <option value="b">Both</option>
+                <option value="o">OFFERs</option>
+                <option value="w">WANTEDs</option>
+            </select>
+        </div>
+
+        <div class="form-group col-sm-2">
+            Scanning: <input type="checkbox" id="scanning" name="scanning" value="1">
+        </div>
+
+        <div class="form-group col-sm-2">
+            <label class="sr-only" for="submit">&nbsp;</label>
+            <input type="submit" id="submit" name="submit" value="Go">
+        </div>
+
+        <input type="hidden" name="posts" value="last">
+    </form>
+
+    <br>
+
+    <div class="row">
         <div class="col-sm-12 bg-secondary text-white">Scan from midnight:</div>
     </div>
     <form method="get" action="/posts/list" class="form-inline row">

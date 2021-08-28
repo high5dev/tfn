@@ -46,7 +46,32 @@ class PostController extends Controller
 
         $rows = 100;
 
-        if ('bypostid' == $request->posts) {
+        if ('last' == $request->posts) {
+
+            // get the last scanned post ID
+            $lastScanned = Scan::orderBy('stopid', 'desc')->first();
+
+            // scan from last scanned post id
+            if ('o' == $request->type) {
+                $posts = Post::where('id', '>=', $lastScanned->stopid)
+                    ->where('type', 'OFFER')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
+            } elseif ('w' == $request->type) {
+                $posts = Post::where('id', '>=', $lastScanned->stopid)
+                    ->where('type', 'WANTED')
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
+            } else {
+                $posts = Post::where('id', '>=', $lastScanned->stopid)
+                    ->orderBy('dated', 'asc')
+                    ->paginate($rows)
+                    ->withQueryString();
+            }
+
+        } elseif ('bypostid' == $request->posts) {
 
             // scan from specified post id
             if ('o' == $request->type) {
