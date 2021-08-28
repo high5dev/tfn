@@ -55,23 +55,29 @@
                         @endif
                     </td>
                     <td>
-                        @if(session()->has('scanning'))
-                            <form method="post" action="/post/done/" class="form-inline">
-                                @csrf
-                                <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                    <i class="fas fa-ban"></i>
-                                </button>
-                                <input type="hidden" name="id" value="{{ $post->id }}">
-                            </form>
-                        @endif
-                        <form method="post" action="/post/{{ $post->id }}" class="form-inline"
-                              onsubmit="return confirm('Are you sure you want to remove this post?');">
-                            @method('DELETE')
-                            @csrf
-                            <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
+                        <div class="row">
+                            <div class="span6">
+                                @if(session()->has('scanning'))
+                                    <form method="post" action="/post/done/" class="form-inline">
+                                        @csrf
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
+                                        <input type="hidden" name="id" value="{{ $post->id }}">
+                                    </form>
+                                @endif
+                            </div>
+                            <div class="span6">
+                                <form method="post" action="/post/{{ $post->id }}" class="form-inline"
+                                      onsubmit="return confirm('Are you sure you want to remove this post?');">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach
