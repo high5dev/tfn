@@ -6,6 +6,7 @@ use App\Models\Scan;
 use Auth;
 use App\Models\Post;
 use Carbon\Carbon;
+use App\Http\Requests\SaveSummaryRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -220,7 +221,7 @@ class PostController extends Controller
     /**
      * save the summary page
      */
-    public function saveSummary(Request $request)
+    public function saveSummary(SaveSummaryRequest $request)
     {
         // get the scan entry
         $scan = Scan::where('user_id', Auth::user()->id)->where('id', $request->id)->first();
