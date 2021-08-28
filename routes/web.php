@@ -65,6 +65,8 @@ Route::group([
     Route::post('/posts/notspam/{id}', 'PostController@notSpam');
     Route::delete('/post/{id}', 'PostController@destroy');
     Route::post('/post/done', 'PostController@doneScanning');
+    Route::get('/posts/summary/{id}', 'PostController@showSummary');
+    Route::post('/posts/summary', 'PostController@saveSummary');
 
     // User: manage watchwords
     Route::get('/watchwords', 'WatchwordController@index');

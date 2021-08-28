@@ -199,9 +199,38 @@ class PostController extends Controller
             $scan->stopid = $request->id;
             $scan->stopped = Carbon::now();
             $scan->save();
-            return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
+            return redirect('/posts/summary/' . $scan->id);
         }
-        return redirect('home')->with('error', "I don't think you were scanning!");
+        return redirect('/home')->with('error', "I don't think you were scanning!");
+    }
+
+    /**
+     * debrief a scanning session
+     */
+    public function showSummary($id)
+    {
+        // get the scanning session
+        $scan = Scan::where('user_id', Auth::user()->id)->where('id', $id)->first();
+        if ($scan) {
+            return view('posts.summary', compact('id'));
+        }
+        return redirect('/home')->with('error', "Unable to find that scan entry!");
+    }
+
+    /**
+     * save the summary page
+     */
+    public function saveSummary(Request $request)
+    {
+        // get the scan entry
+        $scan = Scan::where('user_id', Auth::user()->id)->where('id', $request->id)->first();
+        if ($scan) {
+            $scan->stopid = $request->zaps;
+            $scan->stopped = $request->notes;
+            $scan->save();
+            return redirect('/home')->with('success', 'Thank you for scanning, your efforts are appreciated');
+        }
+        return redirect('/home')->with('error', "Unable to find that scan entry!");
     }
 
     /**
