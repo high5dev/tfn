@@ -15,7 +15,8 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="user">User :</label>
                 <div class="col-sm-10">
-                    <input type="text" id="user" name="user" class="form-control" readonly value="{{ $scan->user->name }}">
+                    <input type="text" id="user" name="user" class="form-control" readonly
+                           value="{{ $scan->user->name }}">
                 </div>
             </div>
 
@@ -62,9 +63,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="notes">Notes :</label>
                 <div class="col-sm-10">
-                    <textarea id="notes" name="notes" class="form-control" readonly>
-                           {{ $scan->notes }}
-                    </textarea>
+                    <textarea id="notes" name="notes" class="form-control" readonly>{{ $scan->notes }}</textarea>
                 </div>
             </div>
 
