@@ -179,6 +179,22 @@ class PostController extends Controller
     }
 
     /**
+     * flag that the user has finished scanning
+     */
+    public function finishedScanning($id)
+    {
+        // get the current scanning entry
+        $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
+        if ($scan) {
+            $scan->stopid = $id;
+            $scan->stopped = Carbon::now();
+            $scan->save();
+            return redirect('home')->with('success', 'Thank you for your scanning session, it is most appreciated!');
+        }
+        return redirect('home')->with('error', "I don't think you were scanning!");
+    }
+
+    /**
      * delete a post entry
      */
     public function destroy($id)

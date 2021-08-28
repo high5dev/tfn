@@ -55,6 +55,9 @@
                         @endif
                     </td>
                     <td>
+                        @if(session()->has('scanning'))
+                            <a href="/post/done/{{ $post->id }}"><i class="fas fa-ban"></i></a>
+                        @endif
                         <form method="post" action="/post/{{ $post->id }}" class="form-inline"
                               onsubmit="return confirm('Are you sure you want to remove this post?');">
                             @method('DELETE')
