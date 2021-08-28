@@ -58,7 +58,7 @@
                         <div class="row">
                             <div class="span6">
                                 @if(session()->has('scanning'))
-                                    <form method="post" action="/post/done/" class="form-inline">
+                                    <form method="post" action="/post/done" class="form-inline">
                                         @csrf
                                         <button class="btn btn-sm btn-outline-secondary" type="submit">
                                             <i class="fas fa-ban"></i>
