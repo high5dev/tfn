@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use Carbon\Carbon;
 use App\Models\Post;
+use App\Models\Scan;
 use App\Models\Statistic;
 use App\Models\Notification;
 
@@ -36,6 +37,22 @@ class UpdateDailyStatisticsAction
         $stats->dated = $yesterday;
         $stats->type = 'WANTEDS';
         $stats->quantity = $wanteds;
+        $stats->save();
+
+        // get ZAPS from yesterday
+        $scans = Scan::where('started', '>=', $yesterday)
+            ->where('started', '<', Carbon::today())
+            ->get();
+        // count them
+        $zaps = 0;
+        foreach ($scans as $scan) {
+            $count += $scan->zap;
+        }
+        // save the results
+        $stats = new Statistic();
+        $stats->dated = $yesterday;
+        $stats->type = 'ZAPS';
+        $stats->quantity = $zaps;
         $stats->save();
     }
 }
