@@ -14,11 +14,32 @@ class Scan extends Model
     protected $fillable = [
         'user_id',
         'started',
-        'startid'
+        'startid',
+        'startts'
     ];
 
     // we don't need timestamps in this model as we already have start & finish times
     public $timestamps = false;
+
+    // get formatted datetime string for startts
+    public function getStarttsAttribute()
+    {
+        if ($this->startts) {
+            return Carbon::createFromFormat('Y-m-d H:i', $this->startts, 'UTC');
+        } else {
+            return null;
+        }
+    }
+
+    // get formatted datetime string for stopts
+    public function getStoptsAttribute()
+    {
+        if ($this->stopts) {
+            return Carbon::createFromFormat('Y-m-d H:i', $this->stopts, 'UTC');
+        } else {
+            return null;
+        }
+    }
 
     /**
      * get user the scan belongs to
