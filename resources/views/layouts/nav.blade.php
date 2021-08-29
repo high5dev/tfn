@@ -21,9 +21,6 @@
                     <a class="nav-link" href="/watchwords">Watchwords</a>
                 </li>
                 <li class="nav-item">
-                    ---
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/scans">Scans</a>
                 </li>
                 <li class="nav-item">
