@@ -17,9 +17,11 @@ class CreateScansTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->datetime('started');
-            $table->bigInteger('startid')->unsigned();
             $table->datetime('stopped')->nullable();
+            $table->bigInteger('startid')->unsigned();
+            $table->datetime('startts');
             $table->bigInteger('stopid')->unsigned()->default(0);
+            $table->datetime('stopts')->nullable();
             $table->integer('zaps')->unsigned()->default(0);
             $table->text('notes')->nullable();
         });

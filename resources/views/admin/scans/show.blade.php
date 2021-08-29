@@ -48,7 +48,7 @@
                 <label class="col-sm-2 col-form-label" for="stopped">Stopid :</label>
                 <div class="col-sm-10">
                     <input type="text" id="stopid" name="stopid" class="form-control" readonly
-                           value="{{ $scan->stopped }}">
+                           value="{{ $scan->stopid }}">
                 </div>
             </div>
 

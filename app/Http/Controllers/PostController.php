@@ -145,10 +145,12 @@ class PostController extends Controller
         $alreadyScanning = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
         if (!$alreadyScanning) {
             if ($request->scanning) {
+                $first = $posts->first();
                 Scan::create([
                     'user_id' => Auth::user()->id,
                     'started' => Carbon::now(),
-                    'startid' => $posts->first()->id
+                    'startid' => $first->id,
+                    'startts' => $first->dated
                 ]);
                 session(['scanning' => Auth()->user()->name]);
             }
@@ -197,10 +199,16 @@ class PostController extends Controller
         // get the current scanning entry
         $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
         if ($scan) {
-            $scan->stopid = $request->id;
-            $scan->stopped = Carbon::now();
-            $scan->save();
-            return redirect('/posts/summary/' . $scan->id);
+            // get the last post scanned
+            $post = Post::where('id', $request->id)->first();
+            if ($post) {
+                $scan->stopped = Carbon::now();
+                $scan->stopid = $post->id;
+                $scan->stopts = $post->dated;
+                $scan->save();
+                return redirect('/posts/summary/' . $scan->id);
+            }
+            return redirect('/home')->with('error', "Unable to find the last post scanned, please try again");
         }
         return redirect('/home')->with('error', "I don't think you were scanning!");
     }
