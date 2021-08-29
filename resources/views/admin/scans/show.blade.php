@@ -29,14 +29,6 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="startid">Start ID :</label>
-                <div class="col-sm-10">
-                    <input type="text" id="startid" name="startid" class="form-control" readonly
-                           value="{{ $scan->startid }}">
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="stopped">Stopped :</label>
                 <div class="col-sm-10">
                     <input type="text" id="stopped" name="stopped" class="form-control" readonly
@@ -45,10 +37,34 @@
             </div>
 
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="startid">Start ID :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="startid" name="startid" class="form-control" readonly
+                           value="{{ $scan->startid }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="stopped">Stopid :</label>
                 <div class="col-sm-10">
                     <input type="text" id="stopid" name="stopid" class="form-control" readonly
                            value="{{ $scan->stopid }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="startts">Start timestamp :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="startts" name="startts" class="form-control" readonly
+                           value="{{ $scan->startts }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="stopts">Stop timestamp :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="stopts" name="stopts" class="form-control" readonly
+                           value="{{ $scan->stopts }}">
                 </div>
             </div>
 

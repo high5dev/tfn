@@ -31,7 +31,7 @@ class ScanController extends Controller
     {
         $rows = 50;
 
-        $scans = Scan::orderBy('started', 'desc')
+        $scans = Scan::orderBy('startid', 'desc')
             ->paginate($rows)
             ->withQueryString();
 
