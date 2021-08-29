@@ -25,13 +25,13 @@ class Scan extends Model
     // get formatted datetime string for startts
     public function getStarttsAttribute($value)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value, 'UTC')->formt('Y-m-d H:m');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value, 'UTC')->format('Y-m-d H:m');
     }
 
     // get formatted datetime string for stopts
     public function getStoptsAttribute($value)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value, 'UTC')->formt('Y-m-d H:m');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value, 'UTC')->format('Y-m-d H:m');
     }
 
     /**
