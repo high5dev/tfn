@@ -23,8 +23,8 @@
             <tr>
                 <td>{{ $scan->startid }}</td>
                 <td>{{ $scan->stopid }}</td>
-                <td>{{ $scan->getStartts }}</td>
-                <td>{{ $scan->getStopts }}</td>
+                <td>{{ $scan->startts }}</td>
+                <td>{{ $scan->stopts }}</td>
                 <td>{{ $scan->user->name }}</td>
             </tr>
         @endforeach
