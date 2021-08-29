@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Scan extends Model
@@ -22,23 +23,15 @@ class Scan extends Model
     public $timestamps = false;
 
     // get formatted datetime string for startts
-    public function getStarttsAttribute()
+    public function getStarttsAttribute($value)
     {
-        if ($this->startts) {
-            return Carbon::createFromFormat('Y-m-d H:i', $this->startts, 'UTC');
-        } else {
-            return null;
-        }
+        return Carbon::createFromFormat('Y-m-d H:i', $value, 'UTC');
     }
 
     // get formatted datetime string for stopts
-    public function getStoptsAttribute()
+    public function getStoptsAttribute($value)
     {
-        if ($this->stopts) {
-            return Carbon::createFromFormat('Y-m-d H:i', $this->stopts, 'UTC');
-        } else {
-            return null;
-        }
+        return Carbon::createFromFormat('Y-m-d H:i', $value, 'UTC');
     }
 
     /**
