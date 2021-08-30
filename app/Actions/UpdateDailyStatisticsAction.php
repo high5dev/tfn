@@ -43,16 +43,18 @@ class UpdateDailyStatisticsAction
         $scans = Scan::where('started', '>=', $yesterday)
             ->where('started', '<', Carbon::today())
             ->get();
-        // count them
-        $zaps = 0;
-        foreach ($scans as $scan) {
-            $count += $scan->zap;
+        $count = 0;
+        if ($scans) {
+            // count the zaps
+            foreach ($scans as $scan) {
+                $count += $scan->zaps;
+            }
         }
         // save the results
         $stats = new Statistic();
         $stats->dated = $yesterday;
         $stats->type = 'ZAPS';
-        $stats->quantity = $zaps;
+        $stats->quantity = $count;
         $stats->save();
     }
 }
