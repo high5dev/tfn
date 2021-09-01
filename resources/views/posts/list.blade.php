@@ -57,13 +57,11 @@
                     <td>
                         <div class="row">
                             <div class="span4">
-                                @if(session()->has('scanning'))
-                                    <a href="{{ $imgurl . '/' . $post->id }}">
-                                        <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                            <i class="far fa-image"></i>
-                                        </button>
-                                    </a>
-                                @endif
+                                <a href="{{ $imgurl . '/' . $post->id }}">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                        <i class="far fa-image"></i>
+                                    </button>
+                                </a>
                             </div>
                             <div class="span4">
                                 @if(session()->has('scanning'))
