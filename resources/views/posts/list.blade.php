@@ -56,7 +56,16 @@
                     </td>
                     <td>
                         <div class="row">
-                            <div class="span6">
+                            <div class="span4">
+                                @if(session()->has('scanning'))
+                                    <a href="{{ $imgurl . '/' . $post->id }}">
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                            <i class="far fa-image"></i>
+                                        </button>
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="span4">
                                 @if(session()->has('scanning'))
                                     <form method="post" action="/post/done" class="form-inline">
                                         @csrf
@@ -67,7 +76,7 @@
                                     </form>
                                 @endif
                             </div>
-                            <div class="span6">
+                            <div class="span4">
                                 <form method="post" action="/post/{{ $post->id }}" class="form-inline"
                                       onsubmit="return confirm('Are you sure you want to remove this post?');">
                                     @method('DELETE')
