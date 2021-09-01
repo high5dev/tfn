@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Auth;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminUserStoreRequest extends FormRequest
@@ -23,7 +24,14 @@ class AdminUserStoreRequest extends FormRequest
      */
     public function prepareForValidation(): void
     {
-        //
+        $email = strtolower(substr($this->email, 0, 254));
+        $username = strtolower(substr($this->username, 0, 254));
+
+        // replace the data ready for validation
+        $this->merge([
+            'email' => $email,
+            'username' => $username,
+        ]);
     }
 
     /**
@@ -50,7 +58,7 @@ class AdminUserStoreRequest extends FormRequest
             'password' => [
                 "nullable",
                 "confirmed",
-                "nist_password"
+                Password::min(8)->uncompromised(),
             ],
             'admin_password' => [
                 "required",

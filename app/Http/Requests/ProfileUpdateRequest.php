@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Auth;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileUpdateRequest extends FormRequest
@@ -23,7 +24,14 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function prepareForValidation(): void
     {
-        //
+        $email = strtolower(substr($this->email, 0, 254));
+        $username = strtolower(substr($this->username, 0, 254));
+
+        // replace the data ready for validation
+        $this->merge([
+            'email' => $email,
+            'username' => $username,
+        ]);
     }
 
     /**
@@ -51,7 +59,7 @@ class ProfileUpdateRequest extends FormRequest
             'password' => [
                 "nullable",
                 "confirmed",
-                "nist_password"
+                Password::min(8)->uncompromised(),
             ],
             'current_password' => [
                 "required"
