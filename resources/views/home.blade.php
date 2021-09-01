@@ -17,8 +17,7 @@
         <div class="jumbotron">
             You appear to have an open scanning entry, is this intentional?<br>
             Looks like you started scanning on {{ $scanStarted }}<br>
-            You can close it off by <a href="/post/finished">Clicking Here</a>,
-            or if you are still scanning, please excuse the assumption!
+            If you are still scanning, please excuse the assumption!
         </div>
     @endif
 
