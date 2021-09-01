@@ -57,13 +57,6 @@
                     <td>
                         <div class="row">
                             <div class="span4">
-                                <a href="{{ $imgurl . '/' . $post->id }}">
-                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                        <i class="far fa-image"></i>
-                                    </button>
-                                </a>
-                            </div>
-                            <div class="span4">
                                 @if(session()->has('scanning'))
                                     <form method="post" action="/post/done" class="form-inline">
                                         @csrf
@@ -73,6 +66,13 @@
                                         <input type="hidden" name="id" value="{{ $post->id }}">
                                     </form>
                                 @endif
+                            </div>
+                            <div class="span4">
+                                <a href="{{ $imgurl . '/' . $post->id }}" target="_blank">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                        <i class="far fa-image"></i>
+                                    </button>
+                                </a>
                             </div>
                             <div class="span4">
                                 <form method="post" action="/post/{{ $post->id }}" class="form-inline"
