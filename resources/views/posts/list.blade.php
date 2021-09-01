@@ -68,7 +68,7 @@
                                 @endif
                             </div>
                             <div class="span4">
-                                <a href="{{ $imgurl . '/' . $post->id }}" target="_blank">
+                                <a href="{{ $imgurl . $post->id }}" target="_blank">
                                     <button class="btn btn-sm btn-outline-secondary" type="submit">
                                         <i class="far fa-image"></i>
                                     </button>
