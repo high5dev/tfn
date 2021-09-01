@@ -27,7 +27,5 @@ class AppServiceProvider extends ServiceProvider
     {
         // use bootstrap paginator
         Paginator::useBootstrap();
-        // create a custom validator to check password strength
-        Validator::extend('nist_password', 'App\Rules\CustomValidator@validatePasswordStrength');
     }
 }
