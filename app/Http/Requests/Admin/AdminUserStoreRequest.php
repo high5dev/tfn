@@ -25,12 +25,10 @@ class AdminUserStoreRequest extends FormRequest
     public function prepareForValidation(): void
     {
         $email = strtolower(substr($this->email, 0, 254));
-        $username = strtolower(substr($this->username, 0, 254));
 
         // replace the data ready for validation
         $this->merge([
             'email' => $email,
-            'username' => $username,
         ]);
     }
 

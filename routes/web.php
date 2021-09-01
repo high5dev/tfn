@@ -53,6 +53,7 @@ Route::group([
     Route::get('/logs', 'LoggController@index');
     Route::get('/logs/{id}', 'LoggController@show');
 
+
     // User: search
     Route::get('/search', 'SearchController@index');
     Route::get('/search/email', 'SearchController@email');
