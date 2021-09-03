@@ -195,6 +195,8 @@ class PostController extends Controller
 
     /**
      * flag that the user has finished scanning
+     *
+     * TODO: DON'T SAVE SCAN HERE, GO TO SUMMARY PAGE FIRST TO AVOID NULL notes FIELD
      */
     public function doneScanning(Request $request)
     {
