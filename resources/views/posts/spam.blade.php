@@ -56,7 +56,14 @@
                     </td>
                     <td>
                         <div class="row">
-                            <div class="span6">
+                            <div class="span4">
+                                <a href="{{ $imgurl . $post->id }}" target="_blank">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                        <i class="far fa-image"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="span4">
                                 <form method="post" action="/posts/notspam/{{ $post->id }}" class="form-inline">
                                     @csrf()
                                     <button class="btn btn-sm btn-outline-secondary" type="submit">
@@ -64,7 +71,7 @@
                                     </button>
                                 </form>
                             </div>
-                            <div class="span6">
+                            <div class="span4">
                                 <form method="post" action="/post/{{ $post->id }}" class="form-inline"
                                       onsubmit="return confirm('Are you sure you want to remove this post?');">
                                     @method('DELETE')

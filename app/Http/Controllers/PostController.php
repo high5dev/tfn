@@ -178,8 +178,10 @@ class PostController extends Controller
 
         // Spamtool URL to individual posts can be viewed
         $sturl = 'https://spamcontrol.freecycle.org/';
+        // image view URL
+        $imgurl = 'https://images.freecycle.org/group/x/post_image/';
 
-        return view('posts.spam', compact('posts', 'sturl'));
+        return view('posts.spam', compact('posts', 'sturl', 'imgurl'));
     }
 
     /**
