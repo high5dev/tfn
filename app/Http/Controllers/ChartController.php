@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ChartController extends Controller
 {
-
     /**
      * create a new controller instance.
      */
