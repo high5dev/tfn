@@ -79,8 +79,6 @@ Route::group([
     // User: charts
     Route::get('/chart', 'ChartController@index');
 
-    Route::get('/chart/users', 'ChartController@users');
-
     /****************** ADMIN Routes ****************/
 
     // Admin: manage users
@@ -98,4 +96,9 @@ Route::group([
     // Admin: manage scans
     Route::get('/admin/scans', 'Admin\AdminScanController@index');
     Route::get('/admin/scans/{id}', 'Admin\AdminScanController@show');
+
+    // Admin: graphs
+    Route::get('/admin/chart/users', 'Admin\ChartController@users');
+    Route::get('/admin/chart/weekly', 'Admin\ChartController@weekly');
+
 });

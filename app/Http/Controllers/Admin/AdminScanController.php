@@ -58,8 +58,7 @@ class AdminScanController extends Controller
             } else {
                 return redirect('/admin/scans')->with('warning', 'Unable to find that scan entry!');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view scans');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view scans');
     }
 }
