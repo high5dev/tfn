@@ -90,7 +90,7 @@ class ChartController extends Controller
         foreach ($users as $user) {
             $colours .= '"#' . (string)rand(100000, 999999) . '", ';
             $names .= '"' . $user['name'] .'", ';
-            $efficiency .= '"' . round(($user['scans']/$user['time'])*10) .'", ';
+            $efficiency .= '"' . (($user['scans']/$user['time'])*10) .'", ';
         }
 
         $colours = substr($colours, 0,-2);
