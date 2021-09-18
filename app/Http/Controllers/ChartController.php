@@ -62,6 +62,13 @@ class ChartController extends Controller
 
         $users = [];
         foreach ($scans as $scan) {
+            // create user if they don;t exist yet
+            if (! isset($users[$scan->user_id])) {
+                $users[$scan->user_id] = [
+                    'scans' => 0,
+                    'time' => 0
+                ];
+            }
             // how many posts did this user scan?
             $scans = $users[$scan->user_id]['scans'] + ($scan->stopid - $scan->startid);
             // how long did it take them?
