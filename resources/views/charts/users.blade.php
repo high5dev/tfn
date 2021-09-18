@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">User Efficiency</div>
+                    <div class="panel-heading">User Scanning Efficiency</div>
                     <div class="panel-body">
                         <canvas id="bar-chart" width="800" height="450"></canvas>
                     </div>
@@ -26,8 +26,8 @@
                 datasets: [
                     {
                         label: "xxxx",
-                        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                        data: [2478,5267,734,784,433]
+                        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#aaaaaa"],
+                        data: [2478,5267,734,784,433, 44]
                     }
                 ]
             },
