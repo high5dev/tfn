@@ -61,7 +61,7 @@ class AdminChartController extends Controller
             foreach ($users as $user) {
                 $colours .= '"#' . (string)rand(100000, 999999) . '", ';
                 $names .= '"' . $user['name'] . '", ';
-                $time .= '"' . $user['time'] . '", ';
+                $time .= '"' . round(($user['time'] / 3600), 2) . '", ';
             }
 
             $colours = substr($colours, 0, -2);
@@ -70,7 +70,7 @@ class AdminChartController extends Controller
 
             $colours = $colours . ']';
             $names = $names . ']';
-            $time = round($time / 3600, 2) . ']';
+            $time = $time . ']';
 
             return view('charts.weekly', compact('colours', 'names', 'time'));
         }
