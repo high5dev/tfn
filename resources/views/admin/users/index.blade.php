@@ -13,6 +13,7 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Last Login</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -24,6 +25,9 @@
                 </td>
                 <td>
                     {{ $user->email }}
+                </td>
+                <td>
+                    {{ $user->last_login_at }}
                 </td>
                 <td>
                     <div class="row">
