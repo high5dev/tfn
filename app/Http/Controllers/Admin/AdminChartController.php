@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ChartController extends Controller
+class AdminChartController extends Controller
 {
     /**
      * create a new controller instance.
