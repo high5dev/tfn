@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\Scan;
 use App\Models\Statistic;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
@@ -56,6 +57,23 @@ class ChartController extends Controller
      */
     public function users()
     {
+        // get all scans over last 30 days
+        $scans = Scan::where('started', '>=', Carbon::today()->subDays(30))->orderBy('user_id')->get();
+
+        $users = [];
+        foreach ($scans as $scan) {
+            // how many posts did this user scan?
+            $scans = $users[$scan->user_id]['scans'] + ($scan->stopid - $scan->startid);
+            // how long did it take them?
+            $time = $users[$scan->user_id]['time'] + ($scan->stopped - $scan->started);
+            // store
+            $users[$scan->user_id] = [
+                'scans' => $scans,
+                'time' => $time
+            ];
+        }
+        dd($users);
+
         $colours = '["#000000", "#aa0000","#00ff00","#0000ff","#c45850","#aaaaaa"]';
         $users = '["Ben", "Chris", "Debbie", "Dennis", "Pat", "Valentina"]';
         $efficiency = "[2478, 5267, 734, 784, 433, 4444]";
