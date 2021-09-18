@@ -93,8 +93,8 @@ class ChartController extends Controller
         $names = $efficiency = $colours = '[';
         foreach ($users as $user) {
             $colours .= '"#' . (string)rand(100000, 999999) . '", ';
-            $names .= '"' . $user->name .'", ';
-            $efficiency .= '"' . $user->eff .'", ';
+            $names .= '"' . $user['name'] .'", ';
+            $efficiency .= '"' . $user['eff'] .'", ';
         }
         $colours = substr($colours, -2);
         $names = substr($names, -2);
