@@ -51,4 +51,12 @@ class ChartController extends Controller
         return view('charts.index', compact('dates', 'offers', 'wanteds', 'zaps'));
     }
 
+    /**
+     * display User's Efficiency chart
+     */
+    public function users()
+    {
+        return view('charts.users');
+    }
+
 }

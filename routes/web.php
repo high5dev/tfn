@@ -80,6 +80,8 @@ Route::group([
     Route::get('/chart', 'ChartController@index');
     Route::get('/chartjs', 'ChartController@indexjs');
 
+    Route::get('/users', 'ChartController@users');
+
     /****************** ADMIN Routes ****************/
 
     // Admin: manage users
