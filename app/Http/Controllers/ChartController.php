@@ -60,13 +60,15 @@ class ChartController extends Controller
         // get all scans over last 30 days
         $scans = Scan::where('started', '>=', Carbon::today()->subDays(30))->orderBy('user_id')->get();
 
+        // get number of posts scanned with time taken for each user
         $users = [];
         foreach ($scans as $scan) {
             // create user if they don;t exist yet
             if (! isset($users[$scan->user_id])) {
                 $users[$scan->user_id] = [
                     'scans' => 0,
-                    'time' => 0
+                    'time' => 0,
+                    'eff' => 0
                 ];
             }
             // how many posts did this user scan?
@@ -75,6 +77,8 @@ class ChartController extends Controller
             $start = strtotime($scan->started);
             $stop = strtotime($scan->stopped);
             $time = $users[$scan->user_id]['time'] + abs($stop - $start);
+            // calculate total efficiency
+            $eff = $users[$scan->user_id]['eff'] + ($scan/$time);
             // store
             $users[$scan->user_id] = [
                 'scans' => $scans,
