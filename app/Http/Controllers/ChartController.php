@@ -72,7 +72,9 @@ class ChartController extends Controller
             // how many posts did this user scan?
             $scans = $users[$scan->user_id]['scans'] + ($scan->stopid - $scan->startid);
             // how long did it take them?
-            $time = $users[$scan->user_id]['time'] + ($scan->stopped - $scan->started);
+            $start = strtotime($scan->started);
+            $stop = strtotime($scan->stopped);
+            $time = $users[$scan->user_id]['time'] + abs($stop - $start);
             // store
             $users[$scan->user_id] = [
                 'scans' => $scans,
