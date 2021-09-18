@@ -56,8 +56,9 @@ class ChartController extends Controller
      */
     public function users()
     {
+        $users = "['Ben', 'Chris', 'Debbie', 'Dennis', 'Pat', 'Valentina']";
         $efficiency = "[2478, 5267, 734, 784, 433, 4444]";
-        return view('charts.users', compact('efficiency'));
+        return view('charts.users', compact('users', 'efficiency'));
     }
 
 }
