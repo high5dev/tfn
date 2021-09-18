@@ -27,7 +27,7 @@
                     {
                         label: "xxxx",
                         backgroundColor: {!! $colours !!},
-                        data: {{ $efficiency }}
+                        data: {!! $efficiency !!}
                     }
                 ]
             },
