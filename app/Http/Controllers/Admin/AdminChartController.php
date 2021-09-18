@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\Models\Scan;
-use App\Models\Statistic;
 use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;

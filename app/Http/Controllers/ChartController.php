@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Models\Scan;
 use App\Models\Statistic;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
