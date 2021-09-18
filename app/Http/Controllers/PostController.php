@@ -197,10 +197,27 @@ class PostController extends Controller
 
     /**
      * flag that the user has finished scanning
-     *
-     * TODO: DON'T SAVE SCAN HERE, GO TO SUMMARY PAGE FIRST TO AVOID NULL notes FIELD
      */
     public function doneScanning(Request $request)
+    {
+        // get the current scanning entry
+        $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
+        if ($scan) {
+            // get the last post scanned
+            $post = Post::where('id', $request->id)->first();
+            if ($post) {
+                $id = $post->id;
+                return view('posts.summary', compact('id'));
+            }
+            return redirect('/home')->with('error', "Unable to find the last post scanned, please try again");
+        }
+        return redirect('/home')->with('error', "I don't think you were scanning!");
+    }
+
+    /**
+     * save the summary page
+     */
+    public function saveSummary(SaveSummaryRequest $request)
     {
         // get the current scanning entry
         $scan = Scan::where('user_id', Auth::user()->id)->whereNull('stopped')->first();
@@ -211,39 +228,12 @@ class PostController extends Controller
                 $scan->stopped = Carbon::now();
                 $scan->stopid = $post->id;
                 $scan->stopts = $post->dated;
+                $scan->zaps = $request->zaps;
+                $scan->notes = $request->notes;
                 $scan->save();
-                return redirect('/posts/summary/' . $scan->id);
+                return redirect('/home')->with('success', 'Thank you for scanning, your efforts are appreciated');
             }
-            return redirect('/home')->with('error', "Unable to find the last post scanned, please try again");
-        }
-        return redirect('/home')->with('error', "I don't think you were scanning!");
-    }
-
-    /**
-     * debrief a scanning session
-     */
-    public function showSummary($id)
-    {
-        // get the scanning session
-        $scan = Scan::where('user_id', Auth::user()->id)->where('id', $id)->first();
-        if ($scan) {
-            return view('posts.summary', compact('id'));
-        }
-        return redirect('/home')->with('error', "Unable to find that scan entry!");
-    }
-
-    /**
-     * save the summary page
-     */
-    public function saveSummary(SaveSummaryRequest $request)
-    {
-        // get the scan entry
-        $scan = Scan::where('user_id', Auth::user()->id)->where('id', $request->id)->first();
-        if ($scan) {
-            $scan->zaps = $request->zaps;
-            $scan->notes = $request->notes;
-            $scan->save();
-            return redirect('/home')->with('success', 'Thank you for scanning, your efforts are appreciated');
+            return redirect('/home')->with('error', "Unable to find that last post entry!");
         }
         return redirect('/home')->with('error', "Unable to find that scan entry!");
     }
