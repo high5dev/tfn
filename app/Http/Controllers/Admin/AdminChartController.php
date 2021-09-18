@@ -72,7 +72,7 @@ class AdminChartController extends Controller
             $names = $names . ']';
             $time = $time . ']';
 
-            return view('charts.users', compact('colours', 'names', 'time'));
+            return view('charts.weekly', compact('colours', 'names', 'time'));
         }
         return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view these graphs');
     }
