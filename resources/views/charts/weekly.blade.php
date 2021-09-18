@@ -34,7 +34,7 @@
         legend: { display: false },
         title: {
             display: true,
-                text: 'User Efficiency over the last month'
+                text: 'Time spent scanning over last 7 days'
         }
     }
     });
