@@ -22,7 +22,7 @@
         new Chart(document.getElementById("bar-chart"), {
             type: 'bar',
             data: {
-                labels: {{ $user }},
+                labels: {{ $users }},
                 datasets: [
                     {
                         label: "xxxx",
