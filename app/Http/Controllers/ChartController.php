@@ -56,9 +56,10 @@ class ChartController extends Controller
      */
     public function users()
     {
+        $colours = '["#ffffff", "#aa0000","#00ff00","#0000ff","#c45850","#aaaaaa"]';
         $users = '["Ben", "Chris", "Debbie", "Dennis", "Pat", "Valentina"]';
         $efficiency = "[2478, 5267, 734, 784, 433, 4444]";
-        return view('charts.users', compact('users', 'efficiency'));
+        return view('charts.users', compact('colours','users', 'efficiency'));
     }
 
 }
