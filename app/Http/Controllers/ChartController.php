@@ -63,9 +63,10 @@ class ChartController extends Controller
         // get number of posts scanned with time taken for each user
         $users = [];
         foreach ($scans as $scan) {
-            // create user if they don;t exist yet
+            // create user if they don't exist yet
             if (! isset($users[$scan->user_id])) {
                 $users[$scan->user_id] = [
+                    'name' => '',
                     'scans' => 0,
                     'time' => 0,
                     'eff' => 0
@@ -81,6 +82,7 @@ class ChartController extends Controller
             $eff = $users[$scan->user_id]['eff'] + ($scans/$time);
             // store
             $users[$scan->user_id] = [
+                'name' => $scan->user->name,
                 'scans' => $scans,
                 'time' => $time,
                 'eff' => $eff
