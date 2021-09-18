@@ -66,7 +66,6 @@ class ChartController extends Controller
             // create user if they don't exist yet
             if (! isset($users[$scan->user_id])) {
                 $users[$scan->user_id] = [
-                    'colour' => '',
                     'name' => '',
                     'scans' => 0,
                     'time' => 0,
@@ -83,7 +82,6 @@ class ChartController extends Controller
             $eff = $users[$scan->user_id]['eff'] + ($scans/$time);
             // store
             $users[$scan->user_id] = [
-                'colour' => '#' . (string)rand(100000, 999999),
                 'name' => $scan->user->name,
                 'scans' => $scans,
                 'time' => $time,
@@ -94,7 +92,7 @@ class ChartController extends Controller
         // build data
         $names = $efficiency = $colours = '[';
         foreach ($users as $user) {
-            $colours .= '"' . $user->colour . '", ';
+            $colours .= '"#' . (string)rand(100000, 999999) . '", ';
             $names .= '"' . $user->name .'", ';
             $efficiency .= '"' . $user->eff .'", ';
         }
