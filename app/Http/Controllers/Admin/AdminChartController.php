@@ -70,7 +70,7 @@ class AdminChartController extends Controller
 
             $colours = $colours . ']';
             $names = $names . ']';
-            $time = $time . ']';
+            $time = round($time / 3600, 2) . ']';
 
             return view('charts.weekly', compact('colours', 'names', 'time'));
         }
