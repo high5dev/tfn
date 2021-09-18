@@ -47,7 +47,7 @@ class AdminChartController extends Controller
                 // how long spent on this scan?
                 $start = strtotime($scan->started);
                 $stop = strtotime($scan->stopped);
-                $time = $users[$scan->user_id] + abs($stop - $start);
+                $time = $users[$scan->user_id]['time'] + abs($stop - $start);
 
                 // save the running total
                 $users[$scan->user_id] = [
