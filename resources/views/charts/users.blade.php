@@ -25,7 +25,6 @@
                 labels: {!! $names !!},
                 datasets: [
                     {
-                        label: {!! $names !!},
                         backgroundColor: {!! $colours !!},
                         data: {!! $efficiency !!}
                     }
