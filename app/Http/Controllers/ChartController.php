@@ -90,12 +90,13 @@ class ChartController extends Controller
         }
 
         // build data
-        $names = $efficiency = $colours = '[';
+        $colours = $names = $efficiency = '[';
         foreach ($users as $user) {
             $colours .= '"#' . (string)rand(100000, 999999) . '", ';
             $names .= '"' . $user['name'] .'", ';
             $efficiency .= '"' . $user['eff'] .'", ';
         }
+        dd($names, $colours, $efficiency);
         $colours = substr($colours, -2);
         $names = substr($names, -2);
         $efficiency = substr($efficiency, -2);
