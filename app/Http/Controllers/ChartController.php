@@ -68,24 +68,20 @@ class ChartController extends Controller
                 $users[$scan->user_id] = [
                     'name' => '',
                     'scans' => 0,
-                    'time' => 0,
-                    'eff' => 0
+                    'time' => 0
                 ];
             }
             // how many posts did this user scan?
-            $scans = $users[$scan->user_id]['scans'] + ($scan->stopid - $scan->startid);
+            $scans = $users[$scan->user_id]['scans'] + abs($scan->stopid - $scan->startid);
             // how long did it take them?
             $start = strtotime($scan->started);
             $stop = strtotime($scan->stopped);
             $time = $users[$scan->user_id]['time'] + abs($stop - $start);
-            // calculate total efficiency
-            $eff = $users[$scan->user_id]['eff'] + ($scans/$time);
             // store
             $users[$scan->user_id] = [
                 'name' => $scan->user->name,
                 'scans' => $scans,
-                'time' => $time,
-                'eff' => $eff
+                'time' => $time
             ];
         }
 
@@ -94,7 +90,7 @@ class ChartController extends Controller
         foreach ($users as $user) {
             $colours .= '"#' . (string)rand(100000, 999999) . '", ';
             $names .= '"' . $user['name'] .'", ';
-            $efficiency .= '"' . $user['eff'] .'", ';
+            $efficiency .= '"' . round(($user['scans']/$user['time'])*10 .'", ';
         }
 
         $colours = substr($colours, 0,-2);
