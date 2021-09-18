@@ -78,11 +78,12 @@ class ChartController extends Controller
             $stop = strtotime($scan->stopped);
             $time = $users[$scan->user_id]['time'] + abs($stop - $start);
             // calculate total efficiency
-            $eff = $users[$scan->user_id]['eff'] + ($scan/$time);
+            $eff = $users[$scan->user_id]['eff'] + ($scans/$time);
             // store
             $users[$scan->user_id] = [
                 'scans' => $scans,
-                'time' => $time
+                'time' => $time,
+                'eff' => $eff
             ];
         }
         dd($users);
