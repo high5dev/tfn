@@ -84,13 +84,14 @@ class ChartController extends Controller
                 'time' => $time
             ];
         }
+        dd($users);
 
         // build data
         $colours = $names = $efficiency = '[';
         foreach ($users as $user) {
             $colours .= '"#' . (string)rand(100000, 999999) . '", ';
             $names .= '"' . $user['name'] .'", ';
-            $efficiency .= '"' . (($user['scans']/$user['time'])*10) .'", ';
+            $efficiency .= '"' . round(($user['scans']/$user['time'])*100) .'", ';
         }
 
         $colours = substr($colours, 0,-2);
