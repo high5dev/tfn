@@ -66,6 +66,7 @@ class ChartController extends Controller
             // create user if they don't exist yet
             if (! isset($users[$scan->user_id])) {
                 $users[$scan->user_id] = [
+                    'colour' => '',
                     'name' => '',
                     'scans' => 0,
                     'time' => 0,
@@ -82,18 +83,30 @@ class ChartController extends Controller
             $eff = $users[$scan->user_id]['eff'] + ($scans/$time);
             // store
             $users[$scan->user_id] = [
+                'colour' => '#' . (string)rand(100000, 999999),
                 'name' => $scan->user->name,
                 'scans' => $scans,
                 'time' => $time,
                 'eff' => $eff
             ];
         }
-        dd($users);
 
-        $colours = '["#000000", "#aa0000","#00ff00","#0000ff","#c45850","#aaaaaa"]';
-        $users = '["Ben", "Chris", "Debbie", "Dennis", "Pat", "Valentina"]';
-        $efficiency = "[2478, 5267, 734, 784, 433, 4444]";
-        return view('charts.users', compact('colours','users', 'efficiency'));
+        // build data
+        $names = $efficiency = $colours = '[';
+        foreach ($users as $user) {
+            $colours .= '"' . $user->colour . '", ';
+            $names .= '"' . $user->name .'", ';
+            $efficiency .= '"' . $user->eff .'", ';
+        }
+        $colours = substr($colours, -2);
+        $names = substr($names, -2);
+        $efficiency = substr($efficiency, -2);
+
+        $colours .= ']';
+        $names .= ']';
+        $efficiency .= ']';
+
+        return view('charts.users', compact('colours','names', 'efficiency'));
     }
 
 }
