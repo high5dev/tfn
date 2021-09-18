@@ -38,16 +38,22 @@ class AdminChartController extends Controller
             foreach ($scans as $scan) {
                 // create user if they don't exist yet
                 if (!isset($users[$scan->user_id])) {
-                    $users[$scan->user_id] = 0;
+                    $users[$scan->user_id] = [
+                        'name' => '',
+                        'time' => 0
+                    ];
                 }
 
                 // how long spent on this scan?
                 $start = strtotime($scan->started);
                 $stop = strtotime($scan->stopped);
-                $time =  abs($stop - $start);
+                $time = $users[$scan->user_id] + abs($stop - $start);
 
                 // save the running total
-                $users[$scan->user_id] = $users[$scan->user_id] + $time;
+                $users[$scan->user_id] = [
+                    'name' => $scan->user->name,
+                    'time' => $time
+                ];
             }
 
             // build data
