@@ -97,9 +97,9 @@ class ChartController extends Controller
             $efficiency .= '"' . $user['eff'] .'", ';
         }
 
-        $colours = substr($colours, -2);
-        $names = substr($names, -2);
-        $efficiency = substr($efficiency, -2);
+        $colours = substr($colours, 0,-2);
+        $names = substr($names, 0,-2);
+        $efficiency = substr($efficiency, 0,-2);
         dd($names, $colours, $efficiency);
 
         $colours = $colours . ']';
