@@ -48,8 +48,7 @@
         };
 
         window.onload = function () {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myBar = new Chart(ctx, {
+            new Chart(document.getElementById("canvas"), {
                 type: 'bar',
                 data: {
                     labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
