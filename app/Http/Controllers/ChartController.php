@@ -100,9 +100,9 @@ class ChartController extends Controller
         $names = substr($names, -2);
         $efficiency = substr($efficiency, -2);
 
-        $colours .= ']';
-        $names .= ']';
-        $efficiency .= ']';
+        $colours = $colours . ']';
+        $names = $names . ']';
+        $efficiency = $efficiency . ']';
 
         return view('charts.users', compact('colours','names', 'efficiency'));
     }
