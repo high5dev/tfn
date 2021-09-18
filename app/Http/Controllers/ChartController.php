@@ -100,7 +100,6 @@ class ChartController extends Controller
         $colours = substr($colours, 0,-2);
         $names = substr($names, 0,-2);
         $efficiency = substr($efficiency, 0,-2);
-        dd($names, $colours, $efficiency);
 
         $colours = $colours . ']';
         $names = $names . ']';
