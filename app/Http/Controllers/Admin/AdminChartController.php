@@ -37,36 +37,36 @@ class AdminChartController extends Controller
             $users = [];
             foreach ($scans as $scan) {
                 // create user if they don't exist yet
-                if (! isset($users[$scan->user_id])) {
+                if (!isset($users[$scan->user_id])) {
                     $users[$scan->user_id] = 0;
                 }
 
                 // how long spent on this scan?
                 $start = strtotime($scan->started);
                 $stop = strtotime($scan->stopped);
-                $time = $users[$scan->user_id]['time'] + abs($stop - $start);
+                $time =  abs($stop - $start);
 
                 // save the running total
                 $users[$scan->user_id] = $users[$scan->user_id] + $time;
-
-                // build data
-                $colours = $names = $time = '[';
-                foreach ($users as $user) {
-                    $colours .= '"#' . (string)rand(100000, 999999) . '", ';
-                    $names .= '"' . $user['name'] . '", ';
-                    $time .= '"' . $user['time'] . '", ';
-                }
-
-                $colours = substr($colours, 0, -2);
-                $names = substr($names, 0, -2);
-                $efficiency = substr($time, 0, -2);
-
-                $colours = $colours . ']';
-                $names = $names . ']';
-                $time = $time . ']';
-
-                return view('charts.users', compact('colours', 'names', 'time'));
             }
+
+            // build data
+            $colours = $names = $time = '[';
+            foreach ($users as $user) {
+                $colours .= '"#' . (string)rand(100000, 999999) . '", ';
+                $names .= '"' . $user['name'] . '", ';
+                $time .= '"' . $user['time'] . '", ';
+            }
+
+            $colours = substr($colours, 0, -2);
+            $names = substr($names, 0, -2);
+            $time = substr($time, 0, -2);
+
+            $colours = $colours . ']';
+            $names = $names . ']';
+            $time = $time . ']';
+
+            return view('charts.users', compact('colours', 'names', 'time'));
         }
         return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view these graphs');
     }
