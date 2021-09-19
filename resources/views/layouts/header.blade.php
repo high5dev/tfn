@@ -8,18 +8,18 @@
     <title>The Secret Portal</title>
 
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap-5.0.2-dist/css/bootstrap.css">
     <link href="/css/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="/dataTables/dataTables.min.css">
 
     <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/dataTables/dataTables.min.js"></script>
     <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/select2.full.min.js"></script>
     <script src="/js/all.min.js"></script>
     <script src="/js/scripts.js"></script>
-    <script type="text/javascript" src="/js/dataTables.bootstrap5.min.js"></script>
 
 </head>
