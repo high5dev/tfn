@@ -80,7 +80,7 @@ class WatchwordController extends Controller
             // delete the watchword
             $watchword->delete();
 
-            return redirect('/watchwords')->with('success', 'You have successfully the watchword');
+            return redirect('/watchwords')->with('success', 'You have successfully deleted the watchword');
         } else {
             return redirect('/watchwords')->with('warning', 'Unable to find that watchword!');
         }
