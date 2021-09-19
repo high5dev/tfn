@@ -12,11 +12,11 @@
     <link href="/css/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/dataTables/dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/dataTables/dataTables.css">
 
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/dataTables/dataTables.min.js"></script>
+    <script type="text/javascript" src="/dataTables/dataTables.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/select2.full.min.js"></script>
     <script src="/js/all.min.js"></script>
