@@ -35,14 +35,15 @@ class AdminGroupController extends Controller
     {
         if (Auth::User()->can('view groups')) {
 
-            // get rows/page
-            $rows = 100;
+            // get rows per page if passed with request,
+            // otherwise default to 10
+            $rows = request('rows', 10);
             // don't allow > 100 rows per page
             $rows = $rows < 101 ? $rows : 100;
 
             $groups = Group::orderBy('name', 'asc')->paginate($rows);
 
-            return view('admin.groups.index', compact('groups'));
+            return view('admin.groups.index', compact('groups', 'rows'));
         } else {
             return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view groups');
         }
