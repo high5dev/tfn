@@ -1,4 +1,4 @@
-/*! DataTables styling integration
+/*! dataTables styling integration
  * ©2018 SpryMedia Ltd - datatables.net/license
  */
 
@@ -17,7 +17,7 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				// Require DataTables, which attaches to jQuery, including
+				// Require dataTables, which attaches to jQuery, including
 				// jQuery if needed and have a $ property so we can access the
 				// jQuery object that is used
 				$ = require('datatables.net')(root, $).$;

@@ -1,3 +1,15 @@
+/*
+ * This combined file was created by the dataTables downloader builder:
+ *   https://datatables.net/download
+ *
+ * To rebuild or modify this file with the latest versions of the included
+ * software please visit:
+ *   https://datatables.net/download/#bs5/dt-1.11.2
+ *
+ * Included libraries:
+ *   dataTables 1.11.2
+ */
+
 @charset "UTF-8";
 td.dt-control {
   background: url("https://www.datatables.net/examples/resources/details_open.png") no-repeat center center;
@@ -80,7 +92,7 @@ table.dataTable tbody td.dt-body-nowrap {
   white-space: nowrap;
 }
 
-/*! Bootstrap 5 integration for DataTables
+/*! Bootstrap 5 integration for dataTables
  *
  * ©2020 SpryMedia Ltd, all rights reserved.
  * License: MIT datatables.net/license/mit
@@ -310,3 +322,5 @@ table.dataTable.table-striped > tbody > tr:nth-of-type(2n+1) {
 table.dataTable.table-striped > tbody > tr.odd {
   --bs-table-accent-bg: var(--bs-table-striped-bg);
 }
+
+
