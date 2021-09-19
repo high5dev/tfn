@@ -102,7 +102,7 @@
 
         </fieldset>
 
-        <input type="hidden" name="id" value="{{ $user->id }}">
+        <input type="hidden" name="id" value="{{ $group->id }}">
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="submit">&nbsp;</label>
