@@ -35,8 +35,7 @@ class AdminGroupController extends Controller
     {
         if (Auth::User()->can('view groups')) {
 
-            // get rows per page if passed with request,
-            // otherwise default to 10
+            // get rows per page if passed with request, otherwise default to 10
             $rows = request('rows', 10);
             // don't allow > 100 rows per page
             $rows = $rows < 101 ? $rows : 100;
