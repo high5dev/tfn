@@ -34,7 +34,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: 'User Efficiency over the last month'
+                    text: 'User Efficiency over the last week'
                 }
             }
         });

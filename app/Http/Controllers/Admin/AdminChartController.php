@@ -84,7 +84,7 @@ class AdminChartController extends Controller
     {
         if (Auth::User()->can('admin view graphs')) {
             // get all scans over last 30 days
-            $scans = Scan::where('started', '>=', Carbon::today()->subDays(30))->orderBy('user_id')->get();
+            $scans = Scan::where('started', '>=', Carbon::today()->subDays(7))->orderBy('user_id')->get();
 
             // get number of posts scanned with time taken for each user
             $users = [];
