@@ -10,7 +10,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 @if (Auth::check())
                     <li class="nav-item">
                         <a class="nav-link" href="/posts">Scan</a>
