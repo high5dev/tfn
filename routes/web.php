@@ -96,6 +96,7 @@ Route::group([
     Route::get('/admin/groups/{id}', 'Admin\AdminGroupController@show');
     Route::patch('/admin/groups', 'Admin\AdminGroupController@update');
     Route::delete('/admin/groups/{id}', 'Admin\AdminGroupController@destroy');
+    Route::get('/admin/getGroups', 'Admin\AdminGroupController@getGroups');
 
     // Admin: manage logs
     Route::get('/admin/logs', 'Admin\AdminLoggController@index');

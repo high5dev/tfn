@@ -49,6 +49,65 @@ class AdminGroupController extends Controller
     }
 
     /**
+     * Admin: index - Process ajax request
+     */
+    public function getGroups(Request $request)
+    {
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // total number of rows per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+        // Total records
+        $totalRecords = Group::select('count(*) as allcount')->count();
+        $totalRecordswithFilter = Group::select('count(*) as allcount')->where('name', 'like', '%' . $searchValue . '%')->count();
+
+        // Get records with search filter
+        $records = Group::orderBy($columnName, $columnSortOrder)
+            ->where('groups.name', 'like', '%' . $searchValue . '%')
+            ->orWhere('groups.region', 'like', '%' . $searchValue . '%')
+            ->orWhere('groups.country', 'like', '%' . $searchValue . '%')
+            ->select('groups.*')
+            ->skip($start)
+            ->take($rowperpage)
+            ->get();
+
+        $data_arr = array();
+
+        foreach ($records as $record) {
+
+            $data_arr[] = array(
+                "id" => $record->id,
+                "link" => $record->link,
+                "name" => $record->name,
+                "goa" => $record->goa,
+                "region" => $record->region,
+                "country" => $record->country,
+                "url" => $record->url,
+                "contact" => $record->contact,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr,
+        );
+
+        echo json_encode($response);
+    }
+
+    /**
      * admin: display the create new group form
      */
     public function create()
