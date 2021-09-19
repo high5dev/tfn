@@ -8,7 +8,7 @@
 
     <a href="/admin/groups/create">Create a new group</a>
 
-    <table id="groupsTable" class="table table-striped">
+    <table id="groupsTable" class="table table-striped" width="100%">
         <thead class="table-light">
         <tr>
             <th>Name</th>
