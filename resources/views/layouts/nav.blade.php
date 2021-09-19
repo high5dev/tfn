@@ -8,7 +8,7 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
                 <li class="nav-item">
@@ -28,16 +28,16 @@
                 </li>
                 @role('admin')
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Admin
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/admin/users">Users</a>
-                        <a class="dropdown-item" href="/admin/groups">Groups</a>
-                        <a class="dropdown-item" href="/admin/scans">Scans</a>
-                        <a class="dropdown-item" href="/admin/logs">Logs</a>
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="/admin/users">Users</a></li>
+                        <li><a class="dropdown-item" href="/admin/groups">Groups</a></li>
+                        <li><a class="dropdown-item" href="/admin/scans">Scans</a></li>
+                        <li><a class="dropdown-item" href="/admin/logs">Logs</a></li>
+                    </ul>
                 </li>
                 @endrole
             @endif
@@ -49,13 +49,12 @@
                        aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/profile"><span class="fa fa-user" aria-hidden="true"></span>&nbsp;Profile</a>
-                        <a class="dropdown-item" href="/logout"><span class="fa fa-sign-out-alt"
-                                                                      aria-hidden="true"></span>&nbsp;Logout</a>
-                    </div>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="/profile"><span class="fa fa-user" aria-hidden="true"></span>&nbsp;Profile</a></li>
+                        <li><a class="dropdown-item" href="/logout"><span class="fa fa-sign-out-alt" aria-hidden="true"></span>&nbsp;Logout</a></li>
+                    </ul>
                 </li>
             @endif
         </ul>
-    </div>
+        </div>
 </nav>
