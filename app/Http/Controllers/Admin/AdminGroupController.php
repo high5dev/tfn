@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Auth;
-use App\Models\User;
 use App\Models\Logg;
+use App\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminGroupStoreRequest;
 use App\Http\Requests\Admin\AdminGroupUpdateRequest;
