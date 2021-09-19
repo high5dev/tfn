@@ -8,8 +8,8 @@
 
     <a href="/admin/groups/create">Create a new group</a>
 
-    <table id="groupsTable" class="table table-striped">
-        <thead class="thead-light">
+    <table id="groupsTable" class="table table-responsive table-striped">
+        <thead class="table-light">
         <tr>
             <th>Name</th>
             <th>Region</th>
