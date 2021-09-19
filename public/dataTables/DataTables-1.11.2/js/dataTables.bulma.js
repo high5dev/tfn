@@ -1,4 +1,4 @@
-/*! dataTables Bulma integration
+/*! DataTables Bulma integration
  * ©2020 SpryMedia Ltd - datatables.net/license
  */
 
@@ -17,7 +17,7 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				// Require dataTables, which attaches to jQuery, including
+				// Require DataTables, which attaches to jQuery, including
 				// jQuery if needed and have a $ property so we can access the
 				// jQuery object that is used
 				$ = require('datatables.net')(root, $).$;
@@ -35,7 +35,7 @@
 var DataTable = $.fn.dataTable;
 
 
-/* Set the defaults for dataTables initialisation */
+/* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
 		"<'columns is-gapless is-multiline'" +
@@ -155,7 +155,7 @@ DataTable.ext.renderer.pageButton.bulma = function ( settings, host, idx, button
 	};
 
 	// IE9 throws an 'unknown error' if document.activeElement is used
-	// inside an iframe or frame.
+	// inside an iframe or frame. 
 	var activeEl;
 
 	try {

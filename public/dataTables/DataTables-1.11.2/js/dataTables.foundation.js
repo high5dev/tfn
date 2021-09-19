@@ -1,12 +1,12 @@
-/*! dataTables Foundation integration
+/*! DataTables Foundation integration
  * ©2011-2015 SpryMedia Ltd - datatables.net/license
  */
 
 /**
- * dataTables integration for Foundation. This requires Foundation 5 and
- * dataTables 1.10 or newer.
+ * DataTables integration for Foundation. This requires Foundation 5 and
+ * DataTables 1.10 or newer.
  *
- * This file sets the defaults and adds options to dataTables to style its
+ * This file sets the defaults and adds options to DataTables to style its
  * controls using Foundation. See http://datatables.net/manual/styling/foundation
  * for further information.
  */
@@ -51,7 +51,7 @@ $.extend( DataTable.ext.classes, {
 } );
 
 
-/* Set the defaults for dataTables initialisation */
+/* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
 		"<'row grid-x'<'small-6 columns cell'l><'small-6 columns cell'f>r>"+

@@ -1,12 +1,12 @@
-/*! dataTables Bootstrap 3 integration
+/*! DataTables Bootstrap 3 integration
  * ©2011-2015 SpryMedia Ltd - datatables.net/license
  */
 
 /**
- * dataTables integration for Bootstrap 3. This requires Bootstrap 3 and
- * dataTables 1.10 or newer.
+ * DataTables integration for Bootstrap 3. This requires Bootstrap 3 and
+ * DataTables 1.10 or newer.
  *
- * This file sets the defaults and adds options to dataTables to style its
+ * This file sets the defaults and adds options to DataTables to style its
  * controls using Bootstrap. See http://datatables.net/manual/styling/bootstrap
  * for further information.
  */
@@ -25,7 +25,7 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				// Require dataTables, which attaches to jQuery, including
+				// Require DataTables, which attaches to jQuery, including
 				// jQuery if needed and have a $ property so we can access the
 				// jQuery object that is used
 				$ = require('datatables.net')(root, $).$;
@@ -43,7 +43,7 @@
 var DataTable = $.fn.dataTable;
 
 
-/* Set the defaults for dataTables initialisation */
+/* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
 		"<'row'<'col-sm-6'l><'col-sm-6'f>>" +
@@ -155,7 +155,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	};
 
 	// IE9 throws an 'unknown error' if document.activeElement is used
-	// inside an iframe or frame.
+	// inside an iframe or frame. 
 	var activeEl;
 
 	try {

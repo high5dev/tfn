@@ -1,12 +1,12 @@
-/*! dataTables jQuery UI integration
+/*! DataTables jQuery UI integration
  * ©2011-2014 SpryMedia Ltd - datatables.net/license
  */
 
 /**
- * dataTables integration for jQuery UI. This requires jQuery UI and
- * dataTables 1.10 or newer.
+ * DataTables integration for jQuery UI. This requires jQuery UI and
+ * DataTables 1.10 or newer.
  *
- * This file sets the defaults and adds options to dataTables to style its
+ * This file sets the defaults and adds options to DataTables to style its
  * controls using jQuery UI. See http://datatables.net/manual/styling/jqueryui
  * for further information.
  */
@@ -43,7 +43,7 @@ var DataTable = $.fn.dataTable;
 var sort_prefix = 'css_right ui-icon ui-icon-';
 var toolbar_prefix = 'fg-toolbar ui-toolbar ui-widget-header ui-helper-clearfix ui-corner-';
 
-/* Set the defaults for dataTables initialisation */
+/* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
 		'<"'+toolbar_prefix+'tl ui-corner-tr"lfr>'+
