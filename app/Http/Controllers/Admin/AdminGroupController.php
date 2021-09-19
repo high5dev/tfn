@@ -108,7 +108,7 @@ class AdminGroupController extends Controller
         if (Auth::User()->can('view groups')) {
 
             // get the group
-            $group = User::Where('id', '=', $id)->first();
+            $group = Group::Where('id', '=', $id)->first();
 
             if ($group) {
 
