@@ -43,7 +43,7 @@
                     @endrole
                 @endif
             </ul>
-            <ul class="d-flex">
+            <ul class="navbar-nav d-flex">
                 @if (Auth::check())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
