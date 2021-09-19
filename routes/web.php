@@ -89,6 +89,14 @@ Route::group([
     Route::patch('/admin/users', 'Admin\AdminUserController@update');
     Route::delete('/admin/users/{id}', 'Admin\AdminUserController@destroy');
 
+    // Admin: manage groups
+    Route::get('/admin/groups', 'Admin\AdminGroupController@index');
+    Route::get('/admin/groups/create', 'Admin\AdminGroupController@create');
+    Route::post('/admin/groups', 'Admin\AdminGroupController@store');
+    Route::get('/admin/groups/{id}', 'Admin\AdminGroupController@show');
+    Route::patch('/admin/groups', 'Admin\AdminGroupController@update');
+    Route::delete('/admin/groups/{id}', 'Admin\AdminGroupController@destroy');
+
     // Admin: manage logs
     Route::get('/admin/logs', 'Admin\AdminLoggController@index');
     Route::get('/admin/logs/{id}', 'Admin\AdminLoggController@show');

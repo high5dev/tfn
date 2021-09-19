@@ -34,6 +34,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/admin/users">Users</a>
+                        <a class="dropdown-item" href="/admin/groups">Groups</a>
                         <a class="dropdown-item" href="/admin/scans">Scans</a>
                         <a class="dropdown-item" href="/admin/logs">Logs</a>
                     </div>
