@@ -35,7 +35,12 @@ class AdminGroupController extends Controller
     {
         if (Auth::User()->can('view groups')) {
 
-            $groups = Group::orderBy('name', 'asc')->get();
+            // get rows/page
+            $rows = 100;
+            // don't allow > 100 rows per page
+            $rows = $rows < 101 ? $rows : 100;
+
+            $groups = Group::orderBy('name', 'asc')->paginate($rows);
 
             return view('admin.groups.index', compact('groups'));
         } else {
