@@ -11,10 +11,10 @@
     <table id="groupsTable" class="table table-striped">
         <thead class="thead-light">
         <tr>
-            <th>#Name</th>
-            <th>#Region</th>
-            <th>#Country</th>
-            <th>#Actions</th>
+            <th>Name</th>
+            <th>Region</th>
+            <th>Country</th>
+            <th>Actions</th>
         </tr>
         </thead>
     </table>
