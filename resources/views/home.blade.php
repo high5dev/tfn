@@ -6,23 +6,19 @@
 
     <div class="jumbotron">
         <h1 class="display-5 fw-bold">Hello {{ $name }}</h1>
-        <p class="col-md-8 fs-4">
-            @if (strlen($lastLoggedIn))
-                You last logged in {{ $lastLoggedIn }}
-            @else
-                This is the first time you have logged into the secret portal.
-            @endif
-        </p>
+        @if (strlen($lastLoggedIn))
+            You last logged in {{ $lastLoggedIn }}
+        @else
+            This is the first time you have logged into the secret portal.
+        @endif
     </div>
 
     @if(strlen($scanStarted))
         <div class="jumbotron">
             <h1 class="display-5 fw-bold">Still Scanning?</h1>
-            <p class="col-md-8 fs-4">
-                You appear to have an open scanning entry, is this intentional?<br>
-                Looks like you started scanning on {{ $scanStarted }}<br>
-                If you are still scanning, please excuse the assumption!
-            </p>
+            You appear to have an open scanning entry, is this intentional?<br>
+            Looks like you started scanning on {{ $scanStarted }}<br>
+            If you are still scanning, please excuse the assumption!
         </div>
     @endif
 
