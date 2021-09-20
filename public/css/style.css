@@ -23,10 +23,6 @@ h4, h5 {
     padding: 0 0 60px;
 }
 
-.table-max-width {
-    width: 100%;
-}
-
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
     background-color: rgb(245, 230, 200);

@@ -4,10 +4,10 @@
  *
  * To rebuild or modify this file with the latest versions of the included
  * software please visit:
- *   https://datatables.net/download/#bs5/dt-1.11.2
+ *   https://datatables.net/download/#bs4/dt-1.11.2/fh-3.1.9
  *
  * Included libraries:
- *   DataTables 1.11.2
+ *   DataTables 1.11.2, FixedHeader 3.1.9
  */
 
 @charset "UTF-8";
@@ -92,11 +92,6 @@ table.dataTable tbody td.dt-body-nowrap {
   white-space: nowrap;
 }
 
-/*! Bootstrap 5 integration for DataTables
- *
- * ©2020 SpryMedia Ltd, all rights reserved.
- * License: MIT datatables.net/license/mit
- */
 table.dataTable {
   clear: both;
   margin-top: 6px !important;
@@ -191,7 +186,7 @@ table.dataTable > thead .sorting_asc_disabled:after,
 table.dataTable > thead .sorting_desc_disabled:before,
 table.dataTable > thead .sorting_desc_disabled:after {
   position: absolute;
-  bottom: 0.5em;
+  bottom: 0.9em;
   display: block;
   opacity: 0.3;
 }
@@ -279,27 +274,18 @@ table.dataTable.table-sm .sorting_desc:after {
 table.table-bordered.dataTable {
   border-right-width: 0;
 }
-table.table-bordered.dataTable thead tr:first-child th,
-table.table-bordered.dataTable thead tr:first-child td {
-  border-top-width: 1px;
-}
 table.table-bordered.dataTable th,
 table.table-bordered.dataTable td {
   border-left-width: 0;
-}
-table.table-bordered.dataTable th:first-child, table.table-bordered.dataTable th:first-child,
-table.table-bordered.dataTable td:first-child,
-table.table-bordered.dataTable td:first-child {
-  border-left-width: 1px;
 }
 table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child,
 table.table-bordered.dataTable td:last-child,
 table.table-bordered.dataTable td:last-child {
   border-right-width: 1px;
 }
-table.table-bordered.dataTable th,
-table.table-bordered.dataTable td {
-  border-bottom-width: 1px;
+table.table-bordered.dataTable tbody th,
+table.table-bordered.dataTable tbody td {
+  border-bottom-width: 0;
 }
 
 div.dataTables_scrollHead table.table-bordered {
@@ -316,11 +302,26 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   padding-right: 0;
 }
 
-table.dataTable.table-striped > tbody > tr:nth-of-type(2n+1) {
-  --bs-table-accent-bg: transparent;
+
+table.dataTable.fixedHeader-floating,
+table.dataTable.fixedHeader-locked {
+  background-color: white;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
-table.dataTable.table-striped > tbody > tr.odd {
-  --bs-table-accent-bg: var(--bs-table-striped-bg);
+
+table.dataTable.fixedHeader-floating {
+  position: fixed !important;
+}
+
+table.dataTable.fixedHeader-locked {
+  position: absolute !important;
+}
+
+@media print {
+  table.fixedHeader-floating {
+    display: none;
+  }
 }
 
 
