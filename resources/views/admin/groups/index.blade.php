@@ -25,6 +25,13 @@
 
             // DataTable
             $('#groupsTable').DataTable({
+                "autoWidth": false,
+                "columns": [
+                    { "width": "25%" },
+                    { "width": "25%" },
+                    { "width": "25%" },
+                    { "width": "25%" }
+                ],
                 processing: true,
                 serverSide: true,
                 ajax: "{{route('admin.getGroups')}}",
