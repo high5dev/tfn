@@ -32,6 +32,10 @@
                     { "width": "auto" },
                     { "width": "auto" }
                 ],
+                fixedHeader: {
+                    header: true,
+                    footer: true
+                },
                 processing: true,
                 serverSide: true,
                 ajax: "{{route('admin.getGroups')}}",
