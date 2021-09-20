@@ -40,7 +40,7 @@
                     { width: "auto", data: 'country' },
                     { width: "auto", data: null,
                         render: function ( data, type, row, meta ) {
-                            return '<a href="'+data['number']+'">View Detail</a>'; }
+                            return '<a href="/admin/groups/'+data['id']+'">View Detail</a>'; }
                     },
                 ]
             });
