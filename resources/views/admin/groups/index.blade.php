@@ -27,10 +27,10 @@
             $('#groupsTable').DataTable({
                 "autoWidth": false,
                 "columns": [
-                    { "width": "25%" },
-                    { "width": "25%" },
-                    { "width": "25%" },
-                    { "width": "25%" }
+                    { "width": "auto" },
+                    { "width": "auto" },
+                    { "width": "auto" },
+                    { "width": "auto" }
                 ],
                 processing: true,
                 serverSide: true,
