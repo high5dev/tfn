@@ -25,24 +25,23 @@
 
             // DataTable
             $('#groupsTable').DataTable({
-                "autoWidth": false,
-                "columns": [
-                    { "width": "auto" },
-                    { "width": "auto" },
-                    { "width": "auto" },
-                    { "width": "auto" }
-                ],
+                autoWidth: false,
                 fixedHeader: {
                     header: true,
                     footer: true
                 },
+                responsive: true,
                 processing: true,
                 serverSide: true,
                 ajax: "{{route('admin.getGroups')}}",
                 columns: [
-                    { data: 'name' },
-                    { data: 'region' },
-                    { data: 'country' },
+                    { width: "auto", data: 'name' },
+                    { width: "auto", data: 'region' },
+                    { width: "auto", data: 'country' },
+                    { width: "auto", data: null,
+                        render: function ( data, type, row, meta ) {
+                            return '<a href="'+data['number']+'">View Detail</a>'; }
+                    },
                 ]
             });
 
