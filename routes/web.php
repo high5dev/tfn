@@ -65,7 +65,7 @@ Route::group([
     Route::get('/posts/spam', 'PostController@spam');
     Route::post('/posts/notspam/{id}', 'PostController@notSpam');
     Route::delete('/posts/{id}', 'PostController@destroy');
-    Route::post('/posts/done', 'PostController@doneScanning');
+    Route::get('/posts/done', 'PostController@doneScanning');
     Route::post('/posts/summary', 'PostController@saveSummary');
 
     Route::get('/scans', 'ScanController@index');
