@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class saveSummaryRequest extends FormRequest
+class SaveSummaryRequest extends FormRequest
 {
 
     /**
