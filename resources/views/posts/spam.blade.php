@@ -72,7 +72,7 @@
                                 </form>
                             </div>
                             <div class="span4">
-                                <form method="post" action="/post/{{ $post->id }}" class="form-inline"
+                                <form method="post" action="/posts/{{ $post->id }}" class="form-inline"
                                       onsubmit="return confirm('Are you sure you want to remove this post?');">
                                     @method('DELETE')
                                     @csrf
