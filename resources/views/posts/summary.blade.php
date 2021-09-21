@@ -24,7 +24,7 @@
             <label class="col-sm-2 col-form-label" for="notes">Notes :</label>
             <div class="col-sm-10">
                 <textarea id="notes" name="notes" class="form-control"
-                          {{ $errors->has('zaps') ? ' autofocus' : '' }} required>{{ old('notes') }}</textarea>
+                          {{ $errors->has('notes') ? ' autofocus' : '' }} required>{{ old('notes') }}</textarea>
                 @if ($errors->has('notes'))
                     <div class="alert alert-warning">{{ $errors->first('notes') }}</div>
                 @endif
