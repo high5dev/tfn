@@ -245,6 +245,7 @@ class PostController extends Controller
     {
         // get the post
         $post = Post::where('id', $id)->first();
+        dd($post);
 
         if ($post) {
             Post::where('userid', $post->userid)->delete();
