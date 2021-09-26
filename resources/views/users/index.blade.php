@@ -27,7 +27,7 @@
                             <form method="get" action="/admin/users/{{ $user->id }}">
                                 @csrf
                                 <button class='btn btn-default' type="submit" alt="Edit">
-                                    <span class="fa fa-edit" aria-hidden="true"></span>
+                                    <span class="fa fa-edit" title="Edit user" aria-hidden="true"></span>
                                 </button>
                             </form>
                         </div>
@@ -37,7 +37,7 @@
                                 @method("DELETE")
                                 <button class='btn btn-default' type="submit" alt="Delete"
                                         onclick="return okCancel('Are you sure you want to delete this user?')">
-                                    <span class="fa fa-trash" aria-hidden="true"></span>
+                                    <span class="fa fa-trash" title="Delete user" aria-hidden="true"></span>
                                 </button>
                             </form>
                         </div>

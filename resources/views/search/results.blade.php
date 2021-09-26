@@ -62,7 +62,7 @@
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                <i class="fas fa-trash-alt"></i></button>
+                                <i class="fas fa-trash-alt" title="Remove this post"></i></button>
                         </form>
                     </td>
                 </tr>

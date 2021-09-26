@@ -61,7 +61,7 @@
                                     <form method="get" action="/posts/done" class="form-inline">
                                         @csrf
                                         <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                            <i class="fas fa-ban"></i>
+                                            <i class="fas fa-ban" title="Finished scanning"></i>
                                         </button>
                                         <input type="hidden" name="id" value="{{ $post->id }}">
                                     </form>
@@ -70,7 +70,7 @@
                             <div class="span4">
                                 <a href="{{ $imgurl . $post->id }}" target="_blank">
                                     <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                        <i class="far fa-image"></i>
+                                        <i class="far fa-image" title="View image"></i>
                                     </button>
                                 </a>
                             </div>
@@ -80,7 +80,7 @@
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-trash-alt" title="Remove this post"></i>
                                     </button>
                                 </form>
                             </div>

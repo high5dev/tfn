@@ -37,7 +37,7 @@
                                 @method("DELETE")
                                 <button class='btn btn-default' type="submit" alt="Delete"
                                         onclick="return okCancel('Are you sure you want to delete this watchword?')">
-                                    <span class="fa fa-trash" aria-hidden="true"></span>
+                                    <span class="fa fa-trash" title="Delete watchword" aria-hidden="true"></span>
                                 </button>
                             </form>
                         </div>
