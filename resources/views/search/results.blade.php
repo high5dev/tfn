@@ -56,7 +56,7 @@
                         @endif
                     </td>
                     <td>
-                        <form method="post" action="/post/{{ $post->id }}"
+                        <form method="post" action="/posts/{{ $post->id }}"
                               class="user-delete-btn"
                                   onsubmit="return confirm('Are you sure you want to remove this post?');">
                             @method('DELETE')
