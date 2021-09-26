@@ -16,6 +16,7 @@ class CreateScansTable extends Migration
         Schema::create('scans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->boolean('statd')->default(0);
             $table->datetime('started');
             $table->datetime('stopped')->nullable();
             $table->bigInteger('startid')->unsigned();

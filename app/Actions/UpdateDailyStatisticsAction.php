@@ -40,8 +40,11 @@ class UpdateDailyStatisticsAction
         $stats->save();
 
         // get ZAPS from yesterday
-        $scans = Scan::where('started', '>=', $yesterday)
-            ->where('started', '<', Carbon::today())
+        // well, actually, get all scan entries that haven't yet been added to the statistics table
+        // which should be everything from 'yesterday' or since this code last ran.
+        // We do it like this rather than by date/time because occasionally users start scanning
+        // before midnight and don't finish until after midnight to their record gets missed.
+        $scans = Scan::where('statd', 0)
             ->get();
         $count = 0;
         if ($scans) {
@@ -56,6 +59,8 @@ class UpdateDailyStatisticsAction
         $stats->type = 'ZAPS';
         $stats->quantity = $count;
         $stats->save();
+        // flag scans as checked
+        Scan::where('statd', 0)->update(['statd' => 1]);
     }
 }
 
