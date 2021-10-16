@@ -107,7 +107,8 @@ Route::group([
     Route::get('/admin/scans/{id}', 'Admin\AdminScanController@show');
 
     // Admin: graphs
-    Route::get('/admin/charts/users', 'Admin\AdminChartController@users');
-    Route::get('/admin/charts/weekly', 'Admin\AdminChartController@weekly');
+    Route::get('/admin/charts/efficiency', 'Admin\AdminChartController@efficiency');
+    Route::get('/admin/charts/posts', 'Admin\AdminChartController@posts');
+    Route::get('/admin/charts/time', 'Admin\AdminChartController@time');
 
 });

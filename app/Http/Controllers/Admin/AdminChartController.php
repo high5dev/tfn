@@ -27,7 +27,7 @@ class AdminChartController extends Controller
     /**
      * display weekly time spent scanning for each user
      */
-    public function weekly()
+    public function time()
     {
         if (Auth::User()->can('admin view graphs')) {
             // get all scans over last 7 days
@@ -77,10 +77,62 @@ class AdminChartController extends Controller
         return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view these graphs');
     }
 
+
+    /**
+     * display total posts scanned over last week by user
+     */
+    public function posts()
+    {
+        if (Auth::User()->can('admin view graphs')) {
+            // get all scans over last 30 days
+            $scans = Scan::where('started', '>=', Carbon::today()->subDays(7))->orderBy('user_id')->get();
+
+            // get number of posts scanned for each user
+            $users = [];
+            foreach ($scans as $scan) {
+                // create user if they don't exist yet
+                if (!isset($users[$scan->user_id])) {
+                    $users[$scan->user_id] = [
+                        'name' => '',
+                        'scans' => 0
+                    ];
+                }
+
+                // how many posts did this user scan?
+                $scans = $users[$scan->user_id]['scans'] + abs($scan->stopid - $scan->startid);
+
+                // store
+                $users[$scan->user_id] = [
+                    'name' => $scan->user->name,
+                    'scans' => $scans
+                ];
+            }
+
+            // build data
+            $colours = $names = $totals = '[';
+            foreach ($users as $user) {
+                $colours .= '"#' . (string)rand(100000, 999999) . '", ';
+                $names .= '"' . $user['name'] . '", ';
+                $totals .= '"' . $user['scans'] . '", ';
+            }
+
+            $colours = substr($colours, 0, -2);
+            $names = substr($names, 0, -2);
+            $totals = substr($totals, 0, -2);
+
+            $colours = $colours . ']';
+            $names = $names . ']';
+            $totals = $totals . ']';
+
+            return view('charts.posts', compact('colours', 'names', 'totals'));
+        }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view these graphs');
+    }
+
     /**
      * display User's Efficiency chart
      */
-    public function users()
+    public function efficiency()
     {
         if (Auth::User()->can('admin view graphs')) {
             // get all scans over last 30 days
