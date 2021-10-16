@@ -34,6 +34,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="/admin/users">Users</a></li>
+                        <li><a class="dropdown-item" href="/admin/charts/users">Charts Efficiency</a></li>
+                        <li><a class="dropdown-item" href="/admin/charts/weekly">Charts Weekly</a></li>
                         <li><a class="dropdown-item" href="/admin/groups">Groups</a></li>
                         <li><a class="dropdown-item" href="/admin/scans">Scans</a></li>
                         <li><a class="dropdown-item" href="/admin/logs">Logs</a></li>
