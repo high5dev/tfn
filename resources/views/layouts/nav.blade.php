@@ -35,7 +35,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="/admin/users">Users</a></li>
                         <li><a class="dropdown-item" href="/admin/charts/efficiency">Charts User Efficiency</a></li>
-                        <li><a class="dropdown-item" href="/admin/charts/users">Charts User Posts</a></li>
+                        <li><a class="dropdown-item" href="/admin/charts/posts">Charts User Posts</a></li>
                         <li><a class="dropdown-item" href="/admin/charts/time">Charts User Time</a></li>
                         <li><a class="dropdown-item" href="/admin/groups">Groups</a></li>
                         <li><a class="dropdown-item" href="/admin/scans">Scans</a></li>
