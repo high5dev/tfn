@@ -17,7 +17,7 @@
         <tbody>
         @foreach($sessions as $session)
             <tr>
-                <td>{{ $session->usr_id ? $session->user->name : 'UNKNOWN' }}</td>
+                <td>{{ $session->user_id ? $session->user->name : 'UNKNOWN' }}</td>
                 <td>{{ $session->how_long }}</td>
                 <td>
                     <a href="/admin/sessions/{{ $session->id }}">View</a>
