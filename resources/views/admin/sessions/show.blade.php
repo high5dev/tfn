@@ -23,7 +23,7 @@
                 <label class="col-sm-2 col-form-label" for="user">User :</label>
                 <div class="col-sm-10">
                     <input type="text" id="user" name="user" class="form-control" readonly
-                           value="{{ $session->user->name }}">
+                           value="{{ $session->user->name }} [{{ $session->user_id }}]">
                 </div>
             </div>
 
@@ -31,7 +31,15 @@
                 <label class="col-sm-2 col-form-label" for="last_activity">Last Activity :</label>
                 <div class="col-sm-10">
                     <input type="text" id="last_activity" name="last_activity" class="form-control" readonly
-                           value="{{ $session->last_activity }}">
+                           value="{{ $session->how_long }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="user_agent">User Agent :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="user_agent" name="user_agent" class="form-control" readonly
+                           value="{{ $session->user_agent }}">
                 </div>
             </div>
 
@@ -39,7 +47,7 @@
                 <label class="col-sm-2 col-form-label" for="ip">IP Address :</label>
                 <div class="col-sm-10">
                     <input type="text" id="ip" name="ip" class="form-control" readonly
-                           value="{{ $session->ip }}">
+                           value="{{ $session->ip_address }}">
                 </div>
             </div>
 
