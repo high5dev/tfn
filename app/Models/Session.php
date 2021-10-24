@@ -18,7 +18,7 @@ class Session extends Model
     /**
      * return last_activity in human readable form
      */
-    public function how_long_ago()
+    public function getHowLongAttribute()
     {
         return '10 seconds ago';
         //return Carbon::now()->diffForHumans();
