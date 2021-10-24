@@ -29,6 +29,7 @@ class AdminSessionController extends Controller
      */
     public function index()
     {
+        dd('ok');
         if (Auth::User()->can('view sessions')) {
 
             $sessions = Session::orderBy('last_activity', 'desc')->get();
