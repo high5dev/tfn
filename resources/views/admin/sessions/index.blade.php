@@ -18,7 +18,7 @@
         @foreach($sessions as $session)
             <tr>
                 <td>{{ $session->user->name }}</td>
-                <td>{{ $session->how_long_ago }}</td>
+                <td>{{ $session->last_activity }}</td>
                 <td><a href="/admin/sessions/{{ $session->id }}">View</a></td>
             </tr>
         @endforeach
