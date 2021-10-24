@@ -55,7 +55,7 @@
 
     </form>
 
-    <form method="post" action="/admin/sessions/{{$session->id}}">
+    <form method="post" action="/admin/sessions/{{ $session->id }}">
         @csrf
         @method('DELETE')
         <button class='btn btn-default' type="submit" alt="Kick"
