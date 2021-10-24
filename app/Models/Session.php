@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Session extends Model
 {
+    protected $casts = [
+        'id' => 'string',
+        ];
     /**
      * get user the session belongs to
      */
