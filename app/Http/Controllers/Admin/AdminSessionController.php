@@ -32,7 +32,6 @@ class AdminSessionController extends Controller
         if (Auth::User()->can('view sessions')) {
 
             $sessions = Session::orderBy('last_activity', 'desc')->get();
-            dd($sessions);
 
             return view('admin.sessions.index', compact('sessions'));
         }
