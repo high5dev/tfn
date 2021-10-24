@@ -16,11 +16,12 @@ class Session extends Model
     }
 
     /**
-     * return last_Activity in human readable form
+     * return last_activity in human readable form
      */
-    public function last()
+    public function how_long_ago()
     {
-        return Carbon::now();
+        return '10 seconds ago';
+        //return Carbon::now()->diffForHumans();
         //return Carbon::createFromTimeStamp($this->last_activity)->diffForHumans();
     }
 }

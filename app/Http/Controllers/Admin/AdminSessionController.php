@@ -33,8 +33,6 @@ class AdminSessionController extends Controller
 
             $sessions = Session::orderBy('last_activity', 'desc')->get();
 
-            dd($sessions);
-
             return view('admin.sessions.index', compact('sessions'));
         } else {
             return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view sessions');
