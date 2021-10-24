@@ -15,8 +15,8 @@
         </tr>
         </thead>
         <tbody>
-        {{ dd($sessions) }}
         @foreach($sessions as $session)
+            {{ dd($session) }}
             <tr>
                 <td>{{ $session->user->name }}</td>
                 <td>{{ $session->how_long }}</td>
