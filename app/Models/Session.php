@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Session extends Model
@@ -12,5 +13,13 @@ class Session extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * return last_Activity in human readable form
+     */
+    public function last()
+    {
+        return $this->last_activity->diffForHumans();
     }
 }
