@@ -38,9 +38,8 @@ class AdminLoggController extends Controller
             $rows = $rows < 101 ? $rows : 100;
 
             $logs = Logg::orderBy('created_at', 'desc')->paginate($rows);
-            dd($logs);
 
-            return view('admin.logs.index', compact('logs'));
+            return view('admin.logs.index', compact('logs', 'rows'));
         } else {
             return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view logs');
         }
