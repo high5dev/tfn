@@ -20,8 +20,6 @@ class Session extends Model
      */
     public function getHowLongAttribute()
     {
-        return '10 seconds ago';
-        //return Carbon::now()->diffForHumans();
-        //return Carbon::createFromTimeStamp($this->last_activity)->diffForHumans();
+        return Carbon::createFromTimeStamp($this->last_activity)->diffForHumans();
     }
 }
