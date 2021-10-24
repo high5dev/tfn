@@ -15,6 +15,7 @@
         </tr>
         </thead>
         <tbody>
+        {{ dd($sessions) }}
         @foreach($sessions as $session)
             <tr>
                 <td>{{ $session->user->name }}</td>
