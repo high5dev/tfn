@@ -55,4 +55,10 @@
 
     </form>
 
+    <form method="post" action="/admin/sessions/{{$session->id}}">
+        @csrf()
+        @method('DELETE')
+        <input type="submit" id="kick" name="kick" value="Kick Session">
+    </form>
+
 @endsection

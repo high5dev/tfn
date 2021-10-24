@@ -19,7 +19,9 @@
             <tr>
                 <td>{{ $session->user->name }}</td>
                 <td>{{ $session->how_long }}</td>
-                <td><a href="/admin/sessions/{{ $session->id }}">View</a></td>
+                <td>
+                    <a href="/admin/sessions/{{ $session->id }}">View</a>
+                </td>
             </tr>
         @endforeach
         </tbody>

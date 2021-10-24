@@ -105,6 +105,7 @@ Route::group([
     // Admin: sessions
     Route::get('/admin/sessions', 'Admin\AdminSessionController@index');
     Route::get('/admin/sessions/{id}', 'Admin\AdminSessionController@show');
+    Route::delete('/admin/sessions/{id}', 'Admin\AdminSessionsController@delete');
 
     // Admin: manage scans
     Route::get('/admin/scans', 'Admin\AdminScanController@index');

@@ -34,9 +34,8 @@ class AdminSessionController extends Controller
             $sessions = Session::orderBy('last_activity', 'desc')->get();
 
             return view('admin.sessions.index', compact('sessions'));
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view sessions');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view sessions');
     }
 
     /**
@@ -51,11 +50,31 @@ class AdminSessionController extends Controller
 
             if ($session) {
                 return view('admin.sessions.show', compact('session'));
-            } else {
-                return redirect('/admin/sessions')->with('warning', 'Unable to find that session!');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view sessions');
+            return redirect('/admin/sessions')->with('warning', 'Unable to find that session!');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view sessions');
+    }
+
+    /**
+     * delete a session
+     */
+    public function delete($id)
+    {
+        if (Auth::User()->can('view sessions')) {
+
+            // get the session
+            $session = Session::Where('id', '=', $id)->first();
+
+            if ($session) {
+
+                // delete the session
+                $session->delete();
+
+                return redirect('/admin/sessions')->with('success', 'The session was deleted');
+            }
+            return redirect('/admin/sessions')->with('warning', 'Unable to find that session!');
+        }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to kick sessions');
     }
 }
