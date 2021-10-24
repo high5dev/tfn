@@ -20,6 +20,7 @@ class Session extends Model
      */
     public function last()
     {
-        return Carbon::createFromTimeStamp($this->last_activity)->diffForHumans();
+        return Carbon::now();
+        //return Carbon::createFromTimeStamp($this->last_activity)->diffForHumans();
     }
 }
