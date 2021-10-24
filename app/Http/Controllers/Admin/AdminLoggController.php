@@ -33,10 +33,10 @@ class AdminLoggController extends Controller
 
             // get rows per page if passed with request
             $rows = request('rows', 10);
-            dd($rows);
 
             // don't allow > 100 rows per page
             $rows = $rows < 101 ? $rows : 100;
+            dd($rows);
 
             $logs = Logg::orderBy('created_at', 'desc')->paginate($rows);
 
