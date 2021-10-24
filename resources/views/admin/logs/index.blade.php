@@ -6,6 +6,7 @@
 
     <h3>List Log Entries</h3>
 
+    {{ $users->appends(compact('rows'))->links() }}
     <table class="table table-striped">
         <thead class="thead-light">
         <tr>
@@ -24,5 +25,6 @@
         @endforeach
         </tbody>
     </table>
+    {{ $users->appends(compact('rows'))->links() }}
 
 @endsection

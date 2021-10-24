@@ -31,7 +31,13 @@ class AdminLoggController extends Controller
     {
         if (Auth::User()->can('view logs')) {
 
-            $logs = Logg::orderBy('created_at', 'desc')->get();
+            // get rows per page if passed with request
+            $rows = request('rows', 10);
+
+            // don't allow > 100 rows per page
+            $rows = $rows < 101 ? $rows : 100;
+
+            $logs = Logg::orderBy('created_at', 'desc')->paginate($rows);
 
             return view('admin.logs.index', compact('logs'));
         } else {

@@ -23,7 +23,7 @@
                 <label class="col-sm-2 col-form-label" for="user">User :</label>
                 <div class="col-sm-10">
                     <input type="text" id="user" name="user" class="form-control" readonly
-                           value="{{ $session->user->name }} [{{ $session->user_id }}]">
+                           value="{{ $session->user_id ? $session->user->name : 'UNKNOWN' }}">
                 </div>
             </div>
 
