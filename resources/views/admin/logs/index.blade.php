@@ -49,4 +49,10 @@
     </table>
     {{ $logs->appends(compact('rows'))->links() }}
 
+    <script>
+        document.getElementById('rows').onchange = function () {
+            window.location = "/admin/logs?rows=" + this.value;
+        };
+    </script>
+
 @endsection
