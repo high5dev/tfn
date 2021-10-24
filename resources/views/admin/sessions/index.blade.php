@@ -16,9 +16,8 @@
         </thead>
         <tbody>
         @foreach($sessions as $session)
-            {{ dd($session) }}
             <tr>
-                <td>{{ $session->user->name }}</td>
+                <td>{{ $session->id }}</td>
                 <td>{{ $session->how_long }}</td>
                 <td>
                     <a href="/admin/sessions/{{ $session->id }}">View</a>
