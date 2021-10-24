@@ -61,6 +61,7 @@ class AdminSessionController extends Controller
      */
     public function delete($id)
     {
+        dd($id);
         if (Auth::User()->can('view sessions')) {
 
             // get the session
