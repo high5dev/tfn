@@ -56,9 +56,12 @@
     </form>
 
     <form method="post" action="/admin/sessions/{{$session->id}}">
-        @csrf()
+        @csrf
         @method('DELETE')
-        <input type="submit" id="kick" name="kick" value="Kick Session">
+        <button class='btn btn-default' type="submit" alt="Kick"
+                onclick="return okCancel('Are you sure you want to kick this session?')">
+            <span class="fa fa-trash" aria-hidden="true"></span>
+        </button>
     </form>
 
 @endsection
