@@ -137,7 +137,7 @@ class AdminGroupController extends Controller
                 // save the group
                 $group->save();
 
-                // log the changes
+                // logs the changes
                 $log = new Logg();
                 $log->title = 'Admin created group';
                 $log->user_id = Auth::User()->id;
@@ -204,7 +204,7 @@ class AdminGroupController extends Controller
                     // save the group
                     $group->save();
 
-                    // log the changes
+                    // logs the changes
                     $log = new Logg();
                     $log->title = 'Admin updated group';
                     $log->user_id = Auth::User()->id;
@@ -242,7 +242,7 @@ class AdminGroupController extends Controller
                 // delete the group
                 $group->delete();
 
-                // log the changes
+                // logs the changes
                 $log = new Logg();
                 $log->title = 'Admin deleted a group';
                 $log->user_id = Auth::User()->id;

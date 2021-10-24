@@ -11,7 +11,7 @@ return [
     | framework when an event needs to be broadcast. You may set this to
     | any of the connections defined in the "connections" array below.
     |
-    | Supported: "pusher", "ably", "redis", "log", "null"
+    | Supported: "pusher", "ably", "redis", "logs", "null"
     |
     */
 
@@ -51,8 +51,8 @@ return [
             'connection' => 'default',
         ],
 
-        'log' => [
-            'driver' => 'log',
+        'logs' => [
+            'driver' => 'logs',
         ],
 
         'null' => [

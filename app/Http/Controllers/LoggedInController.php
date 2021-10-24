@@ -72,17 +72,17 @@ class LoggedInController extends Controller
         return view('home', compact('name', 'lastLoggedIn', 'offers', 'wanteds', 'scanStarted', 'watchwordsFound'));
     }
 
-    // log the user out and redirect to index page
+    // logs the user out and redirect to index page
     public function logout()
     {
-        // log the logout
+        // logs the logout
         $log = new Logg();
         $log->title = Auth::User()->name . ' logged out';
         $log->user_id = Auth::User()->id;
         $log->content = Auth::User()->name . " logged out at " . date('Y-m-d H:i:s');
         $log->save();
 
-        // log user out
+        // logs user out
         auth()->logout();
         session()->flush();
         return redirect()->route('index');

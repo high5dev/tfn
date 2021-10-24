@@ -49,7 +49,7 @@ class LoginListener
         $user->last_login_ip = $this->request->ip();
         $user->save();
 
-        // log the login
+        // logs the login
         $log = new Logg();
         $log->title = Auth::User()->name . ' logged in';
         $log->user_id = Auth::User()->id;

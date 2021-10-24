@@ -49,7 +49,7 @@ class WatchwordController extends Controller
     {
         Watchword::create($request->validated());
 
-        // log the changes
+        // logs the changes
         Logg::create([
             'title' => 'User added new watchword',
             'user_id' => Auth::user()->id,
@@ -70,7 +70,7 @@ class WatchwordController extends Controller
 
         if ($watchword) {
 
-            // log the changes
+            // logs the changes
             Logg::create([
                 'title' => 'User deleted a watchword',
                 'user_id' => Auth::user()->id,

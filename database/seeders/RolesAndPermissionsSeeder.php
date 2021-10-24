@@ -30,6 +30,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Permission::create(['name' => 'view logs']);
 
+        Permission::create(['name' => 'view sessions']);
+
         // create the admin role
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo(Permission::all());

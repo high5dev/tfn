@@ -25,7 +25,7 @@ class AdminLoggController extends Controller
     }
 
     /**
-     * admin: list all log entries
+     * admin: list all logs entries
      */
     public function index()
     {
@@ -33,26 +33,26 @@ class AdminLoggController extends Controller
 
             $logs = Logg::orderBy('created_at', 'desc')->get();
 
-            return view('admin.log.index', compact('logs'));
+            return view('admin.logs.index', compact('logs'));
         } else {
             return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view logs');
         }
     }
 
     /**
-     * admin: show a log entry
+     * admin: show a logs entry
      */
     public function show($id)
     {
         if (Auth::User()->can('view logs')) {
 
-            // get the log entry
+            // get the logs entry
             $log = Logg::Where('id', '=', $id)->first();
 
             if ($log) {
-                return view('admin.log.show', compact('log'));
+                return view('admin.logs.show', compact('log'));
             } else {
-                return redirect('/admin/logs')->with('warning', 'Unable to find that log entry!');
+                return redirect('/admin/logs')->with('warning', 'Unable to find that logs entry!');
             }
         } else {
             return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view logs');

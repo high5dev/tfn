@@ -4,16 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Logg extends Model
+class Session extends Model
 {
-    protected $fillable = [
-        'user_id',
-        'title',
-        'content',
-    ];
-
     /**
-     * get user the logs belongs to
+     * get user the session belongs to
      */
     public function user()
     {

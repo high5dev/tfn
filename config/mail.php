@@ -29,7 +29,7 @@ return [
     | mailers below. You are free to add additional mailers as required.
     |
     | Supported: "smtp", "sendmail", "mailgun", "ses",
-    |            "postmark", "log", "array"
+    |            "postmark", "logs", "array"
     |
     */
 
@@ -62,8 +62,8 @@ return [
             'path' => '/usr/sbin/sendmail -bs',
         ],
 
-        'log' => [
-            'transport' => 'log',
+        'logs' => [
+            'transport' => 'logs',
             'channel' => env('MAIL_LOG_CHANNEL'),
         ],
 

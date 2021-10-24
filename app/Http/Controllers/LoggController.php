@@ -25,28 +25,28 @@ class LoggController extends Controller
     }
 
     /**
-     * list all the logged in user's log entries
+     * list all the logged in user's logs entries
      */
     public function index()
     {
         $logs = Logg::Where('user_id', '=', Auth::User()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('log.index', compact('logs'));
+        return view('logs.index', compact('logs'));
     }
 
     /**
-     * show a user's log entry
+     * show a user's logs entry
      */
     public function show($id)
     {
 
-        // get the log entry
+        // get the logs entry
         $log = Logg::Where('user_id', '=', Auth::User()->id)->where('id', '=', $id)->first();
 
         if ($log) {
-            return view('log.show', compact('log'));
+            return view('logs.show', compact('log'));
         } else {
-            return redirect('/logs')->with('warning', 'Unable to find that log entry!');
+            return redirect('/logs')->with('warning', 'Unable to find that logs entry!');
         }
     }
 }

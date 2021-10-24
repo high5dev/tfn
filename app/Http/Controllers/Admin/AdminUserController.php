@@ -83,7 +83,7 @@ class AdminUserController extends Controller
                 // save the user
                 $user->save();
 
-                // log the changes
+                // logs the changes
                 $log = new Logg();
                 $log->title = 'Admin created user';
                 $log->user_id = Auth::User()->id;
@@ -165,7 +165,7 @@ class AdminUserController extends Controller
                     // save the user
                     $user->save();
 
-                    // log the changes
+                    // logs the changes
                     $log = new Logg();
                     $log->title = 'Admin updated user';
                     $log->user_id = Auth::User()->id;
@@ -203,7 +203,7 @@ class AdminUserController extends Controller
                 // delete the user
                 $user->delete();
 
-                // log the changes
+                // logs the changes
                 $log = new Logg();
                 $log->title = 'Admin deleted a user';
                 $log->user_id = Auth::User()->id;

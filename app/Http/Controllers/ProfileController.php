@@ -68,7 +68,7 @@ class ProfileController extends Controller
                 // update the user
                 $user->save();
 
-                // log the changes
+                // logs the changes
                 $log = new Logg();
                 $log->title = 'User updated their profile';
                 $log->user_id = $user->id;
