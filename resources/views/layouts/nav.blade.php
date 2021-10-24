@@ -37,7 +37,7 @@
                         <li><a class="dropdown-item" href="/admin/charts/efficiency">Charts User Efficiency</a></li>
                         <li><a class="dropdown-item" href="/admin/charts/posts">Charts User Posts</a></li>
                         <li><a class="dropdown-item" href="/admin/charts/time">Charts User Time</a></li>
-                        <li><a class="dropdown-item" href="/admin/sesssions">Sessions</a></li>
+                        <li><a class="dropdown-item" href="/admin/sessions">Sessions</a></li>
                         <li><a class="dropdown-item" href="/admin/groups">Groups</a></li>
                         <li><a class="dropdown-item" href="/admin/scans">Scans</a></li>
                         <li><a class="dropdown-item" href="/admin/logs">Logs</a></li>
