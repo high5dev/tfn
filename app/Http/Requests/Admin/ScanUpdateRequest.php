@@ -28,11 +28,11 @@ class ScanUpdateRequest extends FormRequest
         return [
             'started' => [
                 "required",
-                "datetime"
+                "date_format: Y-m-d H:i:s"
             ],
             'stopped' => [
                 "required",
-                "datetime"
+                "date_format: Y-m-d H:i:s"
             ],
             'startid' => [
                 "required",
@@ -44,11 +44,11 @@ class ScanUpdateRequest extends FormRequest
             ],
             'startts' => [
                 "required",
-                "datetime"
+                "date_format: Y-m-d H:i:s"
             ],
             'stopts' => [
                 "required",
-                "datetime"
+                "date_format: Y-m-d H:i:s"
             ],
             'zaps' => [
                 "required",

@@ -43,13 +43,13 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel-' . php_sapi_name() . '.logs'),
-            'level' => 'debug',
+            'path' => storage_path('logs/laravel-' . php_sapi_name() . '.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.logs'),
+            'path' =>storage_path('logs/laravel-' . php_sapi_name() . '.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
