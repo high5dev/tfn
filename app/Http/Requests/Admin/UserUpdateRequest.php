@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Admin;
 
 use Auth;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminGroupUpdateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
 
     /**
@@ -23,13 +24,11 @@ class AdminGroupUpdateRequest extends FormRequest
      */
     public function prepareForValidation(): void
     {
-        $link = strtolower(substr($this->link, 0, 255));
-        $url = strtolower(substr($this->url, 0, 255));
+        $email = strtolower(substr($this->email, 0, 254));
 
         // replace the data ready for validation
         $this->merge([
-            'link' => $link,
-            'url' => $url
+            'email' => $email,
         ]);
     }
 
@@ -41,41 +40,23 @@ class AdminGroupUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'link' => [
-                "required",
-                "string",
-                "min:11",
-                "max:255"
-            ],
             'name' => [
                 "required",
                 "string",
-                "min:1"
+                "min:1",
+                "max:31"
             ],
-            'goa' => [
+            'email' => [
                 "required",
                 "string",
-                "min:1"
+                "max:254",
+                "email",
+                "unique:users,email," . $this->id
             ],
-            'region' => [
-                "required",
-                "string",
-                "min:1"
-            ],
-            'country' => [
-                "required",
-                "string",
-                "min:1"
-            ],
-            'url' => [
-                "required",
-                "string",
-                "min:11",
-            ],
-            'contact' => [
-                "required",
-                "string",
-                "min:1"
+            'password' => [
+                "nullable",
+                "confirmed",
+                Password::min(8)->uncompromised(),
             ],
             'admin_password' => [
                 "required",

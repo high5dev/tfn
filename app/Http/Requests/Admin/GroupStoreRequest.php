@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminGroupStoreRequest extends FormRequest
+class GroupStoreRequest extends FormRequest
 {
 
     /**

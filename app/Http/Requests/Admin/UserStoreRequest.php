@@ -6,7 +6,7 @@ use Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminUserStoreRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
 
     /**

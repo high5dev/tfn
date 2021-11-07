@@ -6,8 +6,8 @@ use Auth;
 use App\Models\Logg;
 use App\Models\Group;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminGroupStoreRequest;
-use App\Http\Requests\Admin\AdminGroupUpdateRequest;
+use App\Http\Requests\Admin\GroupStoreRequest;
+use App\Http\Requests\Admin\GroupUpdateRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -115,7 +115,7 @@ class AdminGroupController extends Controller
     /**
      * admin: store the new group
      */
-    public function store(AdminGroupStoreRequest $request)
+    public function store(GroupStoreRequest $request)
     {
         if (Auth::User()->can('create groups')) {
 
@@ -180,7 +180,7 @@ class AdminGroupController extends Controller
     /**
      * admin: update a group
      */
-    public function update(AdminGroupUpdateRequest $request)
+    public function update(GroupUpdateRequest $request)
     {
         if (Auth::User()->can('update groups')) {
 

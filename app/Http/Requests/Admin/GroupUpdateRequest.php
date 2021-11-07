@@ -3,10 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use Auth;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminUserUpdateRequest extends FormRequest
+class GroupUpdateRequest extends FormRequest
 {
 
     /**
@@ -24,11 +23,13 @@ class AdminUserUpdateRequest extends FormRequest
      */
     public function prepareForValidation(): void
     {
-        $email = strtolower(substr($this->email, 0, 254));
+        $link = strtolower(substr($this->link, 0, 255));
+        $url = strtolower(substr($this->url, 0, 255));
 
         // replace the data ready for validation
         $this->merge([
-            'email' => $email,
+            'link' => $link,
+            'url' => $url
         ]);
     }
 
@@ -40,23 +41,41 @@ class AdminUserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'link' => [
+                "required",
+                "string",
+                "min:11",
+                "max:255"
+            ],
             'name' => [
                 "required",
                 "string",
-                "min:1",
-                "max:31"
+                "min:1"
             ],
-            'email' => [
+            'goa' => [
                 "required",
                 "string",
-                "max:254",
-                "email",
-                "unique:users,email," . $this->id
+                "min:1"
             ],
-            'password' => [
-                "nullable",
-                "confirmed",
-                Password::min(8)->uncompromised(),
+            'region' => [
+                "required",
+                "string",
+                "min:1"
+            ],
+            'country' => [
+                "required",
+                "string",
+                "min:1"
+            ],
+            'url' => [
+                "required",
+                "string",
+                "min:11",
+            ],
+            'contact' => [
+                "required",
+                "string",
+                "min:1"
             ],
             'admin_password' => [
                 "required",

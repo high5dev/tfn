@@ -6,8 +6,8 @@ use Auth;
 use App\Models\User;
 use App\Models\Logg;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminUserStoreRequest;
-use App\Http\Requests\Admin\AdminUserUpdateRequest;
+use App\Http\Requests\Admin\UserStoreRequest;
+use App\Http\Requests\Admin\UserUpdateRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -62,7 +62,7 @@ class AdminUserController extends Controller
     /**
      * admin: store the new user
      */
-    public function store(AdminUserStoreRequest $request)
+    public function store(UserStoreRequest $request)
     {
         if (Auth::User()->can('create users')) {
 
@@ -136,7 +136,7 @@ class AdminUserController extends Controller
     /**
      * admin: update a user
      */
-    public function update(AdminUserUpdateRequest $request)
+    public function update(UserUpdateRequest $request)
     {
         if (Auth::User()->can('update users')) {
 

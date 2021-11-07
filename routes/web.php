@@ -110,6 +110,7 @@ Route::group([
     // Admin: manage scans
     Route::get('/admin/scans', 'Admin\AdminScanController@index');
     Route::get('/admin/scans/{id}', 'Admin\AdminScanController@show');
+    Route::patch('/admin/scans', 'Admin\AdminScanController@update');
 
     // Admin: graphs
     Route::get('/admin/charts/efficiency', 'Admin\AdminChartController@efficiency');
