@@ -6,7 +6,7 @@ use Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ScansUpdateRequest extends FormRequest
+class ScanUpdateRequest extends FormRequest
 {
 
     /**
