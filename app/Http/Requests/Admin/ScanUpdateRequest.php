@@ -28,39 +28,39 @@ class ScanUpdateRequest extends FormRequest
         return [
             'started' => [
                 "required",
-                "datetime",
+                "datetime"
             ],
             'stopped' => [
                 "required",
-                "datetime",
+                "datetime"
             ],
             'startid' => [
                 "required",
-                "integer",
+                "integer"
             ],
             'stopid' => [
                 "required",
-                "integer",
+                "integer"
             ],
             'startts' => [
                 "required",
-                "datetime",
+                "datetime"
             ],
-            'stoppts' => [
+            'stopts' => [
                 "required",
-                "datetime",
+                "datetime"
             ],
             'zaps' => [
                 "required",
                 "integer",
                 "min:0",
-                "max:999",
+                "max:999"
             ],
             'notes' => [
                 "required",
                 "string",
                 "min:10",
-                "max:65535",
+                "max:65535"
             ],
             'admin_password' => [
                 "required",
