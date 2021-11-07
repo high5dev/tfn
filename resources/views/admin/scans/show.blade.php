@@ -53,11 +53,11 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="stoppid">Stopid :</label>
+                <label class="col-sm-2 col-form-label" for="stopid">Stop ID :</label>
                 <div class="col-sm-10">
-                    <input type="text" id="stoppid" name="stoppid" class="form-control"
-                           value="{{ old('stoppid', $scan->stoppid) }}"
-                           {{ $errors->has('stoppid') ? ' autofocus' : '' }}
+                    <input type="text" id="stopid" name="stopid" class="form-control"
+                           value="{{ old('stopid', $scan->stopid) }}"
+                           {{ $errors->has('stopid') ? ' autofocus' : '' }}
                            required>
                 </div>
             </div>

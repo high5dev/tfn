@@ -80,7 +80,7 @@ class AdminScanController extends Controller
                 $scan->started = $request->started;
                 $scan->stopped = $request->stopped;
                 $scan->startid = $request->startid;
-                $scan->stoppid = $request->stoppid;
+                $scan->stopid = $request->stopid;
                 $scan->startts = $request->startts;
                 $scan->stopts = $request->stopts;
                 $scan->zaps = $request->zaps;
