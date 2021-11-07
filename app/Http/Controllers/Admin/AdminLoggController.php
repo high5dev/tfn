@@ -40,9 +40,8 @@ class AdminLoggController extends Controller
             $logs = Logg::orderBy('created_at', 'desc')->paginate($rows);
 
             return view('admin.logs.index', compact('logs', 'rows'));
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view logs');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view logs');
     }
 
     /**
@@ -57,11 +56,9 @@ class AdminLoggController extends Controller
 
             if ($log) {
                 return view('admin.logs.show', compact('log'));
-            } else {
-                return redirect('/admin/logs')->with('warning', 'Unable to find that logs entry!');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view logs');
+            return redirect('/admin/logs')->with('warning', 'Unable to find that logs entry!');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view logs');
     }
 }

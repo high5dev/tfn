@@ -11,9 +11,8 @@ class PagesController extends Controller
     {
         if (auth()->check()) {
             return redirect()->route('home');
-        } else {
-            return view('index');
         }
+        return view('index');
     }
 
 }

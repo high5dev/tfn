@@ -99,9 +99,29 @@
                 </div>
             </div>
 
+            <legend>Confirmation</legend>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="admin_password">Your Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" id="admin_password" name="admin_password" class="form-control"
+                           {{ $errors->has('admin_password') ? ' autofocus' : '' }} required>
+                    @if ($errors->has('admin_password'))
+                        <div class="alert alert-warning">{{ $errors->first('admin_password') }}</div>
+                    @endif
+                </div>
+            </div>
+
         </fieldset>
 
         <input type="hidden" name="id" value="{{ $scan->id }}">
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="submit">&nbsp;</label>
+            <div class="col-sm-10">
+                <input type="submit" id="submit" name="submit" value="Save">
+            </div>
+        </div>
 
     </form>
 

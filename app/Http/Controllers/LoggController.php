@@ -45,8 +45,7 @@ class LoggController extends Controller
 
         if ($log) {
             return view('logs.show', compact('log'));
-        } else {
-            return redirect('/logs')->with('warning', 'Unable to find that logs entry!');
         }
+        return redirect('/logs')->with('warning', 'Unable to find that logs entry!');
     }
 }

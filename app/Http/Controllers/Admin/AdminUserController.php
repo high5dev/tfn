@@ -38,9 +38,8 @@ class AdminUserController extends Controller
             $users = User::orderBy('name', 'asc')->get();
 
             return view('admin.users.index', compact('users'));
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view other users');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view other users');
     }
 
     /**
@@ -54,9 +53,8 @@ class AdminUserController extends Controller
             $roles = Role::all();
 
             return view('admin.users.create', compact('roles'));
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new users');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new users');
     }
 
     /**
@@ -92,14 +90,12 @@ class AdminUserController extends Controller
                 $log->save();
 
                 return redirect('/admin/users')->with('success', 'You have successfully created a new user');
-            } else {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('error', 'Incorrect password !');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new users');
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Incorrect password !');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new users');
     }
 
     /**
@@ -125,12 +121,10 @@ class AdminUserController extends Controller
                 }
 
                 return view('admin.users.show', compact('user', 'availableRoles', 'assignedRoles'));
-            } else {
-                return redirect('/admin/users')->with('warning', 'Unable to find that user!');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view users');
+            return redirect('/admin/users')->with('warning', 'Unable to find that user!');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view users');
     }
 
     /**
@@ -175,14 +169,12 @@ class AdminUserController extends Controller
                 }
 
                 return redirect('/admin/users')->with('success', 'You have successfully update the user ' . $passwordMessage);
-            } else {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('error', 'Incorrect password !');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to update users');
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Incorrect password !');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to update users');
     }
 
     /**
@@ -212,12 +204,10 @@ class AdminUserController extends Controller
                 $log->save();
 
                 return redirect('/admin/users')->with('success', 'You have successfully deleted ' . $name);
-            } else {
-                return redirect('/admin/users')->with('warning', 'Unable to find that user!');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to delete other users');
+            return redirect('/admin/users')->with('warning', 'Unable to find that user!');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to delete other users');
     }
 
 }

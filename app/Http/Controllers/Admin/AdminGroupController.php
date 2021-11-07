@@ -35,9 +35,8 @@ class AdminGroupController extends Controller
     {
         if (Auth::User()->can('view groups')) {
             return view('admin.groups.index');
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view groups');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view groups');
     }
 
     /**
@@ -107,9 +106,8 @@ class AdminGroupController extends Controller
         if (Auth::User()->can('create groups')) {
 
             return view('admin.groups.create');
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new groups');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new groups');
     }
 
     /**
@@ -146,14 +144,12 @@ class AdminGroupController extends Controller
                 $log->save();
 
                 return redirect('/admin/groups')->with('success', 'You have successfully created a new group');
-            } else {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('error', 'Incorrect password !');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new groups');
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Incorrect password !');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to create new groups');
     }
 
     /**
@@ -167,14 +163,11 @@ class AdminGroupController extends Controller
             $group = Group::Where('id', '=', $id)->first();
 
             if ($group) {
-
                 return view('admin.groups.show', compact('group'));
-            } else {
-                return redirect('/admin/users')->with('warning', 'Unable to find that group!');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view groups');
+            return redirect('/admin/users')->with('warning', 'Unable to find that group!');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view groups');
     }
 
     /**
@@ -214,14 +207,12 @@ class AdminGroupController extends Controller
                 }
 
                 return redirect('/admin/groups')->with('success', 'You have successfully updated the group.');
-            } else {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('error', 'Incorrect password !');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to update groups');
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Incorrect password !');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to update groups');
     }
 
     /**
@@ -251,12 +242,10 @@ class AdminGroupController extends Controller
                 $log->save();
 
                 return redirect('/admin/groups')->with('success', 'You have successfully deleted ' . $name);
-            } else {
-                return redirect('/admin/groups')->with('warning', 'Unable to find that group!');
             }
-        } else {
-            return redirect('/home')->with('error', 'Unauthorised! You need admin permission to delete groups');
+            return redirect('/admin/groups')->with('warning', 'Unable to find that group!');
         }
+        return redirect('/home')->with('error', 'Unauthorised! You need admin permission to delete groups');
     }
 
 }

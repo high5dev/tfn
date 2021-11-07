@@ -81,9 +81,8 @@ class WatchwordController extends Controller
             $watchword->delete();
 
             return redirect('/watchwords')->with('success', 'You have successfully deleted the watchword');
-        } else {
-            return redirect('/watchwords')->with('warning', 'Unable to find that watchword!');
         }
+        return redirect('/watchwords')->with('warning', 'Unable to find that watchword!');
     }
 
 }

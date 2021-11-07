@@ -81,9 +81,8 @@ class ProfileController extends Controller
             }
             // redirect back to homepage
             return redirect('/home')->with('success', 'You made no changes, nothing updated');
-        } else {
-            // wrong password
-            return redirect()->back()->with('error', 'Incorrect password !!');
         }
+        // wrong password
+        return redirect()->back()->with('error', 'Incorrect password !!');
     }
 }
