@@ -38,4 +38,17 @@ class ScanController extends Controller
         return view('scans.index', compact('scans'));
     }
 
+    /**
+     * show a scan entry
+     */
+    public function show($id)
+    {
+        $scan = Scan::where('id', $id)->first();
+
+        if ($scan) {
+            return view('scans.show', compact('scan'));
+        }
+        return redirect('/scans')->with('warning', 'Unable to find that scan entry!');
+    }
+
 }

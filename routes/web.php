@@ -69,6 +69,7 @@ Route::group([
     Route::post('/posts/summary', 'PostController@saveSummary');
 
     Route::get('/scans', 'ScanController@index');
+    Route::get('/scans/{id}', 'ScanController@show');
 
     // User: manage watchwords
     Route::get('/watchwords', 'WatchwordController@index');

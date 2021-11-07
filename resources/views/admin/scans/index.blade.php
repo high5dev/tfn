@@ -26,7 +26,7 @@
                 <td>{{ $scan->startid }}</td>
                 <td>{{ $scan->stopid }}</td>
                 <td>{{ $scan->startts }}</td>
-                <td>{{ $scan->sopts }}</td>
+                <td>{{ $scan->stopts }}</td>
                 <td><a href="/admin/scans/{{ $scan->id }}">{{ $scan->user->name }}</a></td>
             </tr>
         @endforeach

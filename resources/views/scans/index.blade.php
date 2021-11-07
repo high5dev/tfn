@@ -11,6 +11,7 @@
     <table class="table table-striped">
         <thead class="thead-light">
         <tr>
+            <th scope="col">Started</th>
             <th scope="col">Start ID</th>
             <th scope="col">Stop ID</th>
             <th scope="col">Start timestamp</th>
@@ -21,11 +22,12 @@
         <tbody>
         @foreach($scans as $scan)
             <tr>
+                <td>{{ $scan->started }}</td>
                 <td>{{ $scan->startid }}</td>
                 <td>{{ $scan->stopid }}</td>
                 <td>{{ $scan->startts }}</td>
                 <td>{{ $scan->stopts }}</td>
-                <td>{{ $scan->user->name }}</td>
+                <td><a href="/scans/{{ $scan->id }}">{{ $scan->user->name }}</a></td>
             </tr>
         @endforeach
         </tbody>
