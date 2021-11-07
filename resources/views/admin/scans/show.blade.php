@@ -5,7 +5,7 @@
     @include('layouts.flash_message')
 
     <h3>View a scan entry</h3>
-
+{{ dd($errors) }}
     <form method="post" action="/admin/scans">
         @csrf()
         @method('PATCH')
