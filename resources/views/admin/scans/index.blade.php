@@ -13,8 +13,9 @@
         <tr>
             <th scope="col">Started</th>
             <th scope="col">Start ID</th>
-            <th scope="col">Finished</th>
             <th scope="col">Stop ID</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">Stop Time</th>
             <th scope="col">Who</th>
         </tr>
         </thead>
@@ -23,8 +24,9 @@
             <tr>
                 <td>{{ $scan->started }}</td>
                 <td>{{ $scan->startid }}</td>
-                <td>{{ $scan->stopped }}</td>
                 <td>{{ $scan->stopid }}</td>
+                <td>{{ $scan->startts }}</td>
+                <td>{{ $scan->sopts }}</td>
                 <td><a href="/admin/scans/{{ $scan->id }}">{{ $scan->user->name }}</a></td>
             </tr>
         @endforeach
