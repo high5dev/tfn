@@ -29,6 +29,9 @@
                            value="{{ old('started', $scan->started) }}"
                            {{ $errors->has('started') ? ' autofocus' : '' }}
                            required>
+                    @if ($errors->has('started'))
+                        <div class="alert alert-warning">{{ $errors->first('started') }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -39,6 +42,9 @@
                            value="{{ old('stopped', $scan->stopped) }}"
                            {{ $errors->has('stopped') ? ' autofocus' : '' }}
                            required>
+                    @if ($errors->has('stopped'))
+                        <div class="alert alert-warning">{{ $errors->first('stopped') }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -49,6 +55,9 @@
                            value="{{ old('startid', $scan->startid) }}"
                            {{ $errors->has('startid') ? ' autofocus' : '' }}
                            required>
+                    @if ($errors->has('startid'))
+                        <div class="alert alert-warning">{{ $errors->first('startid') }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -59,6 +68,9 @@
                            value="{{ old('stopid', $scan->stopid) }}"
                            {{ $errors->has('stopid') ? ' autofocus' : '' }}
                            required>
+                    @if ($errors->has('stopid'))
+                        <div class="alert alert-warning">{{ $errors->first('stopid') }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -69,6 +81,9 @@
                            value="{{ old('startts', $scan->startts) }}"
                            {{ $errors->has('startts') ? ' autofocus' : '' }}
                            required>
+                    @if ($errors->has('startts'))
+                        <div class="alert alert-warning">{{ $errors->first('startts') }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -79,6 +94,9 @@
                            value="{{ old('stopts', $scan->stopts) }}"
                            {{ $errors->has('stopts') ? ' autofocus' : '' }}
                            required>
+                    @if ($errors->has('stopts'))
+                        <div class="alert alert-warning">{{ $errors->first('stopts') }}</div>
+                    @endif
                 </div>
             </div>
 
@@ -89,6 +107,9 @@
                            value="{{ old('zaps', $scan->zaps) }}"
                            {{ $errors->has('zaps') ? ' autofocus' : '' }}
                            required>
+                    @if ($errors->has('zaps'))
+                        <div class="alert alert-warning">{{ $errors->first('zaps') }}</div>
+                    @endif
                 </div>
             </div>
 
