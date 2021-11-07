@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin;
 
 use Auth;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ScanUpdateRequest extends FormRequest
