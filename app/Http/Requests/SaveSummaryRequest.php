@@ -19,14 +19,6 @@ class SaveSummaryRequest extends FormRequest
     }
 
     /**
-     * Pre-process the Request
-     */
-    public function prepareForValidation(): void
-    {
-        //
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -37,6 +29,8 @@ class SaveSummaryRequest extends FormRequest
             'zaps' => [
                 "required",
                 "integer",
+                "min:0",
+                "max:999"
             ],
             'notes' => [
                 "required",

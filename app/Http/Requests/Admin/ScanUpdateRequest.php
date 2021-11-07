@@ -59,8 +59,8 @@ class ScanUpdateRequest extends FormRequest
             'notes' => [
                 "required",
                 "string",
-                "min:10",
-                "max:65535"
+                "min:3",
+                "max:16384",
             ],
             'admin_password' => [
                 "required",

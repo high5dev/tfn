@@ -5,7 +5,7 @@
     @include('layouts.flash_message')
 
     <h3>View a scan entry</h3>
-{{ dd($errors) }}
+
     <form method="post" action="/admin/scans">
         @csrf()
         @method('PATCH')
@@ -116,7 +116,11 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="notes">Notes :</label>
                 <div class="col-sm-10">
-                    <textarea id="notes" name="notes" class="form-control">{{ old('notes', $scan->notes) }}</textarea>
+                    <textarea id="notes" name="notes" class="form-control"
+                        {{ $errors->has('notes') ? ' autofocus' : '' }}>{{ old('notes', $scan->notes) }}</textarea>
+                    @if ($errors->has('started'))
+                        <div class="alert alert-warning">{{ $errors->first('started') }}</div>
+                    @endif
                 </div>
             </div>
 
