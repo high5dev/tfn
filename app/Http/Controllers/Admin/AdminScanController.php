@@ -66,7 +66,7 @@ class AdminScanController extends Controller
     /**
      * admin: update a scan entry
      */
-    public function update(Request $request)
+    public function update(ScanUpdateRequest $request)
     {
         if (Auth::User()->can('update scans')) {
 
@@ -100,7 +100,7 @@ class AdminScanController extends Controller
                     $log->save();
                 }
 
-                return redirect('/admin/scans')->with('success', 'You have successfully update the scan entry');
+                return redirect('/admin/scans')->with('success', 'You have successfully updated the scan entry');
             }
             return redirect()->back()
                 ->withInput()
