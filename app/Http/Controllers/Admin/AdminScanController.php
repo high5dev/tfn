@@ -66,7 +66,7 @@ class AdminScanController extends Controller
     /**
      * admin: update a scan entry
      */
-    public function update(ScanUpdateRequest $request)
+    public function update(Request $request)
     {
         dd($request);
         if (Auth::User()->can('update scans')) {
