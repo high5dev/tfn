@@ -52,13 +52,12 @@ class AdminScanController extends Controller
         if (Auth::User()->can('view scans')) {
 
             // get the scan entry
-            $scan = Scan::where('id', '=', $id)->first();
+            $scan = Scan::where('id', $id)->first();
 
             if ($scan) {
                 return view('admin.scans.show', compact('scan'));
-            } else {
-                return redirect('/admin/scans')->with('warning', 'Unable to find that scan entry!');
             }
+            return redirect('/admin/scans')->with('warning', 'Unable to find that scan entry!');
         }
         return redirect('/home')->with('error', 'Unauthorised! You need admin permission to view scans');
     }
@@ -71,7 +70,7 @@ class AdminScanController extends Controller
         if (Auth::User()->can('update scans')) {
 
             // get the scan entry
-            $scan = Scan::Where('id', '=', $request->id)->first();
+            $scan = Scan::where('id', $request->id)->first();
 
             // confirm admin password
             if (Hash::check($request->admin_password, Auth::User()->password)) {
