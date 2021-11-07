@@ -118,8 +118,8 @@
                 <div class="col-sm-10">
                     <textarea id="notes" name="notes" class="form-control"
                         {{ $errors->has('notes') ? ' autofocus' : '' }}>{{ old('notes', $scan->notes) }}</textarea>
-                    @if ($errors->has('started'))
-                        <div class="alert alert-warning">{{ $errors->first('started') }}</div>
+                    @if ($errors->has('notes'))
+                        <div class="alert alert-warning">{{ $errors->first('notes') }}</div>
                     @endif
                 </div>
             </div>
