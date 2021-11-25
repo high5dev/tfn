@@ -35,6 +35,8 @@ class ScanController extends Controller
             ->paginate($rows)
             ->withQueryString();
 
+        dd($scans);
+
         return view('scans.index', compact('scans'));
     }
 
