@@ -20,9 +20,9 @@
         </tr>
         </thead>
         <tbody>
-        {{ dd($scans) }}
         @foreach($scans as $scan)
             <tr>
+                {{ dd($scans) }}
                 <td>{{ $scan->started }}</td>
                 <td>{{ $scan->startid }}</td>
                 <td>{{ $scan->stopid }}</td>
