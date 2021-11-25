@@ -22,12 +22,12 @@
         <tbody>
         @foreach($scans as $scan)
             <tr>
-                {{ dd($scans) }}
                 <td>{{ $scan->started }}</td>
                 <td>{{ $scan->startid }}</td>
                 <td>{{ $scan->stopid }}</td>
                 <td>{{ $scan->startts }}</td>
                 <td>{{ $scan->stopts }}</td>
+                {{ dd($scans) }}
                 <td><a href="/scans/{{ $scan->id }}">{{ $scan->user->name }}</a></td>
             </tr>
         @endforeach
