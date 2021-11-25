@@ -27,7 +27,6 @@
                 <td>{{ $scan->stopid }}</td>
                 <td>{{ $scan->startts }}</td>
                 <td>{{ $scan->stopts }}</td>
-                {{ dd($scans) }}
                 <td><a href="/scans/{{ $scan->id }}">{{ $scan->user->name }}</a></td>
             </tr>
         @endforeach
