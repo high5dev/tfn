@@ -7,7 +7,6 @@
     <h3>Previous Scans</h3>
 
     {{ $scans->links() }}
-    {{ dd($scans) }}
 
     <table class="table table-striped">
         <thead class="thead-light">
@@ -21,6 +20,7 @@
         </tr>
         </thead>
         <tbody>
+        {{ dd($scans) }}
         @foreach($scans as $scan)
             <tr>
                 <td>{{ $scan->started }}</td>
