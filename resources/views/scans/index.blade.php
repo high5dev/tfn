@@ -6,8 +6,8 @@
 
     <h3>Previous Scans</h3>
 
-    {{ dd($scans) }}
     {{ $scans->links() }}
+    {{ dd($scans) }}
 
     <table class="table table-striped">
         <thead class="thead-light">
