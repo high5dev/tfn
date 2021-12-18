@@ -95,9 +95,9 @@ class SearchController extends Controller
     {
         $rows = Auth::user()->rows_per_page;
 
-        dd($rows);
-
         $members = Member::where('joined_recently', true)->paginate($rows)->withQueryString();
+
+        dd($members);
 
         if ($members) {
 
