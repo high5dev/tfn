@@ -104,6 +104,7 @@ class SearchController extends Controller
 
         $members = Member::where('created_at', '<=', $days_ago)->orderBy('created_at', 'desc')->paginate($rows)->withQueryString();
 
+        dd($members);
         if ($members) {
 
             // image view URL
