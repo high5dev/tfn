@@ -54,6 +54,8 @@ class SearchController extends Controller
 
             $sturl = 'https://spamcontrol.freecycle.org/';
 
+            dd($members);
+
             return view('search.results_email', compact('members', 'search', 'sturl'));
         }
         return view('search.index')->with('notice', 'No results found for the search criteria');
