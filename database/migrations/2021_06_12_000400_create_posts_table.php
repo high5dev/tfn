@@ -15,9 +15,9 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('member_id');
             $table->string('type', 7);
             $table->string('subject', 254)->nullable();
-            $table->string('userid', 15);
             $table->string('username', 254);
             $table->string('email', 254);
             $table->string('grp', 254);

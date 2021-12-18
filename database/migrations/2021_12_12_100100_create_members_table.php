@@ -16,7 +16,7 @@ class CreateMembersTable extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('username', 254);
-            $table->string('email', 254);
+            $table->string('email', 254)->nullable();
             $table->string('firstip', 63)->nullable();
             $table->datetime('zapped')->nullable();
             $table->timestamps();

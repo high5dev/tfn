@@ -39,8 +39,8 @@
                         {{ $post->type }}
                     </td>
                     <td>
-                        <a href="{{ $sturl }}/view_member?user_id={{ $post->userid }}"
-                           target="_blank">{{ $post->userid }}</a>
+                        <a href="{{ $sturl }}/view_member?user_id={{ $post->member_id }}"
+                           target="_blank">{{ $post->member_id }}</a>
                     </td>
                     <td>
                         {{ $post->email }}
