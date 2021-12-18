@@ -16,8 +16,6 @@
             <th scope="col">Dated</th>
             <th scope="col">Subject</th>
             <th scope="col">Type</th>
-            <th scope="col">User ID</th>
-            <th scope="col">Email</th>
             <th scope="col">Flags</th>
             <th scope="col">Actions</th>
         </tr>
@@ -26,7 +24,7 @@
         @if(count($members))
             @foreach($members as $member)
                 <tr>
-                    <td colspan="6">
+                    <td colspan="4">
                         Posts for: <a href="{{ $sturl }}{{ $stmember }}{{ $member->email }}"
                                       target="_blank">{{ $member->username }} &lt;{{ $member->email }}&gt;</a>
                     </td>
@@ -54,13 +52,6 @@
                             </td>
                             <td>
                                 {{ $post->type }}
-                            </td>
-                            <td>
-                                <a href="{{ $sturl }}/view_member?user_id={{ $post->member_id }}"
-                                   target="_blank">{{ $post->member_id }}</a>
-                            </td>
-                            <td>
-                                {{ $post->email }}
                             </td>
                             <td>
                                 @if($post->status == 'Active')
@@ -94,13 +85,13 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="8">No posts found</td>
+                        <td colspan="6">No posts found</td>
                     </tr>
                 @endif
             @endforeach
         @else
             <tr>
-                <td colspan="8">No members found with specified email address</td>
+                <td colspan="6">No members found with specified email address</td>
             </tr>
         @endif
         </tbody>
