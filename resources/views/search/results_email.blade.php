@@ -7,7 +7,7 @@
     <h3>Results</h3>
     <h4>Search on {{ $search }}</h4>
 
-    {{ $posts->links() }}
+    {{ $members->links() }}
 
     <table class="table table-striped">
         <thead class="thead-light">
@@ -24,7 +24,6 @@
         </thead>
         <tbody>
         @if(count($members))
-            <?php dd($members); ?>
             @foreach($members as $member)
                 @if(count($member->posts))
                     @foreach($member->posts as $post)
@@ -85,6 +84,6 @@
         </tbody>
     </table>
 
-    {{ $posts->links() }}
+    {{ $members->links() }}
 
 @endsection
