@@ -56,6 +56,28 @@
                             </div>
                         </form>
 
+                        <form method="get" action="/search/newmembers">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="days_ago">Days ago joined :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="days_ago" name="days_ago" class="form-control"
+                                           value="{{ old('days_ago') }}"
+                                           {{ $errors->has('days_ago') ? ' autofocus' : '' }} required>
+                                    @if ($errors->has('days_ago'))
+                                        <div class="alert alert-warning">{{ $errors->first('days_ago') }}</div>
+                                    @endif
+                                </div>
+                                <span class="text-muted">List new members</span>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="submit">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <input type="submit" id="submit" name="submit" value="Search">
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
 
                 </div>

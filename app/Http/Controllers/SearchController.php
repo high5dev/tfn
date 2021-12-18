@@ -91,12 +91,18 @@ class SearchController extends Controller
     /**
      * search for all new members
      */
-    public function newmembers()
+    public function newmembers(Request $request)
     {
-        $rows = Auth::user()->rows_per_page;
+        $validated = $request->validate([
+            'days_ago' => 'required|integer|min:1|max:31'
+        ]);
+
+        $rows = $request->user()->rows_per_page;
         $search = "New members";
 
-        $members = Member::where('joined_recently', true)->paginate($rows)->withQueryString();
+        $days_ago = Carbon::now()->subDays($request->days_ago);
+
+        $members = Member::where('created_at', '<=', $days_ago)->orderBy('created_at', 'desc')->paginate($rows)->withQueryString();
 
         if ($members) {
 
