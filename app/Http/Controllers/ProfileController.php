@@ -55,6 +55,7 @@ class ProfileController extends Controller
             // update the user
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->rows_per_page = $request->rows;
 
             // update the users password
             $passwordMessage = ' [password was NOT changed]';

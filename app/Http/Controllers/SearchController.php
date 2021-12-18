@@ -43,7 +43,7 @@ class SearchController extends Controller
             'email' => 'required|max:254'
         ]);
 
-        $rows = 100;
+        $rows = auth()->rows_per_page;
 
         $email = '%' . $request->email . '%';
         $search = 'Email: "' . $request->email . '"';
@@ -72,7 +72,7 @@ class SearchController extends Controller
             'subject' => 'required|max:31'
         ]);
 
-        $rows = 100;
+        $rows = auth()->rows_per_page;
 
         $subject = '%' . $request->subject . '%';
         $search = 'Subject: "' . $request->subject . '"';

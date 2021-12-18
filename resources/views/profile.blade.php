@@ -25,6 +25,19 @@
                 </div>
             </div>
 
+            <legend>Settings</legend>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="rows">Rows :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="rows" name="rows" class="form-control" value="{{ old('rows', $user->rows_per_page) }}"
+                           {{ $errors->has('rows') ? ' autofocus' : '' }} required>
+                    @if ($errors->has('rows'))
+                        <div class="alert alert-warning">{{ $errors->first('rows') }}</div>
+                    @endif
+                </div>
+            </div>
+
             <legend>Security details</legend>
 
             <div class="form-group row">

@@ -6,6 +6,8 @@
 
     <h3>List my log entries</h3>
 
+    {{ $log->links() }}
+
     <table class="table table-striped">
         <thead class="thead-light">
         <tr>
@@ -22,5 +24,7 @@
         @endforeach
         </tbody>
     </table>
+
+    {{ $log->links() }}
 
 @endsection

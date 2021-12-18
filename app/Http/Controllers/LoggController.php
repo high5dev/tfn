@@ -29,7 +29,10 @@ class LoggController extends Controller
      */
     public function index()
     {
-        $logs = Logg::Where('user_id', '=', Auth::User()->id)->orderBy('created_at', 'desc')->get();
+        $rows = auth()->rows_per_page;
+
+        $logs = Logg::Where('user_id', '=', Auth::User()->id)->orderBy('created_at', 'desc')->paginate($rows)
+            ->withQueryString();
 
         return view('logs.index', compact('logs'));
     }
@@ -40,7 +43,7 @@ class LoggController extends Controller
     public function show($id)
     {
 
-        // get the logs entry
+        // get the log entry
         $log = Logg::Where('user_id', '=', Auth::User()->id)->where('id', '=', $id)->first();
 
         if ($log) {

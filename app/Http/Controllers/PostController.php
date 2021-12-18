@@ -45,7 +45,7 @@ class PostController extends Controller
             'time' => 'sometimes|required|date_format:H:i'
         ]);
 
-        $rows = 100;
+        $rows = auth()->rows_per_page;
 
         if ('last' == $request->posts) {
 
@@ -169,7 +169,7 @@ class PostController extends Controller
      */
     public function spam(Request $request)
     {
-        $rows = 100;
+        $rows = auth()->rows_per_page;
 
         $posts = Post::where('spam', 1)
             ->orderBy('dated', 'asc')

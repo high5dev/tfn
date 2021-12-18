@@ -59,6 +59,12 @@ class ProfileUpdateRequest extends FormRequest
                 "confirmed",
                 Password::min(8)->uncompromised(),
             ],
+            'rows' => [
+                "required",
+                "integer",
+                "min:10",
+                "max:100",
+            ],
             'current_password' => [
                 "required"
             ]
