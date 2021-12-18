@@ -24,12 +24,15 @@
         @if(count($members))
             @foreach($members as $member)
                 <tr>
-                    <td colspan="4">
+                    <td colspan="3">
                         Posts for: <a href="{{ $sturl }}{{ $stmember }}{{ $member->email }}"
                                       target="_blank">{{ $member->username }} &lt;{{ $member->email }}&gt;</a>
                     </td>
                     <td colspan="2">
                         Joined {{ $member->days_ago_joined }}
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
                 @if(count($member->posts))
