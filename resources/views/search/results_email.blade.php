@@ -103,4 +103,15 @@
 
     {{ $members->links() }}
 
+    <ul>
+        <li>
+            In the Flags columns:
+            <ul>
+                <li>A - Post is Active</li>
+                <li>P - Post is in pending</li>
+                <li>N - User has recently joined</li>
+            </ul>
+        </li>
+    </ul>
+
 @endsection

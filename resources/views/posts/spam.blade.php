@@ -95,11 +95,25 @@
     {{ $posts->links() }}
 
     <div class="jumbotron">
-        Posts marked as potential spam will appear in this list.
-        @if(count($posts))
-            Please check them and, if they are not spam/scam then please tick the
-            checkbox and click the "Unmark Spam" button to unmark them as potential spam.
-        @endif
+        <ul>
+            <li>
+                Posts marked as potential spam will appear in this list.
+            </li>
+            @if(count($posts))
+                <li>
+                    Please check them and, if they are not spam/scam then please tick the
+                    checkbox and click the "Unmark Spam" button to unmark them as potential spam.
+                </li>
+            @endif
+            <li>
+                In the Flags columns:
+                <ul>
+                    <li>A - Post is Active</li>
+                    <li>P - Post is in pending</li>
+                    <li>N - User has recently joined</li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
 @endsection
