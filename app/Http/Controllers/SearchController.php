@@ -102,7 +102,6 @@ class SearchController extends Controller
         $search = "New members";
 
         $days_ago = Carbon::now()->subDays($request->days_ago);
-        dd($days_ago);
 
         $members = Member::where('created_at', '<=', $days_ago)->orderBy('created_at', 'desc')->paginate($rows)->withQueryString();
 
