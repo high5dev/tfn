@@ -30,12 +30,6 @@
                     </td>
                     <td colspan="2">
                         Joined {{ $member->days_ago_joined }}
-                        @if($member->days_ago_joined == 1)
-                            day
-                        @else
-                            days
-                        @endif
-                        ago
                     </td>
                 </tr>
                 @if(count($member->posts))
