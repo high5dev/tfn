@@ -47,9 +47,9 @@ class SearchController extends Controller
         $email = '%' . $request->email . '%';
         $search = 'Email: "' . $request->email . '"';
 
-        dd($request);
-
         $members = Member::where('email', 'like', $email)->paginate($rows)->withQueryString();
+
+        dd($request);
 
         if ($members) {
 
