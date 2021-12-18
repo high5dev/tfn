@@ -101,8 +101,8 @@
             </li>
             @if(count($posts))
                 <li>
-                    Please check them and, if they are not spam/scam then please tick the
-                    checkbox and click the "Unmark Spam" button to unmark them as potential spam.
+                    Please check them and, if they are not spam/scam then please click on the icon
+                    <i class="fas fa-toilet-paper-slash" title="Mark as not spam"></i> to unmark them as potential spam.
                 </li>
             @endif
             <li>
