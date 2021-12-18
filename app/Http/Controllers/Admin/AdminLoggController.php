@@ -32,7 +32,7 @@ class AdminLoggController extends Controller
         if (Auth::User()->can('view logs')) {
 
             // get rows per page if passed with request
-            $rows = request('rows', $rows = auth()->rows_per_page;);
+            $rows = request('rows', $rows = auth()->rows_per_page);
 
             // don't allow > 100 rows per page
             $rows = $rows < 101 ? $rows : 100;
