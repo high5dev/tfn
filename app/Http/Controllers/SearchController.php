@@ -79,9 +79,12 @@ class SearchController extends Controller
 
         $posts = Post::where('subject', 'like', $subject)->orderBy('id', 'asc')->paginate($rows)->withQueryString();
 
+        // image view URL
+        $imgurl = 'https://images.freecycle.org/group/x/post_image/';
+        // spamtools URL
         $sturl = 'https://spamcontrol.freecycle.org/';
 
-        return view('search.results_subject', compact('posts', 'search', 'sturl'));
+        return view('search.results_subject', compact('posts', 'search', 'imgurl', 'sturl'));
     }
 
 }
