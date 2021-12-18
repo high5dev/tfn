@@ -26,7 +26,10 @@
         @if(count($members))
             @foreach($members as $member)
                 <tr>
-                    <td colspan="8">Posts for: {{ $member->username }} &lt;{{ $member->email }}&gt;</td>
+                    <td colspan="8">
+                        Posts for: <a href="{{ $sturl }}{{ $stmember }}{{ $username }}"
+                                      target="_blank">{{ $member->username }} &lt;{{ $member->email }}&gt;</a>
+                    </td>
                 </tr>
                 @if(count($member->posts))
                     @foreach($member->posts as $post)
