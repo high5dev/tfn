@@ -47,11 +47,15 @@ class SearchController extends Controller
         $email = '%' . $request->email . '%';
         $search = 'Email: "' . $request->email . '"';
 
-        $posts = Post::where('email', 'like', $email)->orderBy('id', 'asc')->paginate($rows)->withQueryString();
+        $members = Member::where('email', 'like', $email)->paginate($rows)->withQueryString();
 
-        $sturl = 'https://spamcontrol.freecycle.org/';
+        if ($members) {
 
-        return view('search.results', compact('posts', 'search', 'sturl'));
+            $sturl = 'https://spamcontrol.freecycle.org/';
+
+            return view('search.results_email', compact('members', 'search', 'sturl'));
+        }
+        return view('search.index')->with('notice', 'No results found for the search criteria');
     }
 
     /**
@@ -72,7 +76,7 @@ class SearchController extends Controller
 
         $sturl = 'https://spamcontrol.freecycle.org/';
 
-        return view('search.results', compact('posts', 'search', 'sturl'));
+        return view('search.results_subject', compact('posts', 'search', 'sturl'));
     }
 
 }

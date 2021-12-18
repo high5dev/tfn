@@ -27,7 +27,8 @@
             @foreach($posts as $post)
                 <tr>
                     <td>
-                        <a href="{{ $sturl }}/view_post?post_id={{ $post->id }}" target="_blank">{{ $post->id }}</a>
+                        <a href="{{ $sturl }}/view_post?post_id={{ $post->id }}"
+                           target="_blank">{{ $post->id }}</a>
                     </td>
                     <td>
                         {{ $post->dated }}
@@ -58,7 +59,7 @@
                     <td>
                         <form method="post" action="/posts/{{ $post->id }}"
                               class="user-delete-btn"
-                                  onsubmit="return confirm('Are you sure you want to remove this post?');">
+                              onsubmit="return confirm('Are you sure you want to remove this post?');">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-sm btn-outline-secondary" type="submit">
@@ -72,6 +73,7 @@
                 <td colspan="8">No results for your search criteria</td>
             </tr>
         @endif
+
         </tbody>
     </table>
 

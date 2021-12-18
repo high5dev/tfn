@@ -18,8 +18,6 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('member_id');
             $table->string('type', 7);
             $table->string('subject', 254)->nullable();
-            $table->string('username', 254);
-            $table->string('email', 254);
             $table->string('grp', 254);
             $table->datetime('dated');
             $table->string('status', 7);
