@@ -11,4 +11,14 @@ class Member extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    // get formatted datetime string for mobile_verified_at
+    public function getdaysAgoJoinedAttribute()
+    {
+        if ($this->created_at) {
+            return $this->created_at->diffForHumans();
+        } else {
+            return null;
+        }
+    }
 }

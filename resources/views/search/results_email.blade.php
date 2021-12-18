@@ -28,13 +28,14 @@
                         Posts for: <a href="{{ $sturl }}{{ $stmember }}{{ $member->email }}"
                                       target="_blank">{{ $member->username }} &lt;{{ $member->email }}&gt;</a>
                     </td>
-                    <td>
-                        @if($member->joined_recently)
-                            N
+                    <td colspan="2">
+                        Joined {{ $member->days_ago_joined }}
+                        @if($member->days_ago_joined == 1)
+                            day
+                        @else
+                            days
                         @endif
-                    </td>
-                    <td>
-
+                        ago
                     </td>
                 </tr>
                 @if(count($member->posts))
