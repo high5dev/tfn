@@ -94,10 +94,9 @@ class SearchController extends Controller
     public function newmembers()
     {
         $rows = Auth::user()->rows_per_page;
+        $search = "New members";
 
         $members = Member::where('joined_recently', true)->paginate($rows)->withQueryString();
-
-        dd($members);
 
         if ($members) {
 
