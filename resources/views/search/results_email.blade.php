@@ -25,6 +25,7 @@
         <tbody>
         @if(count($members))
             @foreach($members as $member)
+                <?php dd($members); ?>
                 @if(count($member->posts))
                     @foreach($member->posts as $post)
                         <tr>
