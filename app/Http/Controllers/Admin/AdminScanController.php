@@ -32,7 +32,7 @@ class AdminScanController extends Controller
     {
         if (Auth::User()->can('view scans')) {
 
-            $rows = auth()->rows_per_page;
+            $rows = Auth::user()->rows_per_page;
 
             $scans = Scan::orderBy('started', 'desc')
                 ->paginate($rows)

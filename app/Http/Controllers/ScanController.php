@@ -29,7 +29,7 @@ class ScanController extends Controller
      */
     public function index()
     {
-        $rows = auth()->rows_per_page;
+        $rows = Auth::user()->rows_per_page;
 
         $scans = Scan::orderBy('startid', 'desc')
             ->paginate($rows)
