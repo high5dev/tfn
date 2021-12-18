@@ -169,8 +169,8 @@ class PostController extends Controller
      */
     public function spam(Request $request)
     {
-        //$rows = auth()->rows_per_page;
-        $rows = 10;
+        $user = Auth::user();
+        $rows = $user->rows_per_page;
 
         $posts = Post::where('spam', 1)
             ->orderBy('dated', 'asc')
