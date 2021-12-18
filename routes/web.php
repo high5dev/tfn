@@ -58,6 +58,7 @@ Route::group([
     Route::get('/search', 'SearchController@index');
     Route::get('/search/email', 'SearchController@email');
     Route::get('/search/subject', 'SearchController@subject');
+    Route::get('/search/newmembers', 'SearchController@newmembers');
 
     // User: posts
     Route::get('/posts', 'PostController@index');

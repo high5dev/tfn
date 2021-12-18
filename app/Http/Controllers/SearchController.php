@@ -87,4 +87,26 @@ class SearchController extends Controller
         return view('search.results_subject', compact('posts', 'search', 'imgurl', 'sturl'));
     }
 
+
+    /**
+     * search for all new members
+     */
+    public function newmembers()
+    {
+        $rows = Auth::user()->rows_per_page;
+
+        $members = Member::where('joined_recently', true)->paginate($rows)->withQueryString();
+
+        if ($members) {
+
+            // image view URL
+            $imgurl = 'https://images.freecycle.org/group/x/post_image/';
+            // spamtools url
+            $sturl = 'https://spamcontrol.freecycle.org/';
+            $stmember = 'view_member?user_id=';
+
+            return view('search.results_email', compact('members', 'search', 'imgurl', 'sturl', 'stmember'));
+        }
+        return view('search.index')->with('notice', 'No new members found');
+    }
 }
