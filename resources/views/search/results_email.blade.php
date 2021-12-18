@@ -31,7 +31,7 @@
                                       target="_blank">{{ $member->username }} &lt;{{ $member->email }}&gt;</a>
                     </td>
                     <td>
-                        @if($post->member->joined_recently)
+                        @if($member->joined_recently)
                             N
                         @endif
                     </td>
