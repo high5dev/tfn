@@ -169,7 +169,7 @@ class PostController extends Controller
      */
     public function spam(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
         $rows = $user->rows_per_page;
 
         $posts = Post::where('spam', 1)
