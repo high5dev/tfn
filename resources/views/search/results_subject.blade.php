@@ -52,7 +52,7 @@
                         @else
                             P
                         @endif
-                        @if($post->usernew)
+                        @if($post->member->joined_recently)
                             N
                         @endif
                     </td>
