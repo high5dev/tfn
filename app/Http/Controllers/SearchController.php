@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
 use App\Models\Post;
+use App\Models\Member;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class SearchController extends Controller
 
         $members = Member::where('email', 'like', $email)->paginate($rows)->withQueryString();
 
-        dd($request);
+        dd($members);
 
         if ($members) {
 
