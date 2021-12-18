@@ -52,10 +52,13 @@ class SearchController extends Controller
 
         if ($members) {
 
+            // image view URL
+            $imgurl = 'https://images.freecycle.org/group/x/post_image/';
+            // spamtools url
             $sturl = 'https://spamcontrol.freecycle.org/';
             $stmember = 'view_member?user_id=';
 
-            return view('search.results_email', compact('members', 'search', 'sturl', 'stmember'));
+            return view('search.results_email', compact('members', 'search', 'imgurl', 'sturl', 'stmember'));
         }
         return view('search.index')->with('notice', 'No results found for the search criteria');
     }

@@ -65,14 +65,23 @@
                                 @endif
                             </td>
                             <td>
-                                <form method="post" action="/posts/{{ $post->id }}"
-                                      class="user-delete-btn"
-                                      onsubmit="return confirm('Are you sure you want to remove this post?');">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                        <i class="fas fa-trash-alt" title="Remove this post"></i></button>
-                                </form>
+                                <div class="span4">
+                                    <a href="{{ $imgurl . $post->id }}" target="_blank">
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                            <i class="far fa-image" title="View image"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="span4">
+                                    <form method="post" action="/posts/{{ $post->id }}"
+                                          class="user-delete-btn"
+                                          onsubmit="return confirm('Are you sure you want to remove this post?');">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                            <i class="fas fa-trash-alt" title="Remove this post"></i></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
