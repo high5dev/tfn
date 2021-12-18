@@ -26,7 +26,7 @@
         @if(count($members))
             @foreach($members as $member)
                 <tr>
-                    <td>Posts for: {{ $member->username }} &lt;{{ $member->email }}&gt;</td>
+                    <td colspan="8">Posts for: {{ $member->username }} &lt;{{ $member->email }}&gt;</td>
                 </tr>
                 @if(count($member->posts))
                     @foreach($member->posts as $post)
