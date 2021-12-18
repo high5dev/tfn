@@ -27,7 +27,7 @@
             @foreach($members as $member)
                 <tr>
                     <td colspan="8">
-                        Posts for: <a href="{{ $sturl }}{{ $stmember }}{{ $username }}"
+                        Posts for: <a href="{{ $sturl }}{{ $stmember }}{{ $member->email }}"
                                       target="_blank">{{ $member->username }} &lt;{{ $member->email }}&gt;</a>
                     </td>
                 </tr>
