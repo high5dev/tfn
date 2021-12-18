@@ -25,6 +25,9 @@
         <tbody>
         @if(count($members))
             @foreach($members as $member)
+                <tr>
+                    <td>Posts for: {{ $member->username }} &lt;{{ $member->email }}&gt;</td>
+                </tr>
                 @if(count($member->posts))
                     @foreach($member->posts as $post)
                         <tr>
@@ -72,7 +75,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="8">No results for your search criteria</td>
+                        <td colspan="8">No posts found</td>
                     </tr>
                 @endif
             @endforeach
