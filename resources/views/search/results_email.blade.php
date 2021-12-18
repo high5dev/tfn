@@ -29,7 +29,7 @@
                                       target="_blank">{{ $member->username }} &lt;{{ $member->email }}&gt;</a>
                     </td>
                     <td colspan="2">
-                        Joined {{ $member->days_ago_joined }}
+                        First seen {{ $member->days_ago_joined }}
                     </td>
                     <td>
 
