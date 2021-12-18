@@ -21,7 +21,6 @@ class CreatePostsTable extends Migration
             $table->string('grp', 254);
             $table->datetime('dated');
             $table->string('status', 7);
-            $table->boolean('usernew')->default(false);
             $table->boolean('spam')->default(false);
         });
     }
