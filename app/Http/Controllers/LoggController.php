@@ -31,7 +31,7 @@ class LoggController extends Controller
     {
         $rows = Auth::user()->rows_per_page;
 
-        $logs = Logg::Where('user_id', '=', Auth::User()->id)->orderBy('created_at', 'desc')->paginate($rows)
+        $logs = Logg::Where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->paginate($rows)
             ->withQueryString();
 
         return view('logs.index', compact('logs'));
