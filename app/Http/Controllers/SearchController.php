@@ -38,7 +38,6 @@ class SearchController extends Controller
      */
     public function email(Request $request)
     {
-        dd($request);
         $validated = $request->validate([
             'email' => 'required|max:254'
         ]);
@@ -47,6 +46,8 @@ class SearchController extends Controller
 
         $email = '%' . $request->email . '%';
         $search = 'Email: "' . $request->email . '"';
+
+        dd($request);
 
         $members = Member::where('email', 'like', $email)->paginate($rows)->withQueryString();
 
