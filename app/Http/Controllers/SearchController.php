@@ -50,8 +50,6 @@ class SearchController extends Controller
 
         $members = Member::where('email', 'like', $email)->paginate($rows)->withQueryString();
 
-        dd($members);
-
         if ($members) {
 
             $sturl = 'https://spamcontrol.freecycle.org/';
