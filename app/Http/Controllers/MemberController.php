@@ -80,6 +80,8 @@ class MemberController extends Controller
             "password" => config("BlueCheese42+"),
         ]);
 
+        dd($login);
+
         $sessionCookie = $login
             ->cookies()
             ->getCookieByName("PHPSESSID")
