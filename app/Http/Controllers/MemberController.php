@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
@@ -73,7 +74,31 @@ class MemberController extends Controller
      */
     public function zap($id)
     {
-        //
+        /**
+         * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
+         * <input type='hidden' name='user_id' id='user_id' value="31465118" />
+         * <input type='submit' value="Zap Member" />
+         * </form>
+         */
+
+        $member = Member::where('id', $id)->first();
+
+        if($member) {
+            $response = Http::post('https://spamcontrol.freecycle.org/zap_member', [
+                'user_id' => $member->id,
+            ]);
+
+            dd($response);
+
+            // delete all their posts if they have any
+            if(isset($member->posts)) {
+                $member->posts()->delete();
+            }
+
+            return back()->with('success', 'Successfully zapped the member, all posts removed');
+        }
+
+        return redirect('/home')->with('error', 'Unable to find that member, not zapped!');
     }
 
     /**

@@ -67,6 +67,7 @@ Route::group([
     Route::get('/members/{id}', 'MemberController@show');
     Route::patch('/members', 'MemberController@update');
     Route::delete('/members/{id}', 'MemberController@destroy');
+    Route::get('/members/zap/{id}', 'MemberController@zap');
 
     // User: posts
     Route::get('/posts', 'PostController@index');
