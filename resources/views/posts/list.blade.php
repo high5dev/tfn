@@ -50,6 +50,9 @@
                         @else
                             P
                         @endif
+                        @if(!isset($post->member->joined_recently))
+                            {{ dd($post) }}
+                        @endif
                         @if($post->member->joined_recently)
                             N
                         @endif
