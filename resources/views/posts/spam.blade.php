@@ -42,7 +42,9 @@
                            target="_blank">{{ $post->member_id }}</a>
                     </td>
                     <td>
-                        {{ $post->email }}
+                        @if(isset($post->member->email))
+                            {{ $post->member->email }}
+                        @endif
                     </td>
                     <td>
                         @if($post->status == 'Active')
