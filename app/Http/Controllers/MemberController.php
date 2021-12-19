@@ -88,7 +88,7 @@ class MemberController extends Controller
                 'user_id' => $id,
             ]);
 
-            dd($response->body);
+            dd($response);
 
             // delete all their posts if they have any
             if(isset($member->posts)) {
