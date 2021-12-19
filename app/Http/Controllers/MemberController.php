@@ -83,7 +83,7 @@ class MemberController extends Controller
 
         $member = Member::where('id', $id)->first();
 
-        if($member) {
+        //if($member) {
             $response = Http::post('https://spamcontrol.freecycle.org/zap_member', [
                 'user_id' => $member->id,
             ]);
@@ -96,7 +96,7 @@ class MemberController extends Controller
             }
 
             return back()->with('success', 'Successfully zapped the member, all posts removed');
-        }
+       // }
 
         return redirect('/home')->with('error', 'Unable to find that member, not zapped!');
     }
