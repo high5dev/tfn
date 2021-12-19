@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-class PagesController extends Controller
+class PageController extends Controller
 {
 
     // index page

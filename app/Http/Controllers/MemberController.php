@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Auth;
+use App\Models\Member;
+use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class MemberController extends Controller
+{
+
+    /**
+     * create a new controller instance.
+     */
+    public function __construct()
+    {
+        // user can only access this if they're logged in and verified
+        $this->middleware([
+            'auth'
+        ]);
+    }
+
+    /**
+     * display all members
+     */
+    public function index()
+    {
+        $rows = Auth::user()->rows_per_page;
+
+        $members = Member::orderBy('username', 'asc')->paginate($rows)->withQueryString();
+
+        return view('members.index', compact('members'));
+    }
+
+    /**
+     * show form to create a new member
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * store a new member
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * show form to update a member
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * update a member
+     */
+    public function update(Request $request)
+    {
+        //
+    }
+
+    /**
+     * zap a member
+     */
+    public function zap($id)
+    {
+        //
+    }
+
+    /**
+     * delete a member and remove all their posts
+     */
+    public function destroy($id)
+    {
+        // get the post
+        $member = Member::where('id', $id)->first();
+
+        if ($member) {
+
+            // delete all their posts if they have any
+            if(isset($member->posts)) {
+                $member->posts()->delete();
+            }
+
+            // now delete the member
+            Member::where('id', $id)->delete();
+
+            return back()->with('success', 'Successfully removed that member');
+        }
+        return redirect('/home')->with('error', 'Unable to find that member!');
+    }
+}

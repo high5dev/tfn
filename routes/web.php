@@ -37,7 +37,7 @@ Route::get('logout', 'LoggedInController@logout');
  * Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
  */
 // public routes
-Route::get('/', 'PagesController@index')->name('index');
+Route::get('/', 'PageController@index')->name('index');
 
 // pages for logged in users
 Route::group([
@@ -59,6 +59,14 @@ Route::group([
     Route::get('/search/email', 'SearchController@email');
     Route::get('/search/subject', 'SearchController@subject');
     Route::get('/search/newmembers', 'SearchController@newmembers');
+
+    // User: members
+    Route::get('/members', 'MemberController@index');
+    Route::get('/members/create', 'MemberController@create');
+    Route::post('/members', 'MemberController@store');
+    Route::get('/members/{id}', 'MemberController@show');
+    Route::patch('/members', 'MemberController@update');
+    Route::delete('/members/{id}', 'MemberController@destroy');
 
     // User: posts
     Route::get('/posts', 'PostController@index');
