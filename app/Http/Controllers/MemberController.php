@@ -74,6 +74,19 @@ class MemberController extends Controller
      */
     public function zap($id)
     {
+
+        $login = Http::asForm()->post("https://www.freecycle.org/login", [
+            "user" => config("microscan5ep"),
+            "password" => config("BlueCheese42+"),
+        ]);
+
+        $sessionCookie = $login
+            ->cookies()
+            ->getCookieByName("PHPSESSID")
+            ->toArray();
+
+        dd($sessionCookie);
+
         /**
          * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
          * <input type='hidden' name='user_id' id='user_id' value="31465118" />
