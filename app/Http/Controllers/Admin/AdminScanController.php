@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\Models\Scan;
+use App\Models\Logg;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ScanUpdateRequest;
 use Spatie\Permission\Models\Role;
