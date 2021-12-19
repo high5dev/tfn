@@ -84,7 +84,7 @@ class MemberController extends Controller
         $member = Member::where('id', $id)->first();
 
         //if($member) {
-            $response = Http::post('https://spamcontrol.freecycle.org/zap_member', [
+            $response = Http::asForm()->post('https://spamcontrol.freecycle.org/zap_member', [
                 'user_id' => $id,
             ]);
 
