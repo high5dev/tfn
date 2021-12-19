@@ -85,7 +85,7 @@ class MemberController extends Controller
 
         //if($member) {
             $response = Http::post('https://spamcontrol.freecycle.org/zap_member', [
-                'user_id' => $member->id,
+                'user_id' => $id,
             ]);
 
             dd($response);
