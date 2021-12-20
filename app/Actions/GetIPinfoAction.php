@@ -11,7 +11,9 @@ class GetIPinfoAction
      */
     public function execute($ip): array
     {
-        $url = config('app.ip_base_url') . config('app.ip_api_key') . '/' . $ip;
+        $strictness = 1;
+
+        $url = config('app.ip_base_url') . config('app.ip_api_key') . '/' . $ip . '?strictness=' . $strictness;
         $response = Http::get($url);
         return $response->json();
     }
