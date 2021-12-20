@@ -2,8 +2,7 @@
 
 namespace App\Actions;
 
-use GuzzleHttp\Client;
-use App\Models\Prefixes;
+use Illuminate\Support\Facades\Http;
 
 class GetIPinfoAction
 {
