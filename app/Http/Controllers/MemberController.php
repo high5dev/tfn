@@ -131,5 +131,7 @@ class MemberController extends Controller
     public function test(Request $request, GetIPinfoAction $IPinfo)
     {
         $results = $IPinfo->execute($request->ip);
+
+        dd($results);
     }
 }
