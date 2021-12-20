@@ -13,7 +13,7 @@ class GetIPinfoAction
     {
         $url = config('app.ip_base_url') . config('app.ip_api_key') . '/' . $ip;
         $response = Http::get($url);
-        dd($response);
+        dd($response->body);
 
         return [];
     }
