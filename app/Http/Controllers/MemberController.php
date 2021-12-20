@@ -128,8 +128,8 @@ class MemberController extends Controller
     /**
      * test
      */
-    public function test(Request $request, GetIPinfoAction $IPinfoAction)
+    public function test(Request $request, GetIPinfoAction $IPinfo)
     {
-        $results = $IPinfoAction->execute($request->ip);
+        $results = $IPinfo->execute($request->ip);
     }
 }
