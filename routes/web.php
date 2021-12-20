@@ -44,6 +44,9 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
 
+    // User: test
+    Route::get('/test', 'MemberController@test');
+
     // User: homepage and profile
     Route::get('/home', 'LoggedInController@home')->name('home');
     Route::get('/profile', 'ProfileController@show');

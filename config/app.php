@@ -4,6 +4,13 @@ return [
 
     'dictionary' => env('DICTIONARY', 'dictionary.txt'),
 
+    'ip_base_url' => env('IP_BASE_URL'),
+    'ip_api_key' => env('IP_API_KEY'),
+
+    'tfn_username' => env('TFN_USERNAME'),
+    'tfn_password' => env('TFN_PASSWORD'),
+    'tfn_base_url' => env('TFN_BASE_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

@@ -11,8 +11,8 @@ class PruneOldPostsAction
 {
     public function __invoke(): void
     {
-        // delete any posts over 30 days old
-        $posts = Post::where('dated', '<', Carbon::now()->subDays(30))->delete();
+        // delete any posts over 90 days old
+        $posts = Post::where('dated', '<', Carbon::now()->subDays(90))->delete();
 
         // Log it
         Logg::create([
