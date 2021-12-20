@@ -10,7 +10,7 @@ class GetIPinfoAction
     /*
      * get info on an IP address
      */
-    public function __invoke($ip): array
+    public function execute($ip): array
     {
         $url = config('app.ip_base_url') . config('app.ip_api_key') . '/' . $ip;
         $response = Http::get($url);
