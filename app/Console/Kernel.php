@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Actions\PruneOldPostsAction;
+use App\Actions\ScrapyAction;
 use App\Actions\UpdateDailyStatisticsAction;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(new UpdateDailyStatisticsAction)->dailyAt('00:01');
         $schedule->call(new PruneOldPostsAction)->dailyAt('01:01');
+        $schedule->call(new ScrapyAction)->everyFifteenMinutes();
     }
 
     /**
