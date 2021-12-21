@@ -6,7 +6,7 @@ use App\Models\Member;
 use App\Models\Post;
 use App\Models\Watchword;
 
-class ScrapyAction
+class ScrapeAction
 {
     public function __invoke(): void
     {
@@ -213,7 +213,7 @@ class ScrapyAction
                     }
                 }
 
-                if (email_exists($email)) {
+                if (member_id_exists($member_id)) {
                     update_member([
                         'member_id' => $member_id,
                         'dated' => $dated,
@@ -427,7 +427,7 @@ class ScrapyAction
                     }
                 }
 
-                if (email_exists($email)) {
+                if (member_id_exists($member_id)) {
                     update_member([
                         'member_id' => $member_id,
                         'dated' => $dated,
@@ -582,15 +582,16 @@ function httpGet($url, $cookie = 0)
     return $result;
 }
 
-function email_exists($email)
+function member_id_exists($id)
 {
-    $count = Member::where('email', $email)->count();
+    $count = Member::where('id', $id)->count();
     return $count ? true : false;
 }
 
 function create_member($data)
 {
     $new_member = new Member();
+    $new_member->id = $data['member_id'];
     $new_member->username = $data['user'];
     $new_member->email = $data['email'];
     $new_member->joined_recently = $data['joined_recently'];
@@ -601,5 +602,5 @@ function create_member($data)
 
 function update_member($data)
 {
-    Member::where('created_at', '>', $data['dated'])->update(['created_at' => $data['dated']]);
+    Member::where('id', $data['member_id'])->where('created_at', '>', $data['dated'])->update(['created_at' => $data['dated']]);
 }
