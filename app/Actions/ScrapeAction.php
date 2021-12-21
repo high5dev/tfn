@@ -223,6 +223,7 @@ class ScrapeAction
                     echo "\nCreating new member: {$email}";
 
                     create_member([
+                        'member_id' => $member_id,
                         'user' => $user,
                         'email' => $email,
                         'dated' => $dated,
@@ -436,6 +437,7 @@ class ScrapeAction
                     echo "\nCreating new member: {$email}";
 
                     create_member([
+                        'member_id' => $member_id,
                         'user' => $user,
                         'email' => $email,
                         'dated' => $dated,
