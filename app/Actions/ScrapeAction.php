@@ -10,16 +10,13 @@ class ScrapeAction
 {
     public function __invoke(): void
     {
-        echo "\nStarting Freecyle spamtools scrape...\n";
-
         $initialID = "80000000";
         $forceInitialID = false;
 
-        $user = 'microscan5ep';
-        $password = 'BlueCheese42+';
+        $user = config('app.tfn_username');
+        $password = config('app.tfn_password');
 
         // Get the watchwords list
-        echo "\nRetrieving watchwords: ";
         $results = Watchword::all();
 
         $wwEmails = [];
@@ -33,37 +30,27 @@ class ScrapeAction
                 }
             }
         }
-        echo "Done\n";
 
         // Login
-        echo "\nLogging in: ";
         $status = Login($user, $password);
         if ($status !== true) {
-            echo "Login failed\n\n";
-            die();
+            return;
         }
-        echo "Success";
 
         // get spamcontrol entry page
-        echo "\nOpening spamtools: ";
-        $homepage = 'https://spamcontrol.freecycle.org';
+        $homepage = config('app.tfn_base_url');
         $page = GetPage($homepage);
         if (false === strpos($page, 'You must log in using')) {
-            echo "Error! Check error.txt\n\n";
             file_put_contents('./error.txt', $page);
             die();
         }
-        echo "Success\n";
 
         $num_rows = 0;
 
         if ($forceInitialID) {
             $currentID = $initialID;
-            echo "\nForcing OFFER start ID: ";
         } else {
             // read the last db entry for OFFERs
-            echo "\nGetting OFFER start ID: ";
-
             $results = Post::where('type', 'OFFER')->orderBy('id', 'desc')->first();
             if ($results) {
                 $currentID = $results['id'];
@@ -71,7 +58,6 @@ class ScrapeAction
                 $currentID = $initialID;
             }
         }
-        echo $currentID;
 
         // save start Post ID
         $lastID = $currentID;
@@ -79,29 +65,22 @@ class ScrapeAction
         // loop round and grab up to 1000 OFFER posts at a time
         do {
             // make sure we are on OFFERs
-            echo "\nSetting to OFFERs: ";
-            $url = 'https://spamcontrol.freecycle.org/type_limit_direction?Type=OFFER&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
+            $url = config('app.tfn_base_url') . '/type_limit_direction?Type=OFFER&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                echo "Error! Check error.txt\n\n";
                 file_put_contents('./error.txt', $page);
                 die();
             }
-            echo "Success";
             // select the page
-            echo "\nSetting start ID: ";
-            $url = "https://spamcontrol.freecycle.org/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
+            $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                echo "Error! Check error.txt\n\n";
                 file_put_contents('./error.txt', $page);
                 die();
             }
-            echo "Success [{$currentID}]";
 
             // get the page
-            echo "\nDownloading: ";
-            $url = 'https://spamcontrol.freecycle.org/display_posts';
+            $url = config('app.tfn_base_url') . '/display_posts';
             $page = GetPage($url);
 
             $DOM = new \DOMDocument('1.0', 'UTF-8');
@@ -110,10 +89,7 @@ class ScrapeAction
             $Header = $DOM->getElementsByTagName('th');
             $Detail = $DOM->getElementsByTagName('td');
 
-            echo "Success";
-
             // Get header name of the table
-            echo "\nGetting header: ";
             $aDataTableHeaderHTML = [];
             foreach ($Header as $NodeHeader) {
                 $aDataTableHeaderHTML[] = trim($NodeHeader->textContent);
@@ -129,15 +105,11 @@ class ScrapeAction
                 $i = $i + 1;
                 $j = $i % count($aDataTableHeaderHTML) == 0 ? $j + 1 : $j;
             }
-            echo "Success";
 
             // Get row data/detail table with header name as key and outer array index as row number
 
-            echo "\nProcessing header: ";
-
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
-                    echo "\nIncorrect number of parameters [" . count($aDataTableDetailHTML[$i]) . "]\n";
                     print_r($aDataTableDetailHTML[$i]);
                     die();
                 }
@@ -146,10 +118,6 @@ class ScrapeAction
                 }
             }
             $aDataTableDetailHTML = $aTempData;unset($aTempData);
-
-            echo "Success";
-
-            echo "\nUpdating database: ";
 
             foreach ($aDataTableDetailHTML as $row) {
 
@@ -176,9 +144,7 @@ class ScrapeAction
 
                 // check it is incrementing
                 if ($currentID < $lastID) {
-                    echo "Error, ID is not incrementing!\n";
-                    echo "Last ID: {$lastID} current ID: {$currentID}\n";
-                    exit;
+                    return;
                 }
 
                 // if this a new user?
@@ -197,18 +163,12 @@ class ScrapeAction
                 // check for email watchwords
                 foreach ($wwEmails as $word) {
                     if (false !== stripos($email, $word)) {
-
-                        echo "\nWatching emails for: '" . $word . "' Found: '" . $email . "'";
-
                         $spam = 1;
                     }
                 }
                 // check for subject watchwords
                 foreach ($wwSubjects as $word) {
                     if (false !== stripos($subject, $word)) {
-
-                        echo "\nWatching subjects for: '" . $word . "' Found: '" . $subject . "'";
-
                         $spam = 1;
                     }
                 }
@@ -219,9 +179,6 @@ class ScrapeAction
                         'dated' => $dated,
                     ]);
                 } else {
-
-                    echo "\nCreating new member: {$email}";
-
                     create_member([
                         'member_id' => $member_id,
                         'user' => $user,
@@ -248,25 +205,15 @@ class ScrapeAction
             }
             $num = count($aDataTableDetailHTML);
 
-            echo "\nProcessed {$num} rows";
-
             $num_rows += $num;
             $lastID = $currentID;
 
         } while (1000 == count($aDataTableDetailHTML));
 
-        echo "\nCompleted OFFERs\n";
-
         if ($forceInitialID) {
             $currentID = $initialID;
-
-            echo "\nForcing WANTED start ID: ";
-
         } else {
             // read the last db entry for WANTEDs
-
-            echo "\nGetting WANTED start ID: ";
-
             $results = Post::where('type', 'WANTED')->orderBy('id', 'desc')->first();
             if ($results) {
                 $currentID = $results['id'];
@@ -275,45 +222,28 @@ class ScrapeAction
             }
         }
 
-        echo $currentID;
-
         $lastID = $currentID;
 
         // loop round and grab up to 1000 WANTED posts at a time
         do {
             // make sure we are on WANTEDs
-
-            echo "\nSetting to WANTEDs: ";
-
-            $url = 'https://spamcontrol.freecycle.org/type_limit_direction?Type=WANTED&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
+            $url = config('app.tfn_base_url') . '/type_limit_direction?Type=WANTED&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                echo "Error! Check error.txt\n\n";
                 file_put_contents('./error.txt', $page);
-                die();
+                return;
             }
-
-            echo "Success";
 
             // select the page
-
-            echo "\nSetting start ID: ";
-
-            $url = "https://spamcontrol.freecycle.org/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
+            $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                echo "Error! Check error.txt\n\n";
                 file_put_contents('./error.txt', $page);
                 die();
             }
 
-            echo "Success [{$currentID}]";
-
             // get the page
-
-            echo "\nDownloading: ";
-
-            $url = 'https://spamcontrol.freecycle.org/display_posts';
+            $url = config('app.tfn_base_url') . '/display_posts';
             $page = GetPage($url);
 
             $DOM = new \DOMDocument('1.0', 'UTF-8');
@@ -322,12 +252,7 @@ class ScrapeAction
             $Header = $DOM->getElementsByTagName('th');
             $Detail = $DOM->getElementsByTagName('td');
 
-            echo "Success";
-
             //#Get header name of the table
-
-            echo "\nGetting header: ";
-
             $aDataTableHeaderHTML = [];
             foreach ($Header as $NodeHeader) {
                 $aDataTableHeaderHTML[] = trim($NodeHeader->textContent);
@@ -344,15 +269,9 @@ class ScrapeAction
                 $j = $i % count($aDataTableHeaderHTML) == 0 ? $j + 1 : $j;
             }
 
-            echo "Success";
-
             //#Get row data/detail table with header name as key and outer array index as row number
-
-            echo "\nProcessing header: ";
-
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
-                    echo "\nIncorrect number of parameters [" . count($aDataTableDetailHTML[$i]) . "]\n";
                     print_r($aDataTableDetailHTML[$i]);
                     die();
                 }
@@ -361,10 +280,6 @@ class ScrapeAction
                 }
             }
             $aDataTableDetailHTML = $aTempData;unset($aTempData);
-
-            echo "Success";
-
-            echo "\nUpdating database: ";
 
             foreach ($aDataTableDetailHTML as $row) {
 
@@ -391,9 +306,7 @@ class ScrapeAction
 
                 // check it is incrementing
                 if ($currentID < $lastID) {
-                    echo "Error, ID is not incrementing!\n";
-                    echo "Last ID: {$lastID} current ID: {$currentID}\n";
-                    exit;
+                    return;
                 }
 
                 // if this a new user?
@@ -412,18 +325,12 @@ class ScrapeAction
                 // check for email watchwords
                 foreach ($wwEmails as $word) {
                     if (false !== stripos($email, $word)) {
-
-                        echo "\nWatching emails for: '" . $word . "' Found: '" . $email . "'";
-
                         $spam = 1;
                     }
                 }
                 // check for subject watchwords
                 foreach ($wwSubjects as $word) {
                     if (false !== stripos($subject, $word)) {
-
-                        echo "\nWatching subjects for: '" . $word . "' Found: '" . $subject . "'";
-
                         $spam = 1;
                     }
                 }
@@ -434,8 +341,6 @@ class ScrapeAction
                         'dated' => $dated,
                     ]);
                 } else {
-                    echo "\nCreating new member: {$email}";
-
                     create_member([
                         'member_id' => $member_id,
                         'user' => $user,
@@ -462,18 +367,10 @@ class ScrapeAction
             }
             $num = count($aDataTableDetailHTML);
 
-            echo "\nProcessed {$num} rows";
-
             $num_rows += $num;
             $lastID = $currentID;
 
         } while (1000 == count($aDataTableDetailHTML));
-
-        echo "\nCompleted WANTEDs";
-
-        echo "\n\nProcessed {$num_rows} rows";
-
-        echo "\n\nEnd of script\n";
 
     }
 }
