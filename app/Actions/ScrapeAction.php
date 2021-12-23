@@ -432,7 +432,7 @@ function SaveSession($cook)
 
 function GetSession()
 {
-    $cookies = json_decode(Storage::get('tfn_session'), ASSOCIATIVE);
+    $cookies = json_decode(Storage::get('tfn_session'), true);
     if ($cookies) {
         $jar = new \GuzzleHttp\Cookie\CookieJar();
         foreach ($cookies as $cookie) {
