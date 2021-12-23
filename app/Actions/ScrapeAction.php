@@ -385,8 +385,8 @@ function Login()
     $url = config('app.tfn_base_url');
     $var = [];
     $vars = [];
-    $vars['user'] = trim(config('app.tfn_username'));
-    $vars['password'] = trim(config('app.tfn_password'));
+    $vars['user'] = config('app.tfn_username');
+    $vars['password'] = config('app.tfn_password');
     $var['Origin'] = $url;
     $data = httpPost($url . '/login', $vars);
 
@@ -426,14 +426,18 @@ function SaveSession($cook)
         $cook1 = $cook['cookie'];
     }
 
-    Storage::put('tfn_session', json_encode($cook1->toArray()));
+    file_put_contents('./session.json', json_encode($cook1->toArray()));
+    //Storage::put('tfn_session', json_encode($cook1->toArray()));
     return true;
 }
 
 function GetSession()
 {
-    $cookies = json_decode(Storage::get('tfn_session'), true);
-    if ($cookies) {
+    //$cookies = json_decode(Storage::get('tfn_session'), true);
+
+    $sessionf = './session.json';
+    if (file_exists($sessionf)) {
+        $cookies = json_decode(file_get_contents($sessionf), 1);
         $jar = new \GuzzleHttp\Cookie\CookieJar();
         foreach ($cookies as $cookie) {
             $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
@@ -442,7 +446,6 @@ function GetSession()
     } else {
         return [];
     }
-
 }
 
 function httpPost($url, $data)
