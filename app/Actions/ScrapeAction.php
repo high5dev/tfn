@@ -6,6 +6,7 @@ use App\Models\Member;
 use App\Models\Post;
 use App\Models\Watchword;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ScrapeAction
 {
