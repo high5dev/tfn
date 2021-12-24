@@ -17,6 +17,9 @@ class ScrapeAction
         $initialID = "80000000";
         $forceInitialID = false;
 
+        $user = config('app.tfn_username');
+        $password = config('app.tfn_password');
+
         // Get the watchwords list
         $results = Watchword::all();
 
@@ -35,7 +38,7 @@ class ScrapeAction
         // Login
         // TODO: Store session cookie, then retrieve it on subsequent runs
         // TODO: so we don't have to login every time this script is run.
-        $status = Login();
+        $status = Login($user, $password);
         if ($status !== true) {
             Log::debug('Scrape: Error logging in');
             return;
@@ -380,13 +383,13 @@ class ScrapeAction
     }
 }
 
-function Login()
+function Login($user, $password)
 {
     $url = config('app.tfn_base_url');
     $var = [];
     $vars = [];
-    $vars['user'] = config('app.tfn_username');
-    $vars['password'] = config('app.tfn_password');
+    $vars['user'] = trim($user);
+    $vars['password'] = trim($password);
     $var['Origin'] = $url;
     $data = httpPost($url . '/login', $vars);
 
