@@ -18,7 +18,6 @@ class ScrapeMemberAction
 
         $results = Member::where('updated_at', '>', Carbon::now()->subMonth())
             ->whereNull('firstip')
-            ->limit(10)
             ->pluck('id');
 
         if (!count($results)) {
