@@ -5,15 +5,11 @@ namespace App\Actions;
 use App\Models\Member;
 use App\Models\Post;
 use App\Models\Watchword;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class ScrapeAction
 {
     public function __invoke(): void
     {
-        Log::debug('Scrape started');
-
         $initialID = "80000000";
         $forceInitialID = false;
 
@@ -36,11 +32,8 @@ class ScrapeAction
         }
 
         // Login
-        // TODO: Store session cookie, then retrieve it on subsequent runs
-        // TODO: so we don't have to login every time this script is run.
         $status = Login($user, $password);
         if ($status !== true) {
-            Log::debug('Scrape: Error logging in');
             return;
         }
 
@@ -48,8 +41,8 @@ class ScrapeAction
         $homepage = config('app.tfn_base_url');
         $page = GetPage($homepage);
         if (false === strpos($page, 'You must log in using')) {
-            Log::debug('Scrape: ' . $page);
-            return;
+            file_put_contents('./error.txt', $page);
+            die();
         }
 
         $num_rows = 0;
@@ -75,15 +68,15 @@ class ScrapeAction
             $url = config('app.tfn_base_url') . '/type_limit_direction?Type=OFFER&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                Log::debug('Scrape: ' . $page);
-                return;
+                file_put_contents('./error.txt', $page);
+                die();
             }
             // select the page
             $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                Log::debug('Scrape: ' . $page);
-                return;
+                file_put_contents('./error.txt', $page);
+                die();
             }
 
             // get the page
@@ -117,8 +110,8 @@ class ScrapeAction
 
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
-                    Log::debug('Scrape: ' . print_r($aDataTableDetailHTML[$i]));
-                    return;
+                    print_r($aDataTableDetailHTML[$i]);
+                    die();
                 }
                 for ($j = 0; $j < count($aDataTableHeaderHTML); $j++) {
                     $aTempData[$i][$aDataTableHeaderHTML[$j]] = $aDataTableDetailHTML[$i][$j];
@@ -151,7 +144,6 @@ class ScrapeAction
 
                 // check it is incrementing
                 if ($currentID < $lastID) {
-                    Log::debug('Scrape: OFFERs not incrementing');
                     return;
                 }
 
@@ -238,7 +230,7 @@ class ScrapeAction
             $url = config('app.tfn_base_url') . '/type_limit_direction?Type=WANTED&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                Log::debug('Scrape: ' . $page);
+                file_put_contents('./error.txt', $page);
                 return;
             }
 
@@ -246,8 +238,8 @@ class ScrapeAction
             $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                Log::debug('Scrape: ' . $page);
-                return;
+                file_put_contents('./error.txt', $page);
+                die();
             }
 
             // get the page
@@ -280,8 +272,8 @@ class ScrapeAction
             //#Get row data/detail table with header name as key and outer array index as row number
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
-                    Log::debug('Scrape: ' . print_r($aDataTableDetailHTML[$i]));
-                    return;
+                    print_r($aDataTableDetailHTML[$i]);
+                    die();
                 }
                 for ($j = 0; $j < count($aDataTableHeaderHTML); $j++) {
                     $aTempData[$i][$aDataTableHeaderHTML[$j]] = $aDataTableDetailHTML[$i][$j];
@@ -314,7 +306,6 @@ class ScrapeAction
 
                 // check it is incrementing
                 if ($currentID < $lastID) {
-                    Log::debug('Scrape: WANTEDs not incrementing');
                     return;
                 }
 
@@ -380,12 +371,13 @@ class ScrapeAction
             $lastID = $currentID;
 
         } while (1000 == count($aDataTableDetailHTML));
+
     }
 }
 
 function Login($user, $password)
 {
-    $url = config('app.tfn_base_url');
+    $url = 'https://www.freecycle.org';
     $var = [];
     $vars = [];
     $vars['user'] = trim($user);
@@ -423,21 +415,18 @@ function GetPage($url, $redirect = 10)
 
 function SaveSession($cook)
 {
+    $sessionf = './session.json';
     if ($cook['cookie'] === null) {
         $cook1 = [];
     } else {
         $cook1 = $cook['cookie'];
     }
 
-    file_put_contents('./session.json', json_encode($cook1->toArray()));
-    //Storage::put('tfn_session', json_encode($cook1->toArray()));
+    file_put_contents($sessionf, json_encode($cook1->toArray()));
     return true;
 }
-
 function GetSession()
 {
-    //$cookies = json_decode(Storage::get('tfn_session'), true);
-
     $sessionf = './session.json';
     if (file_exists($sessionf)) {
         $cookies = json_decode(file_get_contents($sessionf), 1);
@@ -449,6 +438,7 @@ function GetSession()
     } else {
         return [];
     }
+
 }
 
 function httpPost($url, $data)
