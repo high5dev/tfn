@@ -2,17 +2,18 @@
 
 namespace App\Actions;
 
+use App\Helpers\ScrapeHelper;
 use App\Models\Member;
 use App\Models\Post;
 use App\Models\Watchword;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class ScrapeAction
 {
     public function __invoke(): void
     {
         Log::debug('Scrape started');
+        $scrapeHelper = new ScrapeHelper();
 
         $initialID = "80000000";
         $forceInitialID = false;
@@ -36,17 +37,16 @@ class ScrapeAction
         }
 
         // Login
-        $status = Login($user, $password);
+        $status = $scrapeHelper->Login($user, $password);
         if ($status !== true) {
             return;
         }
 
         // get spamcontrol entry page
         $homepage = config('app.tfn_base_url');
-        $page = GetPage($homepage);
-        if (false === strpos($page, 'You must log in using')) {
-            Logg:debug('Scrape: error logging in');
-            //file_put_contents('./error.txt', $page);
+        $page = $scrapeHelper->GetPage($homepage);
+        if (strpos($page, 'You must log in using')) {
+            Log::debug('Scrape: error logging in');
             return;
         }
 
@@ -71,7 +71,7 @@ class ScrapeAction
         do {
             // make sure we are on OFFERs
             $url = config('app.tfn_base_url') . '/type_limit_direction?Type=OFFER&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
-            $page = GetPage($url);
+            $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape set OFFERs: ' . $page);
                 //file_put_contents('./error.txt', $page);
@@ -79,7 +79,7 @@ class ScrapeAction
             }
             // select the page
             $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
-            $page = GetPage($url);
+            $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape select page: ' . $page);
                 //file_put_contents('./error.txt', $page);
@@ -88,7 +88,7 @@ class ScrapeAction
 
             // get the page
             $url = config('app.tfn_base_url') . '/display_posts';
-            $page = GetPage($url);
+            $page = $scrapeHelper->GetPage($url);
 
             $DOM = new \DOMDocument('1.0', 'UTF-8');
             @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
@@ -182,13 +182,13 @@ class ScrapeAction
                     }
                 }
 
-                if (member_id_exists($member_id)) {
-                    update_member([
+                if ($this->member_id_exists($member_id)) {
+                    $this->update_member([
                         'member_id' => $member_id,
                         'dated' => $dated,
                     ]);
                 } else {
-                    create_member([
+                    $this->create_member([
                         'member_id' => $member_id,
                         'user' => $user,
                         'email' => $email,
@@ -237,7 +237,7 @@ class ScrapeAction
         do {
             // make sure we are on WANTEDs
             $url = config('app.tfn_base_url') . '/type_limit_direction?Type=WANTED&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
-            $page = GetPage($url);
+            $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape set WANTEDs: ' . $page);
                 //file_put_contents('./error.txt', $page);
@@ -246,7 +246,7 @@ class ScrapeAction
 
             // select the page
             $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
-            $page = GetPage($url);
+            $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape select page: ' . $page);
                 //file_put_contents('./error.txt', $page);
@@ -255,7 +255,7 @@ class ScrapeAction
 
             // get the page
             $url = config('app.tfn_base_url') . '/display_posts';
-            $page = GetPage($url);
+            $page = $scrapeHelper->GetPage($url);
 
             $DOM = new \DOMDocument('1.0', 'UTF-8');
             @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
@@ -348,13 +348,13 @@ class ScrapeAction
                     }
                 }
 
-                if (member_id_exists($member_id)) {
-                    update_member([
+                if ($this->member_id_exists($member_id)) {
+                    $this->update_member([
                         'member_id' => $member_id,
                         'dated' => $dated,
                     ]);
                 } else {
-                    create_member([
+                    $this->create_member([
                         'member_id' => $member_id,
                         'user' => $user,
                         'email' => $email,
@@ -386,133 +386,27 @@ class ScrapeAction
         } while (1000 == count($aDataTableDetailHTML));
 
     }
-}
 
-function Login($user, $password)
-{
-    $url = 'https://www.freecycle.org';
-    $var = [];
-    $vars = [];
-    $vars['user'] = trim($user);
-    $vars['password'] = trim($password);
-    $var['Origin'] = $url;
-    $data = httpPost($url . '/login', $vars);
-
-    $xdata = SaveSession($data);
-    $xpage = $data['body'];
-    if (strpos($xpage, 'Invalid username/email or password.') === false) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function GetPage($url, $redirect = 10)
-{
-    $loop = true;
-    for ($i = 0; $loop == true; $i++) {
-        $loop = false;
-        $i++;
-        $redirect--;
-        $session = GetSession();
-        $data = httpGet($url, $session);
-        $page = $data['body'];
-        SaveSession($data);
-
-        if ($data['status'] == '200' && $redirect) {
-            $loop = true;
-        }
-    }
-    return $page;
-}
-
-function SaveSession($cook)
-{
-    $sessionf = './session.json';
-    if ($cook['cookie'] === null) {
-        $cook1 = [];
-    } else {
-        $cook1 = $cook['cookie'];
+    public function member_id_exists($id)
+    {
+        $count = Member::where('id', $id)->count();
+        return $count ? true : false;
     }
 
-    file_put_contents($sessionf, json_encode($cook1->toArray()));
-    return true;
-}
-function GetSession()
-{
-    $sessionf = './session.json';
-    if (file_exists($sessionf)) {
-        $cookies = json_decode(file_get_contents($sessionf), 1);
-        $jar = new \GuzzleHttp\Cookie\CookieJar();
-        foreach ($cookies as $cookie) {
-            $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
-        }
-        return $jar;
-    } else {
-        return [];
+    public function create_member($data)
+    {
+        $new_member = new Member();
+        $new_member->id = $data['member_id'];
+        $new_member->username = $data['user'];
+        $new_member->email = $data['email'];
+        $new_member->joined_recently = $data['joined_recently'];
+        $new_member->created_at = $data['dated'];
+        $new_member->updated_at = $data['dated'];
+        $new_member->save();
     }
 
-}
-
-function httpPost($url, $data)
-{
-    $domain = parse_url($url, PHP_URL_HOST);
-
-    $cookieJar = \GuzzleHttp\Cookie\CookieJar::fromArray($data, $domain);
-    $client = new \GuzzleHttp\Client([
-        'base_uri' => $url,
-        'cookies' => $cookieJar,
-    ]);
-
-    $headers = [];
-    $headers['Content-Type'] = 'application/x-www-form-urlencoded;';
-
-    $response = $client->request('POST', $url, ['form_params' => $data, 'headers' => $headers]);
-
-    $result['body'] = ($response->getBody()->getContents());
-    $result['cookie'] = $cookieJar;
-    $result['header'] = $response->getHeaders();
-
-    return $result;
-}
-
-function httpGet($url, $cookie = 0)
-{
-    $domain = parse_url($url, PHP_URL_HOST);
-
-    $client = new \GuzzleHttp\Client([
-        'base_uri' => $url,
-        'cookies' => $cookie ? $cookie : null,
-    ]);
-
-    $response = $client->request('GET', $url);
-
-    $result['body'] = ($response->getBody()->getContents());
-    $result['cookie'] = $cookie ? $cookie : null;
-    $result['status'] = $response->getStatusCode();
-
-    return $result;
-}
-
-function member_id_exists($id)
-{
-    $count = Member::where('id', $id)->count();
-    return $count ? true : false;
-}
-
-function create_member($data)
-{
-    $new_member = new Member();
-    $new_member->id = $data['member_id'];
-    $new_member->username = $data['user'];
-    $new_member->email = $data['email'];
-    $new_member->joined_recently = $data['joined_recently'];
-    $new_member->created_at = $data['dated'];
-    $new_member->updated_at = $data['dated'];
-    $new_member->save();
-}
-
-function update_member($data)
-{
-    Member::where('id', $data['member_id'])->where('created_at', '>', $data['dated'])->update(['created_at' => $data['dated']]);
+    public function update_member($data)
+    {
+        Member::where('id', $data['member_id'])->where('created_at', '>', $data['dated'])->update(['created_at' => $data['dated']]);
+    }
 }
