@@ -8,6 +8,12 @@ use Illuminate\Support\Str;
 
 class ScrapeMemberAction
 {
+
+
+    // I do not use Skype
+    // I can use WhatsApp - do you have WhatsApp?
+
+
     public function __invoke()
     {
         \Log::debug('ScrapeMember started');
