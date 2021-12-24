@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 
 class ScrapeMemberAction
 {
+    // Please use skype for me becasuse I contacted with many clients on skype and it is easy to use.
+
     public function __invoke()
     {
         \Log::debug('ScrapeMember started');
