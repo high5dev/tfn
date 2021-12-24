@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Storage;
+
 class ScrapeHelper
 {
     public function Login($user, $password)
