@@ -54,15 +54,17 @@ class ScrapeHelper
         }
 
         Storage::put('tfn_session', json_encode($cook1->toArray()));
-        file_put_contents($sessionf, json_encode($cook1->toArray()));
+        //file_put_contents($sessionf, json_encode($cook1->toArray()));
         return true;
     }
 
     public function GetSession()
     {
-        $sessionf = './tfn_session';
-        if (file_exists($sessionf)) {
-            $cookies = json_decode(file_get_contents($sessionf), 1);
+        //$sessionf = './tfn_session';
+        //if (file_exists($sessionf)) {
+        if (Storage::exists('tfn_session')) {
+            //$cookies = json_decode(file_get_contents($sessionf), 1);
+            $cookies = json_decode(Storage::get('tfn_session'), 1);
             $jar = new \GuzzleHttp\Cookie\CookieJar();
             foreach ($cookies as $cookie) {
                 $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
