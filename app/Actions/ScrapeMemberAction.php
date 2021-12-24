@@ -6,6 +6,7 @@ use App\Helpers\ScrapeHelper;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class ScrapeMemberAction
 {
@@ -13,10 +14,10 @@ class ScrapeMemberAction
 
     public function __invoke()
     {
-        \Log::debug('ScrapeMember started');
+        Log::debug('ScrapeMember: started');
         $scrapeHelper = new ScrapeHelper();
 
-        $pageUrl = 'https://spamcontrol.freecycle.org/view_member';
+        $pageUrl = config('app.tfn_base_url') . '/view_member';
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
 
@@ -25,18 +26,18 @@ class ScrapeMemberAction
             ->pluck('id');
 
         if (!count($results)) {
-            \Log::debug('No data to scrape');
+            Log::debug('ScrapeMember: No data to scrape');
             return;
         }
 
         $login = $scrapeHelper->Login($user, $password);
         if ($login !== true) {
-            \Log::debug('failed to log in');
+            Log::debug('ScrapeMember: failed to log in');
             return;
         }
 
         foreach ($results as $member_id) {
-            \Log::debug($member_id . ' started');
+            Log::debug('ScrapeMember: checking ' . $member_id);
             try {
                 $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
 
@@ -75,12 +76,12 @@ class ScrapeMemberAction
                         'updated_at' => Carbon::now(),
                     ]);
 
-                    \Log::debug($member_id . ' found ip');
+                    Log::debug('ScrapeMember: Found IP ' . $firstIP . ' for ' . $member_id);
                 } else {
-                    \Log::debug($member_id . ' not found ip');
+                    Log::debug('ScrapeMember: No IP found for ' . $member_id);
                 }
             } catch (\Throwable $th) {
-                \Log::debug('scraping error. ' . $th->getMessage());
+                Log::debug('ScrapeMember: scraping error. ' . $th->getMessage());
                 continue;
             }
         }
