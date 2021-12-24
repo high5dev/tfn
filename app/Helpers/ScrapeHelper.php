@@ -44,20 +44,21 @@ class ScrapeHelper
 
     public function SaveSession($cook)
     {
-        $sessionf = './session.json';
+        $sessionf = './tfn_session';
         if ($cook['cookie'] === null) {
             $cook1 = [];
         } else {
             $cook1 = $cook['cookie'];
         }
 
+        Storage::put('tfn_session', json_encode($cook1->toArray()));
         file_put_contents($sessionf, json_encode($cook1->toArray()));
         return true;
     }
 
     public function GetSession()
     {
-        $sessionf = './session.json';
+        $sessionf = './tfn_session';
         if (file_exists($sessionf)) {
             $cookies = json_decode(file_get_contents($sessionf), 1);
             $jar = new \GuzzleHttp\Cookie\CookieJar();
