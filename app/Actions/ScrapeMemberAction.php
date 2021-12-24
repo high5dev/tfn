@@ -22,7 +22,8 @@ class ScrapeMemberAction
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
 
-        $results = Member::where('updated_at', '>', Carbon::now()->subMonth())
+        // get the ID of all members that were last updated over a month ago
+        $results = Member::where('updated_at', '<', Carbon::now()->subMonth())
             ->whereNull('firstip')
             ->pluck('id');
 
