@@ -13,7 +13,7 @@ class ScrapeMemberAction
     // Sorry, I do not have a Skype account
     // You can email me: chris@comgw.co.uk
 
-    public function __invoke()
+    public function __invoke(): void
     {
         Log::debug('ScrapeMember: started');
         $scrapeHelper = new ScrapeHelper();
