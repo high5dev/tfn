@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 class ScrapeMemberAction
 {
     // Sorry, I do not have a Skype account
+    // You can email me: chris@comgw.co.uk
 
     public function __invoke()
     {
