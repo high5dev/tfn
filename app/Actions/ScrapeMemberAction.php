@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class ScrapeMemberAction
 {
-    // Please use skype for me becasuse I contacted with many clients on skype and it is easy to use.
+    // Sorry, I do not have a Skype account
 
     public function __invoke()
     {
