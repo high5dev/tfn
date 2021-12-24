@@ -5,11 +5,15 @@ namespace App\Actions;
 use App\Models\Member;
 use App\Models\Post;
 use App\Models\Watchword;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ScrapeAction
 {
     public function __invoke(): void
     {
+        Log::debug('Scrape started');
+
         $initialID = "80000000";
         $forceInitialID = false;
 
@@ -41,8 +45,9 @@ class ScrapeAction
         $homepage = config('app.tfn_base_url');
         $page = GetPage($homepage);
         if (false === strpos($page, 'You must log in using')) {
-            file_put_contents('./error.txt', $page);
-            die();
+            Logg:debug('Scrape: error logging in');
+            //file_put_contents('./error.txt', $page);
+            return;
         }
 
         $num_rows = 0;
@@ -68,15 +73,17 @@ class ScrapeAction
             $url = config('app.tfn_base_url') . '/type_limit_direction?Type=OFFER&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                file_put_contents('./error.txt', $page);
-                die();
+                Log::debug('Scrape set OFFERs: ' . $page);
+                //file_put_contents('./error.txt', $page);
+                return;
             }
             // select the page
             $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                file_put_contents('./error.txt', $page);
-                die();
+                Log::debug('Scrape select page: ' . $page);
+                //file_put_contents('./error.txt', $page);
+                return;
             }
 
             // get the page
@@ -110,8 +117,9 @@ class ScrapeAction
 
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
-                    print_r($aDataTableDetailHTML[$i]);
-                    die();
+                    Log::debug('Scrape row data: ' . print_r($aDataTableDetailHTML[$i], true));
+                    //print_r($aDataTableDetailHTML[$i]);
+                    return;
                 }
                 for ($j = 0; $j < count($aDataTableHeaderHTML); $j++) {
                     $aTempData[$i][$aDataTableHeaderHTML[$j]] = $aDataTableDetailHTML[$i][$j];
@@ -144,6 +152,7 @@ class ScrapeAction
 
                 // check it is incrementing
                 if ($currentID < $lastID) {
+                    Log::debug('Scrape: OFFERs not incrementing');
                     return;
                 }
 
@@ -230,7 +239,8 @@ class ScrapeAction
             $url = config('app.tfn_base_url') . '/type_limit_direction?Type=WANTED&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                file_put_contents('./error.txt', $page);
+                Log::debug('Scrape set WANTEDs: ' . $page);
+                //file_put_contents('./error.txt', $page);
                 return;
             }
 
@@ -238,8 +248,9 @@ class ScrapeAction
             $url = config('app.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
-                file_put_contents('./error.txt', $page);
-                die();
+                Log::debug('Scrape select page: ' . $page);
+                //file_put_contents('./error.txt', $page);
+                return;
             }
 
             // get the page
@@ -272,8 +283,9 @@ class ScrapeAction
             //#Get row data/detail table with header name as key and outer array index as row number
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
-                    print_r($aDataTableDetailHTML[$i]);
-                    die();
+                    Log::debug('Scrape row data: ' . print_r($aDataTableDetailHTML[$i], true));
+                    //print_r($aDataTableDetailHTML[$i]);
+                    return;
                 }
                 for ($j = 0; $j < count($aDataTableHeaderHTML); $j++) {
                     $aTempData[$i][$aDataTableHeaderHTML[$j]] = $aDataTableDetailHTML[$i][$j];
@@ -306,6 +318,7 @@ class ScrapeAction
 
                 // check it is incrementing
                 if ($currentID < $lastID) {
+                    Log::debug('Scrape: WANTEDs not incrementing');
                     return;
                 }
 
