@@ -81,11 +81,14 @@ class ScrapeMemberAction
                         'firstip' => $firstIP,
                         'updated_at' => Carbon::now(),
                     ]);
-
                     Log::debug('ScrapeMember: Found IP ' . $firstIP . ' for ' . $member_id);
                 } else {
+                    Member::where('id', $member_id)->update([
+                        'updated_at' => Carbon::now(),
+                    ]);
                     Log::debug('ScrapeMember: No IP found for ' . $member_id);
                 }
+
             } catch (\Throwable $th) {
                 Log::debug('ScrapeMember: scraping error. ' . $th->getMessage());
                 continue;
