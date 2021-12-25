@@ -6,6 +6,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ScrapeHelper
 {
+    /**
+     * Check if we are already logged in
+     */
+    public function isLoggedIn(): bool
+    {
+        // get spamcontrol entry page
+        $homepage = config('app.tfn_base_url');
+        $page = $this->GetPage($homepage);
+        if (strpos($page, 'You must log in using')) {
+            return false;
+        }
+        return true;
+    }
+
     public function Login($user, $password)
     {
         $url = 'https://www.freecycle.org';

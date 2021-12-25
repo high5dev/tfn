@@ -16,8 +16,6 @@ class ScrapeAction
         $scrapeHelper = new ScrapeHelper();
 
         $initialID = "80000000";
-        $forceInitialID = false;
-
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
 
@@ -36,32 +34,24 @@ class ScrapeAction
             }
         }
 
-        // Login
-        $status = $scrapeHelper->Login($user, $password);
-        if ($status !== true) {
-            return;
-        }
-
-        // get spamcontrol entry page
-        $homepage = config('app.tfn_base_url');
-        $page = $scrapeHelper->GetPage($homepage);
-        if (strpos($page, 'You must log in using')) {
-            Log::debug('Scrape: error logging in');
-            return;
+        // check if we're logged in
+        if (!$scrapeHelper->isLoggedIn()) {
+            // login
+            $status = $scrapeHelper->Login($user, $password);
+            if ($status !== true) {
+                Log::debug('Scrape: error logging in');
+                return;
+            }
         }
 
         $num_rows = 0;
 
-        if ($forceInitialID) {
-            $currentID = $initialID;
+        // read the last db entry for OFFERs
+        $results = Post::where('type', 'OFFER')->orderBy('id', 'desc')->first();
+        if ($results) {
+            $currentID = $results['id'];
         } else {
-            // read the last db entry for OFFERs
-            $results = Post::where('type', 'OFFER')->orderBy('id', 'desc')->first();
-            if ($results) {
-                $currentID = $results['id'];
-            } else {
-                $currentID = $initialID;
-            }
+            $currentID = $initialID;
         }
 
         // save start Post ID
@@ -74,7 +64,6 @@ class ScrapeAction
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape set OFFERs: ' . $page);
-                //file_put_contents('./error.txt', $page);
                 return;
             }
             // select the page
@@ -82,7 +71,6 @@ class ScrapeAction
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape select page: ' . $page);
-                //file_put_contents('./error.txt', $page);
                 return;
             }
 
@@ -118,14 +106,14 @@ class ScrapeAction
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
                     Log::debug('Scrape row data: ' . print_r($aDataTableDetailHTML[$i], true));
-                    //print_r($aDataTableDetailHTML[$i]);
                     return;
                 }
                 for ($j = 0; $j < count($aDataTableHeaderHTML); $j++) {
                     $aTempData[$i][$aDataTableHeaderHTML[$j]] = $aDataTableDetailHTML[$i][$j];
                 }
             }
-            $aDataTableDetailHTML = $aTempData;unset($aTempData);
+            $aDataTableDetailHTML = $aTempData;
+            unset($aTempData);
 
             foreach ($aDataTableDetailHTML as $row) {
 
@@ -219,16 +207,12 @@ class ScrapeAction
 
         } while (1000 == count($aDataTableDetailHTML));
 
-        if ($forceInitialID) {
-            $currentID = $initialID;
+        // read the last db entry for WANTEDs
+        $results = Post::where('type', 'WANTED')->orderBy('id', 'desc')->first();
+        if ($results) {
+            $currentID = $results['id'];
         } else {
-            // read the last db entry for WANTEDs
-            $results = Post::where('type', 'WANTED')->orderBy('id', 'desc')->first();
-            if ($results) {
-                $currentID = $results['id'];
-            } else {
-                $currentID = $initialID;
-            }
+            $currentID = $initialID;
         }
 
         $lastID = $currentID;
@@ -240,7 +224,6 @@ class ScrapeAction
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape set WANTEDs: ' . $page);
-                //file_put_contents('./error.txt', $page);
                 return;
             }
 
@@ -249,7 +232,6 @@ class ScrapeAction
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape select page: ' . $page);
-                //file_put_contents('./error.txt', $page);
                 return;
             }
 
@@ -284,14 +266,14 @@ class ScrapeAction
             for ($i = 0; $i < count($aDataTableDetailHTML); $i++) {
                 if (count($aDataTableDetailHTML[$i]) != 7) {
                     Log::debug('Scrape row data: ' . print_r($aDataTableDetailHTML[$i], true));
-                    //print_r($aDataTableDetailHTML[$i]);
                     return;
                 }
                 for ($j = 0; $j < count($aDataTableHeaderHTML); $j++) {
                     $aTempData[$i][$aDataTableHeaderHTML[$j]] = $aDataTableDetailHTML[$i][$j];
                 }
             }
-            $aDataTableDetailHTML = $aTempData;unset($aTempData);
+            $aDataTableDetailHTML = $aTempData;
+            unset($aTempData);
 
             foreach ($aDataTableDetailHTML as $row) {
 

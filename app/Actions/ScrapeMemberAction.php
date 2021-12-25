@@ -32,10 +32,14 @@ class ScrapeMemberAction
             return;
         }
 
-        $login = $scrapeHelper->Login($user, $password);
-        if ($login !== true) {
-            Log::debug('ScrapeMember: failed to log in');
-            return;
+        // check if we're logged in
+        if (!$scrapeHelper->isLoggedIn()) {
+            // login
+            $status = $scrapeHelper->Login($user, $password);
+            if ($status !== true) {
+                Log::debug('Scrape: error logging in');
+                return;
+            }
         }
 
         foreach ($results as $member_id) {
