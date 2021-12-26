@@ -63,7 +63,7 @@
 
     </form>
 
-    <form method="post" action="/members/zap/{{ $user->id }}">
+    <form method="post" action="/members/zap/{{ $member->id }}">
         @csrf
         @method("DELETE")
         <button class='btn btn-default' type="submit" alt="Delete"
