@@ -31,11 +31,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $rows = Auth::user()->rows_per_page;
-
-        $members = Member::orderBy('username', 'asc')->paginate($rows)->withQueryString();
-
-        return view('members.index', compact('members'));
+        return view('members.index');
     }
 
     /**

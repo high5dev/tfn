@@ -6,7 +6,7 @@
 
     <h3>List Members</h3>
 
-    <table id="groupsTable" class="table table-striped table-max-width">
+    <table id="membersTable" class="table table-striped table-max-width">
         <thead class="table-light">
         <tr>
             <th>ID</th>
