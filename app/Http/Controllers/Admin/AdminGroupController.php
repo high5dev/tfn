@@ -60,14 +60,18 @@ class AdminGroupController extends Controller
 
         // Total records
         $totalRecords = Group::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = Group::select('count(*) as allcount')->where('name', 'like', '%' . $searchValue . '%')->count();
+        $totalRecordswithFilter = Group::select('count(*) as allcount')
+            ->where('name', 'like', '%' . $searchValue . '%')
+            ->orWhere('region', 'like', '%' . $searchValue . '%')
+            ->orWhere('country', 'like', '%' . $searchValue . '%')
+            ->count();
 
         // Get records with search filter
         $records = Group::orderBy($columnName, $columnSortOrder)
-            ->where('groups.name', 'like', '%' . $searchValue . '%')
-            ->orWhere('groups.region', 'like', '%' . $searchValue . '%')
-            ->orWhere('groups.country', 'like', '%' . $searchValue . '%')
-            ->select('groups.*')
+            ->where('name', 'like', '%' . $searchValue . '%')
+            ->orWhere('region', 'like', '%' . $searchValue . '%')
+            ->orWhere('country', 'like', '%' . $searchValue . '%')
+            ->select('*')
             ->skip($start)
             ->take($rowperpage)
             ->get();

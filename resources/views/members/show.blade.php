@@ -63,6 +63,15 @@
 
     </form>
 
+    <form method="post" action="/members/zap/{{ $user->id }}">
+        @csrf
+        @method("DELETE")
+        <button class='btn btn-default' type="submit" alt="Delete"
+                onclick="return okCancel('Are you sure you want to zap this member?')">
+            <span class="fa fa-trash" aria-hidden="true"></span>
+        </button>
+    </form>
+
     <a href="/members">Back to list of members</a>
 
 @endsection

@@ -134,9 +134,23 @@ class MemberController extends Controller
     }
 
     /**
+     * form to zap a member
+     */
+    public function prezap($id)
+    {
+        $member = Member::where('id', $id)->first();
+
+        if ($member) {
+            return view('members.prezap');
+        }
+
+        return back()->with('error', 'Unable to find that member!');
+    }
+
+    /**
      * zap a member
      */
-    public function zap($id)
+    public function zap(Request $request)
     {
         /**
          * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
@@ -145,14 +159,14 @@ class MemberController extends Controller
          * </form>
          */
 
-        $member = Member::where('id', $id)->first();
+        $member = Member::where('id', $request->id)->first();
 
         if($member) {
             $response = Http::asForm()->post('https://spamcontrol.freecycle.org/zap_member', [
-                'user_id' => $id,
+                'user_id' => $request->id,
             ]);
 
-            dd($response);
+            dd($request, $response);
 
             // delete all their posts if they have any
             if(isset($member->posts)) {
