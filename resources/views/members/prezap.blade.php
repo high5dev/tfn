@@ -8,7 +8,7 @@
 
     <form method="post" action="/members/zap">
         @csrf()
-        @delete()
+        @method('delete')
 
         <fieldset>
 
@@ -40,7 +40,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="justification">Justification:</label>
                 <div class="col-sm-10">
-                    <textarea id="justification" name="justification" class="form-control"
+                    <textarea id="justification" name="justification" class="form-control" required
                               {{ $errors->has('justification') ? ' autofocus' : '' }}>{{ old('justification') }}</textarea>
                     @if ($errors->has('justification'))
                         <div class="alert alert-warning">{{ $errors->first('justification') }}</div>
