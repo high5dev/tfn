@@ -141,7 +141,7 @@ class MemberController extends Controller
         $member = Member::where('id', $id)->first();
 
         if ($member) {
-            return view('members.prezap');
+            return view('members.prezap', compact('member'));
         }
 
         return back()->with('error', 'Unable to find that member!');
