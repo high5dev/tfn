@@ -51,6 +51,14 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="updated_at">Last checked: </label>
+                <div class="col-sm-10">
+                    <input type="text" id="updated_at" name="updated_at" class="form-control"
+                           value="{{ $member->updated_at }}" readonly>
+                </div>
+            </div>
+
         </fieldset>
 
     </form>
