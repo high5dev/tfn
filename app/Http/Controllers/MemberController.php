@@ -62,7 +62,7 @@ class MemberController extends Controller
             ->where('members.id', 'like', '%' . $searchValue . '%')
             ->orWhere('members.username', 'like', '%' . $searchValue . '%')
             ->orWhere('members.email', 'like', '%' . $searchValue . '%')
-            ->orWhere('members.ip', 'like', '%' . $searchValue . '%')
+            ->orWhere('members.firstip', 'like', '%' . $searchValue . '%')
             ->select('members.*')
             ->skip($start)
             ->take($rowperpage)
@@ -78,7 +78,7 @@ class MemberController extends Controller
                 "link" => $record->link,
                 "username" => $record->username,
                 "email" => $record->email,
-                "ip" => $record->ip,
+                "firstip" => $record->firstip,
             );
         }
 
