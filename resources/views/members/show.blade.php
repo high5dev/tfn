@@ -15,7 +15,7 @@
                 <label class="col-sm-2 col-form-label" for="id">ID: </label>
                 <div class="col-sm-10">
                     <input type="text" id="id" name="id" class="form-control"
-                           value="{{ old('id', $user->id) }}" readonly>
+                           value="{{ $member->id }}" readonly>
                 </div>
             </div>
 
@@ -23,7 +23,7 @@
                 <label class="col-sm-2 col-form-label" for="username">Username: </label>
                 <div class="col-sm-10">
                     <input type="email" id="username" name="ussername" class="form-control"
-                           value="{{ old('username', $user->username) }}" readonly>
+                           value="{{ $member->username }}" readonly>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
                 <label class="col-sm-2 col-form-label" for="email">Email: </label>
                 <div class="col-sm-10">
                     <input type="text" id="email" name="email"
-                           value="{{ old('email', $user->email) }}" readonly>
+                           value="{{ $member->email }}" readonly>
                 </div>
             </div>
 
