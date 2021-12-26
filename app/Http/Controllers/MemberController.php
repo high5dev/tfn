@@ -113,7 +113,13 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        // get the member's details
+        $member = Member::where('id', $id)->first();
+
+        if($member) {
+            return view('members.show', compact('member'));
+        }
+        return back()->with('error', 'Mmeber not found!');
     }
 
     /**

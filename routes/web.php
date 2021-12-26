@@ -65,12 +65,12 @@ Route::group([
 
     // User: members
     Route::get('/members', 'MemberController@index');
-    Route::get('/members/create', 'MemberController@create');
-    Route::post('/members', 'MemberController@store');
+//    Route::get('/members/create', 'MemberController@create');
+//    Route::post('/members', 'MemberController@store');
     Route::get('/members/{id}', 'MemberController@show');
-    Route::patch('/members', 'MemberController@update');
-    Route::delete('/members/{id}', 'MemberController@destroy');
-    Route::get('/members/zap/{id}', 'MemberController@zap');
+//    Route::patch('/members', 'MemberController@update');
+//    Route::delete('/members/{id}', 'MemberController@destroy');
+//    Route::get('/members/zap/{id}', 'MemberController@zap');
     Route::get('/getMembers', 'MemberController@getMembers')->name('getMembers');
 
     // User: posts
