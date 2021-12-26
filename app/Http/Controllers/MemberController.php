@@ -59,7 +59,7 @@ class MemberController extends Controller
 
         // Total records
         $totalRecords = Member::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = Member::select('count(*) as allcount')->where('id', 'like', '%' . $searchValue . '%')->count();
+        //$totalRecordswithFilter = Member::select('count(*) as allcount')->where('id', 'like', '%' . $searchValue . '%')->count();
 
         // Get records with search filter
         $records = Member::orderBy($columnName, $columnSortOrder)
@@ -71,6 +71,8 @@ class MemberController extends Controller
             ->skip($start)
             ->take($rowperpage)
             ->get();
+
+        $totalRecordswithFilter = count($records);
 
         $data_arr = array();
 

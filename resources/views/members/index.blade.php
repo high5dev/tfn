@@ -37,7 +37,7 @@
                     { width: "auto", data: 'id' },
                     { width: "auto", data: 'username' },
                     { width: "auto", data: 'email' },
-                    { width: "auto", data: 'IP' },
+                    { width: "auto", data: 'ip' },
                     { width: "auto", data: null,
                         render: function ( data, type, row, meta ) {
                             return '<a href="/members/'+data['id']+'">View</a>'; }
