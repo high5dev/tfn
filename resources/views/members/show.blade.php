@@ -55,4 +55,6 @@
 
     </form>
 
+    <a href="/members">Back to list of members</a>
+
 @endsection
