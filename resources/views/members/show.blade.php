@@ -63,9 +63,9 @@
 
     </form>
 
-    <form method="post" action="/members/prezap/{{ $member->id }}">
+    <form method="post" action="/members/zap/{{ $member->id }}">
         @csrf
-        @method("DELETE")
+        @method("GET")
         <button class='btn btn-default' type="submit" alt="Delete"
                 onclick="return okCancel('Are you sure you want to zap this member?')">
             <span class="fa fa-trash" aria-hidden="true"></span>

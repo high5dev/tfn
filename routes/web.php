@@ -70,8 +70,8 @@ Route::group([
     Route::get('/members/{id}', 'MemberController@show');
 //    Route::patch('/members', 'MemberController@update');
 //    Route::delete('/members/{id}', 'MemberController@destroy');
-    Route::get('/members/zap/{id}', 'MemberController@zap');
-    Route::delete('/members/zap', 'MemberController@prezap');
+    Route::get('/members/zap/{id}', 'MemberController@prezap');
+    Route::delete('/members/zap', 'MemberController@zap');
     Route::get('/getMembers', 'MemberController@getMembers')->name('getMembers');
 
     // User: posts
