@@ -55,20 +55,23 @@ class MemberController extends Controller
 
         // Total records
         $totalRecords = Member::select('count(*) as allcount')->count();
-        //$totalRecordswithFilter = Member::select('count(*) as allcount')->where('id', 'like', '%' . $searchValue . '%')->count();
+        $totalRecordswithFilter = Member::select('count(*) as allcount')
+            ->where('id', 'like', '%' . $searchValue . '%')
+            ->orWhere('username', 'like', '%' . $searchValue . '%')
+            ->orWhere('email', 'like', '%' . $searchValue . '%')
+            ->orWhere('firstip', 'like', '%' . $searchValue . '%')
+            ->count();
 
         // Get records with search filter
         $records = Member::orderBy($columnName, $columnSortOrder)
-            ->where('members.id', 'like', '%' . $searchValue . '%')
-            ->orWhere('members.username', 'like', '%' . $searchValue . '%')
-            ->orWhere('members.email', 'like', '%' . $searchValue . '%')
-            ->orWhere('members.firstip', 'like', '%' . $searchValue . '%')
-            ->select('members.*')
+            ->where('id', 'like', '%' . $searchValue . '%')
+            ->orWhere('username', 'like', '%' . $searchValue . '%')
+            ->orWhere('email', 'like', '%' . $searchValue . '%')
+            ->orWhere('firstip', 'like', '%' . $searchValue . '%')
+            ->select('*')
             ->skip($start)
             ->take($rowperpage)
             ->get();
-
-        $totalRecordswithFilter = count($records);
 
         $data_arr = array();
 
