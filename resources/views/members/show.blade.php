@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="joined_recently">: </label>
+                <label class="col-sm-2 col-form-label" for="joined_recently">New Member: </label>
                 <div class="col-sm-10">
                     <input type="text" id="joined_recently" name="joined_recently" class="form-control"
                            value="{{ $member->joined_recently ? 'YES' : 'NO' }}" readonly>
