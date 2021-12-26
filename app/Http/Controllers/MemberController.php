@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\Member;
+use App\Models\Report;
 use App\Actions\GetIPinfoAction;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
@@ -162,16 +163,19 @@ class MemberController extends Controller
         $member = Member::where('id', $request->id)->first();
 
         if($member) {
-            $response = Http::asForm()->post('https://spamcontrol.freecycle.org/zap_member', [
-                'user_id' => $request->id,
-            ]);
 
-            dd($request, $response);
+            // TODO: Send zap request to SpamTool
+
+            // Create zap report
+            $report = Report::create($request->validated());
 
             // delete all their posts if they have any
             if(isset($member->posts)) {
                 $member->posts()->delete();
             }
+
+            // delete the member
+            $member->delete();
 
             return back()->with('success', 'Successfully zapped the member, all posts removed');
        }
