@@ -4,48 +4,48 @@
 
     @include('layouts.flash_message')
 
-    <h3>List Users</h3>
+    <h3>List Members</h3>
 
-    <a href="/members/create">Create a new member</a>
-
-    <table class="table table-striped">
-        <thead class="thead-light">
+    <table id="groupsTable" class="table table-striped table-max-width">
+        <thead class="table-light">
         <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Actions</th>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>IP</th>
+            <th>Actions</th>
         </tr>
         </thead>
-        <tbody>
-        @foreach($members as $member)
-            <tr>
-                <td>{{ $member->username }}</td>
-                <td>{{ $member->email }}</td>
-                <td>
-                    <div class="row">
-                        <div class="span6">
-                            <form method="get" action="/members/{{ $member->id }}">
-                                @csrf
-                                <button class='btn btn-default' type="submit" alt="Edit">
-                                    <span class="fa fa-edit" title="Edit member" aria-hidden="true"></span>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="span6">
-                            <form method="post" action="/members/{{ $member->id }}">
-                                @csrf
-                                @method("DELETE")
-                                <button class='btn btn-default' type="submit" alt="Delete"
-                                        onclick="return okCancel('Are you sure you want to delete this member?')">
-                                    <span class="fa fa-trash" title="Delete member" aria-hidden="true"></span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
     </table>
+
+    <!-- Script -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            // DataTable
+            $('#membersTable').DataTable({
+                autoWidth: false,
+                fixedHeader: {
+                    header: true,
+                    footer: true
+                },
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                ajax: "{{route('getMembers')}}",
+                columns: [
+                    { width: "auto", data: 'id' },
+                    { width: "auto", data: 'username' },
+                    { width: "auto", data: 'email' },
+                    { width: "auto", data: 'IP' },
+                    { width: "auto", data: null,
+                        render: function ( data, type, row, meta ) {
+                            return '<a href="/members/'+data['id']+'">View</a>'; }
+                    },
+                ]
+            });
+
+        });
+    </script>
 
 @endsection

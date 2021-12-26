@@ -39,6 +39,62 @@ class MemberController extends Controller
     }
 
     /**
+     * index - Process ajax request
+     */
+    public function getMembers(Request $request)
+    {
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // total number of rows per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+        // Total records
+        $totalRecords = Member::select('count(*) as allcount')->count();
+        $totalRecordswithFilter = Member::select('count(*) as allcount')->where('id', 'like', '%' . $searchValue . '%')->count();
+
+        // Get records with search filter
+        $records = Member::orderBy($columnName, $columnSortOrder)
+            ->where('members.id', 'like', '%' . $searchValue . '%')
+            ->orWhere('members.username', 'like', '%' . $searchValue . '%')
+            ->orWhere('members.email', 'like', '%' . $searchValue . '%')
+            ->orWhere('members.ip', 'like', '%' . $searchValue . '%')
+            ->select('members.*')
+            ->skip($start)
+            ->take($rowperpage)
+            ->get();
+
+        $data_arr = array();
+
+        foreach ($records as $record) {
+            $data_arr[] = array(
+                "id" => $record->id,
+                "link" => $record->link,
+                "username" => $record->username,
+                "email" => $record->email,
+                "ip" => $record->ip,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr,
+        );
+
+        echo json_encode($response);
+    }
+
+    /**
      * show form to create a new member
      */
     public function create()
