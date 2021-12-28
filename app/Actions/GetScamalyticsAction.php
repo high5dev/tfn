@@ -4,15 +4,14 @@ namespace App\Actions;
 
 use Illuminate\Support\Facades\Http;
 
-class GetIPinfoAction
+class GetScamalyticsAction
 {
     /**
      * get info on an IP address
      */
     public function execute($ip): array
     {
-        $strictness = 1;
-        $url = config('app.ip_base_url') . config('app.ip_api_key') . '/' . $ip . '?strictness=' . $strictness;
+        $url = config('app.scam_base_url') . '/' . config('app.scam_api_user') . '/?key=' . config('app.scam_api_key') . '&ip=' . $ip;
         $response = Http::get($url);
         return $response->json();
     }
@@ -50,4 +49,3 @@ class GetIPinfoAction
 
     }
 }
-

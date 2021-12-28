@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Member;
 use App\Models\Report;
 use App\Actions\GetIPinfoAction;
+use App\Actions\GetScamalyticsAction;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -209,10 +210,12 @@ class MemberController extends Controller
     /**
      * test
      */
-    public function test(Request $request, GetIPinfoAction $IPinfo)
+    public function test(Request $request, GetIPinfoAction $IPinfo, GetScamalyticsAction $Scamalytics)
     {
-        $results = $IPinfo->execute($request->ip);
+        $ip = $IPinfo->execute($request->ip);
 
-        dd($results);
+        $scam = $Scamalytics->execute($request->ip);
+
+        dd($ip, $scam);
     }
 }

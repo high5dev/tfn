@@ -4,6 +4,10 @@ return [
 
     'dictionary' => env('DICTIONARY', 'dictionary.txt'),
 
+    'scam_base_url' => env('SCAM_BASE_URL'),
+    'scam_api_user' => env('SCAM_API_USER'),
+    'scam_api_key' => env('SCAM_API_KEY'),
+
     'ip_base_url' => env('IP_BASE_URL'),
     'ip_api_key' => env('IP_API_KEY'),
 
