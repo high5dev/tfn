@@ -163,6 +163,7 @@ class MemberController extends Controller
          */
 
         $member = Member::where('id', $request->id)->first();
+        dd($member);
 
         if($member) {
 
