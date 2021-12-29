@@ -167,14 +167,13 @@ class MemberController extends Controller
         if (Hash::check($request->password, Auth::User()->password)) {
 
             $member = Member::where('id', $request->id)->first();
-            dd($member);
 
             if ($member) {
 
                 // TODO: Send zap request to SpamTool
 
                 // Create zap report
-                $report = Report::create($request->validated());
+                Report::create($request->validated());
 
                 // delete all their posts if they have any
                 if (isset($member->posts)) {
