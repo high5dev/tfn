@@ -121,12 +121,12 @@
             <legend>Confirmation</legend>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="admin_password">Your Password:</label>
+                <label class="col-sm-2 col-form-label" for="password">Your Password:</label>
                 <div class="col-sm-10">
-                    <input type="password" id="admin_password" name="admin_password" class="form-control"
-                           {{ $errors->has('admin_password') ? ' autofocus' : '' }} required>
-                    @if ($errors->has('admin_password'))
-                        <div class="alert alert-warning">{{ $errors->first('admin_password') }}</div>
+                    <input type="password" id="password" name="password" class="form-control"
+                           {{ $errors->has('password') ? ' autofocus' : '' }} required>
+                    @if ($errors->has('password'))
+                        <div class="alert alert-warning">{{ $errors->first('password') }}</div>
                     @endif
                 </div>
             </div>

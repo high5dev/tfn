@@ -122,7 +122,7 @@ class MemberController extends Controller
         // get the member's details
         $member = Member::where('id', $id)->first();
 
-        if($member) {
+        if ($member) {
             return view('members.show', compact('member'));
         }
         return back()->with('error', 'Mmeber not found!');
@@ -162,28 +162,36 @@ class MemberController extends Controller
          * </form>
          */
 
-        $member = Member::where('id', $request->id)->first();
-        dd($member);
+        // confirm admin password
+        if (Hash::check($request->password, Auth::User()->password)) {
 
-        if($member) {
+            $member = Member::where('id', $request->id)->first();
+            dd($member);
 
-            // TODO: Send zap request to SpamTool
+            if ($member) {
 
-            // Create zap report
-            $report = Report::create($request->validated());
+                // TODO: Send zap request to SpamTool
 
-            // delete all their posts if they have any
-            if(isset($member->posts)) {
-                //$member->posts()->delete();
+                // Create zap report
+                $report = Report::create($request->validated());
+
+                // delete all their posts if they have any
+                if (isset($member->posts)) {
+                    //$member->posts()->delete();
+                }
+
+                // delete the member
+                //$member->delete();
+
+                return back()->with('success', 'Successfully zapped the member, all posts removed');
             }
 
-            // delete the member
-            //$member->delete();
+            return redirect('/home')->with('error', 'Unable to find that member, not zapped!');
 
-            return back()->with('success', 'Successfully zapped the member, all posts removed');
-       }
-
-        return redirect('/home')->with('error', 'Unable to find that member, not zapped!');
+        }
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'Incorrect password !');
     }
 
     /**
@@ -197,7 +205,7 @@ class MemberController extends Controller
         if ($member) {
 
             // delete all their posts if they have any
-            if(isset($member->posts)) {
+            if (isset($member->posts)) {
                 $member->posts()->delete();
             }
 
