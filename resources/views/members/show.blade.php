@@ -66,9 +66,9 @@
     <form method="post" action="/members/zap/{{ $member->id }}">
         @csrf
         @method("GET")
-        <button class='btn btn-default' type="submit" alt="Delete"
+        <button class='btn btn-default' type="submit" alt="Zap Account" title="Zap Account"
                 onclick="return okCancel('Are you sure you want to zap this member?')">
-            <span class="fa fa-trash" aria-hidden="true"></span>
+            ZAP THIS ACCOUNT
         </button>
     </form>
 
