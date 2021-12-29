@@ -39,16 +39,7 @@ class ReportStoreRequest extends FormRequest
                 "min:5",
                 "max:64000"
             ],
-            'username' => [
-                "required",
-                "string",
-                "max:254"
-            ],
-            'email' => [
-                "required",
-                "string",
-            ],
-            'regions' => [
+            'region' => [
                 "required",
                 "string",
                 "min:1",
@@ -59,6 +50,10 @@ class ReportStoreRequest extends FormRequest
                 "string",
                 "min:1",
                 "max:254",
+            ],
+            'password' => [
+                "required",
+                "string",
             ],
         ];
     }
