@@ -39,11 +39,12 @@
 
             <legend>Posts</legend>
 
-            <table>
+            <table class="table table-striped">
                 @if(count($member->posts))
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Type</th>
                         <th>Subject</th>
                         <th>Date</th>
                     </tr>
@@ -51,8 +52,9 @@
                     @foreach($member->posts as $post)
                         <tr>
                             <td>{{ $post->id }}</td>
+                            <td>{{ $post->type }}</td>
                             <td>{{ $post->subject }}</td>
-                            <td>{{ $member->dated }}</td>
+                            <td>{{ $post->dated }}</td>
                         </tr>
                     @endforeach
                 @else
