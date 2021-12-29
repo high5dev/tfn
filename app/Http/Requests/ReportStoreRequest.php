@@ -30,7 +30,7 @@ class ReportStoreRequest extends FormRequest
             'found' => [
                 "required",
                 "string",
-                "in:HSGOA|HSMOD|HSMEM|SEARCH|SCAN|WATCH|OTHER",
+                Rule::in(['HSGOA', 'HSMOD', 'HSMEM', 'SEARCH', 'SCAN', 'WATCH', 'OTHER']),
             ],
             'justification' => [
                 "required",
