@@ -24,16 +24,43 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="username">Username:</label>
                 <div class="col-sm-10">
-                    <input type="email" id="username" name="username" class="form-control" value="{{ $member->username }}" readonly>
+                    <input type="email" id="username" name="username" class="form-control"
+                           value="{{ $member->username }}" readonly>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="email">Email:</label>
                 <div class="col-sm-10">
-                    <input type="text" id="email" name="email" class="form-control" value="{{ $member->email }}" readonly>
+                    <input type="text" id="email" name="email" class="form-control" value="{{ $member->email }}"
+                           readonly>
                 </div>
             </div>
+
+            <legend>Posts</legend>
+
+            <table>
+                @if(count($member->posts))
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    @foreach($member->posts as $post)
+                        <tr>
+                            <td>{{ $post->id }}</td>
+                            <td>{{ $post->subject }}</td>
+                            <td>{{ $member->dated }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td>This member has no posts in the local database</td>
+                    </tr>
+                @endif
+            </table>
 
             <legend>Zap Report</legend>
 
