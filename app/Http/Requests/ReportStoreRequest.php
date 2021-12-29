@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReportstoreRequest extends FormRequest
+class ReportStoreRequest extends FormRequest
 {
 
     /**

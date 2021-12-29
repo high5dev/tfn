@@ -7,7 +7,7 @@ use App\Models\Member;
 use App\Models\Report;
 use App\Actions\GetIPinfoAction;
 use App\Actions\GetScamalyticsAction;
-use App\Http\Requests\ReportstoreRequest;
+use App\Http\Requests\ReportStoreRequest;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -153,7 +153,7 @@ class MemberController extends Controller
     /**
      * zap a member
      */
-    public function zap(ReportstoreRequest $request)
+    public function zap(ReportStoreRequest $request)
     {
         /**
          * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
