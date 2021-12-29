@@ -173,7 +173,15 @@ class MemberController extends Controller
                 // TODO: Send zap request to SpamTool
 
                 // Create zap report
-                Report::create($request->validated());
+                $report = new Report;
+                $report->user_id = $request->id;
+                $report->justification = $request->justification;
+                $report->found = $request->found;
+                $report->regions = $request->regions;
+                $report->warnings = $request->warnings;
+                $report->warning_emails = '';
+                $report->body = '';
+                $report->save();
 
                 // delete all their posts if they have any
                 if (isset($member->posts)) {
