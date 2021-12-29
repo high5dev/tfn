@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReportStoreRequest extends FormRequest
