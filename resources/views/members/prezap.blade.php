@@ -77,6 +77,7 @@
                         <option value="SEARCH"{{ 'SEARCH'==old('found') ? ' selected' : '' }}>App Search</option>
                         <option value="SCAN"{{ 'SCAN'==old('found') ? ' selected' : '' }}>App Scan</option>
                         <option value="WATCH"{{ 'WATCH'==old('found') ? ' selected' : '' }}>App Watchwords</option>
+                        <option value="OTHER"{{ 'OTHER'==old('found') ? ' selected' : '' }}>Other</option>
                     </select>
                     @if ($errors->has('found'))
                         <div class="alert alert-warning">{{ $errors->first('found') }}</div>
@@ -140,5 +141,13 @@
         </div>
 
     </form>
+
+    <ul>
+        <li>Please fill out ALL the fields</li>
+        <li>If no warnings are neccessary, put "None" in the warnings field.</li>
+        <li>If you send warnings, please reference the HS ticket in the Warnings field.</li>
+        <li>If you select "Other" for how the account was found, please expand in the Justification area.</li>
+        <li>In the region field put the region of the post that triggered the zap.</li>
+    </ul>
 
 @endsection

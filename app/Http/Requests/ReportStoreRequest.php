@@ -27,6 +27,11 @@ class ReportStoreRequest extends FormRequest
     {
         // validate the form
         return [
+            'found' => [
+                "required",
+                "string",
+                "in:HSGOA|HSMOD|HSMEM|SEARCH|SCAN|WATCH|OTHER",
+            ],
             'justification' => [
                 "required",
                 "string",
@@ -41,12 +46,6 @@ class ReportStoreRequest extends FormRequest
             'email' => [
                 "required",
                 "string",
-            ],
-            'found' => [
-                "required",
-                "string",
-                "min:1",
-                "max:254",
             ],
             'regions' => [
                 "required",
