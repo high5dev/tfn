@@ -7,6 +7,7 @@ use App\Models\Member;
 use App\Models\Report;
 use App\Actions\GetIPinfoAction;
 use App\Actions\GetScamalyticsAction;
+use App\Http\Requests\ReportstoreRequest;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -152,7 +153,7 @@ class MemberController extends Controller
     /**
      * zap a member
      */
-    public function zap(Request $request)
+    public function zap(ReportstoreRequest $request)
     {
         /**
          * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
@@ -172,11 +173,11 @@ class MemberController extends Controller
 
             // delete all their posts if they have any
             if(isset($member->posts)) {
-                $member->posts()->delete();
+                //$member->posts()->delete();
             }
 
             // delete the member
-            $member->delete();
+            //$member->delete();
 
             return back()->with('success', 'Successfully zapped the member, all posts removed');
        }
