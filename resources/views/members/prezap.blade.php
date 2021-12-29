@@ -80,6 +80,17 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="found">Found:</label>
                 <div class="col-sm-10">
+                    <div class="form-group col-sm-4">
+                        <select id="found" name="found" class="form-control">
+                            <option value="">Please select how the account was discovered</option>
+                            <option value="HSGOA"{{ 'HSGOA'==old('found') ? ' selected' : '' }}>HS GOA Report</option>
+                            <option value="HSMOD"{{ 'HSMOD'==old('found') ? ' selected' : '' }}>HS MOD Report</option>
+                            <option value="HSMEM"{{ 'HSMEM'==old('found') ? ' selected' : '' }}>HS Member Report</option>
+                            <option value="SEARCH"{{ 'SEARCH'==old('found') ? ' selected' : '' }}>App Search</option>
+                            <option value="SCAN"{{ 'SCAN'==old('found') ? ' selected' : '' }}>App Scan</option>
+                            <option value="WATCH"{{ 'WATCH'==old('found') ? ' selected' : '' }}>App Watchwords</option>
+                        </select>
+                    </div>
                     <input type="text" id="found" name="found" class="form-control" value="{{ old('found') }}"
                            {{ $errors->has('found') ? ' autofocus' : '' }} required>
                     @if ($errors->has('found'))
