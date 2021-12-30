@@ -96,9 +96,9 @@ class ScrapeHelper
                 }
                 return $jar;
             }
-            return null;
+            return collect();
         }
-        return null;
+        return collect();
 
         /**
          * if (Storage::exists('tfn_session')) {
