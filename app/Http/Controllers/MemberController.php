@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\GetMemberDetailsAction;
 use Auth;
 use App\Models\Member;
 use App\Models\Report;
@@ -154,7 +155,7 @@ class MemberController extends Controller
     /**
      * zap a member
      */
-    public function zap(ReportStoreRequest $request)
+    public function zap(ReportStoreRequest $request, GetMemberDetailsAction $getMember)
     {
         /**
          * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
@@ -170,7 +171,12 @@ class MemberController extends Controller
 
             if ($member) {
 
+                // get user details
+                $page = $getMember->execute($member->id);
+                dd($page);
+
                 // TODO: Send zap request to SpamTool
+                // TODO: Get email replies
 
                 // Create zap report
                 $report = new Report;
@@ -191,7 +197,7 @@ class MemberController extends Controller
                 // delete the member
                 //$member->delete();
 
-                return back()->with('success', 'Successfully zapped the member, all posts removed');
+                return redirect('/home')->with('success', 'Successfully zapped the member, all posts removed');
             }
 
             return redirect('/home')->with('error', 'Unable to find that member, not zapped!');
