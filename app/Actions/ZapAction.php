@@ -11,7 +11,7 @@ class ZapAction
 {
     public function execute($id): void
     {
-        $scrapeHelper = new ScrapeHelper();
+        $scrapeHelper = new ScrapeHelper('zap');
 
         $pageUrl = config('app.tfn_base_url') . '/zap_member';
         $user = config('app.tfn_username');

@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ScrapeHelper
 {
+    protected $cookie_id;
+
+    /**
+     * create a new instance.
+     */
+    public function __construct($cookie_id = 'cli')
+    {
+        // store the cookie id
+        $this->cookie_id = $cookie_id;
+    }
+
     /**
      * Check if we are already logged in
      */
@@ -23,7 +34,7 @@ class ScrapeHelper
 
     public function Login($user, $password)
     {
-        $url = 'https://www.freecycle.org';
+        $url = config('app.tfn_base_url');
         $var = [];
         $vars = [];
         $vars['user'] = trim($user);
@@ -31,9 +42,9 @@ class ScrapeHelper
         $var['Origin'] = $url;
         $data = $this->httpPost($url . '/login', $vars);
 
-        $xdata = $this->SaveSession($data);
-        $xpage = $data['body'];
-        if (strpos($xpage, 'Invalid username/email or password.') === false) {
+        $this->SaveSession($data);
+        $body = $data['body'];
+        if (strpos($body, 'Invalid username/email or password.') === false) {
             return true;
         } else {
             return false;
@@ -59,26 +70,26 @@ class ScrapeHelper
         return $page;
     }
 
-    public function SaveSession($cook)
+    public function SaveSession($data)
     {
-        if ($cook['cookie'] === null) {
-            $cook1 = [];
+        if ($data['cookie'] === null) {
+            $cookie = [];
         } else {
-            $cook1 = $cook['cookie'];
+            $cookie = $data['cookie'];
         }
-        $payload = json_encode($cook1->toArray());
+        $payload = json_encode($cookie->toArray());
 
-        Remote::updateOrCreate(['name' => 'web'],['payload' => $payload]);
+        Remote::updateOrCreate(['name' => $this->cookie_id],['payload' => $payload]);
         //Storage::put('tfn_session', $payload);
         return true;
     }
 
     public function GetSession()
     {
-        $session = Remote::firstOrCreate(['name' => 'web']);
+        $session = Remote::firstOrCreate(['name' => $this->cookie_id]);
         if ($session) {
-            $cookies = json_decode($session->payload, 1);
             $jar = new \GuzzleHttp\Cookie\CookieJar();
+            $cookies = json_decode($session->payload, 1);
             foreach ($cookies as $cookie) {
                 $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
             }

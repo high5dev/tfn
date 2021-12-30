@@ -11,7 +11,7 @@ class GetMemberDetailsAction
 {
     public function execute($member_id): string
     {
-        $scrapeHelper = new ScrapeHelper();
+        $scrapeHelper = new ScrapeHelper('getMmeber');
 
         $pageUrl = config('app.tfn_base_url') . '/view_member';
         $user = config('app.tfn_username');

@@ -13,7 +13,7 @@ class ScrapeAction
     public function __invoke(): void
     {
         Log::debug('Scrape started');
-        $scrapeHelper = new ScrapeHelper();
+        $scrapeHelper = new ScrapeHelper('scrape');
 
         $initialID = "80000000";
         $user = config('app.tfn_username');

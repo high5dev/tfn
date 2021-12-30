@@ -13,7 +13,7 @@ class ScrapeMemberAction
     public function __invoke(): void
     {
         Log::debug('ScrapeMember: started');
-        $scrapeHelper = new ScrapeHelper();
+        $scrapeHelper = new ScrapeHelper('scrapeMember');
 
         $pageUrl = config('app.tfn_base_url') . '/view_member';
         $user = config('app.tfn_username');
