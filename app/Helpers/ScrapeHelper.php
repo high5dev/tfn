@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Remote;
 use Illuminate\Support\Facades\Storage;
 
 class ScrapeHelper
@@ -60,24 +61,24 @@ class ScrapeHelper
 
     public function SaveSession($cook)
     {
-        $sessionf = './tfn_session';
         if ($cook['cookie'] === null) {
             $cook1 = [];
         } else {
             $cook1 = $cook['cookie'];
         }
+        $payload = json_encode($cook1->toArray());
 
-        Storage::put('tfn_session', json_encode($cook1->toArray()));
-        //file_put_contents($sessionf, json_encode($cook1->toArray()));
+        Remote::insertOrUpdate(['name' => 'web'],['payload' => $payload]);
+        Storage::put('tfn_session', $payload);
         return true;
     }
 
     public function GetSession()
     {
-        //$sessionf = './tfn_session';
-        //if (file_exists($sessionf)) {
+        $session = Remote::where('name', 'web')->first();
+        $cookies = json_decode($session->payload, 1);
+
         if (Storage::exists('tfn_session')) {
-            //$cookies = json_decode(file_get_contents($sessionf), 1);
             $cookies = json_decode(Storage::get('tfn_session'), 1);
             $jar = new \GuzzleHttp\Cookie\CookieJar();
             foreach ($cookies as $cookie) {
