@@ -90,8 +90,12 @@ class ScrapeHelper
         if ($session) {
             $jar = new \GuzzleHttp\Cookie\CookieJar();
             $cookies = json_decode($session->payload, 1);
-            foreach ($cookies as $cookie) {
-                $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
+            if (is_array($cookies)) {
+                foreach ($cookies as $cookie) {
+                    $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
+                }
+            } else {
+                $jar = [];
             }
             return $jar;
         } else {
