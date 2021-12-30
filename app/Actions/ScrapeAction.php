@@ -36,6 +36,7 @@ class ScrapeAction
 
         // check if we're logged in
         if (!$scrapeHelper->isLoggedIn()) {
+            Log::debug('Scrape: Logging in');
             // login
             $status = $scrapeHelper->Login($user, $password);
             if ($status !== true) {
@@ -53,6 +54,7 @@ class ScrapeAction
         } else {
             $currentID = $initialID;
         }
+        Log::debug('Scrape: Current OFFER ID: ' . $currentID);
 
         // save start Post ID
         $lastID = $currentID;
@@ -77,6 +79,8 @@ class ScrapeAction
             // get the page
             $url = config('app.tfn_base_url') . '/display_posts';
             $page = $scrapeHelper->GetPage($url);
+
+            Log::debug('Scrape: got page of OFFERs');
 
             $DOM = new \DOMDocument('1.0', 'UTF-8');
             @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
@@ -214,6 +218,7 @@ class ScrapeAction
         } else {
             $currentID = $initialID;
         }
+        Log::debug('Scrape: Current WANTED ID: ' . $currentID);
 
         $lastID = $currentID;
 
@@ -366,6 +371,8 @@ class ScrapeAction
             $lastID = $currentID;
 
         } while (1000 == count($aDataTableDetailHTML));
+
+        Log::debug('Scrape: Completed');
 
     }
 
