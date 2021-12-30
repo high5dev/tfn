@@ -185,7 +185,7 @@ class MemberController extends Controller
                 $report->regions = $request->regions;
                 $report->warnings = $request->warnings;
                 $report->warning_emails = '';
-                $report->body = '';
+                $report->body = $page;
                 $report->save();
 
                 // delete all their posts if they have any
