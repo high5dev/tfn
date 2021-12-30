@@ -79,7 +79,7 @@ class ScrapeHelper
         }
         $payload = json_encode($cookie->toArray());
 
-        Remote::updateOrCreate(['name' => $this->cookie_id],['payload' => $payload]);
+        Remote::updateOrCreate(['name' => $this->cookie_id], ['payload' => $payload]);
         //Storage::put('tfn_session', $payload);
         return true;
     }
@@ -94,25 +94,23 @@ class ScrapeHelper
                 foreach ($cookies as $cookie) {
                     $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
                 }
-            } else {
-                $jar = [];
+                return $jar;
             }
-            return $jar;
-        } else {
-            return [];
+            return null;
         }
+        return null;
 
         /**
-        if (Storage::exists('tfn_session')) {
-            $cookies = json_decode(Storage::get('tfn_session'), 1);
-            $jar = new \GuzzleHttp\Cookie\CookieJar();
-            foreach ($cookies as $cookie) {
-                $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
-            }
-            return $jar;
-        } else {
-            return [];
-        }
+         * if (Storage::exists('tfn_session')) {
+         * $cookies = json_decode(Storage::get('tfn_session'), 1);
+         * $jar = new \GuzzleHttp\Cookie\CookieJar();
+         * foreach ($cookies as $cookie) {
+         * $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
+         * }
+         * return $jar;
+         * } else {
+         * return [];
+         * }
          */
 
     }
