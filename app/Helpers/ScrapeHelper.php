@@ -68,7 +68,7 @@ class ScrapeHelper
         }
         $payload = json_encode($cook1->toArray());
 
-        Remote::insertOrUpdate(['name' => 'web'],['payload' => $payload]);
+        Remote::updateOrCreate(['name' => 'web'],['payload' => $payload]);
         Storage::put('tfn_session', $payload);
         return true;
     }
