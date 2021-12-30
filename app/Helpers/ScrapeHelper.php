@@ -75,7 +75,7 @@ class ScrapeHelper
 
     public function GetSession()
     {
-        $session = Remote::firstOrCreate(['name' => 'web'],['name' => 'web']);
+        $session = Remote::firstOrCreate(['name' => 'web']);
         $cookies = json_decode($session->payload, 1);
 
         if (Storage::exists('tfn_session')) {

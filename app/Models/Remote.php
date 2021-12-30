@@ -12,7 +12,7 @@ class Remote extends Model
      * @var array
      */
     protected $fillable = [
+        'name',
         'payload',
-        'last_activity',
     ];
 }
