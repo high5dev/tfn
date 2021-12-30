@@ -244,6 +244,8 @@ class ScrapeAction
             $url = config('app.tfn_base_url') . '/display_posts';
             $page = $scrapeHelper->GetPage($url);
 
+            Log::debug('Scrape: got page of WANTEDs');
+
             $DOM = new \DOMDocument('1.0', 'UTF-8');
             @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
 
