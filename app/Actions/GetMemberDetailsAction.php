@@ -29,7 +29,9 @@ class GetMemberDetailsAction
 
         try {
             $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
-            return $page;
+            $start = strpos($page, '<table>');
+            $stop = strpos($page, '</body>');
+            return substr($page, $start, $stop);
         } catch (\Throwable $th) {
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
         }
