@@ -173,7 +173,6 @@ class MemberController extends Controller
 
                 // get user details
                 $page = $getMember->execute($member->id);
-                dd($page);
 
                 // TODO: Send zap request to SpamTool
                 // TODO: Get email replies
