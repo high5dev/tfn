@@ -86,9 +86,9 @@ class ScrapeHelper
 
     public function GetSession()
     {
+        $jar = new \GuzzleHttp\Cookie\CookieJar();
         $session = Remote::firstOrCreate(['name' => $this->cookie_id]);
         if ($session) {
-            $jar = new \GuzzleHttp\Cookie\CookieJar();
             $cookies = json_decode($session->payload, 1);
             if (is_array($cookies)) {
                 foreach ($cookies as $cookie) {
@@ -96,9 +96,9 @@ class ScrapeHelper
                 }
                 return $jar;
             }
-            return collect([]);
+            return $jar;
         }
-        return collect([]);
+        return $jar;
 
         /**
          * if (Storage::exists('tfn_session')) {
