@@ -80,7 +80,6 @@ class ScrapeHelper
         $payload = json_encode($cookie->toArray());
 
         Remote::updateOrCreate(['name' => $this->cookie_id], ['payload' => $payload]);
-        //Storage::put('tfn_session', $payload);
         return true;
     }
 
@@ -99,20 +98,6 @@ class ScrapeHelper
             return $jar;
         }
         return $jar;
-
-        /**
-         * if (Storage::exists('tfn_session')) {
-         * $cookies = json_decode(Storage::get('tfn_session'), 1);
-         * $jar = new \GuzzleHttp\Cookie\CookieJar();
-         * foreach ($cookies as $cookie) {
-         * $jar->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
-         * }
-         * return $jar;
-         * } else {
-         * return [];
-         * }
-         */
-
     }
 
     public function httpPost($url, $data, $cookie = 0)
