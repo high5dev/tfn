@@ -11,6 +11,7 @@ class GetMemberDetailsAction
 {
     public function execute($member_id): string
     {
+        Log:debug('GetMemberDetails: Started');
         $scrapeHelper = new ScrapeHelper('getMember');
 
         $pageUrl = config('app.tfn_base_url') . '/view_member';
@@ -19,15 +20,17 @@ class GetMemberDetailsAction
 
         // check if we're logged in
         if (!$scrapeHelper->isLoggedIn()) {
+            Log::debug('GetMemberDetails: Logging in');
             // login
             $status = $scrapeHelper->Login($user, $password);
             if ($status !== true) {
-                Log::debug('GetMemberDetails: error logging in');
+                Log::debug('GetMemberDetails: Error logging in');
                 return '';
             }
         }
 
         try {
+            Log::debug('GetMemberDetails: Scraping');
             $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
 
             // create the DOM then load the page
