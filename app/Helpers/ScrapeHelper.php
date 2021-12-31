@@ -26,11 +26,11 @@ class ScrapeHelper
         // get spamcontrol entry page
         $homepage = config('app.tfn_base_url');
         $page = $this->GetPage($homepage);
-        Log::debug('isLoggedIn: ' . print_r($page, 1));
-        if (strpos($page, 'You must log in using')) {
-            return false;
+        if (false === stripos($page, 'You must log in using')) {
+            // if the string is not found then we must be logged in
+            return true;
         }
-        return true;
+        return false;
     }
 
     public function Login($user, $password)
