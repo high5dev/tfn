@@ -23,26 +23,49 @@ class GetMemberDetailsAction
             $status = $scrapeHelper->Login($user, $password);
             if ($status !== true) {
                 Log::debug('GetMemberDetails: error logging in');
-                 return '';
+                return '';
             }
         }
 
         try {
             $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
 
+            // create the DOM then load the page
             $dom = new \DOMDocument('1.0', 'UTF-8');
             @$dom->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
 
+            // get the five tables in order
             $table1 = $dom->getElementsByTagName('table')->item(0);
             $table2 = $dom->getElementsByTagName('table')->item(1);
             $table3 = $dom->getElementsByTagName('table')->item(2);
+            $table4 = $dom->getElementsByTagName('table')->item(3);
+            $table5 = $dom->getElementsByTagName('table')->item(4);
 
-            echo '<pre>';
+            // create the array to hold the data
+            $data = [
+                'user_details' => [],
+                'auth_tokens' => [],
+                'group_membership' => [],
+                'replies' => [],
+                'post_details' => []
+            ];
+
+            // first table: User details
+            $tr = $table1->getElementsByTagName('tr')->item(0);
+            $tds = $tr->getElementsByTagName('td');
+            $data['user_details'] = [
+                'user_id' => $tds->item(1),
+                'username' => $tds->item(3),
+                'email' => $tds->item(5),
+                'first_ip' => $tds->item(7)
+            ];
+
+            dd($data);
+
             // iterate over each row in the table
-            foreach($table1->getElementsByTagName('tr') as $tr)
-            {
+            foreach ($table2->getElementsByTagName('tr') as $tr) {
                 $tds = $tr->getElementsByTagName('td'); // get the columns in this row
-                foreach($tds as $td) {
+                foreach ($tds as $td) {
                     echo $td->nodeValue;
                     echo "\n";
                 }
@@ -50,21 +73,9 @@ class GetMemberDetailsAction
             echo "\n";
 
             // iterate over each row in the table
-            foreach($table2->getElementsByTagName('tr') as $tr)
-            {
+            foreach ($table3->getElementsByTagName('tr') as $tr) {
                 $tds = $tr->getElementsByTagName('td'); // get the columns in this row
-                foreach($tds as $td) {
-                    echo $td->nodeValue;
-                    echo "\n";
-                }
-            }
-            echo "\n";
-
-            // iterate over each row in the table
-            foreach($table3->getElementsByTagName('tr') as $tr)
-            {
-                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
-                foreach($tds as $td) {
+                foreach ($tds as $td) {
                     echo $td->nodeValue;
                     echo "\n";
                 }
