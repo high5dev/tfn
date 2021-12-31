@@ -54,10 +54,10 @@ class GetMemberDetailsAction
             $tr = $table1->getElementsByTagName('tr')->item(0);
             $tds = $tr->getElementsByTagName('td');
             $data['user_details'] = [
-                'user_id' => $tds->item(1),
-                'username' => $tds->item(3),
-                'email' => $tds->item(5),
-                'first_ip' => $tds->item(7)
+                'user_id' => $tds->item(1)->nodeValue,
+                'username' => $tds->item(3)->nodeValue,
+                'email' => $tds->item(5)->nodeValue,
+                'first_ip' => $tds->item(7)->nodeValue
             ];
 
             dd($data);
