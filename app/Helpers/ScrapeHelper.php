@@ -34,7 +34,7 @@ class ScrapeHelper
 
     public function Login($user, $password)
     {
-        $url = config('app.tfn_base_url');
+        $url = config('app.tfn_web_url');
         $var = [];
         $vars = [];
         $vars['user'] = trim($user);
