@@ -64,6 +64,8 @@ class GetMemberDetailsAction
                 }
             }
 
+            dd('done');
+
         } catch (\Throwable $th) {
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
         }
