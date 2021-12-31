@@ -41,9 +41,7 @@ class ScrapeHelper
         $vars['user'] = trim($user);
         $vars['password'] = trim($password);
         $var['Origin'] = $url;
-        Log::debug('Login: ' . $url);
         $data = $this->httpPost($url . '/login', $vars);
-        Log::debug('Data: ' . print_r($data, 1));
 
         $this->SaveSession($data);
         $body = $data['body'];
