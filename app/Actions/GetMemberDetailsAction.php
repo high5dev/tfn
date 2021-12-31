@@ -54,7 +54,7 @@ class GetMemberDetailsAction
             ];
 
             /*
-             * first table:
+             * first table: User details
              *
              * User ID:             <integer>
              * Username:            <string>
@@ -81,19 +81,30 @@ class GetMemberDetailsAction
                         break;
                 }
             }
-            dd($data);
 
-            // first table: User details
-            $tr = $table1->getElementsByTagName('tr')->item(0);
-            $tds = $tr->getElementsByTagName('td');
-            dd($tds);
+            /*
+             * second table: Auth tokens
+             *
+             * first row: Token | Created | Last seen | IP address | Country
+             * subsequent rows (zero or more) contain the actual data
+             * Token:       <string>
+             * Created:     <date>
+             * Last seen:   <datetime>
+             * IP address:  <string>
+             * Country:     <string>
+             */
 
-            $data['user_details'] = [
-                'user_id' => $tds->item(1)->nodeValue,
-                'username' => $tds->item(3)->nodeValue,
-                'email' => $tds->item(5)->nodeValue,
-                'first_ip' => $tds->item(7)->nodeValue
-            ];
+            // iterate over each row in table2
+            foreach ($table2->getElementsByTagName('tr') as $tr) {
+                // iterate over each row
+                foreach($tr->getElementsByTagName('td') as $td) {
+                    $data['auth_tokens'][]['token'] = trim($td->item(0)->nodeValue);
+                    $data['auth_tokens'][]['created'] = trim($td->item(1)->nodeValue);
+                    $data['auth_tokens'][]['last_Seen'] = trim($td->item(2)->nodeValue);
+                    $data['auth_tokens'][]['ip'] = trim($td->item(3)->nodeValue);
+                    $data['auth_tokens'][]['country'] = trim($td->item(4)->nodeValue);
+                }
+            }
 
             dd($data);
 
