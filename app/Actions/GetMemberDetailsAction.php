@@ -29,9 +29,16 @@ class GetMemberDetailsAction
 
         try {
             $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
+
+            $DOM = new \DOMDocument('1.0', 'UTF-8');
+            @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
+
+            dd($DOM);
+
             $start = strpos($page, '<table>');
             $stop = strpos($page, '</body>');
             return substr($page, $start, $stop);
+
         } catch (\Throwable $th) {
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
         }
