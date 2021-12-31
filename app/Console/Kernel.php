@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(new UpdateDailyStatisticsAction)->dailyAt('00:01');
         $schedule->call(new PruneOldPostsAction)->dailyAt('01:01');
-        $schedule->call(new ScrapeAction)->cron('0,15,30,45 * * * *')->name('Scrape')->withoutOverlapping();
+        $schedule->call(new ScrapeAction)->cron('19,0,15,30,45 * * * *')->name('Scrape')->withoutOverlapping();
         $schedule->call(new ScrapeMemberAction)->cron('5,20,35,50 * * * *')->name('ScrapeMember')->withoutOverlapping();
     }
 
