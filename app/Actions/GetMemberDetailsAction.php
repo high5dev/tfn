@@ -160,6 +160,8 @@ class GetMemberDetailsAction
                 }
             }
 
+            dd($data);
+
             /*
              * fifth table: Post details
              *
