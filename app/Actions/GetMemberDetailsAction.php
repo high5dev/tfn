@@ -95,15 +95,17 @@ class GetMemberDetailsAction
              */
 
             // iterate over each row in table2
+            $i = 0;
             foreach ($table2->getElementsByTagName('tr') as $tr) {
-                // iterate over each row
-                foreach($tr->getElementsByTagName('td') as $td) {
-                    $data['auth_tokens'][]['token'] = trim($td->item(0)->nodeValue);
-                    $data['auth_tokens'][]['created'] = trim($td->item(1)->nodeValue);
-                    $data['auth_tokens'][]['last_Seen'] = trim($td->item(2)->nodeValue);
-                    $data['auth_tokens'][]['ip'] = trim($td->item(3)->nodeValue);
-                    $data['auth_tokens'][]['country'] = trim($td->item(4)->nodeValue);
-                }
+                // get all the columns in this row
+                $tds = $tr->getElementsByTagName('td');
+                // populate the array
+                $data['auth_tokens'][$i]['token'] = trim($tds->item(0)->nodeValue);
+                $data['auth_tokens'][$i]['created'] = trim($tds->item(1)->nodeValue);
+                $data['auth_tokens'][$i]['last_Seen'] = trim($tds->item(2)->nodeValue);
+                $data['auth_tokens'][$i]['ip'] = trim($tds->item(3)->nodeValue);
+                $data['auth_tokens'][$i]['country'] = trim($tds->item(4)->nodeValue);
+                $i++;
             }
 
             dd($data);
