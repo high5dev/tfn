@@ -53,6 +53,18 @@ class GetMemberDetailsAction
                 'post_details' => []
             ];
 
+            // iterate over each row in the table
+            $xr = 0;
+            foreach ($table1->getElementsByTagName('tr') as $tr) {
+                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
+                $xd = 0;
+                foreach ($tds as $td) {
+                    echo 'Row:' . $xr . ' | Col:' . $xd++ . ' | Data:' . $td->nodeValue . "\n";
+                }
+                $xr++;
+            }
+            dd('done');
+
             // first table: User details
             $tr = $table1->getElementsByTagName('tr')->item(0);
             $tds = $tr->getElementsByTagName('td');
