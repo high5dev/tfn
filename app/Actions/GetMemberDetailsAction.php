@@ -11,7 +11,7 @@ class GetMemberDetailsAction
 {
     public function execute($member_id): string
     {
-        Log:debug('GetMemberDetails: Started');
+        Log::debug('GetMemberDetails: Started');
         $scrapeHelper = new ScrapeHelper('getMember');
 
         $pageUrl = config('app.tfn_base_url') . '/view_member';
