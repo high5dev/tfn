@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Remote;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ScrapeHelper
 {
