@@ -11,7 +11,7 @@ class GetMemberDetailsAction
 {
     public function execute($member_id): string
     {
-        $scrapeHelper = new ScrapeHelper('getMmeber');
+        $scrapeHelper = new ScrapeHelper('getMember');
 
         $pageUrl = config('app.tfn_base_url') . '/view_member';
         $user = config('app.tfn_username');
@@ -30,10 +30,14 @@ class GetMemberDetailsAction
         try {
             $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
 
-            $DOM = new \DOMDocument('1.0', 'UTF-8');
-            @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
+            $dom = new \DOMDocument('1.0', 'UTF-8');
+            @$dom->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
 
-            dd($DOM);
+            $table1 = $dom->getElementsByTagName('table')->item(0);
+            $table2 = $dom->getElementsByTagName('table')->item(1);
+            $table3 = $dom->getElementsByTagName('table')->item(2);
+
+            dd($table1, $table2, $table3);
 
             $start = strpos($page, '<table>');
             $stop = strpos($page, '</body>');

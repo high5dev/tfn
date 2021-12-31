@@ -15,7 +15,7 @@ class CreateRemotesTable extends Migration
     {
         Schema::create('remotes', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('name');
+            $table->string('name', 15);
             $table->text('payload');
             $table->timestamps();
         });
