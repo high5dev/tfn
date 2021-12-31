@@ -53,19 +53,35 @@ class GetMemberDetailsAction
                 'post_details' => []
             ];
 
-            echo '<pre>';
-            // iterate over each row in the table
-            $xr = 0;
+            /*
+             * first table:
+             *
+             * User ID:             <integer>
+             * Username:            <string>
+             * Email:               <string>
+             * First IP address:    <string>
+             */
+
+            // iterate over each row in table1
             foreach ($table1->getElementsByTagName('tr') as $tr) {
-                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
-                $xd = 0;
-                foreach ($tds as $td) {
-                    echo 'Row:' . $xr . ' | Col:' . $xd++ . ' | Data:' . $td->nodeValue . "\n";
+                // get the columns in this row
+                $tds = $tr->getElementsByTagName('td');
+                switch (trim($tds->item(0)->nodeValue)) {
+                    case('User ID:'):
+                        $data['user_details']['user_id'] = trim($tds->item(1)->nodeValue);
+                        break;
+                    case('Username:'):
+                        $data['user_details']['username'] = trim($tds->item(1)->nodeValue);
+                        break;
+                    case('Email:'):
+                        $data['user_details']['email'] = trim($tds->item(1)->nodeValue);
+                        break;
+                    case('First IP address:'):
+                        $data['user_details']['first_ip'] = trim($tds->item(1)->nodeValue);
+                        break;
                 }
-                $xr++;
             }
-            echo '</pre>';
-            dd('done');
+            dd($data);
 
             // first table: User details
             $tr = $table1->getElementsByTagName('tr')->item(0);
