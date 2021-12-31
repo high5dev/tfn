@@ -110,30 +110,87 @@ class GetMemberDetailsAction
                 }
             }
 
-            dd($data);
+            /*
+             * third table: Group membership
+             *
+             * first row: Group | Region
+             * subsequent rows (zero or more) contain the actual data
+             * Group:   <string>
+             * Region:  <date>
+             */
 
-            // iterate over each row in the table
-            foreach ($table2->getElementsByTagName('tr') as $tr) {
-                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
-                foreach ($tds as $td) {
-                    echo $td->nodeValue;
-                    echo "\n";
-                }
-            }
-            echo "\n";
-
-            // iterate over each row in the table
+            // iterate over each row in table2
+            $i = 0;
             foreach ($table3->getElementsByTagName('tr') as $tr) {
-                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
-                foreach ($tds as $td) {
-                    echo $td->nodeValue;
-                    echo "\n";
+                // get all the columns in this row
+                $tds = $tr->getElementsByTagName('td');
+                if(count($tds)) {
+                    // populate the array
+                    $data['group_membership'][$i]['group'] = trim($tds->item(0)->nodeValue);
+                    $data['group_membership'][$i]['region'] = trim($tds->item(1)->nodeValue);
+                    $i++;
                 }
             }
 
-            echo '</pre>';
+            /*
+             * fourth table: Replies
+             *
+             * first row: ID | Recipient | Subject | Date/time | Post
+             * subsequent rows (zero or more) contain the actual data
+             * ID:          <integer>
+             * Recipient:   <email>
+             * Subject:     <string>
+             * Date/time:   <datetime>
+             * Post:        <string>
+             */
 
-            dd('done');
+            // iterate over each row in table2
+            $i = 0;
+            foreach ($table3->getElementsByTagName('tr') as $tr) {
+                // get all the columns in this row
+                $tds = $tr->getElementsByTagName('td');
+                if(count($tds)) {
+                    // populate the array
+                    $data['replies'][$i]['id'] = trim($tds->item(0)->nodeValue);
+                    $data['replies'][$i]['recipient'] = trim($tds->item(1)->nodeValue);
+                    $data['replies'][$i]['subject'] = trim($tds->item(2)->nodeValue);
+                    $data['replies'][$i]['dated'] = trim($tds->item(3)->nodeValue);
+                    $data['replies'][$i]['post'] = trim($tds->item(4)->nodeValue);
+                    $i++;
+                }
+            }
+
+            /*
+             * fifth table: Post details
+             *
+             * first row: Post ID | Type | Subject | Group | Post Date | Emails sent
+             * subsequent rows (zero or more) contain the actual data
+             * Post ID:     <integer>
+             * Type:        <string>
+             * Subject:     <string>
+             * Group:       <string>
+             * Post Date:   <date>
+             * Emails sent: <string>
+             */
+
+            // iterate over each row in table2
+            $i = 0;
+            foreach ($table3->getElementsByTagName('tr') as $tr) {
+                // get all the columns in this row
+                $tds = $tr->getElementsByTagName('td');
+                if(count($tds)) {
+                    // populate the array
+                    $data['post_details'][$i]['post_id'] = trim($tds->item(0)->nodeValue);
+                    $data['post_details'][$i]['type'] = trim($tds->item(1)->nodeValue);
+                    $data['post_details'][$i]['subject'] = trim($tds->item(2)->nodeValue);
+                    $data['post_details'][$i]['group'] = trim($tds->item(3)->nodeValue);
+                    $data['post_details'][$i]['post_date'] = trim($tds->item(4)->nodeValue);
+                    $data['post_details'][$i]['emails_sent'] = trim($tds->item(5)->nodeValue);
+                    $i++;
+                }
+            }
+
+            dd($data);
 
         } catch (\Throwable $th) {
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
