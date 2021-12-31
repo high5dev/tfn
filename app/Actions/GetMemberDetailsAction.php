@@ -53,6 +53,7 @@ class GetMemberDetailsAction
                 'post_details' => []
             ];
 
+            echo '<pre>';
             // iterate over each row in the table
             $xr = 0;
             foreach ($table1->getElementsByTagName('tr') as $tr) {
@@ -63,6 +64,7 @@ class GetMemberDetailsAction
                 }
                 $xr++;
             }
+            echo '</pre>';
             dd('done');
 
             // first table: User details
