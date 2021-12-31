@@ -56,6 +56,8 @@ class GetMemberDetailsAction
             // first table: User details
             $tr = $table1->getElementsByTagName('tr')->item(0);
             $tds = $tr->getElementsByTagName('td');
+            dd($tds);
+
             $data['user_details'] = [
                 'user_id' => $tds->item(1)->nodeValue,
                 'username' => $tds->item(3)->nodeValue,
