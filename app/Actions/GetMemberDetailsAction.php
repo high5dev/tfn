@@ -37,14 +37,17 @@ class GetMemberDetailsAction
             $table2 = $dom->getElementsByTagName('table')->item(1);
             $table3 = $dom->getElementsByTagName('table')->item(2);
 
+            echo '<pre>';
             // iterate over each row in the table
             foreach($table1->getElementsByTagName('tr') as $tr)
             {
                 $tds = $tr->getElementsByTagName('td'); // get the columns in this row
                 foreach($tds as $td) {
                     echo $td->nodeValue;
+                    echo "\n";
                 }
             }
+            echo "\n";
 
             // iterate over each row in the table
             foreach($table2->getElementsByTagName('tr') as $tr)
@@ -52,8 +55,10 @@ class GetMemberDetailsAction
                 $tds = $tr->getElementsByTagName('td'); // get the columns in this row
                 foreach($tds as $td) {
                     echo $td->nodeValue;
+                    echo "\n";
                 }
             }
+            echo "\n";
 
             // iterate over each row in the table
             foreach($table3->getElementsByTagName('tr') as $tr)
@@ -61,8 +66,11 @@ class GetMemberDetailsAction
                 $tds = $tr->getElementsByTagName('td'); // get the columns in this row
                 foreach($tds as $td) {
                     echo $td->nodeValue;
+                    echo "\n";
                 }
             }
+
+            echo '</pre>';
 
             dd('done');
 
