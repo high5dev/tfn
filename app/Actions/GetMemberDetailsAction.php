@@ -37,11 +37,32 @@ class GetMemberDetailsAction
             $table2 = $dom->getElementsByTagName('table')->item(1);
             $table3 = $dom->getElementsByTagName('table')->item(2);
 
-            dd($table1, $table2, $table3);
+            // iterate over each row in the table
+            foreach($table1->getElementsByTagName('tr') as $tr)
+            {
+                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
+                foreach($tds as $td) {
+                    echo $td->nodeValue;
+                }
+            }
 
-            $start = strpos($page, '<table>');
-            $stop = strpos($page, '</body>');
-            return substr($page, $start, $stop);
+            // iterate over each row in the table
+            foreach($table2->getElementsByTagName('tr') as $tr)
+            {
+                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
+                foreach($tds as $td) {
+                    echo $td->nodeValue;
+                }
+            }
+
+            // iterate over each row in the table
+            foreach($table3->getElementsByTagName('tr') as $tr)
+            {
+                $tds = $tr->getElementsByTagName('td'); // get the columns in this row
+                foreach($tds as $td) {
+                    echo $td->nodeValue;
+                }
+            }
 
         } catch (\Throwable $th) {
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
