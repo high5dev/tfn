@@ -132,6 +132,8 @@ class GetMemberDetailsAction
                 }
             }
 
+            dd($data);
+
             /*
              * fourth table: Replies
              *
