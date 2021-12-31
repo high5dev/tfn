@@ -132,8 +132,6 @@ class GetMemberDetailsAction
                 }
             }
 
-            dd($data);
-
             /*
              * fourth table: Replies
              *
@@ -148,7 +146,7 @@ class GetMemberDetailsAction
 
             // iterate over each row in table2
             $i = 0;
-            foreach ($table3->getElementsByTagName('tr') as $tr) {
+            foreach ($table4->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
                 $tds = $tr->getElementsByTagName('td');
                 if(count($tds)) {
@@ -161,8 +159,6 @@ class GetMemberDetailsAction
                     $i++;
                 }
             }
-
-            dd($data);
 
             /*
              * fifth table: Post details
@@ -179,7 +175,7 @@ class GetMemberDetailsAction
 
             // iterate over each row in table2
             $i = 0;
-            foreach ($table3->getElementsByTagName('tr') as $tr) {
+            foreach ($table5->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
                 $tds = $tr->getElementsByTagName('td');
                 if(count($tds)) {
