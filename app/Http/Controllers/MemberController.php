@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\GetMemberDetailsAction;
+use App\Actions\ScrapeAction;
 use Auth;
 use App\Models\Member;
 use App\Models\Report;
@@ -235,10 +236,11 @@ class MemberController extends Controller
      */
     public function test(Request $request, GetIPinfoAction $IPinfo, GetScamalyticsAction $Scamalytics)
     {
-        $ip = $IPinfo->execute($request->ip);
+        //$ip = $IPinfo->execute($request->ip);
+        //$scam = $Scamalytics->execute($request->ip);
+        //dd($ip, $scam);
 
-        $scam = $Scamalytics->execute($request->ip);
-
-        dd($ip, $scam);
+        new ScrapeAction;
+        return redirect('/home')->with('success', 'Test completed');
     }
 }
