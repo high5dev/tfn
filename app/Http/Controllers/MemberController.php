@@ -158,14 +158,6 @@ class MemberController extends Controller
      */
     public function zap(ReportStoreRequest $request, GetMemberDetailsAction $getMember)
     {
-        \Log::debug('MC: Start');
-        /**
-         * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
-         * <input type='hidden' name='user_id' id='user_id' value="31465118" />
-         * <input type='submit' value="Zap Member" />
-         * </form>
-         */
-
         // confirm admin password
         if (Hash::check($request->password, Auth::User()->password)) {
 
@@ -173,38 +165,22 @@ class MemberController extends Controller
 
             if ($member) {
 
-                // get user details
-                \Log::debug('MC: First');
-                $memberDetails = new GetMemberDetailsAction($member->id);
-                \Log::debug('MC: Second');
-                $member_details = $memberDetails->getMember();
-                \Log::debug('MC: Third');
-                $member_replies = $memberDetails->getReplies();
-                \Log::debug('MC: Fourth');
-
-                // TODO: Send zap request to SpamTool
-                // TODO: Get email replies
-
                 // Create zap report
                 $report = new Report;
-                $report->user_id = $request->id;
+                $report->user_id = Auth::user()->id;
+                $report->member_id = $request->id;
                 $report->justification = $request->justification;
                 $report->found = $request->found;
                 $report->regions = $request->regions;
                 $report->warnings = $request->warnings;
-                $report->warning_emails = json_encode($member_replies);
-                $report->body = json_encode($member_details);
+                $report->warning_emails = '';
+                $report->body = '';
                 $report->save();
 
-                // delete all their posts if they have any
-                if (isset($member->posts)) {
-                    //$member->posts()->delete();
-                }
+                // dispatch zap job to queue
+                dispatch(new App\Jobs\ZapMember($report->id));
 
-                // delete the member
-                //$member->delete();
-
-                return redirect('/home')->with('success', 'Successfully zapped the member, all posts removed');
+                return redirect('/home')->with('success', 'Successfully queued the zap');
             }
 
             return redirect('/home')->with('error', 'Unable to find that member, not zapped!');

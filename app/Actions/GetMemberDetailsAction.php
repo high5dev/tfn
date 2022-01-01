@@ -244,7 +244,7 @@ class GetMemberDetailsAction
             $emails = $textarea->textContent;
 
             if(strlen($emails)){
-                $data = explode(',', $emails);
+                $data = array_map('trim', explode(',', $emails));
             }
 
         } catch (\Throwable $th) {
