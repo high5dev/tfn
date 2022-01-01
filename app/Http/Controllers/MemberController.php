@@ -173,7 +173,7 @@ class MemberController extends Controller
             if ($member) {
 
                 // get user details
-                $page = $getMember->execute($member->id);
+                $member_details = $getMember->execute($member->id);
 
                 // TODO: Send zap request to SpamTool
                 // TODO: Get email replies
@@ -186,7 +186,7 @@ class MemberController extends Controller
                 $report->regions = $request->regions;
                 $report->warnings = $request->warnings;
                 $report->warning_emails = '';
-                $report->body = $page;
+                $report->body = json_encode($member_details);
                 $report->save();
 
                 // delete all their posts if they have any

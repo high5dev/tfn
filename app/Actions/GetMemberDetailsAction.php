@@ -9,36 +9,38 @@ use Illuminate\Support\Facades\Log;
 
 class GetMemberDetailsAction
 {
-    public function execute($member_id): string
+    protected $scrapeHelper;
+
+    public function execute($member_id): array
     {
         Log::debug('GetMemberDetails: Started');
 
         // data to return
         $data = [];
         // helper class
-        $scrapeHelper = new ScrapeHelper('getMember');
+        $this->scrapeHelper = new ScrapeHelper('getMember');
         // login creds
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
 
         // check if we're logged in
-        if (!$scrapeHelper->isLoggedIn()) {
+        if (!$this->scrapeHelper->isLoggedIn()) {
             Log::debug('GetMemberDetails: Logging in');
             // login
-            $status = $scrapeHelper->Login($user, $password);
+            $status = $this->scrapeHelper->Login($user, $password);
             if ($status !== true) {
                 Log::debug('GetMemberDetails: Error logging in');
                 return $data;
             }
         }
 
+        Log::debug('GetMemberDetails: Scraping');
+
+        // get the 'User details' page
+        $url = config('app.tfn_base_url') . '/view_member';
+        $page = $this->scrapeHelper->GetPage($url, ['user_id' => $member_id]);
+
         try {
-            Log::debug('GetMemberDetails: Scraping');
-
-            // get the 'User details' page
-            $url = config('app.tfn_base_url') . '/view_member';
-            $page = $scrapeHelper->GetPage($url, ['user_id' => $member_id]);
-
             // create the DOM then load the page
             $dom = new \DOMDocument('1.0', 'UTF-8');
             @$dom->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
@@ -105,7 +107,7 @@ class GetMemberDetailsAction
             foreach ($table2->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
                 $tds = $tr->getElementsByTagName('td');
-                if(count($tds)) {
+                if (count($tds)) {
                     // populate the array
                     $data['auth_tokens'][$i]['token'] = trim($tds->item(0)->nodeValue);
                     $data['auth_tokens'][$i]['created'] = trim($tds->item(1)->nodeValue);
@@ -130,7 +132,7 @@ class GetMemberDetailsAction
             foreach ($table3->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
                 $tds = $tr->getElementsByTagName('td');
-                if(count($tds)) {
+                if (count($tds)) {
                     // populate the array
                     $data['group_membership'][$i]['group'] = trim($tds->item(0)->nodeValue);
                     $data['group_membership'][$i]['region'] = trim($tds->item(1)->nodeValue);
@@ -155,7 +157,7 @@ class GetMemberDetailsAction
             foreach ($table4->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
                 $tds = $tr->getElementsByTagName('td');
-                if(count($tds)) {
+                if (count($tds)) {
                     // populate the array
                     $data['replies'][$i]['id'] = trim($tds->item(0)->nodeValue);
                     $data['replies'][$i]['recipient'] = trim($tds->item(1)->nodeValue);
@@ -184,7 +186,7 @@ class GetMemberDetailsAction
             foreach ($table5->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
                 $tds = $tr->getElementsByTagName('td');
-                if(count($tds)) {
+                if (count($tds)) {
                     // populate the array
                     $data['post_details'][$i]['post_id'] = trim($tds->item(0)->nodeValue);
                     $data['post_details'][$i]['type'] = trim($tds->item(1)->nodeValue);
@@ -200,8 +202,43 @@ class GetMemberDetailsAction
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
         }
 
+        // get replies
+        $data['email_replies'] = $this->getReplies($member_id);
+
         return $data;
 
+    }
+
+    protected function getReplies($member_id): array
+    {
+        Log::debug('GetMemberDetails: Scraping');
+
+        // return data
+        $data = [];
+
+        // get the 'User details' page
+        $url = config('app.tfn_base_url') . '/view_replies_received?user_id=' . $member_id;
+        $page = $this->scrapeHelper->GetPage($url);
+
+        try {
+            // create the DOM then load the page
+            $dom = new \DOMDocument('1.0', 'UTF-8');
+            @$dom->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
+
+            // get the textarea (there is only one and it contains the emails we want)
+            $textarea = $dom->getElementsByTagName('textarea')->item(0);
+            // get the contents of the textarea
+            $emails = $textarea->textContent;
+
+            if(strlen($emails)){
+                $data = explode(',', $emails);
+            }
+
+        } catch (\Throwable $th) {
+            Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
+        }
+
+        return $data;
     }
 
 }
