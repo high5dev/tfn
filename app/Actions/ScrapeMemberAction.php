@@ -12,7 +12,7 @@ class ScrapeMemberAction
 {
     public function __invoke(): void
     {
-        Log::debug('ScrapeMember: started');
+        Log::debug('ScrapeMember: Started');
         $scrapeHelper = new ScrapeHelper('scrapeMember');
 
         $pageUrl = config('app.tfn_base_url') . '/view_member';
@@ -22,10 +22,10 @@ class ScrapeMemberAction
         // check if we're logged in
         if (!$scrapeHelper->isLoggedIn()) {
             // login
-            Log::debug('ScrapeMember: logging in');
+            Log::debug('ScrapeMember: Logging in');
             $status = $scrapeHelper->Login($user, $password);
             if ($status !== true) {
-                Log::debug('Scrape: error logging in');
+                Log::debug('Scrape: Error logging in');
                 return;
             }
         }

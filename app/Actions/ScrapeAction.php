@@ -12,7 +12,7 @@ class ScrapeAction
 {
     public function __invoke(): void
     {
-        Log::debug('Scrape started');
+        Log::debug('Scrape: Started');
         $scrapeHelper = new ScrapeHelper('scrape');
 
         $initialID = "80000000";
@@ -40,7 +40,7 @@ class ScrapeAction
             Log::debug('Scrape: Logging in');
             $status = $scrapeHelper->Login($user, $password);
             if ($status !== true) {
-                Log::debug('Scrape: error logging in');
+                Log::debug('Scrape: Error logging in');
                 return;
             }
         }
