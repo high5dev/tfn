@@ -9,16 +9,30 @@ use Illuminate\Support\Facades\Log;
 
 class GetMemberDetailsAction
 {
+    protected $member_id;
     protected $scrapeHelper;
 
-    public function execute($member_id): array
+    /**
+     * create a new instance.
+     */
+    public function __construct($member_id = 0)
+    {
+        // store the member_id
+        $this->member_id = $member_id;
+        // helper class
+        $this->scrapeHelper = new ScrapeHelper('getMember');
+    }
+
+    /**
+     * retrieve the member's details
+     */
+    public function getMember(): array
     {
         Log::debug('GetMemberDetails: Started');
 
         // data to return
         $data = [];
-        // helper class
-        $this->scrapeHelper = new ScrapeHelper('getMember');
+
         // login creds
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
@@ -38,7 +52,7 @@ class GetMemberDetailsAction
 
         // get the 'User details' page
         $url = config('app.tfn_base_url') . '/view_member';
-        $page = $this->scrapeHelper->GetPage($url, ['user_id' => $member_id]);
+        $page = $this->scrapeHelper->GetPage($url, ['user_id' => $this->member_id]);
 
         try {
             // create the DOM then load the page
@@ -202,22 +216,22 @@ class GetMemberDetailsAction
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
         }
 
-        // get replies
-        $data['email_replies'] = $this->getReplies($member_id);
-
         return $data;
 
     }
 
-    protected function getReplies($member_id): array
+    /**
+     * retrieve any replies
+     */
+    public function getReplies(): array
     {
-        Log::debug('GetMemberDetails: Scraping');
+        Log::debug('GetMemberDetails: Getting replies');
 
         // return data
         $data = [];
 
         // get the 'User details' page
-        $url = config('app.tfn_base_url') . '/view_replies_received?user_id=' . $member_id;
+        $url = config('app.tfn_base_url') . '/view_replies_received?user_id=' . $this->member_id;
         $page = $this->scrapeHelper->GetPage($url);
 
         try {
