@@ -12,9 +12,12 @@ class GetMemberDetailsAction
     public function execute($member_id): string
     {
         Log::debug('GetMemberDetails: Started');
-        $scrapeHelper = new ScrapeHelper('getMember');
 
-        $pageUrl = config('app.tfn_base_url') . '/view_member';
+        // data to return
+        $data = [];
+        // helper class
+        $scrapeHelper = new ScrapeHelper('getMember');
+        // login creds
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
 
@@ -25,13 +28,16 @@ class GetMemberDetailsAction
             $status = $scrapeHelper->Login($user, $password);
             if ($status !== true) {
                 Log::debug('GetMemberDetails: Error logging in');
-                return '';
+                return $data;
             }
         }
 
         try {
             Log::debug('GetMemberDetails: Scraping');
-            $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
+
+            // get the 'User details' page
+            $url = config('app.tfn_base_url') . '/view_member';
+            $page = $scrapeHelper->GetPage($url, ['user_id' => $member_id]);
 
             // create the DOM then load the page
             $dom = new \DOMDocument('1.0', 'UTF-8');
@@ -190,12 +196,12 @@ class GetMemberDetailsAction
                 }
             }
 
-            dd($data);
-
         } catch (\Throwable $th) {
             Log::debug('GetMemberDetails: Exception: ' . $th->getMessage());
         }
-        return '';
+
+        return $data;
+
     }
 
 }
