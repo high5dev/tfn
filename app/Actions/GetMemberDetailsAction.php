@@ -276,7 +276,7 @@ class GetMemberDetailsAction
         $page = $this->scrapeHelper->GetPage($url, ['user_id' => $this->member_id]);
         Log::debug('zapMember: got page: ' . print_r($page, true));
 
-        if (stripos($page, '') !== false) {
+        if (stripos($page, 'The zap probably succeeded') !== false) {
             $result = true;
         }
 
