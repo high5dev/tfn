@@ -22,6 +22,7 @@ class ScrapeMemberAction
         // check if we're logged in
         if (!$scrapeHelper->isLoggedIn()) {
             // login
+            Log::debug('ScrapeMember: logging in');
             $status = $scrapeHelper->Login($user, $password);
             if ($status !== true) {
                 Log::debug('Scrape: error logging in');
