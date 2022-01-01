@@ -39,11 +39,7 @@ class ScrapeHelper
         $vars = [];
         $vars['user'] = trim($user);
         $vars['password'] = trim($password);
-        //$var['Origin'] = $url;
         $data = $this->httpPost($url, $vars);
-
-        Log::debug('Login data: ' . print_r($data, true));
-
         $this->SaveSession($data);
         $body = $data['body'];
         if (strpos($body, 'Invalid username/email or password.') === false) {
