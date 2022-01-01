@@ -36,13 +36,6 @@ class ZapMember implements ShouldQueue
      */
     public function handle()
     {
-        /**
-         * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
-         * <input type='hidden' name='user_id' id='user_id' value="31465118" />
-         * <input type='submit' value="Zap Member" />
-         * </form>
-         */
-
         // retrieve the report
         $report = Report::where('id', $this->report_id)->first();
 
@@ -58,19 +51,21 @@ class ZapMember implements ShouldQueue
                 $member_details = $memberDetails->getMember();
                 $member_replies = $memberDetails->getReplies();
 
+                // update the zap report
                 $report->warning_emails = json_encode($member_replies);
                 $report->body = json_encode($member_details);
                 $report->save();
 
-                // TODO: send zap request to SpamTool
+                // send zap request to SpamTool
+                $memberDetails->zapMember();
 
                 // delete all their posts if they have any
                 if (isset($member->posts)) {
-                    //$member->posts()->delete();
+                    $member->posts()->delete();
                 }
 
                 // delete the member
-                //$member->delete();
+                $member->delete();
 
                 Log::debug('ZapMember: zap completed successfully');
                 return;

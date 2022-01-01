@@ -240,11 +240,13 @@ class GetMemberDetailsAction
 
             // get the textarea (there is only one and it contains the emails we want)
             $textarea = $dom->getElementsByTagName('textarea')->item(0);
-            // get the contents of the textarea
-            $emails = $textarea->textContent;
 
-            if(strlen($emails)){
-                $data = array_map('trim', explode(',', $emails));
+            if ($textarea) {
+                // get the contents of the textarea
+                $emails = $textarea->textContent;
+                if (strlen($emails)) {
+                    $data = array_map('trim', explode(',', $emails));
+                }
             }
 
         } catch (\Throwable $th) {
@@ -252,6 +254,33 @@ class GetMemberDetailsAction
         }
 
         return $data;
+    }
+
+    /**
+     * send a zap request to SpamTool
+     *
+     * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
+     * <input type='hidden' name='user_id' id='user_id' value="31465118" />
+     * <input type='submit' value="Zap Member" />
+     * </form>
+     */
+    public function zapMember(): bool
+    {
+        Log::debug('zapMember: Start');
+
+        // return value
+        $result = false;
+
+        // send the zap to SpamTool
+        $url = config('app.tfn_base_url') . '/zap_member';
+        $page = $this->scrapeHelper->GetPage($url, ['user_id' => $this->member_id]);
+        Log::debug('zapMember: got page: ' . print_r($page, true));
+
+        if (stripos($page, '') !== false) {
+            $result = true;
+        }
+
+        return $result;
     }
 
 }
