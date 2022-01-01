@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GetMemberDetailsAction;
-use App\Actions\ScrapeAction;
 use Auth;
 use App\Models\Member;
 use App\Models\Report;
+use App\Actions\ScrapeAction;
 use App\Actions\GetIPinfoAction;
 use App\Actions\GetScamalyticsAction;
+use App\Actions\GetMemberDetailsAction;
+use App\Jobs\ZapMember;
 use App\Http\Requests\ReportStoreRequest;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
@@ -178,7 +179,7 @@ class MemberController extends Controller
                 $report->save();
 
                 // dispatch zap job to queue
-                dispatch(new App\Jobs\ZapMember($report->id));
+                dispatch(new ZapMember($report->id));
 
                 return redirect('/home')->with('success', 'Successfully queued the zap');
             }
