@@ -158,6 +158,7 @@ class MemberController extends Controller
      */
     public function zap(ReportStoreRequest $request, GetMemberDetailsAction $getMember)
     {
+        \Log::debug('MC: Start');
         /**
          * <form method="post" action="https://spamcontrol.freecycle.org/zap_member">
          * <input type='hidden' name='user_id' id='user_id' value="31465118" />
@@ -173,7 +174,7 @@ class MemberController extends Controller
             if ($member) {
 
                 // get user details
-                \Log::debug('MC: Start');
+                \Log::debug('MC: First');
                 $memberDetails = new GetMemberDetailsAction($member->id);
                 \Log::debug('MC: Second');
                 $member_details = $memberDetails->getMember();
