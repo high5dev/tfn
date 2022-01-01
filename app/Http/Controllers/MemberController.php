@@ -173,9 +173,13 @@ class MemberController extends Controller
             if ($member) {
 
                 // get user details
+                \Log::debug('MC: Start');
                 $memberDetails = new GetMemberDetailsAction($member->id);
+                \Log::debug('MC: Second');
                 $member_details = $memberDetails->getMember();
+                \Log::debug('MC: Third');
                 $member_replies = $memberDetails->getReplies();
+                \Log::debug('MC: Fourth');
 
                 // TODO: Send zap request to SpamTool
                 // TODO: Get email replies

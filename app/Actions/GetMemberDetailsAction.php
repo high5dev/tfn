@@ -43,14 +43,14 @@ class GetMemberDetailsAction
      */
     public function getMember(): array
     {
-        Log::debug('GetMemberDetails: Getting member details');
-
+        Log::debug('getMember: start');
         // data to return
         $data = [];
 
         // get the 'User details' page
         $url = config('app.tfn_base_url') . '/view_member';
         $page = $this->scrapeHelper->GetPage($url, ['user_id' => $this->member_id]);
+        Log::debug('getMember: got page');
 
         try {
             // create the DOM then load the page
@@ -223,7 +223,7 @@ class GetMemberDetailsAction
      */
     public function getReplies(): array
     {
-        Log::debug('GetMemberDetails: Getting replies');
+        Log::debug('getReplies: Start');
 
         // return data
         $data = [];
@@ -231,6 +231,7 @@ class GetMemberDetailsAction
         // get the 'User details' page
         $url = config('app.tfn_base_url') . '/view_replies_received?user_id=' . $this->member_id;
         $page = $this->scrapeHelper->GetPage($url);
+        Log::debug('getReplies: got page');
 
         try {
             // create the DOM then load the page
