@@ -21,17 +21,6 @@ class GetMemberDetailsAction
         $this->member_id = $member_id;
         // helper class
         $this->scrapeHelper = new ScrapeHelper('getMember');
-    }
-
-    /**
-     * retrieve the member's details
-     */
-    public function getMember(): array
-    {
-        Log::debug('GetMemberDetails: Started');
-
-        // data to return
-        $data = [];
 
         // login creds
         $user = config('app.tfn_username');
@@ -47,8 +36,17 @@ class GetMemberDetailsAction
                 return $data;
             }
         }
+    }
 
-        Log::debug('GetMemberDetails: Scraping');
+    /**
+     * retrieve the member's details
+     */
+    public function getMember(): array
+    {
+        Log::debug('GetMemberDetails: Getting member details');
+
+        // data to return
+        $data = [];
 
         // get the 'User details' page
         $url = config('app.tfn_base_url') . '/view_member';
