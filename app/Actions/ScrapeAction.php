@@ -134,6 +134,18 @@ class ScrapeAction
                 $email = (isset($aMatch[3])) ? $aMatch[3] : '';
                 $email = trim($email);
 
+                /*
+                 * TODO: year change needs fixing.
+                 * The following code extracts the date & time from the page,
+                 * however the page has the data in the format "MM-DD HH:MM"
+                 * so we need to add the year. This is a problem on new year's eve
+                 * because the remote server's clock is not exactly synchronised,
+                 * so some records get the wrong year added. Between 2021/2022
+                 * the remote site was slightly behind, so a handful of records
+                 * got 2022-12-31 as their date, putting them nearly a year in the future.
+                 * If we're still doing this in 2022/2023 this needs fixing !!
+                 */
+
                 // extract the datetime
                 $date = explode(' ', trim($row['Time']));
                 $dated = date('Y') . '-' . trim($date[0]) . ' ' . $date[1] . ':00';

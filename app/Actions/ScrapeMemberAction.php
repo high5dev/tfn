@@ -19,16 +19,6 @@ class ScrapeMemberAction
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
 
-        // get the ID of all members that were last updated over a month ago
-        $results = Member::where('updated_at', '<', Carbon::now()->subMonth())
-            ->whereNull('firstip')
-            ->pluck('id');
-
-        if (!count($results)) {
-            Log::debug('ScrapeMember: No data to scrape');
-            return;
-        }
-
         // check if we're logged in
         if (!$scrapeHelper->isLoggedIn()) {
             // login
@@ -37,6 +27,19 @@ class ScrapeMemberAction
                 Log::debug('Scrape: error logging in');
                 return;
             }
+        }
+
+        // get the ID of members that were last updated over a month ago
+        // get a maximum of 1000 at a time
+        $results = Member::where('updated_at', '<', Carbon::now()->subMonth())
+            ->whereNull('firstip')
+            ->orderBy('id')
+            ->take(1000)
+            ->pluck('id');
+
+        if (!count($results)) {
+            Log::debug('ScrapeMember: No data to scrape');
+            return;
         }
 
         foreach ($results as $member_id) {
@@ -87,7 +90,7 @@ class ScrapeMemberAction
                 }
 
             } catch (\Throwable $th) {
-                Log::debug('ScrapeMember: scraping error. ' . $th->getMessage());
+                Log::debug('ScrapeMember: Scrape error: ' . $th->getMessage());
                 continue;
             }
         }
