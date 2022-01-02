@@ -75,8 +75,9 @@ class GetAllMembersAction
                     // find which row we are processing in this loop
                     switch (trim($tds->item(0)->nodeValue)) {
                         case('Username:'):
-                            Log::debug('X:1');
                             $username = trim($tds->item(1)->nodeValue);
+                            // skip this one if username is empty
+                            if (strlen($username)) continue 2;
                             // check if this member has been zapped/deleted
                             if ('!' == $username[0]) {
                                 // were they zapped or deleted?
@@ -92,18 +93,15 @@ class GetAllMembersAction
                             }
                             break;
                         case('Email:'):
-                            Log::debug('X:2');
                             $email = trim($tds->item(1)->nodeValue);
                             break;
                         case('First IP address:'):
-                            Log::debug('X:3');
                             $first_ip = trim($tds->item(1)->nodeValue);
                             $first_ip = filter_var($first_ip, FILTER_VALIDATE_IP) ? $first_ip : '';
                             break;
                     }
                 }
 
-                Log::debug('X:Z');
                 // TODO: get the second table: "Auth tokens"
                 //  and check for additional IP addresses
 
