@@ -75,11 +75,15 @@ class GetAllMembersAction
                     // find which row we are processing in this loop
                     switch (trim($tds->item(0)->nodeValue)) {
                         case('Username:'):
+                            Log::debug('X1');
                             $username = trim($tds->item(1)->nodeValue);
+                            Log::debug('X2');
                             // skip this one if username is empty
                             if (strlen($username)) continue 2;
+                            Log::debug('X3');
                             // check if this member has been zapped/deleted
                             if ('!' == $username[0]) {
+                                Log::debug('X3a');
                                 // were they zapped or deleted?
                                 // Zapped has member id in curly braces, deleted member id is round brackets.
                                 if (false !== strpos($username, ' {')) {
@@ -91,6 +95,7 @@ class GetAllMembersAction
                                 // Example: "!johndoe {32341212}"
                                 $username = substr($username, 1, (strpos($username, ' ') - 1));
                             }
+                            Log::debug('X4');
                             break;
                         case('Email:'):
                             $email = trim($tds->item(1)->nodeValue);
