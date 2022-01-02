@@ -120,7 +120,7 @@ class GetAllMembersAction
                 }
 
             } catch (\Throwable $th) {
-                Log::debug('ScrapeMember: Scrape error: ' . $th->getMessage());
+                Log::debug('GetAllMembers: Scrape error: ' . $th->getMessage());
                 continue;
             }
         }

@@ -77,7 +77,9 @@ class ScrapeMemberAction
                     // find which row we are processing on this loop
                     switch (trim($tds->item(0)->nodeValue)) {
                         case('Username:'):
+                            Log::debug('X:1');
                             $username = trim($tds->item(1)->nodeValue);
+                            Log::debug('X:2');
                             // check if this member has been zapped/deleted
                             if ('!' == $username[0]) {
                                 // were they zapped or deleted?
