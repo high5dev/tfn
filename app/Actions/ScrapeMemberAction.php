@@ -39,7 +39,7 @@ class ScrapeMemberAction
         // get the ID of members that were last updated over a month ago
         // get a maximum of 1000 at a time
         $members = Member::where('updated_at', '<', Carbon::now()->subMonth())
-            ->whereNull('firstip')
+    //        ->whereNull('firstip')
             ->orderBy('id')
             ->take(1000)
             ->get();
