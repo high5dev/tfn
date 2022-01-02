@@ -44,7 +44,7 @@ class ScrapeMemberAction
             ->take(1000)
             ->get();
 
-        if (!count($results)) {
+        if (!count($members)) {
             Log::debug('ScrapeMember: No data to scrape');
             return;
         }
@@ -61,7 +61,7 @@ class ScrapeMemberAction
 
             try {
                 // grab the member's details from ST
-                $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
+                $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member->id]);
 
                 $dom = new \DOMDocument('1.0', 'UTF-8');
                 @$dom->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
@@ -103,7 +103,7 @@ class ScrapeMemberAction
                 }
 
                 // update the member's record
-                Member::where('id', $member_id)->update([
+                Member::where('id', $member->id)->update([
                     'username' => $username,
                     'email' => $email,
                     'firstip' => $first_ip,
@@ -114,7 +114,7 @@ class ScrapeMemberAction
                 // TODO: get the second table: "Auth tokens"
                 //  and check for additional IP addresses
 
-                Log::debug('ScrapeMember: ID:' . $member_id . ' updated');
+                Log::debug('ScrapeMember: ID:' . $member->id . ' updated');
 
             } catch (\Throwable $th) {
                 Log::debug('ScrapeMember: Scrape error: ' . $th->getMessage());
