@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(new ScrapeAction)->cron('0,15,30,45 * * * *')->name('Scrape')->withoutOverlapping();
         $schedule->call(new ScrapeMemberAction)->cron('5,20,35,50 * * * *')->name('ScrapeMember')->withoutOverlapping();
 
-        $schedule->call(new GetAllMembersAction)->cron('23 17 * * *')->name('GetAllMembers')->withoutOverlapping();
+        $schedule->call(new GetAllMembersAction)->cron('25 17 * * *')->name('GetAllMembers')->withoutOverlapping();
     }
 
     /**
