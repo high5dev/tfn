@@ -83,13 +83,16 @@ class ScrapeMemberAction
                                 // were they zapped or deleted?
                                 // Zapped has member id in curly braces, deleted member id is round brackets.
                                 if (false !== strpos($username, '{')) {
+                                    // strip the leading '!' and copy up to, but not including the {
+                                    // Example: "!john {101}" "!fred{102}"
+                                    $username = trim(substr($username, 1, (strpos($username, '{')-1)));
                                     $status = 'Zapped';
                                 } else {
+                                    // strip the leading '!' and copy up to, but not including the (
+                                    // Examples: "!john (101)" "!fred(102)"
+                                    $username = trim(substr($username, 1, (strpos($username, '(')-1)));
                                     $status = 'Deleted';
                                 }
-                                // strip the leading '!' and copy up to, but not including the space
-                                // Example: "!johndoe {32341212}"
-                                $username = substr($username, 1, (strpos($username, ' ') - 1));
                             }
                             break;
                         case('Email:'):
