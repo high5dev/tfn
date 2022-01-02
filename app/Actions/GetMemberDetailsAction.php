@@ -33,7 +33,6 @@ class GetMemberDetailsAction
             $status = $this->scrapeHelper->Login($user, $password);
             if ($status !== true) {
                 Log::debug('GetMemberDetails: Error logging in');
-                return $data;
             }
         }
     }
@@ -44,13 +43,13 @@ class GetMemberDetailsAction
     public function getMember(): array
     {
         Log::debug('getMember: start');
+
         // data to return
         $data = [];
 
-        // get the 'User details' page
+        // get the "User details" page
         $url = config('app.tfn_base_url') . '/view_member';
         $page = $this->scrapeHelper->GetPage($url, ['user_id' => $this->member_id]);
-        Log::debug('getMember: got page');
 
         try {
             // create the DOM then load the page
@@ -66,7 +65,13 @@ class GetMemberDetailsAction
 
             // create the array to hold the data
             $data = [
-                'user_details' => [],
+                'user_details' => [
+                    'user_id' => 0,
+                    'username' => '',
+                    'email' => '',
+                    'first_ip' => '',
+                    'status' => 'Active'
+                ],
                 'auth_tokens' => [],
                 'group_membership' => [],
                 'replies' => [],
@@ -77,7 +82,7 @@ class GetMemberDetailsAction
              * first table: User details
              *
              * User ID:             <integer>
-             * Username:            <string>
+             * Username:            <string>    Has leading ! if zapped or deleted
              * Email:               <string>
              * First IP address:    <string>
              */
@@ -86,12 +91,28 @@ class GetMemberDetailsAction
             foreach ($table1->getElementsByTagName('tr') as $tr) {
                 // get the columns in this row
                 $tds = $tr->getElementsByTagName('td');
+
+                // find which row we are processing
                 switch (trim($tds->item(0)->nodeValue)) {
                     case('User ID:'):
                         $data['user_details']['user_id'] = trim($tds->item(1)->nodeValue);
                         break;
                     case('Username:'):
-                        $data['user_details']['username'] = trim($tds->item(1)->nodeValue);
+                        $username = trim($tds->item(1)->nodeValue);
+                        // check if this member has been zapped/deleted
+                        if ('!' == $username[0]) {
+                            // were they zapped or deleted?
+                            // Zapped has member id in curly braces, deleted member id is round brackets.
+                            if (false !== strpos($username, ' {')) {
+                                $data['user_details']['status'] = 'Zapped';
+                            } else {
+                                $data['user_details']['status'] = 'Deleted';
+                            }
+                            // strip the leading '!' and copy up to, but not including the space
+                            // Example: "!johndoe {32341212}"
+                            $username = substr($username, 1, (strpos($username, ' ') - 1));
+                        }
+                        $data['user_details']['username'] = $username;
                         break;
                     case('Email:'):
                         $data['user_details']['email'] = trim($tds->item(1)->nodeValue);

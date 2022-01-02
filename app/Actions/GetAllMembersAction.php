@@ -10,11 +10,23 @@ use Illuminate\Support\Facades\Log;
 
 class GetAllMembersAction
 {
+    /**
+     * called from \App\Console\Kernel
+     *
+     * iterates over all User ID's
+     * if not found in local database:
+     *      download "User details" page from ST
+     *      create member and update record
+     */
+
     public function __invoke(): void
     {
         Log::debug('GetAllMembers: Started');
+
+        // instantiate helper
         $scrapeHelper = new ScrapeHelper('scrapeMember');
 
+        // some useful constants
         $pageUrl = config('app.tfn_base_url') . '/view_member';
         $user = config('app.tfn_username');
         $password = config('app.tfn_password');
@@ -30,7 +42,7 @@ class GetAllMembersAction
             }
         }
 
-        // check all IDs starting at 1
+        // iterate over all IDs starting at 1
         for ($member_id = 1; $member_id < 31522154; $member_id++) {
             Log::debug('GetAllMembers: checking id ' . $member_id);
 
@@ -41,43 +53,69 @@ class GetAllMembersAction
             }
 
             try {
+                // grab the member's details from ST
                 $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
 
-                $DOM = new \DOMDocument('1.0', 'UTF-8');
-                @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
+                $dom = new \DOMDocument('1.0', 'UTF-8');
+                @$dom->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
 
-                $trNodes = $DOM->getElementsByTagName('tr');
+                // get the first table on the page (User details)
+                $table1 = $dom->getElementsByTagName('table')->item(0);
 
-                foreach ($trNodes as $trNode) {
-                    $trContent = $trNode->textContent;
+                $username = '';
+                $email = '';
+                $first_ip = '';
+                $status = 'Active';
 
-                    $ipContent = 'Username: ';
-                    if (Str::contains($trContent, $ipContent)) {
-                        $username = trim(str_replace($ipContent, "", $trContent));
-                    }
+                // iterate over each row in this table
+                foreach ($table1->getElementsByTagName('tr') as $tr) {
+                    // get the columns in this row
+                    $tds = $tr->getElementsByTagName('td');
 
-                    $ipContent = 'Email: ';
-                    if (Str::contains($trContent, $ipContent)) {
-                        $email = trim(str_replace($ipContent, "", $trContent));
-                    }
-
-                    $ipContent = 'First IP address: ';
-                    if (Str::contains($trContent, $ipContent)) {
-                        $ip = trim(str_replace($ipContent, "", $trContent));
-                        $firstIP = filter_var($ip, FILTER_VALIDATE_IP) ? $ip : '';
+                    // find which row we are processing in this loop
+                    switch (trim($tds->item(0)->nodeValue)) {
+                        case('Username:'):
+                            $username = trim($tds->item(1)->nodeValue);
+                            // check if this member has been zapped/deleted
+                            if ('!' == $username[0]) {
+                                // were they zapped or deleted?
+                                // Zapped has member id in curly braces, deleted member id is round brackets.
+                                if (false !== strpos($username, ' {')) {
+                                    $status = 'Zapped';
+                                } else {
+                                    $status = 'Deleted';
+                                }
+                                // strip the leading '!' and copy up to, but not including the space
+                                // Example: "!johndoe {32341212}"
+                                $username = substr($username, 1, (strpos($username, ' ') - 1));
+                            }
+                            break;
+                        case('Email:'):
+                            $email = trim($tds->item(1)->nodeValue);
+                            break;
+                        case('First IP address:'):
+                            $first_ip = trim($tds->item(1)->nodeValue);
+                            $first_ip = filter_var($first_ip, FILTER_VALIDATE_IP) ? $first_ip : '';
+                            break;
                     }
                 }
 
+                // TODO: get the second table: "Auth tokens"
+                //  and check for additional IP addresses
+
+                // create the new member's record
                 if (strlen($username)) {
                     Member::create([
                         'id' => $member_id,
                         'username' => $username,
                         'email' => $email,
-                        'firstip' => $firstIP,
+                        'firstip' => $first_ip,
+                        'status' => $status,
                         'joined_recently' => 0,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ]);
+
                     Log::debug('GetAllMembers: Added new member ID ' . $member_id);
                 }
 
@@ -86,6 +124,7 @@ class GetAllMembersAction
                 continue;
             }
         }
+
     }
 
 }

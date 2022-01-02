@@ -16,6 +16,7 @@ class Member extends Model
         'username',
         'email',
         'firstip',
+        'status',
         'zapped',
         'joined_recently',
         'created_at',

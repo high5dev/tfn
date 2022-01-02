@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Log;
 
 class ScrapeMemberAction
 {
+    /**
+     * called from \App\Console\Kernel
+     *
+     * grab all members that were last updated over a month ago. 1,000 at a time.
+     * update their details in the local database.
+     */
     public function __invoke(): void
     {
         Log::debug('ScrapeMember: Started');
@@ -32,68 +38,89 @@ class ScrapeMemberAction
 
         // get the ID of members that were last updated over a month ago
         // get a maximum of 1000 at a time
-        $results = Member::where('updated_at', '<', Carbon::now()->subMonth())
+        $members = Member::where('updated_at', '<', Carbon::now()->subMonth())
             ->whereNull('firstip')
             ->orderBy('id')
             ->take(1000)
-            ->pluck('id');
+            ->get();
 
         if (!count($results)) {
             Log::debug('ScrapeMember: No data to scrape');
             return;
         }
 
-        foreach ($results as $member_id) {
-            Log::debug('ScrapeMember: checking ' . $member_id);
+        // iterate over each member from local database
+        foreach ($members as $member) {
+            Log::debug('ScrapeMember: checking ' . $member->id);
+
+            // load the current values for this member
+            $username = $member->username;
+            $email = $member->email;
+            $first_ip = $member->first_ip;
+            $status = $member->status;
+
             try {
+                // grab the member's details from ST
                 $page = $scrapeHelper->GetPage($pageUrl, ['user_id' => $member_id]);
 
-                $DOM = new \DOMDocument('1.0', 'UTF-8');
-                @$DOM->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
+                $dom = new \DOMDocument('1.0', 'UTF-8');
+                @$dom->loadHTML(mb_convert_encoding($page, 'HTML-ENTITIES', 'UTF-8'));
 
-                $trNodes = $DOM->getElementsByTagName('tr');
+                // get the first table on the page: "User details"
+                $table1 = $dom->getElementsByTagName('table')->item(0);
 
-                $idFound = false;
-                $ipFound = false;
-                $firstIP = '';
+                // iterate over each row in this table
+                foreach ($table1->getElementsByTagName('tr') as $tr) {
+                    // get the columns in this row
+                    $tds = $tr->getElementsByTagName('td');
 
-                foreach ($trNodes as $trNode) {
-                    $trContent = $trNode->textContent;
-
-                    $idContent = 'User ID: ' . $member_id;
-                    if (Str::contains($trContent, $idContent)) {
-                        $idFound = true;
-                    }
-
-                    $ipContent = 'First IP address: ';
-                    if (Str::contains($trContent, $ipContent)) {
-                        $ipFound = true;
-                        $ip = trim(str_replace($ipContent, "", $trContent));
-                        $firstIP = filter_var($ip, FILTER_VALIDATE_IP) ? $ip : '';
-                    }
-
-                    if ($idFound && $ipFound && $firstIP != '') {
-                        break;
+                    // find which row we are processing on this loop
+                    switch (trim($tds->item(0)->nodeValue)) {
+                        case('Username:'):
+                            $username = trim($tds->item(1)->nodeValue);
+                            // check if this member has been zapped/deleted
+                            if ('!' == $username[0]) {
+                                // were they zapped or deleted?
+                                // Zapped has member id in curly braces, deleted member id is round brackets.
+                                if (false !== strpos($username, ' {')) {
+                                    $status = 'Zapped';
+                                } else {
+                                    $status = 'Deleted';
+                                }
+                                // strip the leading '!' and copy up to, but not including the space
+                                // Example: "!johndoe {32341212}"
+                                $username = substr($username, 1, (strpos($username, ' ') - 1));
+                            }
+                            break;
+                        case('Email:'):
+                            $email = trim($tds->item(1)->nodeValue);
+                            break;
+                        case('First IP address:'):
+                            $first_ip = trim($tds->item(1)->nodeValue);
+                            $first_ip = filter_var($first_ip, FILTER_VALIDATE_IP) ? $first_ip : '';
+                            break;
                     }
                 }
 
-                if ($idFound && $ipFound && $firstIP != '') {
-                    Member::where('id', $member_id)->update([
-                        'firstip' => $firstIP,
-                        'updated_at' => Carbon::now(),
-                    ]);
-                    Log::debug('ScrapeMember: Found IP ' . $firstIP . ' for ' . $member_id);
-                } else {
-                    Member::where('id', $member_id)->update([
-                        'updated_at' => Carbon::now(),
-                    ]);
-                    Log::debug('ScrapeMember: No IP found for ' . $member_id);
-                }
+                // update the member's record
+                Member::where('id', $member_id)->update([
+                    'username' => $username,
+                    'email' => $email,
+                    'firstip' => $first_ip,
+                    'status' => $status,
+                    'updated_at' => Carbon::now(),
+                ]);
+
+                // TODO: get the second table: "Auth tokens"
+                //  and check for additional IP addresses
+
+                Log::debug('ScrapeMember: ID:' . $member_id . ' updated');
 
             } catch (\Throwable $th) {
                 Log::debug('ScrapeMember: Scrape error: ' . $th->getMessage());
                 continue;
             }
+
         }
     }
 

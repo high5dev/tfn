@@ -19,6 +19,7 @@ class CreateMembersTable extends Migration
             $table->string('email', 254)->nullable();
             $table->string('firstip', 63)->nullable();
             $table->datetime('zapped')->nullable();
+            $table->string('status', 7)->nullable();
             $table->boolean('joined_recently')->default(false);
             $table->timestamps();
         });
