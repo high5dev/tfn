@@ -48,8 +48,6 @@ class GetAllMembersAction
 
                 $trNodes = $DOM->getElementsByTagName('tr');
 
-                $firstIP = '';
-
                 foreach ($trNodes as $trNode) {
                     $trContent = $trNode->textContent;
 
@@ -70,16 +68,18 @@ class GetAllMembersAction
                     }
                 }
 
-                Member::create([
-                    'id' => $member_id,
-                    'username' => $username,
-                    'email' => $email,
-                    'firstip' => $firstIP,
-                    'joined_recently' => 0,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ]);
-                Log::debug('GetAllMembers: Added new member ID ' . $member_id);
+                if (strlen($username)) {
+                    Member::create([
+                        'id' => $member_id,
+                        'username' => $username,
+                        'email' => $email,
+                        'firstip' => $firstIP,
+                        'joined_recently' => 0,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                    Log::debug('GetAllMembers: Added new member ID ' . $member_id);
+                }
 
             } catch (\Throwable $th) {
                 Log::debug('ScrapeMember: Scrape error: ' . $th->getMessage());
