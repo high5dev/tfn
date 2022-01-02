@@ -103,7 +103,7 @@ class GetMemberDetailsAction
                         if ('!' == $username[0]) {
                             // were they zapped or deleted?
                             // Zapped has member id in curly braces, deleted member id is round brackets.
-                            if (false !== strpos($username, ' {')) {
+                            if (false !== strpos($username, '{')) {
                                 $data['user_details']['status'] = 'Zapped';
                             } else {
                                 $data['user_details']['status'] = 'Deleted';

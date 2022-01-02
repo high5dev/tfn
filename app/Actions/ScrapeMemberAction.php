@@ -82,7 +82,7 @@ class ScrapeMemberAction
                             if ('!' == $username[0]) {
                                 // were they zapped or deleted?
                                 // Zapped has member id in curly braces, deleted member id is round brackets.
-                                if (false !== strpos($username, ' {')) {
+                                if (false !== strpos($username, '{')) {
                                     $status = 'Zapped';
                                 } else {
                                     $status = 'Deleted';
