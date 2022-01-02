@@ -123,8 +123,8 @@ class ScrapeMemberAction
                 Log::debug('ScrapeMember: Scrape error: ' . $th->getMessage());
                 continue;
             }
-
         }
+        Log::debug('ScrapeMember: Completed');
     }
 
 }
