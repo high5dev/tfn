@@ -79,7 +79,7 @@ class GetAllMembersAction
                             $username = trim($tds->item(1)->nodeValue);
                             Log::debug('X2');
                             // skip this one if username is empty
-                            if (strlen($username)) continue 2;
+                            if (strlen($username)<1) continue 2;
                             Log::debug('X3');
                             // check if this member has been zapped/deleted
                             if ('!' == $username[0]) {
