@@ -12,7 +12,7 @@ class GetAllMembersAction
 {
     public function __invoke(): void
     {
-        Log::debug('ScrapeMember: Started');
+        Log::debug('GetAllMembers: Started');
         $scrapeHelper = new ScrapeHelper('scrapeMember');
 
         $pageUrl = config('app.tfn_base_url') . '/view_member';
