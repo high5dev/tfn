@@ -21,9 +21,9 @@ class ScrapeMemberAction
         Log::debug('ScrapeMember: Started');
         $scrapeHelper = new ScrapeHelper('scrapeMember');
 
-        $pageUrl = config('app.tfn_base_url') . '/view_member';
-        $user = config('app.tfn_username');
-        $password = config('app.tfn_password');
+        $pageUrl = config('tfn.tfn_base_url') . '/view_member';
+        $user = config('tfn.tfn_username');
+        $password = config('tfn.tfn_password');
 
         // check if we're logged in
         if (!$scrapeHelper->isLoggedIn()) {

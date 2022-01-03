@@ -12,7 +12,7 @@ class GetIPinfoAction
     public function execute($ip): array
     {
         $strictness = 1;
-        $url = config('app.ip_base_url') . config('app.ip_api_key') . '/' . $ip . '?strictness=' . $strictness;
+        $url = config('tfn.ip_base_url') . config('tfn.ip_api_key') . '/' . $ip . '?strictness=' . $strictness;
         $response = Http::get($url);
         return $response->json();
     }

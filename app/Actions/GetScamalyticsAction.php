@@ -11,7 +11,7 @@ class GetScamalyticsAction
      */
     public function execute($ip): array
     {
-        $url = config('app.scam_base_url') . '/' . config('app.scam_api_user') . '/?key=' . config('app.scam_api_key') . '&ip=' . $ip;
+        $url = config('tfn.scam_base_url') . '/' . config('tfn.scam_api_user') . '/?key=' . config('tfn.scam_api_key') . '&ip=' . $ip;
         $response = Http::get($url);
         return $response->json();
     }

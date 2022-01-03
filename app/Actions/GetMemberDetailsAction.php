@@ -23,8 +23,8 @@ class GetMemberDetailsAction
         $this->scrapeHelper = new ScrapeHelper('getMember');
 
         // login creds
-        $user = config('app.tfn_username');
-        $password = config('app.tfn_password');
+        $user = config('tfn.tfn_username');
+        $password = config('tfn.tfn_password');
 
         // check if we're logged in
         if (!$this->scrapeHelper->isLoggedIn()) {
@@ -48,7 +48,7 @@ class GetMemberDetailsAction
         $data = [];
 
         // get the "User details" page
-        $url = config('app.tfn_base_url') . '/view_member';
+        $url = config('tfn.tfn_base_url') . '/view_member';
         $page = $this->scrapeHelper->GetPage($url, ['user_id' => $this->member_id]);
 
         try {
@@ -250,7 +250,7 @@ class GetMemberDetailsAction
         $data = [];
 
         // get the 'User details' page
-        $url = config('app.tfn_base_url') . '/view_replies_received?user_id=' . $this->member_id;
+        $url = config('tfn.tfn_base_url') . '/view_replies_received?user_id=' . $this->member_id;
         $page = $this->scrapeHelper->GetPage($url);
         Log::debug('getReplies: got page');
 
@@ -291,7 +291,7 @@ class GetMemberDetailsAction
         $result = false;
 
         // send the zap to SpamTool
-        $url = config('app.tfn_base_url') . '/zap_member';
+        $url = config('tfn.tfn_base_url') . '/zap_member';
         $page = $this->scrapeHelper->GetPage($url, ['user_id' => $this->member_id]);
 
         if (stripos($page, 'The zap probably succeeded') !== false) {

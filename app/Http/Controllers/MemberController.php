@@ -124,8 +124,8 @@ class MemberController extends Controller
     {
         // get the member's details
         $member = Member::where('id', $id)->first();
-        $imgurl = config('app.tfn_img_url');
-        $sturl = config('app.tfn_base_url');
+        $imgurl = config('tfn.tfn_img_url');
+        $sturl = config('tfn.tfn_base_url');
 
         if ($member) {
             return view('members.show', compact('member', 'imgurl', 'sturl'));
@@ -147,8 +147,8 @@ class MemberController extends Controller
     public function prezap($id)
     {
         $member = Member::where('id', $id)->first();
-        $imgurl = config('app.tfn_img_url');
-        $sturl = config('app.tfn_base_url');
+        $imgurl = config('tfn.tfn_img_url');
+        $sturl = config('tfn.tfn_base_url');
 
         if ($member) {
             return view('members.prezap', compact('member', 'imgurl', 'sturl'));

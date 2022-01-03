@@ -24,7 +24,7 @@ class ScrapeHelper
     public function isLoggedIn(): bool
     {
         // get spamcontrol entry page
-        $url = config('app.tfn_base_url') . '/home';
+        $url = config('tfn.tfn_base_url') . '/home';
         $page = $this->GetPage($url);
         if (false === stripos($page, 'ou must log in using')) {
             // if the string is not found then we must be logged in
@@ -35,7 +35,7 @@ class ScrapeHelper
 
     public function Login($user, $password)
     {
-        $url = config('app.tfn_web_url') . '/login';
+        $url = config('tfn.tfn_web_url') . '/login';
         $vars = [];
         $vars['user'] = trim($user);
         $vars['password'] = trim($password);
