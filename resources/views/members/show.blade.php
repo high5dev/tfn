@@ -71,6 +71,7 @@
                         <th>Type</th>
                         <th>Subject</th>
                         <th>Date</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     @foreach($member->posts as $post)
@@ -79,6 +80,15 @@
                             <td>{{ $post->type }}</td>
                             <td>{{ $post->subject }}</td>
                             <td>{{ $post->dated }}</td>
+                            <td>
+                                <div class="span4">
+                                    <a href="{{ $imgurl . $post->id }}" target="_blank">
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit">
+                                            <i class="far fa-image" title="View image"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 @else

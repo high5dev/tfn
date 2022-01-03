@@ -128,7 +128,7 @@ class MemberController extends Controller
         if ($member) {
             return view('members.show', compact('member'));
         }
-        return back()->with('error', 'Mmeber not found!');
+        return back()->with('error', 'Member not found!');
     }
 
     /**
@@ -145,9 +145,10 @@ class MemberController extends Controller
     public function prezap($id)
     {
         $member = Member::where('id', $id)->first();
+        $imgurl = config('app.tfn_img_url');
 
         if ($member) {
-            return view('members.prezap', compact('member'));
+            return view('members.prezap', compact('member', 'imgurl'));
         }
 
         return back()->with('error', 'Unable to find that member!');

@@ -15,6 +15,7 @@ return [
     'tfn_password' => env('TFN_PASSWORD'),
     'tfn_web_url' => env('TFN_WEB_URL'),
     'tfn_base_url' => env('TFN_BASE_URL'),
+    'tfn_img_url' => env('TFN_IMG_URL'),
 
     /*
     |--------------------------------------------------------------------------
