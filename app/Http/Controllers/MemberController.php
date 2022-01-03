@@ -162,16 +162,13 @@ class MemberController extends Controller
      */
     public function zap(ReportStoreRequest $request, GetMemberDetailsAction $getMember)
     {
-        \Log::debug('X:1');
         // confirm admin password
         if (Hash::check($request->password, Auth::User()->password)) {
 
-            \Log::debug('X:2');
             $member = Member::where('id', $request->id)->first();
 
             if ($member) {
 
-                \Log::debug('X:3');
                 // Create zap report
                 $report = new Report;
                 $report->user_id = Auth::user()->id;
@@ -184,7 +181,6 @@ class MemberController extends Controller
                 $report->body = '';
                 $report->save();
 
-                \Log::debug('X:4');
                 // dispatch zap job to queue
                 dispatch(new ZapMember($report->id));
 
