@@ -12,15 +12,22 @@ class Report extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'user_id',
+        'member_id',
+        'justification',
+        'found',
+        'regions',
+        'warnings',
+        'warning_emails',
+        'body'
     ];
 
-    // which reports a user has
-    public function reports()
+    /**
+     * get user the report belongs to
+     */
+    public function user()
     {
-        return $this->hasMany(Report::class);
+        return $this->belongsTo(User::class);
     }
 
 }
