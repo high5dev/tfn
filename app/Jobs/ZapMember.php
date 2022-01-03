@@ -36,43 +36,34 @@ class ZapMember implements ShouldQueue
      */
     public function handle()
     {
-        Log::debug('ZapMember: x1');
         // retrieve the report
         $report = Report::where('id', $this->report_id)->first();
 
         if ($report) {
 
-            Log::debug('ZapMember: x2');
             // get the member record
             $member = Member::where('id', $report->member_id)->first();
 
             if ($member) {
 
-                Log::debug('ZapMember: x3');
                 // get user details
                 $memberDetails = new GetMemberDetailsAction($report->member_id);
-                Log::debug('ZapMember: x4');
                 $member_details = $memberDetails->getMember();
-                Log::debug('ZapMember: x5');
                 $member_replies = $memberDetails->getReplies();
 
-                Log::debug('ZapMember: x6');
                 // update the zap report
                 $report->warning_emails = json_encode($member_replies);
                 $report->body = json_encode($member_details);
                 $report->save();
 
-                Log::debug('ZapMember: x7');
                 // send zap request to SpamTool
                 $memberDetails->zapMember();
 
-                Log::debug('ZapMember: x7');
                 // delete all their posts if they have any
                 if (isset($member->posts)) {
                     $member->posts()->delete();
                 }
 
-                Log::debug('ZapMember: x8');
                 // delete the member
                 $member->delete();
 
