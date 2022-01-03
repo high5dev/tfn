@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Member;
 use App\Models\Report;
-use App\Actions\ScrapeAction;
 use App\Actions\GetIPinfoAction;
 use App\Actions\GetScamalyticsAction;
 use App\Actions\GetMemberDetailsAction;
@@ -107,7 +106,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        return view('members.create');
     }
 
     /**
@@ -167,9 +166,12 @@ class MemberController extends Controller
             if ($member) {
 
                 // Create zap report
+                Report::create($request->validated());
+                /*
                 $report = new Report;
                 $report->user_id = Auth::user()->id;
                 $report->member_id = $request->id;
+                $report->title = $request->title;
                 $report->justification = $request->justification;
                 $report->found = $request->found;
                 $report->regions = $request->regions;
@@ -177,6 +179,7 @@ class MemberController extends Controller
                 $report->warning_emails = '';
                 $report->body = '';
                 $report->save();
+                */
 
                 // dispatch zap job to queue
                 dispatch(new ZapMember($report->id));
@@ -223,8 +226,6 @@ class MemberController extends Controller
         //$ip = $IPinfo->execute($request->ip);
         //$scam = $Scamalytics->execute($request->ip);
         //dd($ip, $scam);
-
-        new ScrapeAction;
         return redirect('/home')->with('success', 'Test completed');
     }
 }

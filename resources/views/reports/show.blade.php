@@ -49,6 +49,17 @@
             <legend>Details</legend>
 
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="title">Title:</label>
+                <div class="col-sm-10">
+                    <textarea id="justification" name="title" class="form-control" required
+                              {{ $errors->has('title') ? ' autofocus' : '' }}>{{ old('title', $report->title) }}</textarea>
+                    @if ($errors->has('title'))
+                        <div class="alert alert-warning">{{ $errors->first('title') }}</div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="found">Found:</label>
                 <div class="col-sm-10">
                     <select id="found" name="found" class="form-control">

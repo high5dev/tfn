@@ -9,8 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportUpdateRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 //use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
@@ -41,6 +43,14 @@ class ReportController extends Controller
     }
 
     /**
+     * show the form to create a new zap report
+     */
+    public function create($member_id)
+    {
+        //
+    }
+
+    /**
      * show a zap report
      */
     public function show($id)
@@ -66,23 +76,35 @@ class ReportController extends Controller
         if (Hash::check($request->password, Auth::User()->password)) {
 
             // update the zap report
+            $report = Report::update($request->validated());
+            /*
+            $report->title = $request->title;
             $report->justification = $request->justification;
             $report->found = $request->found;
             $report->regions = $request->regions;
             $report->warnings = $request->warnings;
+            */
 
             if ($report->isDirty()) {
 
                 // save the zap report
-                $report->save();
+                //$report->save();
 
                 // log the changes
-                $log = new Logg();
+                Logg::create([
+                    'title' => 'User updated zap report',
+                    'user_id' => Auth::User()->id,
+                    'content' => "User updated zap report:\n" .
+                        "Report ID: {{ $report->id }}\n\n" .
+                        print_r($report->getChanges(), true)
+                ]);
+                /*
                 $log->title = 'User updated zap report';
                 $log->user_id = Auth::User()->id;
                 $log->content = "User updated zap report:\nReport ID: {{ $report->id }}\n\n";
                 $log->content .= print_r($report->getChanges(), TRUE);
                 $log->save();
+                */
             }
 
             return redirect('/reports')->with('success', 'You have successfully updated the zap report');

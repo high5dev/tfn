@@ -14,6 +14,7 @@ class Report extends Model
     protected $fillable = [
         'user_id',
         'member_id',
+        'title',
         'justification',
         'found',
         'regions',
