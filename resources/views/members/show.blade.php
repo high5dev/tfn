@@ -94,7 +94,7 @@
 
     <form method="GET" action="/members/zap/{{ $member->id }}">
         @csrf
-        <button class='btn btn-error' type="submit" alt="Zap Account">zap</button>
+        <button type="submit" class="btn btn-error" title="Zap Account">ZAP</button>
     </form>
 
     <a href="/members">Back to list of members</a>
