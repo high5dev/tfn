@@ -69,6 +69,7 @@ class ReportController extends Controller
             $report->justification = $request->justification;
             $report->found = $request->found;
             $report->regions = $request->regions;
+            $report->warnings = $request->warnings;
 
             if ($report->isDirty()) {
 
