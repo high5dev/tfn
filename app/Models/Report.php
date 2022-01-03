@@ -17,7 +17,6 @@ class Report extends Model
         'title',
         'justification',
         'found',
-        'regions',
         'warnings',
         'warning_emails',
         'body'

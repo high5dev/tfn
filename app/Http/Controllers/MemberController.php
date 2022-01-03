@@ -178,7 +178,6 @@ class MemberController extends Controller
                 $report->title = $request->title;
                 $report->justification = $request->justification;
                 $report->found = $request->found;
-                $report->regions = $request->regions;
                 $report->warnings = $request->warnings;
                 $report->warning_emails = '';
                 $report->body = '';

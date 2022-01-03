@@ -20,7 +20,6 @@ class CreateReportsTable extends Migration
             $table->string('title');
             $table->text('justification');
             $table->string('found');
-            $table->string('regions');
             $table->string('warnings');
             $table->text('warning_emails');
             $table->text('body');

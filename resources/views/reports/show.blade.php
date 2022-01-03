@@ -102,17 +102,6 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="regions">Regions:</label>
-                <div class="col-sm-10">
-                    <input type="text" id="regions" name="regions" class="form-control" value="{{ old('regions', $report->regions) }}"
-                           {{ $errors->has('region') ? ' autofocus' : '' }} required>
-                    @if ($errors->has('regions'))
-                        <div class="alert alert-warning">{{ $errors->first('regions') }}</div>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="warnings">Warnings:</label>
                 <div class="col-sm-10">
                     <input type="text" id="warnings" name="warnings" class="form-control" value="{{ old('warnings', $report->warnings) }}"

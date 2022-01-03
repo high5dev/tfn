@@ -114,17 +114,6 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="regions">Regions:</label>
-                <div class="col-sm-10">
-                    <input type="text" id="regions" name="regions" class="form-control" value="{{ old('regions') }}"
-                           {{ $errors->has('region') ? ' autofocus' : '' }} required>
-                    @if ($errors->has('regions'))
-                        <div class="alert alert-warning">{{ $errors->first('regions') }}</div>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="warnings">Warnings:</label>
                 <div class="col-sm-10">
                     <input type="text" id="warnings" name="warnings" class="form-control" value="{{ old('warnings') }}"
@@ -165,7 +154,6 @@
         <li>If no warnings are neccessary, put "None" in the warnings field.</li>
         <li>If you send warnings, please reference the HS ticket in the Warnings field.</li>
         <li>If you select "Other" for how the account was found, please expand in the Justification area.</li>
-        <li>In the regions field put the region of the post that triggered the zap.</li>
     </ul>
 
 @endsection

@@ -45,12 +45,6 @@ class ReportStoreRequest extends FormRequest
                 "min:5",
                 "max:64000"
             ],
-            'regions' => [
-                "required",
-                "string",
-                "min:1",
-                "max:254",
-            ],
             'warnings' => [
                 "required",
                 "string",
