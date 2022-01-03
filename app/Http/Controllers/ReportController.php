@@ -76,7 +76,7 @@ class ReportController extends Controller
         if (Hash::check($request->password, Auth::User()->password)) {
 
             // update the zap report
-            $report = Report::update($request->validated());
+            Report::update($request->validated());
             /*
             $report->title = $request->title;
             $report->justification = $request->justification;
@@ -85,7 +85,7 @@ class ReportController extends Controller
             $report->warnings = $request->warnings;
             */
 
-            if ($report->isDirty()) {
+        //    if ($report->isDirty()) {
 
                 // save the zap report
                 //$report->save();
@@ -105,7 +105,7 @@ class ReportController extends Controller
                 $log->content .= print_r($report->getChanges(), TRUE);
                 $log->save();
                 */
-            }
+        //    }
 
             return redirect('/reports')->with('success', 'You have successfully updated the zap report');
         }
