@@ -92,9 +92,8 @@
 
     </form>
 
-    <form method="post" action="/members/zap/{{ $member->id }}">
+    <form method="GET" action="/members/zap/{{ $member->id }}">
         @csrf
-        @method("GET")
         <button class='btn btn-error' type="submit" alt="Zap Account">zap</button>
     </form>
 
