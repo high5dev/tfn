@@ -76,7 +76,7 @@
                     </thead>
                     @foreach($member->posts as $post)
                         <tr>
-                            <td>{{ $post->id }}</td>
+                            <td><a href="{{ $sturl }}/view_post?post_id={{ $post->id }}" target="_blank">{{ $post->id }}</a></td>
                             <td>{{ $post->type }}</td>
                             <td>{{ $post->subject }}</td>
                             <td>{{ $post->dated }}</td>
