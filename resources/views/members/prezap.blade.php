@@ -147,7 +147,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="submit">&nbsp;</label>
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-error"
+                <button type="submit" class="btn btn-danger"
                         onclick="return okCancel('Are you sure you want to zap this member?')">ZAP</button>
             </div>
         </div>
