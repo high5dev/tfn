@@ -74,6 +74,14 @@ Route::group([
     Route::delete('/members/zap', 'MemberController@zap');
     Route::get('/getMembers', 'MemberController@getMembers')->name('getMembers');
 
+    // User: zap reports
+    Route::get('/reports', 'ReportController@index');
+    //Route::get('/reports/create', 'ReportController@create');
+    //Route::post('/reports', 'ReportController@store');
+    Route::get('/reports/{id}', 'ReportController@show');
+    Route::patch('/reports', 'ReportController@update');
+    //Route::delete('/reports/{id}', 'ReportController@destroy');
+
     // User: posts
     Route::get('/posts', 'PostController@index');
     Route::get('/posts/list', 'PostController@list');
