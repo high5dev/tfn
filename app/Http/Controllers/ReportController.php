@@ -72,46 +72,48 @@ class ReportController extends Controller
         // get the zap report
         $report = Report::where('id', $request->id)->first();
 
-        // confirm password
-        if (Hash::check($request->password, Auth::User()->password)) {
+        if ($report) {
 
-            // update the zap report
-            Report::update($request->validated());
-            /*
-            $report->title = $request->title;
-            $report->justification = $request->justification;
-            $report->found = $request->found;
-            $report->regions = $request->regions;
-            $report->warnings = $request->warnings;
-            */
+            // confirm password
+            if (Hash::check($request->password, Auth::User()->password)) {
 
-        //    if ($report->isDirty()) {
-
-                // save the zap report
-                //$report->save();
-
-                // log the changes
-                Logg::create([
-                    'title' => 'User updated zap report',
-                    'user_id' => Auth::User()->id,
-                    'content' => "User updated zap report:\n" .
-                        "Report ID: {{ $report->id }}\n\n" .
-                        print_r($report->getChanges(), true)
-                ]);
+                // update the zap report
+                $report->update($request->validated());
                 /*
-                $log->title = 'User updated zap report';
-                $log->user_id = Auth::User()->id;
-                $log->content = "User updated zap report:\nReport ID: {{ $report->id }}\n\n";
-                $log->content .= print_r($report->getChanges(), TRUE);
-                $log->save();
+                $report->title = $request->title;
+                $report->justification = $request->justification;
+                $report->found = $request->found;
+                $report->regions = $request->regions;
+                $report->warnings = $request->warnings;
                 */
-        //    }
 
-            return redirect('/reports')->with('success', 'You have successfully updated the zap report');
+                if ($report->isDirty()) {
+
+                    // save the zap report
+                    //$report->save();
+
+                    // log the changes
+                    Logg::create([
+                        'title' => 'User updated zap report',
+                        'user_id' => Auth::User()->id,
+                        'content' => "User updated zap report:\n" .
+                            "Report ID: {{ $report->id }}\n\n" .
+                            print_r($report->getChanges(), true)
+                    ]);
+                    /*
+                    $log->title = 'User updated zap report';
+                    $log->user_id = Auth::User()->id;
+                    $log->content = "User updated zap report:\nReport ID: {{ $report->id }}\n\n";
+                    $log->content .= print_r($report->getChanges(), TRUE);
+                    $log->save();
+                    */
+                }
+
+                return redirect('/reports')->with('success', 'You have successfully updated the zap report');
+            }
+            return redirect()->back()->withInput()->with('error', 'Incorrect password !');
         }
-        return redirect()->back()
-            ->withInput()
-            ->with('error', 'Incorrect password !');
+        return redirect()->back()->withInput()->with('error', 'Unable to find that report!');
     }
 
 }
