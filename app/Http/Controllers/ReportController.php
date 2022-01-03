@@ -6,11 +6,12 @@ use Auth;
 use App\Models\Logg;
 use App\Models\Report;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReportUpdateRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+//use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Hash;
+//use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
 {
