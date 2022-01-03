@@ -18,12 +18,12 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($scans as $scan)
+        @foreach($reports as $report)
             <tr>
-                <td>{{ $reports->created_at }}</td>
-                <td>{{ $reports->user_id }}</td>
-                <td>{{ $reports->member_id }}</td>
-                <td><a href="/reports/{{ $reports->id }}">Edit</a></td>
+                <td>{{ $report->created_at }}</td>
+                <td>{{ $report->user_id }}</td>
+                <td>{{ $report->member_id }}</td>
+                <td><a href="/reports/{{ $report->id }}">Edit</a></td>
             </tr>
         @endforeach
         </tbody>
