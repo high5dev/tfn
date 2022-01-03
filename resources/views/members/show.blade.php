@@ -66,9 +66,7 @@
     <form method="post" action="/members/zap/{{ $member->id }}">
         @csrf
         @method("GET")
-        <button class='btn btn-warning' type="submit" alt="Zap Account"
-                onclick="return okCancel('Are you sure you want to zap this member?')">zap
-        </button>
+        <button class='btn btn-warning' type="submit" alt="Zap Account">zap</button>
     </form>
 
     <a href="/members">Back to list of members</a>

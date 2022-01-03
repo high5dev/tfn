@@ -147,7 +147,8 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="submit">&nbsp;</label>
             <div class="col-sm-10">
-                <input type="submit" id="submit" name="submit" value="Zap">
+                <input type="submit" id="submit" name="submit" value="Zap"
+                       onclick="return okCancel('Are you sure you want to zap this member?')">
             </div>
         </div>
 
