@@ -58,7 +58,7 @@
                             <td>{{ $post->dated }}</td>
                             <td>
                                 <div class="span4">
-                                    <a href="{{ $imgurl . $post->id }}" target="_blank">Image</a>
+                                    <a href="{{ $imgurl . $post->id }}" target="_blank"><i class="fas fa-image" title=""View Image></i></a>
                                 </div>
                             </td>
                         </tr>
