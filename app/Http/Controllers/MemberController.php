@@ -170,8 +170,6 @@ class MemberController extends Controller
             if ($member) {
 
                 // Create zap report
-                $report = Report::create(['user_id' => auth()->id] + $request->validated());
-                /*
                 $report = new Report;
                 $report->user_id = Auth::user()->id;
                 $report->member_id = $request->id;
@@ -182,7 +180,6 @@ class MemberController extends Controller
                 $report->warning_emails = '';
                 $report->body = '';
                 $report->save();
-                */
 
                 // dispatch zap job to queue
                 dispatch(new ZapMember($report->id));
