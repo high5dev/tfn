@@ -56,7 +56,7 @@ class ReportController extends Controller
     /**
      * update a zap report
      */
-    public function update(ScanUpdateRequest $request)
+    public function update(ReportUpdateRequest $request)
     {
         // get the zap report
         $report = Report::where('id', $request->id)->first();
