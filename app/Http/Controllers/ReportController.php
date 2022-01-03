@@ -10,7 +10,7 @@ use App\Http\Requests\ReportUpdateRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 //use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 //use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
