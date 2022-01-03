@@ -66,9 +66,9 @@ class ReportController extends Controller
         if (Hash::check($request->password, Auth::User()->password)) {
 
             // update the zap report
-            $report->started = $request->justification;
-            $report->stopped = $request->found;
-            $report->startid = $request->regions;
+            $report->justification = $request->justification;
+            $report->found = $request->found;
+            $report->regions = $request->regions;
 
             if ($report->isDirty()) {
 
