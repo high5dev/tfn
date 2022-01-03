@@ -9,11 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportUpdateRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
-//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
-//use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
 {
@@ -87,15 +83,15 @@ class ReportController extends Controller
                 $report->warnings = $request->warnings;
                 */
 
-                if ($report->isDirty()) {
+        //        if ($report->isDirty()) {
 
                     // save the zap report
                     //$report->save();
 
                     // log the changes
                     Logg::create([
-                        'title' => 'User updated zap report',
                         'user_id' => Auth::User()->id,
+                        'title' => 'User updated zap report',
                         'content' => "User updated zap report:\n" .
                             "Report ID: {{ $report->id }}\n\n" .
                             print_r($report->getChanges(), true)
@@ -107,7 +103,7 @@ class ReportController extends Controller
                     $log->content .= print_r($report->getChanges(), TRUE);
                     $log->save();
                     */
-                }
+        //        }
 
                 return redirect('/reports')->with('success', 'You have successfully updated the zap report');
             }
