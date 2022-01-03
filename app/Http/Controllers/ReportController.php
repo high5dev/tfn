@@ -75,35 +75,15 @@ class ReportController extends Controller
 
                 // update the zap report
                 $report->update($request->validated());
-                /*
-                $report->title = $request->title;
-                $report->justification = $request->justification;
-                $report->found = $request->found;
-                $report->regions = $request->regions;
-                $report->warnings = $request->warnings;
-                */
 
-        //        if ($report->isDirty()) {
-
-                    // save the zap report
-                    //$report->save();
-
-                    // log the changes
-                    Logg::create([
-                        'user_id' => Auth::User()->id,
-                        'title' => 'User updated zap report',
-                        'content' => "User updated zap report:\n" .
-                            "Report ID: {{ $report->id }}\n\n" .
-                            print_r($report->getChanges(), true)
-                    ]);
-                    /*
-                    $log->title = 'User updated zap report';
-                    $log->user_id = Auth::User()->id;
-                    $log->content = "User updated zap report:\nReport ID: {{ $report->id }}\n\n";
-                    $log->content .= print_r($report->getChanges(), TRUE);
-                    $log->save();
-                    */
-        //        }
+                // log the changes
+                Logg::create([
+                    'user_id' => Auth::User()->id,
+                    'title' => 'User updated zap report',
+                    'content' => "User updated zap report:\n" .
+                        "Report ID: { $report->id }\n\n" .
+                        print_r($report->getChanges(), true)
+                ]);
 
                 return redirect('/reports')->with('success', 'You have successfully updated the zap report');
             }

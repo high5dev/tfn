@@ -86,6 +86,17 @@
             </div>
 
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="title">Title:</label>
+                <div class="col-sm-10">
+                    <textarea id="title" name="title" class="form-control" required
+                              {{ $errors->has('title') ? ' autofocus' : '' }}>{{ old('title') }}</textarea>
+                    @if ($errors->has('title'))
+                        <div class="alert alert-warning">{{ $errors->first('title') }}</div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="justification">Justification:</label>
                 <div class="col-sm-10">
                     <textarea id="justification" name="justification" class="form-control" required
