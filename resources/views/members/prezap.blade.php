@@ -88,8 +88,8 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="title">Title:</label>
                 <div class="col-sm-10">
-                    <textarea id="title" name="title" class="form-control" required
-                              {{ $errors->has('title') ? ' autofocus' : '' }}>{{ old('title') }}</textarea>
+                    <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}"
+                           {{ $errors->has('title') ? ' autofocus' : '' }} required>
                     @if ($errors->has('title'))
                         <div class="alert alert-warning">{{ $errors->first('title') }}</div>
                     @endif
