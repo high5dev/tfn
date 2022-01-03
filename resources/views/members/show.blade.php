@@ -59,6 +59,33 @@
                 </div>
             </div>
 
+            <legend>Posts</legend>
+
+            <table class="table table-striped">
+                @if(count($member->posts))
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    @foreach($member->posts as $post)
+                        <tr>
+                            <td>{{ $post->id }}</td>
+                            <td>{{ $post->type }}</td>
+                            <td>{{ $post->subject }}</td>
+                            <td>{{ $post->dated }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td>This member has no posts in the local database</td>
+                    </tr>
+                @endif
+            </table>
+
         </fieldset>
 
     </form>
@@ -66,7 +93,7 @@
     <form method="post" action="/members/zap/{{ $member->id }}">
         @csrf
         @method("GET")
-        <button class='btn btn-warning' type="submit" alt="Zap Account">zap</button>
+        <button class='btn btn-error' type="submit" alt="Zap Account">zap</button>
     </form>
 
     <a href="/members">Back to list of members</a>
