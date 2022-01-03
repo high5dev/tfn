@@ -170,7 +170,7 @@ class MemberController extends Controller
             if ($member) {
 
                 // Create zap report
-                $report = Report::create($request->validated(),['user_id' => Auth::User->id]);
+                $report = Report::create(['user_id' => Auth::User->id] + $request->validated());
                 /*
                 $report = new Report;
                 $report->user_id = Auth::user()->id;
