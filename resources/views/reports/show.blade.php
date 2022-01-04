@@ -82,7 +82,7 @@
                     <td>{{ $auth_token->ip }}</td>
                     <td>{{ $auth_token->country }}</td>
                 </tr>
-            @endif
+            @endforeach
             </table>
 
             <legend>Group membership</legend>
