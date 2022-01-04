@@ -98,10 +98,10 @@
                     <th>Group</th>
                     <th>Region</th>
                 </tr>
-                @foreach($auth_tokens as $auth_token)
+                @foreach($group_membership as $group)
                     <tr>
-                        <td>{{ $auth_token["group"] }}</td>
-                        <td>{{ $auth_token["region"] }}</td>
+                        <td>{{ $group["group"] }}</td>
+                        <td>{{ $group["region"] }}</td>
                     </tr>
                 @endforeach
             </table>
