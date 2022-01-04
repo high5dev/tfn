@@ -138,7 +138,7 @@
                     <th>Date</th>
                     <th>Emails</th>
                 </tr>
-                @foreach(post_details as $post_detail)
+                @foreach($post_details as $post_detail)
                     <tr>
                         <td>{{ post_detail["post_id"] }}</td>
                         <td>{{ $post_detail["type"] }}</td>
