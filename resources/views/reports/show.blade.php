@@ -140,7 +140,7 @@
                 </tr>
                 @foreach($post_details as $post_detail)
                     <tr>
-                        <td>{{ post_detail["post_id"] }}</td>
+                        <td>{{ $post_detail["post_id"] }}</td>
                         <td>{{ $post_detail["type"] }}</td>
                         <td>{{ $post_detail["subject"] }}</td>
                         <td>{{ $post_detail["group"] }}</td>
