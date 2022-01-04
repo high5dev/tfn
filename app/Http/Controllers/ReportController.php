@@ -70,15 +70,15 @@ class ReportController extends Controller
             $body = json_decode($report->body, true);
 
             // get "User details" into an array
-            $user_details = json_decode($body['user_details'], true);
+            $user_details = $body['user_details'];
             // get "Auth tokens" into an array
-            $auth_tokens = json_decode($body['auth_tokens'], true);
+            $auth_tokens = $body['auth_tokens'];
             // get "Group membership" into an array
-            $group_membership = json_decode($body['group_membership'], true);
+            $group_membership = $body['group_membership'];
             // get "Replies" into an array
-            $replies = json_decode($body['replies'], true);
+            $replies = $body['replies'];
             // get "Post details" into an array
-            $post_details = json_decode($body['post_details'], true);
+            $post_details = $body['post_details'];
 
             return view('reports.show', compact('report', 'warning_emails', 'user_details', 'auth_tokens', 'group_membership', 'replies', 'post_details'));
         }
