@@ -77,10 +77,10 @@
             <table class="table table-striped">
             @foreach($auth_tokens as $auth_token)
                 <tr>
-                    <td>{{ $auth_token->created }}</td>
-                    <td>{{ $auth_token->last_Seen }}</td>
-                    <td>{{ $auth_token->ip }}</td>
-                    <td>{{ $auth_token->country }}</td>
+                    <td>{{ $auth_token["created"] }}</td>
+                    <td>{{ $auth_token["last_Seen"] }}</td>
+                    <td>{{ $auth_token["ip"] }}</td>
+                    <td>{{ $auth_token["country"] }}</td>
                 </tr>
             @endforeach
             </table>
