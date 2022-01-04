@@ -23,14 +23,6 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="member_id">Member ID :</label>
-                <div class="col-sm-10">
-                    <input type="text" id="started" name="member_id" class="form-control" readonly
-                           value="{{ $report->member_id }}">
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="created_at">Zapped :</label>
                 <div class="col-sm-10">
                     <input type="text" id="created_at" name="created_at" class="form-control" readonly
@@ -46,6 +38,50 @@
                 </div>
             </div>
 
+            <legend>User details</legend>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="member_id">Member ID :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="started" name="member_id" class="form-control" readonly
+                           value="{{ $user_details['user_id'] }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="username">Username :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="username" name="username" class="form-control" readonly
+                           value="{{ $user_details['username'] }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="email">Email :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="email" name="email" class="form-control" readonly
+                           value="{{ $user_details['email'] }}">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="first_ip">First IP :</label>
+                <div class="col-sm-10">
+                    <input type="text" id="first_ip" name="first_ip" class="form-control" readonly
+                           value="{{ $user_details['first_ip'] }}">
+                </div>
+            </div>
+
+            <legend>Auth tokens</legend>
+
+            <legend>Group membership</legend>
+
+            <legend>Replies</legend>
+
+            <legend>Post details</legend>
+
+            <legend>Warnings</legend>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="warning_emails">Warning Emails:</label>
                 <div class="col-sm-10">
@@ -54,7 +90,7 @@
                 </div>
             </div>
 
-            <legend>Details</legend>
+            <legend>report</legend>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="title">Title:</label>

@@ -55,12 +55,32 @@ class ReportController extends Controller
         $report = Report::where('id', $id)->first();
 
         if ($report) {
+
+            // pre-process warning emails
             $warning_emails = '';
-            foreach(json_decode($report->warning_emails) as $email) {
-                $warning_emails.= $email . ', ';
+            $warning_emails_list = json_decode($report->warning_emails);
+            if (count(json_decode($report->warning_emails, true))) {
+                foreach ($warning_emails_list as $email) {
+                    $warning_emails .= $email . ', ';
+                }
+                $warning_emails = substr($warning_emails, 0, -2);
             }
-            $warning_emails = substr($warning_emails, 0, -2);
-            return view('reports.show', compact('report', 'warning_emails'));
+
+            // get the body of the report
+            $body = json_decode($report->body, true);
+
+            // get "User details" into an array
+            $user_details = json_decode($body['user_details'], true);
+            // get "Auth tokens" into an array
+            $auth_tokens = json_decode($body['auth_tokens'], true);
+            // get "Group membership" into an array
+            $group_membership = json_decode($body['group_membership'], true);
+            // get "Replies" into an array
+            $replies = json_decode($body['replies'], true);
+            // get "Post details" into an array
+            $post_details = json_decode($body['post_details'], true);
+
+            return view('reports.show', compact('report', 'warning_emails', 'user_details', 'auth_tokens', 'group_membership', 'replies', 'post_details'));
         }
         return redirect('/reports')->with('warning', 'Unable to find that zap report!');
     }
