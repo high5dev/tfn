@@ -50,8 +50,7 @@
                 <label class="col-sm-2 col-form-label" for="warning_emails">Warning Emails:</label>
                 <div class="col-sm-10">
                     <textarea id="warning_emails" name="warning_emails" class="form-control"
-                              readonly>@foreach(json_decode($report->warning_emails) as $email){{ $email . ", " }}@endforeach
-                    </textarea>
+                              readonly>{{ $warning_emails }}</textarea>
                 </div>
             </div>
 

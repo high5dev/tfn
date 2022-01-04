@@ -55,7 +55,12 @@ class ReportController extends Controller
         $report = Report::where('id', $id)->first();
 
         if ($report) {
-            return view('reports.show', compact('report'));
+            $warning_emails = '';
+            foreach(json_decode($report->warning_emails) as $email) {
+                $warning_emails.= $email . ', ';
+            }
+            $warning_emails = substr($warning_emails, 0, -2);
+            return view('reports.show', compact('report', 'warning_emails'));
         }
         return redirect('/reports')->with('warning', 'Unable to find that zap report!');
     }
