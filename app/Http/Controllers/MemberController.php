@@ -177,8 +177,8 @@ class MemberController extends Controller
                 $report->justification = $request->justification;
                 $report->found = $request->found;
                 $report->warnings = $request->warnings;
-                $report->warning_emails = '';
-                $report->body = '';
+                $report->warning_emails = '[]';
+                $report->body = '[]';
                 $report->save();
 
                 // dispatch zap job to queue
