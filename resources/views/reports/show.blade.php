@@ -75,6 +75,12 @@
             <legend>Auth tokens</legend>
 
             <table class="table table-striped">
+                <tr>
+                    <th>Created</th>
+                    <th>Last seen</th>
+                    <th>IP Address</th>
+                    <th>Country</th>
+                </tr>
             @foreach($auth_tokens as $auth_token)
                 <tr>
                     <td>{{ $auth_token["created"] }}</td>
@@ -87,9 +93,62 @@
 
             <legend>Group membership</legend>
 
+            <table class="table table-striped">
+                <tr>
+                    <th>Group</th>
+                    <th>Region</th>
+                </tr>
+                @foreach($auth_tokens as $auth_token)
+                    <tr>
+                        <td>{{ $auth_token["group"] }}</td>
+                        <td>{{ $auth_token["region"] }}</td>
+                    </tr>
+                @endforeach
+            </table>
+
             <legend>Replies</legend>
 
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Recipient</th>
+                    <th>Subject</th>
+                    <th>Datetime</th>
+                    <th>Post</th>
+                </tr>
+                @foreach($replies as $reply)
+                    <tr>
+                        <td>{{ $reply["id"] }}</td>
+                        <td>{{ $reply["recipient"] }}</td>
+                        <td>{{ $reply["subject"] }}</td>
+                        <td>{{ $reply["dated"] }}</td>
+                        <td>{{ $reply["post"] }}</td>
+                    </tr>
+                @endforeach
+            </table>
+
             <legend>Post details</legend>
+
+            <table class="table table-striped">
+                <tr>
+                    <th>Post ID</th>
+                    <th>Type</th>
+                    <th>Subject</th>
+                    <th>Group</th>
+                    <th>Date</th>
+                    <th>Emails</th>
+                </tr>
+                @foreach(post_details as $post_detail)
+                    <tr>
+                        <td>{{ post_detail["post_id"] }}</td>
+                        <td>{{ $post_detail["type"] }}</td>
+                        <td>{{ $post_detail["subject"] }}</td>
+                        <td>{{ $post_detail["group"] }}</td>
+                        <td>{{ $post_detail["post_date"] }}</td>
+                        <td>{{ $post_detail["emails_sent"] }}</td>
+                    </tr>
+                @endforeach
+            </table>
 
             <legend>Warnings</legend>
 

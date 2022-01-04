@@ -160,7 +160,7 @@ class GetMemberDetailsAction
              * Region:  <date>
              */
 
-            // iterate over each row in table2
+            // iterate over each row in table3
             $i = 0;
             foreach ($table3->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
@@ -185,7 +185,7 @@ class GetMemberDetailsAction
              * Post:        <string>
              */
 
-            // iterate over each row in table2
+            // iterate over each row in table4
             $i = 0;
             foreach ($table4->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
@@ -214,7 +214,7 @@ class GetMemberDetailsAction
              * Emails sent: <string>
              */
 
-            // iterate over each row in table2
+            // iterate over each row in table5
             $i = 0;
             foreach ($table5->getElementsByTagName('tr') as $tr) {
                 // get all the columns in this row
