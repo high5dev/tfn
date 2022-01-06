@@ -27,9 +27,9 @@ class GetAllMembersAction
         $scrapeHelper = new ScrapeHelper('scrapeMember');
 
         // some useful constants
-        $pageUrl = config('tfn.tfn_base_url') . '/view_member';
-        $user = config('tfn.tfn_username');
-        $password = config('tfn.tfn_password');
+        $pageUrl = config('tfn.base_url') . '/view_member';
+        $user = config('tfn.username');
+        $password = config('tfn.password');
 
         // check if we're logged in
         if (!$scrapeHelper->isLoggedIn()) {

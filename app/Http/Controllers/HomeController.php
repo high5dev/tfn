@@ -40,8 +40,8 @@ class HomeController extends Controller
         //dd($ip, $scam);
 
         Mail::mailer('tfn')->to([
-            ['name' => config('tfn_mail_name'),
-            'email' => config('tfn_mail_from')]
+            ['name' => config('tfn.mail_name'),
+            'email' => config('tfn.mail_from')]
         ])->send(new Warnings('datadatadata'));
 
         return redirect('/home')->with('success', 'Test completed');

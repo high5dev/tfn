@@ -16,8 +16,8 @@ class ScrapeAction
         $scrapeHelper = new ScrapeHelper('scrape');
 
         $initialID = "80000000";
-        $user = config('tfn.tfn_username');
-        $password = config('tfn.tfn_password');
+        $user = config('tfn.username');
+        $password = config('tfn.password');
 
         // Get the watchwords list
         $results = Watchword::all();
@@ -62,14 +62,14 @@ class ScrapeAction
         // loop round and grab up to 1000 OFFER posts at a time
         do {
             // make sure we are on OFFERs
-            $url = config('tfn.tfn_base_url') . '/type_limit_direction?Type=OFFER&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
+            $url = config('tfn.base_url') . '/type_limit_direction?Type=OFFER&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape set OFFERs: ' . $page);
                 return;
             }
             // select the page
-            $url = config('tfn.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
+            $url = config('tfn.base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape select page: ' . $page);
@@ -77,7 +77,7 @@ class ScrapeAction
             }
 
             // get the page
-            $url = config('tfn.tfn_base_url') . '/display_posts';
+            $url = config('tfn.base_url') . '/display_posts';
             $page = $scrapeHelper->GetPage($url);
 
             Log::debug('Scrape: got page of OFFERs');
@@ -237,7 +237,7 @@ class ScrapeAction
         // loop round and grab up to 1000 WANTED posts at a time
         do {
             // make sure we are on WANTEDs
-            $url = config('tfn.tfn_base_url') . '/type_limit_direction?Type=WANTED&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
+            $url = config('tfn.base_url') . '/type_limit_direction?Type=WANTED&Limit=1000&OpenPostIDs:=Spamtool&TablePreferences=Direction';
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape set WANTEDs: ' . $page);
@@ -245,7 +245,7 @@ class ScrapeAction
             }
 
             // select the page
-            $url = config('tfn.tfn_base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
+            $url = config('tfn.base_url') . "/navigation?SelectIDorPage=PostID&GoToNumber={$currentID}&Jump=Jump";
             $page = $scrapeHelper->GetPage($url);
             if (false === strpos($page, 'please try to limit heavy use')) {
                 Log::debug('Scrape select page: ' . $page);
@@ -253,7 +253,7 @@ class ScrapeAction
             }
 
             // get the page
-            $url = config('tfn.tfn_base_url') . '/display_posts';
+            $url = config('tfn.base_url') . '/display_posts';
             $page = $scrapeHelper->GetPage($url);
 
             Log::debug('Scrape: got page of WANTEDs');
