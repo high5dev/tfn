@@ -39,12 +39,9 @@ class HomeController extends Controller
         //$scam = $Scamalytics->execute($request->ip);
         //dd($ip, $scam);
 
-        Mail::mailer('tfn')->to([
-            ['name' => 'Chris', 'email' => 'chris@comgw.co.uk']
-        ])
-            ->from([
-                ['name' => config('tfn.mail_name'), 'email' => config('tfn.mail_from')]
-            ])->send(new Warnings('datadatadata'));
+        Mail::mailer('tfn')->from(config('tfn.mail_from'), config('tfn.mail_name'))
+            ->to('chris@comgw.co.uk', 'Chris')
+            ->send(new Warnings('datadatadata'));
 
         return redirect('/home')->with('success', 'Test completed');
     }
