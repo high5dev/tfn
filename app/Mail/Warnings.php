@@ -30,7 +30,7 @@ class Warnings extends Mailable
      */
     public function build()
     {
-        return $this->from('postmaster@comgw.co.uk', 'Freecycle Spam Control')
+        return $this->from(config('tfn.mail_from'), config('tfn.mail_name'))
             ->view('emails.warnings')
             ->text('emails.warnings_plain');
     }
