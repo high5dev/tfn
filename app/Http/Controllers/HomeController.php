@@ -41,7 +41,7 @@ class HomeController extends Controller
 
         $data = [
             'name' => 'Chris',
-            'title' => 'smart tv',
+            'item' => 'smart tv',
             'date' => '6th January 2022',
         ];
 
