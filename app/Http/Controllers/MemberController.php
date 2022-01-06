@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Member;
 use App\Models\Report;
-use App\Actions\GetIPinfoAction;
-use App\Actions\GetScamalyticsAction;
-use App\Actions\GetMemberDetailsAction;
 use App\Jobs\ZapMember;
+use App\Actions\GetMemberDetailsAction;
 use App\Http\Requests\ReportStoreRequest;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
@@ -218,14 +216,4 @@ class MemberController extends Controller
         return redirect('/home')->with('error', 'Unable to find that member!');
     }
 
-    /**
-     * test
-     */
-    public function test(Request $request, GetIPinfoAction $IPinfo, GetScamalyticsAction $Scamalytics)
-    {
-        //$ip = $IPinfo->execute($request->ip);
-        //$scam = $Scamalytics->execute($request->ip);
-        //dd($ip, $scam);
-        return redirect('/home')->with('success', 'Test completed');
-    }
 }

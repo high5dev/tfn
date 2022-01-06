@@ -11,14 +11,16 @@ class Warnings extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $data;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,6 +30,8 @@ class Warnings extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('postmaster@comgw.co.uk', 'Freecycle Spam Control')
+            ->view('emails.warnings')
+            ->text('emails.warnings_plain');
     }
 }

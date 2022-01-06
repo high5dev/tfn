@@ -45,7 +45,7 @@ Route::group([
 ], function () {
 
     // User: test
-    Route::get('/test', 'MemberController@test');
+    Route::get('/test', 'HomeController@test');
 
     // User: homepage and profile
     Route::get('/home', 'LoggedInController@home')->name('home');
