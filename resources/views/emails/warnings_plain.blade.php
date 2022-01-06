@@ -1,11 +1,11 @@
 Dear Member,
 
-My name is {{ $name }}, and I am a member of the Freecycle Spam Control Team,
+My name is {{ $data->name }}, and I am a member of the Freecycle Spam Control Team,
 working to protect members like you from scams and spam.
 
 A post you responded to may violate the Terms of Service for the Freecycle Network.
-We believe that it was posted as an "OFFER" with the title "{{ $item }}" to your
-local TFN Town group and you replied to the offer on or about {{ $date }}.
+We believe that it was posted as an "OFFER" with the title "{{ $data->item }}" to your
+local TFN Town group and you replied to the offer on or about {{ $data->date }}.
 Please be assured that you did nothing wrong by replying to this post.
 
 We strongly urge you not to pay any money for an item, or for delivery of the
@@ -26,7 +26,7 @@ we will complete our investigation and take appropriate action as necessary.
 Due to privacy concerns, we cannot provide additional details.
 
 Kind regards,
-{{ $name }}
+{{ $data->name }}
 
 ---
 Spam Control Team Volunteer

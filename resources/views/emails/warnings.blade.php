@@ -1,13 +1,13 @@
 <html>
 <body>
 Dear Member,<br>
-<p>My name is {{ $name }}, and I am a member of the Freecycle Spam Control Team,
+<p>My name is {{ $data->name }}, and I am a member of the Freecycle Spam Control Team,
     working to protect members like you from scams and spam.
 </p>
 <p>
     A post you responded to may violate the Terms of Service for the Freecycle Network.
-    We believe that it was posted as an "OFFER" with the title "{{ $item }}" to your local TFN Town group
-    and you replied to the offer on or about {{ $date }}.
+    We believe that it was posted as an "OFFER" with the title "{{ $data->item }}" to your local TFN Town group
+    and you replied to the offer on or about {{ $data->date }}.
     Please be assured that you did nothing wrong by replying to this post.
 </p>
 <p>
@@ -30,7 +30,7 @@ Dear Member,<br>
 </p>
 <br>
 Kind regards,<br>
-{{ $name }}<br>
+{{ $data->name }}<br>
 <br>
 ---<br>
 Spam Control Team Volunteer<br>
