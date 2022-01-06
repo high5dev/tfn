@@ -15,4 +15,7 @@ return [
     'tfn_base_url' => env('TFN_BASE_URL'),
     'tfn_img_url' => env('TFN_IMG_URL'),
 
+    'tfn_mail_from' => env('TFN_MAIL_FROM'),
+    'tfn_mail_name' => env('TFN_MAIL_NAME'),
+
 ];

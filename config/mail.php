@@ -45,6 +45,17 @@ return [
             'auth_mode' => null,
         ],
 
+        'tfn' => [
+            'transport' => 'smtp',
+            'host' => env('TFN_MAIL_HOST', 'smtp.mailgun.org'),
+            'port' => env('TFN_MAIL_PORT', 587),
+            'encryption' => env('TFN_MAIL_ENCRYPTION', 'tls'),
+            'username' => env('TFN_MAIL_USERNAME'),
+            'password' => env('TFN_MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],
