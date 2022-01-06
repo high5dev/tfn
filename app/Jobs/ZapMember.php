@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Actions\GetMemberDetailsAction;
+use App\Mail\Warnings;
 use App\Models\Member;
 use App\Models\Report;
 use Illuminate\Bus\Queueable;
@@ -55,6 +56,23 @@ class ZapMember implements ShouldQueue
                 $report->warning_emails = json_encode($member_replies);
                 $report->body = json_encode($member_details);
                 $report->save();
+
+                // get the variables for the warning emails
+                $data = [
+                    'name' => $report->user->name,
+                    'item' => $report->title,
+                    'date' => $report->dated,
+                ];
+
+                // prepare the email
+                $message = (new Warnings($data))
+                    ->onConnection('database')
+                    ->onQueue('emails');
+
+                // send a separate email to each recipient
+                foreach ($member_replies as $recipient) {
+                    Mail::to($recipient)->queue($message);
+                }
 
                 // send zap request to SpamTool
                 $memberDetails->zapMember();

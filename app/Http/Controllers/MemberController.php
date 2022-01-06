@@ -171,7 +171,8 @@ class MemberController extends Controller
                 $report = new Report;
                 $report->user_id = Auth::user()->id;
                 $report->member_id = $request->id;
-                $report->title = $request->title;
+                $report->item = $request->item;
+                $report->dated = $request->dated;
                 $report->justification = $request->justification;
                 $report->found = $request->found;
                 $report->warnings = $request->warnings;

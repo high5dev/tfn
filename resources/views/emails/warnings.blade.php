@@ -39,7 +39,7 @@ spamcontrol@freecycle.org<br>
 <br>
 ______________________________________<br>
 <p>
-    Copyright &copy; 2021, The Freecycle Network. All rights reserved.
+    Copyright &copy; {{ date('Y') }}, The Freecycle Network. All rights reserved.
     The Freecycle.org logo is a trademark of The Freecycle Network in the United States and/or other countries.
     CTM Reg. No. 4287553
 </p>

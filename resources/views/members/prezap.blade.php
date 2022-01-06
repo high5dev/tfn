@@ -92,12 +92,23 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="title">Title:</label>
+                <label class="col-sm-2 col-form-label" for="item">Item:</label>
                 <div class="col-sm-10">
-                    <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}"
-                           {{ $errors->has('title') ? ' autofocus' : '' }} required>
-                    @if ($errors->has('title'))
-                        <div class="alert alert-warning">{{ $errors->first('title') }}</div>
+                    <input type="text" id="item" name="item" class="form-control" value="{{ old('item') }}"
+                           {{ $errors->has('item') ? ' autofocus' : '' }} required>
+                    @if ($errors->has('item'))
+                        <div class="alert alert-warning">{{ $errors->first('item') }}</div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="dated">Dated:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="dated" name="dated" class="form-control" value="{{ old('dated') }}"
+                           {{ $errors->has('dated') ? ' autofocus' : '' }} required>
+                    @if ($errors->has('dated'))
+                        <div class="alert alert-warning">{{ $errors->first('dated') }}</div>
                     @endif
                 </div>
             </div>

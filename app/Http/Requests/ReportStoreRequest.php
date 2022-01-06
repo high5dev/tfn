@@ -33,11 +33,17 @@ class ReportStoreRequest extends FormRequest
                 "string",
                 Rule::in(['HSGOA', 'HSMOD', 'HSMEM', 'SEARCH', 'SCAN', 'WATCH', 'OTHER']),
             ],
-            'title' => [
+            'item' => [
                 "required",
                 "string",
                 "min:3",
                 "max:254"
+            ],
+            'dated' => [
+                "required",
+                "string",
+                "min:12",
+                "max:63"
             ],
             'justification' => [
                 "required",

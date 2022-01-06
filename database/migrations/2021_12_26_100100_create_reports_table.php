@@ -17,7 +17,8 @@ class CreateReportsTable extends Migration
             $table->string('id')->primary();
             $table->biginteger('user_id')->unsigned();
             $table->biginteger('member_id')->unsigned();
-            $table->string('title');
+            $table->string('item');
+            $table->string('dated');
             $table->text('justification');
             $table->string('found');
             $table->string('warnings');
