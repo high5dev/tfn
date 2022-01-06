@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\GetIPinfoAction;
 use App\Actions\GetScamalyticsAction;
+use App\Mail\Warnings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
