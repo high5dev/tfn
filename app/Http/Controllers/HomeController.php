@@ -39,11 +39,17 @@ class HomeController extends Controller
         //$scam = $Scamalytics->execute($request->ip);
         //dd($ip, $scam);
 
+        $data = [
+            'name' => 'Chris',
+            'title' => 'smart tv',
+            'date' => '6th January 2022',
+        ];
         Mail::mailer('tfn')
             ->to([
                 ['email' => 'chris@comgw.co.uk', 'name' => 'Chris'],
             ])
-            ->send(new Warnings('datadatadata'));
+            ->subject('You have replied to a post that violates the Terms of Service')
+            ->send(new Warnings($data));
 
         return redirect('/home')->with('success', 'Test completed');
     }
