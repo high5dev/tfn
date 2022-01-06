@@ -160,7 +160,7 @@
                 </div>
             </div>
 
-            <legend>report</legend>
+            <legend>Report</legend>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="title">Title:</label>
