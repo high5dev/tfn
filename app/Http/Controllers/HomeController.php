@@ -44,12 +44,16 @@ class HomeController extends Controller
             'title' => 'smart tv',
             'date' => '6th January 2022',
         ];
-        Mail::mailer('tfn')
-            ->to([
+
+        $message = (new Warnings($data))
+            ->onConnection('database')
+            ->onQueue('emails');
+
+        Mail::to([
                 ['email' => 'chris@comgw.co.uk', 'name' => 'Chris'],
             ])
             ->subject('You have replied to a post that violates the Terms of Service')
-            ->send(new Warnings($data));
+            ->queue($message);
 
         return redirect('/home')->with('success', 'Test completed');
     }
