@@ -52,7 +52,6 @@ class HomeController extends Controller
         Mail::to([
                 ['email' => 'chris@comgw.co.uk', 'name' => 'Chris'],
             ])
-            ->subject('You have replied to a post that violates the Terms of Service')
             ->queue($message);
 
         return redirect('/home')->with('success', 'Test completed');

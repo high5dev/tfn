@@ -31,6 +31,7 @@ class Warnings extends Mailable
     public function build()
     {
         return $this->from(config('tfn.mail_from'), config('tfn.mail_name'))
+            ->subject('You have replied to a post that violates the Terms of Service')
             ->view('emails.warnings')
             ->text('emails.warnings_plain');
     }
